@@ -1,0 +1,101 @@
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, you can obtain one at http://mozilla.org/MPL/2.0/. */
+
+#bigScaryWarning {
+  background-color: #FFE900;
+  border-color: #F2D00F;
+  color: -moz-DialogText;
+  padding: 4px;
+  white-space: normal;
+}
+
+#bigScaryWarning image {
+  -moz-context-properties: fill;
+  fill: currentColor;
+  margin: 4px 8px;
+}
+
+#bigScaryWarning description {
+  width: 30em;
+}
+
+#carddav-provider {
+  height: 1.8em;
+}
+
+#carddav-provider {
+  margin: 2px 4px;
+}
+
+#carddav-statusArea {
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 2px;
+  padding: 3px 4px;
+  color: var(--text-color);
+}
+
+#carddav-statusArea #statusImageBefore {
+  -moz-context-properties: fill;
+  fill: currentColor;
+  width: 16px;
+  height: 16px;
+  background-size: 16px 16px;
+}
+
+#carddav-statusArea[status=error] {
+  background-color: #FFE900;
+  border-color: #F2D00F;
+  color: -moz-DialogText;
+}
+
+#carddav-statusArea[status=error] #statusImageBefore {
+  list-style-image: url("chrome://global/skin/icons/warning.svg");
+}
+
+#carddav-statusArea[status=loading] {
+  background-color: rgba(0, 0, 0, 0.05);
+  border-color: rgba(0, 0, 0, 0.1);
+}
+
+#carddav-statusArea[status=loading] #statusImageBefore {
+  background: url("chrome://global/skin/icons/loading.png") no-repeat;
+}
+
+@media (min-resolution: 1.1dppx) {
+  #carddav-statusArea[status=loading] #statusImageBefore {
+    background-image: url("chrome://global/skin/icons/loading@2x.png");
+    background-size: 16px 16px;
+  }
+}
+
+#carddav-properties-table {
+  display: grid;
+  grid-template-columns: min-content auto;
+  align-items: baseline;
+}
+
+.input-container {
+  display: flex;
+}
+
+.input-container > * {
+  flex: 1;
+}
+
+#carddav-refreshActive-cell {
+  /* This shouldn't be necessary, but there's no good combination of checkbox
+   * and label that play nicely with the align-items: baseline above. */
+  align-self: center;
+}
+
+#carddav-refreshInterval-cell {
+  display: flex;
+  align-items: baseline;
+}
+
+#carddav-refreshInterval {
+  flex: 1;
+  margin: 2px 4px;
+}

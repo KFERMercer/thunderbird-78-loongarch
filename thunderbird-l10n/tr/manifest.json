@@ -1,0 +1,57 @@
+{
+  "version": "78.0buildid20210901192859",
+  "languages": {
+    "tr": {
+      "version": "20200904132534",
+      "chrome_resources": {
+        "mozldap": "chrome/tr/locale/tr/mozldap/",
+        "messenger-newsblog": "chrome/tr/locale/tr/messenger-newsblog/",
+        "devtools-shared": "chrome/tr/locale/tr/devtools/shared/",
+        "autoconfig": "chrome/tr/locale/tr/autoconfig/",
+        "pipnss": "chrome/tr/locale/tr/pipnss/",
+        "devtools-startup": "chrome/tr/locale/tr/devtools/startup/",
+        "messenger": "chrome/tr/locale/tr/messenger/",
+        "chat": "chrome/tr/locale/tr/chat/",
+        "necko": "chrome/tr/locale/tr/necko/",
+        "lightning": "chrome/tr/locale/tr/lightning/",
+        "communicator": "chrome/tr/locale/tr/communicator/",
+        "pluginproblem": "chrome/tr/locale/tr/pluginproblem/",
+        "messenger-smime": "chrome/tr/locale/tr/messenger-smime/",
+        "mozapps": "chrome/tr/locale/tr/mozapps/",
+        "places": "chrome/tr/locale/tr/places/",
+        "messenger-mapi": "chrome/tr/locale/tr/messenger-mapi/",
+        "pippki": "chrome/tr/locale/tr/pippki/",
+        "devtools": "chrome/tr/locale/tr/devtools/client/",
+        "global": "chrome/tr/locale/tr/global/",
+        "passwordmgr": "chrome/tr/locale/tr/passwordmgr/",
+        "alerts": "chrome/tr/locale/tr/alerts/",
+        "messenger-region": "chrome/tr/locale/tr/messenger-region/",
+        "branding": "chrome/tr/locale/tr/branding/",
+        "global-platform": {
+          "macosx": "chrome/tr/locale/tr/global-platform/mac/",
+          "win": "chrome/tr/locale/tr/global-platform/win/",
+          "android": "chrome/tr/locale/tr/global-platform/unix/",
+          "linux": "chrome/tr/locale/tr/global-platform/unix/"
+        },
+        "calendar": "chrome/tr/locale/tr/calendar/"
+      }
+    }
+  },
+  "name": "Türkçe (TR) Language Pack",
+  "sources": {
+    "browser": {
+      "base_path": "browser/"
+    }
+  },
+  "langpack_id": "tr",
+  "applications": {
+    "gecko": {
+      "id": "langpack-tr@thunderbird.mozilla.org",
+      "strict_min_version": "78.0",
+      "strict_max_version": "78.*"
+    }
+  },
+  "author": "mozilla.org (contributors: Mozilla Türkiye takımı)",
+  "description": "Language pack for Thunderbird for tr",
+  "manifest_version": 2
+}

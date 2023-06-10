@@ -1,0 +1,155 @@
+#filter substitution
+
+messenger.jar:
+% content messagebody %content/messagebody/ contentaccessible=yes
+% content messenger %content/messenger/ contentaccessible=yes
+% override chrome://messagebody/skin/messageBody.css chrome://messenger/skin/messageBody.css
+#ifndef MOZILLA_OFFICIAL
+% override chrome://browser/content/browser-development-helpers.js chrome://messenger/content/browser-development-helpers.js
+  content/messenger/browser-development-helpers.js (../../common/src/browser-development-helpers.js)
+#endif
+    content/messenger/mailWindow.js                 (content/mailWindow.js)
+    content/messenger/messageDisplay.js             (content/messageDisplay.js)
+    content/messenger/folderDisplay.js              (content/folderDisplay.js)
+    content/messenger/foldersummary.js              (content/foldersummary.js)
+    content/messenger/mailWindowOverlay.js          (content/mailWindowOverlay.js)
+*   content/messenger/messageWindow.xhtml           (content/messageWindow.xhtml)
+    content/messenger/messageWindow.js              (content/messageWindow.js)
+    content/messenger/mailContextMenus.js           (content/mailContextMenus.js)
+    content/messenger/nsContextMenu.js              (content/nsContextMenu.js)
+*   content/messenger/messenger.xhtml               (content/messenger.xhtml)
+    content/messenger/msgHdrView.js                 (content/msgHdrView.js)
+    content/messenger/msgViewNavigation.js          (content/msgViewNavigation.js)
+    content/messenger/mailWidgets.js                (content/mailWidgets.js)
+    content/messenger/button-menu-button.js         (content/button-menu-button.js)
+    content/messenger/toolbarbutton-menu-button.js  (content/toolbarbutton-menu-button.js)
+    content/messenger/customElements.js             (content/customElements.js)
+    content/messenger/customizeToolbar.css          (../../common/src/customizeToolbar.css)
+    content/messenger/customizeToolbar.js           (../../common/src/customizeToolbar.js)
+*   content/messenger/customizeToolbar.xhtml        (../../common/src/customizeToolbar.xhtml)
+    content/messenger/viewSource.js                 (../../common/src/viewSource.js)
+*   content/messenger/viewSource.xhtml              (../../common/src/viewSource.xhtml)
+    content/messenger/viewZoomOverlay.js            (../../common/src/viewZoomOverlay.js)
+    content/messenger/customizable-toolbar.js       (../../common/bindings/customizable-toolbar.js)
+    content/messenger/attachmentList.css            (content/attachmentList.css)
+    content/messenger/menulist.css                  (content/menulist.css)
+    content/messenger/editContactPanel.js           (content/editContactPanel.js)
+    content/messenger/msgMail3PaneWindow.js         (content/msgMail3PaneWindow.js)
+    content/messenger/mail3PaneWindowCommands.js    (content/mail3PaneWindowCommands.js)
+    content/messenger/mailCommands.js               (content/mailCommands.js)
+    content/messenger/mailCore.js                   (content/mailCore.js)
+    content/messenger/mailTabs.js                   (content/mailTabs.js)
+    content/messenger/commandglue.js                (content/commandglue.js)
+*   content/messenger/SearchDialog.xhtml            (content/SearchDialog.xhtml)
+    content/messenger/SearchDialog.js               (content/SearchDialog.js)
+    content/messenger/FilterListDialog.xhtml        (content/FilterListDialog.xhtml)
+    content/messenger/FilterListDialog.js           (content/FilterListDialog.js)
+    content/messenger/specialTabs.js                (content/specialTabs.js)
+    content/messenger/aboutAddonsExtra.css          (content/aboutAddonsExtra.css)
+    content/messenger/aboutAddonsExtra.js           (content/aboutAddonsExtra.js)
+    content/messenger/aboutDialog-appUpdater.js     (content/aboutDialog-appUpdater.js)
+*   content/messenger/aboutDialog.xhtml             (content/aboutDialog.xhtml)
+    content/messenger/aboutDialog.js                (content/aboutDialog.js)
+    content/messenger/aboutRights.xhtml             (content/aboutRights.xhtml)
+    content/messenger/newInstallPage.html           (content/newInstallPage.html)
+    content/messenger/systemIntegrationDialog.xhtml (content/systemIntegrationDialog.xhtml)
+    content/messenger/systemIntegrationDialog.js    (content/systemIntegrationDialog.js)
+    content/messenger/folderPane.js                 (content/folderPane.js)
+    content/messenger/messenger-customization.js    (content/messenger-customization.js)
+    content/messenger/searchBar.js                  (content/searchBar.js)
+    content/messenger/phishingDetector.js           (content/phishingDetector.js)
+    content/messenger/mail-offline.js               (content/mail-offline.js)
+    content/messenger/aboutDialog.css               (content/aboutDialog.css)
+    content/messenger/converterDialog.css           (content/converterDialog.css)
+    content/messenger/notification.css              (content/notification.css)
+*   content/messenger/messenger.css                 (content/messenger.css)
+    content/messenger/gloda-autocomplete-input.js   (content/gloda-autocomplete-input.js)
+    content/messenger/tabmail.js                    (content/tabmail.js)
+    content/messenger/tabmail-tabs.js               (content/tabmail-tabs.js)
+    content/messenger/tabbrowser-tab.js             (content/tabbrowser-tab.js)
+    content/messenger/tabmail.css                   (content/tabmail.css)
+    content/messenger/statuspanel.js                (content/statuspanel.js)
+    content/messenger/newTagDialog.xhtml            (content/newTagDialog.xhtml)
+    content/messenger/newTagDialog.js               (content/newTagDialog.js)
+    content/messenger/composerOverlay.css           (content/composerOverlay.css)
+    content/messenger/threadPane.js                 (content/threadPane.js)
+    content/messenger/protovis-r2.6-modded.js       (content/protovis-r2.6-modded.js)
+    content/messenger/newInstall.xhtml              (content/newInstall.xhtml)
+    content/messenger/newInstall.js                 (content/newInstall.js)
+#ifdef XP_MACOSX
+    content/messenger/macMessengerMenu.js           (content/macMessengerMenu.js)
+*   content/messenger/hiddenWindowMac.xhtml         (content/hiddenWindowMac.xhtml)
+    content/messenger/hiddenWindowMac.js            (content/hiddenWindowMac.js)
+#endif
+#ifdef XP_WIN
+    content/messenger/minimizeToTray.js             (content/minimizeToTray.js)
+#endif
+    content/messenger/selectionsummaries.js         (content/selectionsummaries.js)
+    content/messenger/multimessageview.css          (content/multimessageview.css)
+    content/messenger/multimessageview_print.css    (content/multimessageview_print.css)
+    content/messenger/sharedsummary.css             (content/sharedsummary.css)
+    content/messenger/multimessageview.xhtml        (content/multimessageview.xhtml)
+    content/messenger/multimessageview.js           (content/multimessageview.js)
+    content/messenger/glodaFacetTab.js              (content/glodaFacetTab.js)
+    content/messenger/glodaFacetViewWrapper.xhtml   (content/glodaFacetViewWrapper.xhtml)
+    content/messenger/glodaFacetView.xhtml          (content/glodaFacetView.xhtml)
+    content/messenger/glodaFacetView.js             (content/glodaFacetView.js)
+    content/messenger/glodaFacetView.css            (content/glodaFacetView.css)
+    content/messenger/glodaFacetVis.js              (content/glodaFacetVis.js)
+    content/messenger/glodaFacet.js                 (content/glodaFacet.js)
+    content/messenger/quickFilterBar.js             (content/quickFilterBar.js)
+    content/messenger/quickFilterBar.css            (content/quickFilterBar.css)
+    content/messenger/browserRequest.js             (content/browserRequest.js)
+    content/messenger/browserRequest.xhtml          (content/browserRequest.xhtml)
+*   content/messenger/safeMode.xhtml                (content/safeMode.xhtml)
+    content/messenger/safeMode.js                   (content/safeMode.js)
+    content/messenger/sanitize.xhtml                (content/sanitize.xhtml)
+    content/messenger/sanitize.js                   (content/sanitize.js)
+    content/messenger/sanitizeDialog.css            (content/sanitizeDialog.css)
+    content/messenger/sanitizeDialog.js             (content/sanitizeDialog.js)
+    content/messenger/toolbarIconColor.js           (content/toolbarIconColor.js)
+    content/messenger/dialogShadowDom.js            (content/dialogShadowDom.js)
+
+# the following files are mail-specific overrides
+*   content/messenger/license.html                  (/@mozreltopsrcdir@/toolkit/content/license.html)
+% override chrome://global/content/license.html chrome://messenger/content/license.html
+    content/messenger/profileDowngrade.js           (content/profileDowngrade.js)
+*   content/messenger/profileDowngrade.xhtml        (content/profileDowngrade.xhtml)
+% override chrome://mozapps/content/profile/profileDowngrade.js chrome://messenger/content/profileDowngrade.js
+% override chrome://mozapps/content/profile/profileDowngrade.xhtml chrome://messenger/content/profileDowngrade.xhtml
+
+*   content/messenger/buildconfig.html              (content/buildconfig.html)
+    content/messenger/buildconfig.css               (content/buildconfig.css)
+% override chrome://global/content/buildconfig.html chrome://messenger/content/buildconfig.html
+% override chrome://global/content/buildconfig.css chrome://messenger/content/buildconfig.css
+
+# L10n resources and overrides.
+% override chrome://mozapps/locale/downloads/settingsChange.dtd chrome://messenger/locale/downloads/settingsChange.dtd
+% override chrome://mozapps/locale/profile/profileDowngrade.dtd chrome://messenger/locale/profileDowngrade.dtd
+% override chrome://global/locale/netError.dtd chrome://messenger/locale/netError.dtd
+% resource search-plugins chrome://messenger/locale/searchplugins/
+
+comm.jar:
+% content communicator %content/communicator/
+   content/communicator/contentAreaClick.js         (content/contentAreaClick.js)
+   content/communicator/labelsencodings.properties  (/@mozreltopsrcdir@/dom/encoding/labelsencodings.properties)
+   content/communicator/utilityOverlay.js           (content/utilityOverlay.js)
+
+browser.jar:
+# Needed for built_in_addons.json
+% content browser %content/
+    content/extension.css                              (../../../browser/components/extensions/extension.css)
+#ifdef XP_MACOSX
+    content/extension-mac.css                          (../../../browser/components/extensions/extension-mac.css)
+    content/extension-mac-panel.css                    (../../../browser/components/extensions/extension-mac-panel.css)
+#endif
+#ifdef XP_WIN
+    content/extension-win-panel.css                    (../../../browser/components/extensions/extension-win-panel.css)
+#endif
+# These files are referenced from various toolkit files.
+% skin browser classic/1.0 %skin/
+    skin/illustrations/error-malformed-url.svg         (../../../browser/themes/shared/illustrations/error-malformed-url.svg)
+    skin/controlcenter/trackers.svg                    (../../../browser/themes/shared/controlcenter/trackers.svg)
+    skin/preferences/no-search-results.svg             (../../../browser/themes/shared/preferences/no-search-results.svg)
+    skin/private-browsing.svg                          (../../../browser/themes/shared/icons/private-browsing.svg)
+    skin/warning.svg                                   (../../../browser/themes/shared/warning.svg)

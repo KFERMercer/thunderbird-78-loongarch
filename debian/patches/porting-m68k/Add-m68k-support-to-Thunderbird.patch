@@ -1,0 +1,422 @@
+From: John Paul Adrian Glaubitz <glaubitz@physik.fu-berlin.de>
+Date: Sun, 2 Apr 2017 09:14:39 +0200
+Subject: Add m68k support to Thunderbird
+
+Origin: not yet exist
+Bug-Debian: https://bugs.debian.org/859271
+Bug: https://bugzilla.mozilla.org/show_bug.cgi?id=1325771
+Applied-Upstream: TBD
+
+All patches have been reviewed by positively by upstream with the
+exception of the alignment fixes where upstream wants to use a
+C++11 solution instead of the other suggestions I made. This patch
+currently uses __attribute__((aligned(4))) to ensure the alignment
+is at least 4 bytes. This method is safe and works on gcc and clang
+and unlike the suggested alignas() from C++11 does not break on
+architectures which require stricter alignment (e.g. alignas(4)
+would break on x86_64 while __attribute__((aligned(4))) does not
+as it still allows for 8 bytes alignment.
+
+Cherry-picked and adapted patches from Firefox upstream:
+- a31a2d92cf9a2f4e9ad2d12cb74f96579f54fa5e
+  Bug 1325771 - layout:style: Make sure nsCSSValue has at least 4 bytes alignment
+- b65c6cf80f7038f47c7f5d223a6528d4aa4538cf
+  Bug 1325771 - js:src: Make sure shadow::Shape has at least 4 bytes alignment
+- cbbe025c5034cfa28aa2a8a4e557f9a066ddd013
+  Bug 1325771 - js:src: Make sure Cell has at least 4 bytes alignment
+- 6441fad686d30230a6842a6432bc134ca20c4125
+  Bug 1325771 - js:jit: Use 'Feeling Lucky' atomic operations on m68k
+- ec66da836071ec0f05a3517947c8e1a68620c399
+  Bug 1325771 - mfbt:tests: Handle targets with less strict alignment in TestPair
+- 48f3a6331cad497b933dc6e197f7a006b9189290
+  Bug 1325771 - ipc:chromium: Add platform defines for m68k
+- 26cd64f37741d85bc13c19bc55e3c6e26da59052
+  Bug 1325771 - media:webrtc: Add platform defines for m68k
+- bd19fe85678f948f60caa864a2af28c3c39059c7
+  Bug 1325771 - mfbt:tests: Define RETURN_INSTR for m68k in TestPoisonArea
+- a3e704b48760e3d45d20fc6bb13282d3285ba6bb
+  Bug 1325771 - xpcom: Fix type of result in NS_InvokeByIndex on Linux/m68k
+- 174cfc890291778d12241c9a4cfc25ea85fdd3a0
+  Bug 1325771 - xpcom: Fix syntax error in PrepareAndDispatch on Linux/m68k
+Additional changes:
+- Add defines for m68k to double-conversion library
+- Make sure both "struct Class" and "struct JSClass" have at
+  least 4 bytes alignment
+---
+ build/moz.configure/init.configure                 |   3 +
+ ipc/chromium/src/build/build_config.h              |   3 +
+ js/src/jsfriendapi.h                               |   2 +-
+ layout/style/nsCSSValue.h                          |   2 +-
+ media/webrtc/trunk/webrtc/build/build_config.h     |  10 ++
+ mfbt/tests/TestPoisonArea.cpp                      |   3 +
+ python/mozbuild/mozbuild/configure/constants.py    |   2 +
+ .../test/configure/test_toolchain_configure.py     |   3 +
+ .../xptcall/md/unix/xptcinvoke_linux_m68k.cpp      | 131 +++++++++++++++++++++
+ .../xptcall/md/unix/xptcstubs_linux_m68k.cpp       |  98 +++++++++++++++
+ 10 files changed, 255 insertions(+), 2 deletions(-)
+ create mode 100644 xpcom/reflect/xptcall/md/unix/xptcinvoke_linux_m68k.cpp
+ create mode 100644 xpcom/reflect/xptcall/md/unix/xptcstubs_linux_m68k.cpp
+
+diff --git a/build/moz.configure/init.configure b/build/moz.configure/init.configure
+index b887153..3b94ee8 100644
+--- a/build/moz.configure/init.configure
++++ b/build/moz.configure/init.configure
+@@ -758,6 +758,9 @@ def split_triplet(triplet, allow_msvc=False):
+     elif cpu == 'sh4':
+         canonical_cpu = 'sh4'
+         endianness = 'little'
++    elif cpu in ('m68k'):
++        canonical_cpu = 'm68k'
++        endianness = 'big'
+     else:
+         raise ValueError('Unknown CPU type: %s' % cpu)
+ 
+diff --git a/ipc/chromium/src/build/build_config.h b/ipc/chromium/src/build/build_config.h
+index 72105fc..1fa8db1 100644
+--- a/ipc/chromium/src/build/build_config.h
++++ b/ipc/chromium/src/build/build_config.h
+@@ -81,6 +81,9 @@
+ #  define ARCH_CPU_ARMEL 1
+ #  define ARCH_CPU_32_BITS 1
+ #  define WCHAR_T_IS_UNSIGNED 1
++#elif defined(__m68k__)
++#  define ARCH_CPU_M68K 1
++#  define ARCH_CPU_32_BITS 1
+ #elif defined(__powerpc64__)
+ #  define ARCH_CPU_PPC64 1
+ #  define ARCH_CPU_64_BITS 1
+diff --git a/js/src/jsfriendapi.h b/js/src/jsfriendapi.h
+index 7f7ef17..36f2ca0 100644
+--- a/js/src/jsfriendapi.h
++++ b/js/src/jsfriendapi.h
+@@ -548,7 +548,7 @@ class Shape {
+ 
+   static const uint32_t FIXED_SLOTS_SHIFT = 24;
+   static const uint32_t FIXED_SLOTS_MASK = 0x1f << FIXED_SLOTS_SHIFT;
+-};
++} __attribute__ ((aligned(4)));
+ 
+ /**
+  * This layout is shared by all native objects. For non-native objects, the
+diff --git a/layout/style/nsCSSValue.h b/layout/style/nsCSSValue.h
+index e6af1d2..a5fc2f7 100644
+--- a/layout/style/nsCSSValue.h
++++ b/layout/style/nsCSSValue.h
+@@ -209,6 +209,6 @@ class nsCSSValue {
+     int32_t mInt;
+     float mFloat;
+   } mValue;
+-};
++} __attribute__ ((aligned(4)));
+ 
+ #endif /* nsCSSValue_h___ */
+diff --git a/media/webrtc/trunk/webrtc/build/build_config.h b/media/webrtc/trunk/webrtc/build/build_config.h
+index 9654654..39b33b5 100644
+--- a/media/webrtc/trunk/webrtc/build/build_config.h
++++ b/media/webrtc/trunk/webrtc/build/build_config.h
+@@ -118,6 +118,16 @@
+ #define ARCH_CPU_LITTLE_ENDIAN 1
+ #elif defined(__pnacl__)
+ #define ARCH_CPU_32_BITS 1
++#elif defined(__MIPSEL__)
++#define ARCH_CPU_MIPS_FAMILY 1
++#define ARCH_CPU_MIPSEL 1
++#define ARCH_CPU_32_BITS 1
++#define ARCH_CPU_LITTLE_ENDIAN 1
++#elif defined(__m68k__)
++#define ARCH_CPU_M68K_FAMILY 1
++#define ARCH_CPU_M68K 1
++#define ARCH_CPU_32_BITS 1
++#define ARCH_CPU_BIG_ENDIAN 1
+ #elif defined(__powerpc64__)
+ #define ARCH_CPU_PPC_FAMILY 1
+ #define ARCH_CPU_PPC64 1
+diff --git a/mfbt/tests/TestPoisonArea.cpp b/mfbt/tests/TestPoisonArea.cpp
+index fbd3364..4f7ffe8 100644
+--- a/mfbt/tests/TestPoisonArea.cpp
++++ b/mfbt/tests/TestPoisonArea.cpp
+@@ -132,6 +132,9 @@
+ #elif defined _ARCH_PPC || defined _ARCH_PWR || defined _ARCH_PWR2
+ #  define RETURN_INSTR 0x4E800020 /* blr */
+ 
++#elif defined __m68k__
++#define RETURN_INSTR 0x4E754E75 /* rts; rts */
++
+ #elif defined __sparc || defined __sparcv9
+ #  define RETURN_INSTR 0x81c3e008 /* retl */
+ 
+diff --git a/python/mozbuild/mozbuild/configure/constants.py b/python/mozbuild/mozbuild/configure/constants.py
+index 7542dcd..e8401fc 100644
+--- a/python/mozbuild/mozbuild/configure/constants.py
++++ b/python/mozbuild/mozbuild/configure/constants.py
+@@ -45,6 +45,7 @@ CPU_bitness = {
+     'arm': 32,
+     'hppa': 32,
+     'ia64': 64,
++    'm68k': 32,
+     'mips32': 32,
+     'mips64': 64,
+     'ppc': 32,
+@@ -88,6 +89,7 @@ CPU_preprocessor_checks = OrderedDict((
+     ('mips64', '__mips64'),
+     ('mips32', '__mips__'),
+     ('sh4', '__sh__'),
++    ('m68k', '__m68k__'),
+ ))
+ 
+ assert sorted(CPU_preprocessor_checks.keys()) == sorted(CPU.POSSIBLE_VALUES)
+diff --git a/python/mozbuild/mozbuild/test/configure/test_toolchain_configure.py b/python/mozbuild/mozbuild/test/configure/test_toolchain_configure.py
+index 37c4e26..6783e89 100755
+--- a/python/mozbuild/mozbuild/test/configure/test_toolchain_configure.py
++++ b/python/mozbuild/mozbuild/test/configure/test_toolchain_configure.py
+@@ -1211,6 +1211,9 @@ class LinuxCrossCompileToolchainTest(BaseToolchainTest):
+         'sh4-unknown-linux-gnu': little_endian + {
+             '__sh__': 1,
+         },
++        'm68k-unknown-linux-gnu': big_endian + {
++            '__m68k__': 1,
++        },
+     }
+ 
+     PLATFORMS['powerpc64le-unknown-linux-gnu'] = \
+diff --git a/xpcom/reflect/xptcall/md/unix/xptcinvoke_linux_m68k.cpp b/xpcom/reflect/xptcall/md/unix/xptcinvoke_linux_m68k.cpp
+new file mode 100644
+index 0000000..6989340
+--- /dev/null
++++ b/xpcom/reflect/xptcall/md/unix/xptcinvoke_linux_m68k.cpp
+@@ -0,0 +1,131 @@
++/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 4 -*- */
++/* This Source Code Form is subject to the terms of the Mozilla Public
++ * License, v. 2.0. If a copy of the MPL was not distributed with this
++ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
++
++/* Platform specific code to invoke XPCOM methods on native objects */
++
++#include "xptcprivate.h"
++
++// Remember that these 'words' are 32bit DWORDS
++
++extern "C" {
++    static uint32_t
++    invoke_count_words(uint32_t paramCount, nsXPTCVariant* s)
++    {
++        uint32_t result = 0;
++        for(uint32_t i = 0; i < paramCount; i++, s++)
++        {
++            if(s->IsPtrData())
++            {
++                result++;
++                continue;
++            }
++            switch(s->type)
++            {
++            case nsXPTType::T_I8     :
++            case nsXPTType::T_I16    :
++            case nsXPTType::T_I32    :
++                result++;
++                break;
++            case nsXPTType::T_I64    :
++                result+=2;
++                break;
++            case nsXPTType::T_U8     :
++            case nsXPTType::T_U16    :
++            case nsXPTType::T_U32    :
++                result++;
++                break;
++            case nsXPTType::T_U64    :
++                result+=2;
++                break;
++            case nsXPTType::T_FLOAT  :
++                result++;
++                break;
++            case nsXPTType::T_DOUBLE :
++                result+=2;
++                break;
++            case nsXPTType::T_BOOL   :
++            case nsXPTType::T_CHAR   :
++            case nsXPTType::T_WCHAR  :
++                result++;
++                break;
++            default:
++                // all the others are plain pointer types
++                result++;
++                break;
++            }
++        }
++        return result;
++    }
++
++    void
++    invoke_copy_to_stack(uint32_t* d, uint32_t paramCount, nsXPTCVariant* s)
++    {
++        for(uint32_t i = 0; i < paramCount; i++, d++, s++)
++        {
++            if(s->IsPtrData())
++            {
++                *((void**)d) = s->ptr;
++                continue;
++            }
++            switch(s->type)
++            {
++            // 8 and 16 bit types should be promoted to 32 bits when copying
++            // onto the stack.
++            case nsXPTType::T_I8     : *((uint32_t*)d) = s->val.i8;          break;
++            case nsXPTType::T_I16    : *((uint32_t*)d) = s->val.i16;         break;
++            case nsXPTType::T_I32    : *((int32_t*) d) = s->val.i32;         break;
++            case nsXPTType::T_I64    : *((int64_t*) d) = s->val.i64; d++;    break;
++            case nsXPTType::T_U8     : *((uint32_t*)d) = s->val.u8;          break;
++            case nsXPTType::T_U16    : *((uint32_t*)d) = s->val.u16;         break;
++            case nsXPTType::T_U32    : *((uint32_t*)d) = s->val.u32;         break;
++            case nsXPTType::T_U64    : *((uint64_t*)d) = s->val.u64; d++;    break;
++            case nsXPTType::T_FLOAT  : *((float*)   d) = s->val.f;           break;
++            case nsXPTType::T_DOUBLE : *((double*)  d) = s->val.d;   d++;    break;
++            case nsXPTType::T_BOOL   : *((uint32_t*)d) = s->val.b;           break;
++            case nsXPTType::T_CHAR   : *((uint32_t*)d) = s->val.c;           break;
++            case nsXPTType::T_WCHAR  : *((wchar_t*) d) = s->val.wc;          break;
++
++            default:
++                // all the others are plain pointer types
++                *((void**)d) = s->val.p;
++                break;
++            }
++        }
++    }
++}
++
++EXPORT_XPCOM_API(nsresult)
++NS_InvokeByIndex(nsISupports* that, uint32_t methodIndex,
++                   uint32_t paramCount, nsXPTCVariant* params)
++{
++    nsresult result;
++    uint32_t n;
++
++    n = invoke_count_words(paramCount, params) * 4;
++
++ __asm__ __volatile__(
++    "subl  %5, %%sp\n\t"      /* make room for params */
++    "movel %4, %%sp@-\n\t"
++    "movel %3, %%sp@-\n\t"
++    "pea   %%sp@(8)\n\t"
++    "jbsr  invoke_copy_to_stack\n\t"   /* copy params */
++    "addw  #12, %%sp\n\t"
++    "movel %1, %%sp@-\n\t"
++    "movel %1@, %%a0\n\t"
++    "movel %%a0@(%2:l:4), %%a0\n\t"
++    "jbsr  %%a0@\n\t"         /* safe to not cleanup sp */
++    "lea   %%sp@(4,%5:l), %%sp\n\t"
++    "movel %%d0, %0"
++    : "=d" (result)         /* %0 */
++    : "a" (that),           /* %1 */
++      "d" (methodIndex),    /* %2 */
++      "g" (paramCount),     /* %3 */
++      "g" (params),         /* %4 */
++      "d" (n)               /* %5 */
++    : "a0", "a1", "d0", "d1", "memory"
++    );
++
++  return result;
++}
+diff --git a/xpcom/reflect/xptcall/md/unix/xptcstubs_linux_m68k.cpp b/xpcom/reflect/xptcall/md/unix/xptcstubs_linux_m68k.cpp
+new file mode 100644
+index 0000000..fc33ba0
+--- /dev/null
++++ b/xpcom/reflect/xptcall/md/unix/xptcstubs_linux_m68k.cpp
+@@ -0,0 +1,98 @@
++/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 4 -*- */
++/* This Source Code Form is subject to the terms of the Mozilla Public
++ * License, v. 2.0. If a copy of the MPL was not distributed with this
++ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
++
++/* Implement shared vtbl methods. */
++
++#include "xptcprivate.h"
++#include "xptiprivate.h"
++
++extern "C" {
++    nsresult ATTRIBUTE_USED
++    PrepareAndDispatch(nsXPTCStubBase* self, uint32_t methodIndex, uint32_t* args)
++    {
++#define PARAM_BUFFER_COUNT     16
++
++        nsXPTCMiniVariant paramBuffer[PARAM_BUFFER_COUNT];
++        nsXPTCMiniVariant* dispatchParams = nullptr;
++        const nsXPTMethodInfo* info;
++        uint8_t paramCount;
++        uint8_t i;
++        nsresult result = NS_ERROR_FAILURE;
++
++        NS_ASSERTION(self,"no self");
++
++        self->mEntry->GetMethodInfo(uint16_t(methodIndex), &info);
++        NS_ASSERTION(info,"no method info");
++
++        paramCount = info->GetParamCount();
++
++        // setup variant array pointer
++        if(paramCount > PARAM_BUFFER_COUNT)
++            dispatchParams = new nsXPTCMiniVariant[paramCount];
++        else
++            dispatchParams = paramBuffer;
++        NS_ASSERTION(dispatchParams,"no place for params");
++
++        uint32_t* ap = args;
++        for(i = 0; i < paramCount; i++, ap++)
++        {
++            const nsXPTParamInfo& param = info->GetParam(i);
++            const nsXPTType& type = param.GetType();
++            nsXPTCMiniVariant* dp = &dispatchParams[i];
++
++            if(param.IsOut() || !type.IsArithmetic())
++            {
++                dp->val.p = (void*) *ap;
++                continue;
++            }
++
++            switch(type)
++            {
++            // the 8 and 16 bit types will have been promoted to 32 bits before
++            // being pushed onto the stack. Since the 68k is big endian, we
++            // need to skip over the leading high order bytes.
++            case nsXPTType::T_I8     : dp->val.i8  = *(((int8_t*) ap) + 3);  break;
++            case nsXPTType::T_I16    : dp->val.i16 = *(((int16_t*) ap) + 1); break;
++            case nsXPTType::T_I32    : dp->val.i32 = *((int32_t*) ap);       break;
++            case nsXPTType::T_I64    : dp->val.i64 = *((int64_t*) ap); ap++; break;
++            case nsXPTType::T_U8     : dp->val.u8  = *(((uint8_t*) ap) + 3); break;
++            case nsXPTType::T_U16    : dp->val.u16 = *(((uint16_t*)ap) + 1); break;
++            case nsXPTType::T_U32    : dp->val.u32 = *((uint32_t*)ap);       break;
++            case nsXPTType::T_U64    : dp->val.u64 = *((uint64_t*)ap); ap++; break;
++            case nsXPTType::T_FLOAT  : dp->val.f   = *((float*)   ap);       break;
++            case nsXPTType::T_DOUBLE : dp->val.d   = *((double*)  ap); ap++; break;
++            case nsXPTType::T_BOOL   : dp->val.b   = *((uint32_t*)ap);       break;
++            case nsXPTType::T_CHAR   : dp->val.c   = *(((char*)   ap) + 3);  break;
++            case nsXPTType::T_WCHAR  : dp->val.wc  = *((wchar_t*) ap);       break;
++            default:
++                NS_ERROR("bad type");
++                break;
++            }
++        }
++
++        result = self->mOuter->CallMethod((uint16_t)methodIndex, info, dispatchParams);
++
++        if(dispatchParams != paramBuffer)
++            delete [] dispatchParams;
++
++        return result;
++    }
++}
++
++#define STUB_ENTRY(n) \
++nsresult nsXPTCStubBase::Stub##n() \
++{ \
++  void *frame = __builtin_frame_address(0); \
++  return PrepareAndDispatch(this, n, (uint32_t*)frame + 3); \
++}
++
++#define SENTINEL_ENTRY(n) \
++nsresult nsXPTCStubBase::Sentinel##n() \
++{ \
++    NS_ERROR("nsXPTCStubBase::Sentinel called"); \
++    return NS_ERROR_NOT_IMPLEMENTED; \
++}
++
++#include "xptcstubsdef.inc"

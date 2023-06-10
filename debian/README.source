@@ -1,0 +1,90 @@
+This package is maintained with git-buildpackage(1).
+
+It uses pristine-tar(1) to store enough information in git to generate
+bit identical tarballs when building the package without having
+downloaded an upstream tarball first.
+
+When working with patches it is recommended to use "gbp pq import" to
+import the patches, modify the source and then use "gbp pq export
+--commit" to commit the modifications.
+
+The changelog is generated using "gbp dch" so if you submit any
+changes don't bother to add changelog entries but rather provide
+a nice git commit message that can then end up in the changelog.
+
+It is recommended to build the package with pbuilder using:
+
+    gbp builpackage --git-pbuilder
+
+For information on how to set up a pbuilder environment see the
+git-pbuilder(1) manpage. In short:
+
+    DIST=sid git-pbuilder create
+    gbp clone <project-url>
+    cd <project>
+    gbp buildpackage --git-pbuilder
+
+src:thunderbird uses component tarballs for the l10n packages (see below).
+
+
+Creating a source tarball thunderbird
+=====================================
+
+Download the source from the Mozilla CDN [1], then use debian/repack.py
+to repackage the Thunderbird upstream tarball:
+
+ debian/repack.py -p thunderbird -u 52.4.0 -c xz ../thunderbird-52.4.0.source.tar.xz
+
+[1] http://ftp.mozilla.org/pub/thunderbird/releases/
+
+
+Creating a source tarball thunderbird-l10n
+==========================================
+
+We need to create the component tarball for the thunderbird l10n:
+
+  thunderbird_[xx].orig-thunderbird-l10n.tar.xz
+
+using
+
+  debian/create-thunderbird-l10n-tarball.sh
+
+You need to run the script on top of the Thunderbird Git repository.
+
+Importing the source tarballs
+=============================
+
+Since version 45.0 the source package Icedove was using component
+tarballs to include the l10n source for iceowl-extension and thunderbird.
+The same is now also true for src:thunderbird starting with 52.4.0 with
+lightning and thunderbird l10n component tarballs.
+
+git-buildpackage supports component tarballs since version 0.8.0 so
+you can import the tarballs using "gbp import-orig". Make sure the
+component tarballs are placed in the same folder as
+thunderbird_[version].orig.tar.xz then import the new upstream version as
+usual:
+
+ gbp import-orig --sign-tags [--verbose] /path/to/thunderbird_[version].orig.tar.xz
+
+
+Pre-shipped Font file(s)
+=======================
+The source of Firefox is shipping a pre-build font EmojiOneMozilla.ttf in
+the folder
+
+  mozilla/browser/fonts/
+
+Currently this font isn't provided by any package in Debian but Thunderbird is
+needing this font as well in case users are working and using the HTML modus for
+email reading or writing. Thus we ship that font starting with > 52.4.0-1 in
+
+ /usr/lib/thunderbird/font
+
+Once the font is provided by a package we can drop the shipped file. There is
+RFP #881475 about packaging the EmojiOne font.
+
+See also bug reports #849602 and #881299
+
+  https://bugs.debian.org/849602
+  https://bugs.debian.org/881299

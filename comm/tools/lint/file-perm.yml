@@ -1,0 +1,27 @@
+---
+file-perm:
+    description: File permission check
+    include:
+        - .
+    extensions:
+        - .c
+        - .cc
+        - .cpp
+        - .h
+        - .html
+        - .idl
+        - .js
+        - .jsm
+        - .jsx
+        - .m
+        - .mm
+        - .py
+        - .rs
+        - .xhtml
+        - .xml
+        - .xul
+    support-files:
+        - 'tools/lint/file-perm/**'
+    type: external
+    payload: commlint:lint_wrapper
+    wraps: file-perm:lint

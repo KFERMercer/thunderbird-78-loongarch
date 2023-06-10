@@ -1,0 +1,57 @@
+{
+  "name": "Slovenski jezik Language Pack",
+  "languages": {
+    "sl": {
+      "version": "20200904134515",
+      "chrome_resources": {
+        "passwordmgr": "chrome/sl/locale/sl/passwordmgr/",
+        "messenger-smime": "chrome/sl/locale/sl/messenger-smime/",
+        "global-platform": {
+          "win": "chrome/sl/locale/sl/global-platform/win/",
+          "macosx": "chrome/sl/locale/sl/global-platform/mac/",
+          "android": "chrome/sl/locale/sl/global-platform/unix/",
+          "linux": "chrome/sl/locale/sl/global-platform/unix/"
+        },
+        "devtools": "chrome/sl/locale/sl/devtools/client/",
+        "lightning": "chrome/sl/locale/sl/lightning/",
+        "messenger-mapi": "chrome/sl/locale/sl/messenger-mapi/",
+        "places": "chrome/sl/locale/sl/places/",
+        "mozapps": "chrome/sl/locale/sl/mozapps/",
+        "necko": "chrome/sl/locale/sl/necko/",
+        "mozldap": "chrome/sl/locale/sl/mozldap/",
+        "messenger-newsblog": "chrome/sl/locale/sl/messenger-newsblog/",
+        "messenger-region": "chrome/sl/locale/sl/messenger-region/",
+        "devtools-shared": "chrome/sl/locale/sl/devtools/shared/",
+        "pluginproblem": "chrome/sl/locale/sl/pluginproblem/",
+        "branding": "chrome/sl/locale/sl/branding/",
+        "chat": "chrome/sl/locale/sl/chat/",
+        "messenger": "chrome/sl/locale/sl/messenger/",
+        "global": "chrome/sl/locale/sl/global/",
+        "pippki": "chrome/sl/locale/sl/pippki/",
+        "communicator": "chrome/sl/locale/sl/communicator/",
+        "devtools-startup": "chrome/sl/locale/sl/devtools/startup/",
+        "alerts": "chrome/sl/locale/sl/alerts/",
+        "pipnss": "chrome/sl/locale/sl/pipnss/",
+        "autoconfig": "chrome/sl/locale/sl/autoconfig/",
+        "calendar": "chrome/sl/locale/sl/calendar/"
+      }
+    }
+  },
+  "manifest_version": 2,
+  "sources": {
+    "browser": {
+      "base_path": "browser/"
+    }
+  },
+  "description": "Language pack for Thunderbird for sl",
+  "author": "mozilla.org (contributors: Peter Klofutar, Vito Smolej)",
+  "version": "78.0buildid20210901192859",
+  "langpack_id": "sl",
+  "applications": {
+    "gecko": {
+      "strict_min_version": "78.0",
+      "id": "langpack-sl@thunderbird.mozilla.org",
+      "strict_max_version": "78.*"
+    }
+  }
+}

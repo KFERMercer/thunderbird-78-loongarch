@@ -1,0 +1,3 @@
+20210901192859
+https://hg.mozilla.org/releases/comm-esr78/rev/b4f053e8c19a7929e1edb35ff2efa035881e9b1b
+https://hg.mozilla.org/releases/mozilla-esr78/rev/9d633611fb472b276264c7ce605d99d21acf93cc

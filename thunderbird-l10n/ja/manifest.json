@@ -1,0 +1,57 @@
+{
+  "author": "Mozilla Japanese L10N Community (contributors: Makoto Arai, Tomoya Asai, Hideyuki EMURA, Shaw Hosaka, Joji Ikeda, Masahiko Imanaka, Kosuke Kaizuka, Hidehiro Kozawa, Teiji Matsuba, Shigeki Narisawa, Takeshi Nishimura, Atsushi Sakai, Hiroshi Sekiya, Youhei Tooyama, Satoru Yamaguchi)",
+  "description": "Language pack for Thunderbird for ja",
+  "name": "Japanese Language Pack",
+  "langpack_id": "ja",
+  "applications": {
+    "gecko": {
+      "id": "langpack-ja@thunderbird.mozilla.org",
+      "strict_min_version": "78.0",
+      "strict_max_version": "78.*"
+    }
+  },
+  "version": "78.0buildid20210901192859",
+  "manifest_version": 2,
+  "sources": {
+    "browser": {
+      "base_path": "browser/"
+    }
+  },
+  "languages": {
+    "ja": {
+      "version": "20200906062932",
+      "chrome_resources": {
+        "messenger-mapi": "chrome/ja/locale/ja/messenger-mapi/",
+        "devtools": "chrome/ja/locale/ja/devtools/client/",
+        "necko": "chrome/ja/locale/ja/necko/",
+        "autoconfig": "chrome/ja/locale/ja/autoconfig/",
+        "passwordmgr": "chrome/ja/locale/ja/passwordmgr/",
+        "global-platform": {
+          "win": "chrome/ja/locale/ja/global-platform/win/",
+          "macosx": "chrome/ja/locale/ja/global-platform/mac/",
+          "linux": "chrome/ja/locale/ja/global-platform/unix/",
+          "android": "chrome/ja/locale/ja/global-platform/unix/"
+        },
+        "messenger-newsblog": "chrome/ja/locale/ja/messenger-newsblog/",
+        "messenger-region": "chrome/ja/locale/ja/messenger-region/",
+        "global": "chrome/ja/locale/ja/global/",
+        "messenger": "chrome/ja/locale/ja/messenger/",
+        "pippki": "chrome/ja/locale/ja/pippki/",
+        "devtools-shared": "chrome/ja/locale/ja/devtools/shared/",
+        "places": "chrome/ja/locale/ja/places/",
+        "mozapps": "chrome/ja/locale/ja/mozapps/",
+        "mozldap": "chrome/ja/locale/ja/mozldap/",
+        "calendar": "chrome/ja/locale/ja/calendar/",
+        "devtools-startup": "chrome/ja/locale/ja/devtools/startup/",
+        "pluginproblem": "chrome/ja/locale/ja/pluginproblem/",
+        "chat": "chrome/ja/locale/ja/chat/",
+        "pipnss": "chrome/ja/locale/ja/pipnss/",
+        "lightning": "chrome/ja/locale/ja/lightning/",
+        "alerts": "chrome/ja/locale/ja/alerts/",
+        "messenger-smime": "chrome/ja/locale/ja/messenger-smime/",
+        "communicator": "chrome/ja/locale/ja/communicator/",
+        "branding": "chrome/ja/locale/ja/branding/"
+      }
+    }
+  }
+}

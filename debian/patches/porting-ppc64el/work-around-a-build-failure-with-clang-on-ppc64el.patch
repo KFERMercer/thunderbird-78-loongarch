@@ -1,0 +1,23 @@
+From: Carsten Schoenert <c.schoenert@t-online.de>
+Date: Sat, 5 Oct 2019 15:34:16 +0200
+Subject: work around a build failure with clang on ppc64el
+
+Author: Olivier Tilloy <olivier.tilloy@canonical.com>
+Bug: https://bugzilla.mozilla.org/1555531
+---
+ security/nss/lib/freebl/mpi/mpcpucache.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/security/nss/lib/freebl/mpi/mpcpucache.c b/security/nss/lib/freebl/mpi/mpcpucache.c
+index f09ff34..225edf2 100644
+--- a/security/nss/lib/freebl/mpi/mpcpucache.c
++++ b/security/nss/lib/freebl/mpi/mpcpucache.c
+@@ -705,7 +705,7 @@ s_mpi_getProcessorLineSize()
+ #define MPI_GET_PROCESSOR_LINE_SIZE_DEFINED 1
+ #endif
+ 
+-#if defined(__ppc64__)
++#if 0
+ /*
+  *  Sigh, The PPC has some really nice features to help us determine cache
+  *  size, since it had lots of direct control functions to do so. The POWER

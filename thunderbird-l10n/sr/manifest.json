@@ -1,0 +1,57 @@
+{
+  "version": "78.0buildid20210901192859",
+  "name": "српски (sr) Language Pack",
+  "languages": {
+    "sr": {
+      "chrome_resources": {
+        "mozldap": "chrome/sr/locale/sr/mozldap/",
+        "devtools": "chrome/sr/locale/sr/devtools/client/",
+        "alerts": "chrome/sr/locale/sr/alerts/",
+        "global-platform": {
+          "linux": "chrome/sr/locale/sr/global-platform/unix/",
+          "win": "chrome/sr/locale/sr/global-platform/win/",
+          "macosx": "chrome/sr/locale/sr/global-platform/mac/",
+          "android": "chrome/sr/locale/sr/global-platform/unix/"
+        },
+        "passwordmgr": "chrome/sr/locale/sr/passwordmgr/",
+        "devtools-startup": "chrome/sr/locale/sr/devtools/startup/",
+        "messenger": "chrome/sr/locale/sr/messenger/",
+        "devtools-shared": "chrome/sr/locale/sr/devtools/shared/",
+        "calendar": "chrome/sr/locale/sr/calendar/",
+        "communicator": "chrome/sr/locale/sr/communicator/",
+        "lightning": "chrome/sr/locale/sr/lightning/",
+        "autoconfig": "chrome/sr/locale/sr/autoconfig/",
+        "messenger-mapi": "chrome/sr/locale/sr/messenger-mapi/",
+        "messenger-smime": "chrome/sr/locale/sr/messenger-smime/",
+        "mozapps": "chrome/sr/locale/sr/mozapps/",
+        "messenger-newsblog": "chrome/sr/locale/sr/messenger-newsblog/",
+        "messenger-region": "chrome/sr/locale/sr/messenger-region/",
+        "necko": "chrome/sr/locale/sr/necko/",
+        "global": "chrome/sr/locale/sr/global/",
+        "places": "chrome/sr/locale/sr/places/",
+        "pippki": "chrome/sr/locale/sr/pippki/",
+        "branding": "chrome/sr/locale/sr/branding/",
+        "pluginproblem": "chrome/sr/locale/sr/pluginproblem/",
+        "chat": "chrome/sr/locale/sr/chat/",
+        "pipnss": "chrome/sr/locale/sr/pipnss/"
+      },
+      "version": "20200903224534"
+    }
+  },
+  "manifest_version": 2,
+  "sources": {
+    "browser": {
+      "base_path": "browser/"
+    }
+  },
+  "langpack_id": "sr",
+  "author": "mozilla.rs (contributors: Марко Костић, Марко Андрејић, Александра Узелац, Вања Тумбас)",
+  "description": "Language pack for Thunderbird for sr",
+  "applications": {
+    "gecko": {
+      "strict_min_version": "78.0",
+      "strict_max_version": "78.*",
+      "id": "langpack-sr@thunderbird.mozilla.org"
+    }
+  }
+}

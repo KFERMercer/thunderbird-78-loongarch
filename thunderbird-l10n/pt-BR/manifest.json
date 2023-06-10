@@ -1,0 +1,57 @@
+{
+  "manifest_version": 2,
+  "description": "Language pack for Thunderbird for pt-BR",
+  "version": "78.0buildid20210901192859",
+  "author": "mozilla.org (contributors: Jeferson Hultmann, Fernando Pereira Silveira, Marco Aurélio Krause, Maykon Chagas)",
+  "name": "Português (pt-BR) Language Pack",
+  "applications": {
+    "gecko": {
+      "id": "langpack-pt-BR@thunderbird.mozilla.org",
+      "strict_min_version": "78.0",
+      "strict_max_version": "78.*"
+    }
+  },
+  "languages": {
+    "pt-BR": {
+      "chrome_resources": {
+        "pippki": "chrome/pt-BR/locale/pt-BR/pippki/",
+        "communicator": "chrome/pt-BR/locale/pt-BR/communicator/",
+        "chat": "chrome/pt-BR/locale/pt-BR/chat/",
+        "calendar": "chrome/pt-BR/locale/pt-BR/calendar/",
+        "branding": "chrome/pt-BR/locale/pt-BR/branding/",
+        "devtools-startup": "chrome/pt-BR/locale/pt-BR/devtools/startup/",
+        "necko": "chrome/pt-BR/locale/pt-BR/necko/",
+        "pipnss": "chrome/pt-BR/locale/pt-BR/pipnss/",
+        "lightning": "chrome/pt-BR/locale/pt-BR/lightning/",
+        "devtools-shared": "chrome/pt-BR/locale/pt-BR/devtools/shared/",
+        "autoconfig": "chrome/pt-BR/locale/pt-BR/autoconfig/",
+        "mozapps": "chrome/pt-BR/locale/pt-BR/mozapps/",
+        "passwordmgr": "chrome/pt-BR/locale/pt-BR/passwordmgr/",
+        "mozldap": "chrome/pt-BR/locale/pt-BR/mozldap/",
+        "messenger-region": "chrome/pt-BR/locale/pt-BR/messenger-region/",
+        "messenger": "chrome/pt-BR/locale/pt-BR/messenger/",
+        "pluginproblem": "chrome/pt-BR/locale/pt-BR/pluginproblem/",
+        "global-platform": {
+          "win": "chrome/pt-BR/locale/pt-BR/global-platform/win/",
+          "android": "chrome/pt-BR/locale/pt-BR/global-platform/unix/",
+          "macosx": "chrome/pt-BR/locale/pt-BR/global-platform/mac/",
+          "linux": "chrome/pt-BR/locale/pt-BR/global-platform/unix/"
+        },
+        "alerts": "chrome/pt-BR/locale/pt-BR/alerts/",
+        "messenger-mapi": "chrome/pt-BR/locale/pt-BR/messenger-mapi/",
+        "global": "chrome/pt-BR/locale/pt-BR/global/",
+        "messenger-smime": "chrome/pt-BR/locale/pt-BR/messenger-smime/",
+        "places": "chrome/pt-BR/locale/pt-BR/places/",
+        "messenger-newsblog": "chrome/pt-BR/locale/pt-BR/messenger-newsblog/",
+        "devtools": "chrome/pt-BR/locale/pt-BR/devtools/client/"
+      },
+      "version": "20200903130652"
+    }
+  },
+  "sources": {
+    "browser": {
+      "base_path": "browser/"
+    }
+  },
+  "langpack_id": "pt-BR"
+}

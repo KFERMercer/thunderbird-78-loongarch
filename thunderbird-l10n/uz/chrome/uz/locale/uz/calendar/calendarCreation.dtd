@@ -1,0 +1,41 @@
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+
+<!ENTITY wizard.title             "Yangi taqvim yaratish" >
+<!ENTITY wizard.label             "Yangi taqvim yaratish" >
+<!ENTITY wizard.description       "Taqvimingizni toping" >
+
+<!ENTITY initialpage.description    "Taqvimingizni kompyuteringizda saqlash mumkin yoki uni masofadan boshqarish yoki do‘stlaringiz va hamkorlaringiz bilan bo‘lishish uchun serverda joylashtirish ham mumkin." >
+<!ENTITY initialpage.computer.label  "Mening kompyuterimda">
+<!ENTITY initialpage.network.label  "Tarmoqda">
+
+<!ENTITY locationpage.description         "Masofadagi taqvimingizga kirish uchun nima kerakligi haqida ma’lumot kiriting" >
+<!ENTITY locationpage.login.description   "Ixtiyoriy: foydalanuvchi nomini yoki parolni kiriting" >
+<!ENTITY locationpage.username.label      "Foydalanuvchi:" >
+<!ENTITY locationpage.password.label      "Parol:" >
+
+<!ENTITY custompage.shortdescription  "Taqvimni moslash" >
+<!ENTITY custompage.longdescription   "Taqvimingizga taxallus berishingiz yoki ushbu taqvimdagi tadbirlarni ranlashingiz mumkin." >
+
+<!ENTITY finishpage.shortdescription  "Taqvim yaratildi" >
+<!ENTITY finishpage.longdescription   "Taqvimingiz yaratildi." >
+
+<!ENTITY sourcetabs.other.label  "Other">
+<!ENTITY buttons.create.label "Create Calendar">
+<!ENTITY buttons.create.accesskey "r">
+<!ENTITY buttons.find.label "Find Calendars">
+<!ENTITY buttons.find.accesskey "F">
+<!ENTITY buttons.back.label "Back">
+<!ENTITY buttons.back.accesskey "B">
+<!ENTITY buttons.subscribe.label "Subscribe">
+<!ENTITY buttons.subscribe.accesskey "S">
+<!ENTITY calendartype.label "Calendar Type:">
+<!ENTITY location.label "Location:">
+<!ENTITY location.placeholder "URL or host name of the calendar server">
+<!ENTITY network.nocredentials.label "This location doesn't require credentials">
+<!ENTITY network.loading.description "Please wait while your calendars are being discovered.">
+<!ENTITY network.notfound.description "Could not find calendars at this location. Please check your settings.">
+<!ENTITY network.authfail.description "The credentials you have entered were not accepted. Please check your settings.">
+<!ENTITY network.subscribe.single.description "Please select the calendars you would like to subscribe to.">
+<!ENTITY network.subscribe.multiple.description "Multiple calendar types are available for this location. Please select the calendar type, then mark the calendars you would like to subscribe to.">

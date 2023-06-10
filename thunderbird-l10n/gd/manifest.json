@@ -1,0 +1,57 @@
+{
+  "description": "Language pack for Thunderbird for gd",
+  "applications": {
+    "gecko": {
+      "strict_min_version": "78.0",
+      "strict_max_version": "78.*",
+      "id": "langpack-gd@thunderbird.mozilla.org"
+    }
+  },
+  "manifest_version": 2,
+  "sources": {
+    "browser": {
+      "base_path": "browser/"
+    }
+  },
+  "name": "Gàidhlig Language Pack",
+  "languages": {
+    "gd": {
+      "chrome_resources": {
+        "communicator": "chrome/gd/locale/gd/communicator/",
+        "mozldap": "chrome/gd/locale/gd/mozldap/",
+        "messenger-region": "chrome/gd/locale/gd/messenger-region/",
+        "pippki": "chrome/gd/locale/gd/pippki/",
+        "global": "chrome/gd/locale/gd/global/",
+        "devtools-startup": "chrome/gd/locale/gd/devtools/startup/",
+        "calendar": "chrome/gd/locale/gd/calendar/",
+        "messenger": "chrome/gd/locale/gd/messenger/",
+        "branding": "chrome/gd/locale/gd/branding/",
+        "autoconfig": "chrome/gd/locale/gd/autoconfig/",
+        "necko": "chrome/gd/locale/gd/necko/",
+        "devtools-shared": "chrome/gd/locale/gd/devtools/shared/",
+        "messenger-smime": "chrome/gd/locale/gd/messenger-smime/",
+        "devtools": "chrome/gd/locale/gd/devtools/client/",
+        "lightning": "chrome/gd/locale/gd/lightning/",
+        "pipnss": "chrome/gd/locale/gd/pipnss/",
+        "alerts": "chrome/gd/locale/gd/alerts/",
+        "pluginproblem": "chrome/gd/locale/gd/pluginproblem/",
+        "places": "chrome/gd/locale/gd/places/",
+        "mozapps": "chrome/gd/locale/gd/mozapps/",
+        "messenger-mapi": "chrome/gd/locale/gd/messenger-mapi/",
+        "global-platform": {
+          "linux": "chrome/gd/locale/gd/global-platform/unix/",
+          "android": "chrome/gd/locale/gd/global-platform/unix/",
+          "win": "chrome/gd/locale/gd/global-platform/win/",
+          "macosx": "chrome/gd/locale/gd/global-platform/mac/"
+        },
+        "messenger-newsblog": "chrome/gd/locale/gd/messenger-newsblog/",
+        "chat": "chrome/gd/locale/gd/chat/",
+        "passwordmgr": "chrome/gd/locale/gd/passwordmgr/"
+      },
+      "version": "20200904001209"
+    }
+  },
+  "author": "Sgioba Ionadaileadh Mozilla na Gàidhlig (contributors: Michael &apos;Akerbeltz&apos; Bauer, Kevin Scannell)",
+  "langpack_id": "gd",
+  "version": "78.0buildid20210901192859"
+}

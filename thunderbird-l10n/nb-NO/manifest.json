@@ -1,0 +1,57 @@
+{
+  "author": "firefox.no (contributors: Pascual Strømsnæs, Vidar Braut Haarr, Håvar Henriksen, Reidar Djupvik, Jan-Espen Pettersen, Håvard Mork, Lasse Marøen, Martin Joné, Morten Liljegren)",
+  "description": "Language pack for Thunderbird for nb-NO",
+  "languages": {
+    "nb-NO": {
+      "version": "20200904171406",
+      "chrome_resources": {
+        "devtools-startup": "chrome/nb-NO/locale/nb-NO/devtools/startup/",
+        "branding": "chrome/nb-NO/locale/nb-NO/branding/",
+        "pippki": "chrome/nb-NO/locale/nb-NO/pippki/",
+        "messenger-region": "chrome/nb-NO/locale/nb-NO/messenger-region/",
+        "places": "chrome/nb-NO/locale/nb-NO/places/",
+        "communicator": "chrome/nb-NO/locale/nb-NO/communicator/",
+        "alerts": "chrome/nb-NO/locale/nb-NO/alerts/",
+        "calendar": "chrome/nb-NO/locale/nb-NO/calendar/",
+        "pipnss": "chrome/nb-NO/locale/nb-NO/pipnss/",
+        "passwordmgr": "chrome/nb-NO/locale/nb-NO/passwordmgr/",
+        "messenger-newsblog": "chrome/nb-NO/locale/nb-NO/messenger-newsblog/",
+        "mozapps": "chrome/nb-NO/locale/nb-NO/mozapps/",
+        "mozldap": "chrome/nb-NO/locale/nb-NO/mozldap/",
+        "lightning": "chrome/nb-NO/locale/nb-NO/lightning/",
+        "devtools": "chrome/nb-NO/locale/nb-NO/devtools/client/",
+        "global": "chrome/nb-NO/locale/nb-NO/global/",
+        "pluginproblem": "chrome/nb-NO/locale/nb-NO/pluginproblem/",
+        "chat": "chrome/nb-NO/locale/nb-NO/chat/",
+        "devtools-shared": "chrome/nb-NO/locale/nb-NO/devtools/shared/",
+        "global-platform": {
+          "linux": "chrome/nb-NO/locale/nb-NO/global-platform/unix/",
+          "macosx": "chrome/nb-NO/locale/nb-NO/global-platform/mac/",
+          "win": "chrome/nb-NO/locale/nb-NO/global-platform/win/",
+          "android": "chrome/nb-NO/locale/nb-NO/global-platform/unix/"
+        },
+        "messenger": "chrome/nb-NO/locale/nb-NO/messenger/",
+        "messenger-mapi": "chrome/nb-NO/locale/nb-NO/messenger-mapi/",
+        "necko": "chrome/nb-NO/locale/nb-NO/necko/",
+        "messenger-smime": "chrome/nb-NO/locale/nb-NO/messenger-smime/",
+        "autoconfig": "chrome/nb-NO/locale/nb-NO/autoconfig/"
+      }
+    }
+  },
+  "manifest_version": 2,
+  "version": "78.0buildid20210901192859",
+  "applications": {
+    "gecko": {
+      "id": "langpack-nb-NO@thunderbird.mozilla.org",
+      "strict_max_version": "78.*",
+      "strict_min_version": "78.0"
+    }
+  },
+  "langpack_id": "nb-NO",
+  "name": "Norsk (bokmål) Language Pack",
+  "sources": {
+    "browser": {
+      "base_path": "browser/"
+    }
+  }
+}

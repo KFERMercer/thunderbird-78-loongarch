@@ -1,0 +1,68 @@
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at http://mozilla.org/MPL/2.0/.
+---
+loader: taskgraph.loader.transform:loader
+
+kind-dependencies:
+    - fetch
+    - toolchain
+
+transforms:
+    - taskgraph.transforms.build:transforms
+    - taskgraph.transforms.build_attrs:transforms
+    - taskgraph.transforms.build_lints:transforms
+    - taskgraph.transforms.job:transforms
+    - taskgraph.transforms.task:transforms
+
+jobs-from:
+    - linux.yml
+    - macosx.yml
+    - windows.yml
+
+job-defaults:
+    when:
+        files-changed:
+            # Include everything in comm-central except suite/
+            # https://bugzilla.mozilla.org/show_bug.cgi?id=1422060
+            - comm/build
+            - comm/calendar
+            - comm/chat
+            - comm/common
+            - comm/db
+            - comm/editor
+            - comm/ldap
+            - comm/mail
+            - comm/mailnews
+            - comm/mozharness
+            - comm/other-licenses
+            - comm/taskcluster
+            - comm/testing
+            - comm/third_party
+            - comm/.gecko_rev.yml
+            - comm/.taskcluster.yml
+            - comm/moz.build
+
+    run:
+        mozconfig-variant:
+            by-release-type:
+                beta: release
+                release.*: release
+                default: nightly
+        # Note: These settings are only honored by nightly (i.e. shipping) builds
+        update-channel:
+            by-release-type:
+                nightly: nightly
+                beta: beta
+                release.*: release
+                default: null
+        mar-channel-id:
+            by-release-type:
+                release: thunderbird-comm-release
+                beta: thunderbird-comm-beta
+                default: thunderbird-comm-central
+        accepted-mar-channel-ids:
+            by-release-type:
+                release: thunderbird-comm-release
+                beta: thunderbird-comm-beta,thunderbird-comm-release
+                default: thunderbird-comm-central

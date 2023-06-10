@@ -1,0 +1,57 @@
+{
+  "manifest_version": 2,
+  "langpack_id": "eu",
+  "name": "Basque Language Pack",
+  "sources": {
+    "browser": {
+      "base_path": "browser/"
+    }
+  },
+  "languages": {
+    "eu": {
+      "version": "20200903130645",
+      "chrome_resources": {
+        "messenger-region": "chrome/eu/locale/eu/messenger-region/",
+        "necko": "chrome/eu/locale/eu/necko/",
+        "devtools": "chrome/eu/locale/eu/devtools/client/",
+        "global-platform": {
+          "linux": "chrome/eu/locale/eu/global-platform/unix/",
+          "macosx": "chrome/eu/locale/eu/global-platform/mac/",
+          "win": "chrome/eu/locale/eu/global-platform/win/",
+          "android": "chrome/eu/locale/eu/global-platform/unix/"
+        },
+        "messenger-newsblog": "chrome/eu/locale/eu/messenger-newsblog/",
+        "pippki": "chrome/eu/locale/eu/pippki/",
+        "messenger": "chrome/eu/locale/eu/messenger/",
+        "chat": "chrome/eu/locale/eu/chat/",
+        "calendar": "chrome/eu/locale/eu/calendar/",
+        "pluginproblem": "chrome/eu/locale/eu/pluginproblem/",
+        "passwordmgr": "chrome/eu/locale/eu/passwordmgr/",
+        "places": "chrome/eu/locale/eu/places/",
+        "mozldap": "chrome/eu/locale/eu/mozldap/",
+        "mozapps": "chrome/eu/locale/eu/mozapps/",
+        "lightning": "chrome/eu/locale/eu/lightning/",
+        "pipnss": "chrome/eu/locale/eu/pipnss/",
+        "autoconfig": "chrome/eu/locale/eu/autoconfig/",
+        "alerts": "chrome/eu/locale/eu/alerts/",
+        "messenger-mapi": "chrome/eu/locale/eu/messenger-mapi/",
+        "devtools-shared": "chrome/eu/locale/eu/devtools/shared/",
+        "global": "chrome/eu/locale/eu/global/",
+        "communicator": "chrome/eu/locale/eu/communicator/",
+        "branding": "chrome/eu/locale/eu/branding/",
+        "devtools-startup": "chrome/eu/locale/eu/devtools/startup/",
+        "messenger-smime": "chrome/eu/locale/eu/messenger-smime/"
+      }
+    }
+  },
+  "applications": {
+    "gecko": {
+      "id": "langpack-eu@thunderbird.mozilla.org",
+      "strict_max_version": "78.*",
+      "strict_min_version": "78.0"
+    }
+  },
+  "version": "78.0buildid20210901192859",
+  "description": "Language pack for Thunderbird for eu",
+  "author": "librezale.org (contributors: Librezale.eus)"
+}

@@ -1,0 +1,21 @@
+From: Mike Hommey <glandium@debian.org>
+Date: Sun, 2 Nov 2008 17:56:24 +0100
+Subject: Disable optimization on alpha for the url-classifier component
+
+The use of this component leads to crashes when built with optimizations.
+---
+ comm/suite/components/build/Makefile.in | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/comm/suite/components/build/Makefile.in b/comm/suite/components/build/Makefile.in
+index 2387227..d5ca1ba 100644
+--- a/comm/suite/components/build/Makefile.in
++++ b/comm/suite/components/build/Makefile.in
+@@ -6,3 +6,7 @@ include $(topsrcdir)/config/rules.mk
+ 
+ # Ensure that we don't embed a manifest referencing the CRT.
+ EMBED_MANIFEST_AT =
++
++ifeq ($(OS_TEST),alpha)
++MOZ_OPTIMIZE_FLAGS := -O0
++endif

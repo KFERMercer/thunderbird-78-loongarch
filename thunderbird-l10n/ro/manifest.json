@@ -1,0 +1,57 @@
+{
+  "langpack_id": "ro",
+  "version": "78.0buildid20210901192859",
+  "description": "Language pack for Thunderbird for ro",
+  "name": "Română (România) Language Pack",
+  "applications": {
+    "gecko": {
+      "id": "langpack-ro@thunderbird.mozilla.org",
+      "strict_min_version": "78.0",
+      "strict_max_version": "78.*"
+    }
+  },
+  "sources": {
+    "browser": {
+      "base_path": "browser/"
+    }
+  },
+  "author": "mozilla.org (contributors: Alexandru Szasz, Raul Nicolae Malea, Cristian Silaghi, Jobava)",
+  "manifest_version": 2,
+  "languages": {
+    "ro": {
+      "version": "20200902055103",
+      "chrome_resources": {
+        "pipnss": "chrome/ro/locale/ro/pipnss/",
+        "messenger-newsblog": "chrome/ro/locale/ro/messenger-newsblog/",
+        "communicator": "chrome/ro/locale/ro/communicator/",
+        "messenger-region": "chrome/ro/locale/ro/messenger-region/",
+        "messenger": "chrome/ro/locale/ro/messenger/",
+        "messenger-mapi": "chrome/ro/locale/ro/messenger-mapi/",
+        "necko": "chrome/ro/locale/ro/necko/",
+        "chat": "chrome/ro/locale/ro/chat/",
+        "global-platform": {
+          "macosx": "chrome/ro/locale/ro/global-platform/mac/",
+          "android": "chrome/ro/locale/ro/global-platform/unix/",
+          "win": "chrome/ro/locale/ro/global-platform/win/",
+          "linux": "chrome/ro/locale/ro/global-platform/unix/"
+        },
+        "devtools-shared": "chrome/ro/locale/ro/devtools/shared/",
+        "alerts": "chrome/ro/locale/ro/alerts/",
+        "messenger-smime": "chrome/ro/locale/ro/messenger-smime/",
+        "branding": "chrome/ro/locale/ro/branding/",
+        "devtools-startup": "chrome/ro/locale/ro/devtools/startup/",
+        "devtools": "chrome/ro/locale/ro/devtools/client/",
+        "lightning": "chrome/ro/locale/ro/lightning/",
+        "pluginproblem": "chrome/ro/locale/ro/pluginproblem/",
+        "mozldap": "chrome/ro/locale/ro/mozldap/",
+        "places": "chrome/ro/locale/ro/places/",
+        "pippki": "chrome/ro/locale/ro/pippki/",
+        "mozapps": "chrome/ro/locale/ro/mozapps/",
+        "global": "chrome/ro/locale/ro/global/",
+        "autoconfig": "chrome/ro/locale/ro/autoconfig/",
+        "passwordmgr": "chrome/ro/locale/ro/passwordmgr/",
+        "calendar": "chrome/ro/locale/ro/calendar/"
+      }
+    }
+  }
+}

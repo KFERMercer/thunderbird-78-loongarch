@@ -1,0 +1,57 @@
+{
+  "applications": {
+    "gecko": {
+      "strict_min_version": "78.0",
+      "strict_max_version": "78.*",
+      "id": "langpack-uk@thunderbird.mozilla.org"
+    }
+  },
+  "manifest_version": 2,
+  "description": "Language pack for Thunderbird for uk",
+  "author": "mozilla.org (contributors: Артем Поліванчук, Сергій Хоружин, Тимофій Бабич, Тимур Фараджев)",
+  "version": "78.0buildid20210901192859",
+  "languages": {
+    "uk": {
+      "chrome_resources": {
+        "global": "chrome/uk/locale/uk/global/",
+        "necko": "chrome/uk/locale/uk/necko/",
+        "messenger-mapi": "chrome/uk/locale/uk/messenger-mapi/",
+        "global-platform": {
+          "macosx": "chrome/uk/locale/uk/global-platform/mac/",
+          "android": "chrome/uk/locale/uk/global-platform/unix/",
+          "linux": "chrome/uk/locale/uk/global-platform/unix/",
+          "win": "chrome/uk/locale/uk/global-platform/win/"
+        },
+        "lightning": "chrome/uk/locale/uk/lightning/",
+        "mozldap": "chrome/uk/locale/uk/mozldap/",
+        "mozapps": "chrome/uk/locale/uk/mozapps/",
+        "alerts": "chrome/uk/locale/uk/alerts/",
+        "devtools-shared": "chrome/uk/locale/uk/devtools/shared/",
+        "calendar": "chrome/uk/locale/uk/calendar/",
+        "messenger": "chrome/uk/locale/uk/messenger/",
+        "messenger-newsblog": "chrome/uk/locale/uk/messenger-newsblog/",
+        "messenger-region": "chrome/uk/locale/uk/messenger-region/",
+        "branding": "chrome/uk/locale/uk/branding/",
+        "autoconfig": "chrome/uk/locale/uk/autoconfig/",
+        "pluginproblem": "chrome/uk/locale/uk/pluginproblem/",
+        "communicator": "chrome/uk/locale/uk/communicator/",
+        "devtools": "chrome/uk/locale/uk/devtools/client/",
+        "passwordmgr": "chrome/uk/locale/uk/passwordmgr/",
+        "places": "chrome/uk/locale/uk/places/",
+        "chat": "chrome/uk/locale/uk/chat/",
+        "pippki": "chrome/uk/locale/uk/pippki/",
+        "devtools-startup": "chrome/uk/locale/uk/devtools/startup/",
+        "messenger-smime": "chrome/uk/locale/uk/messenger-smime/",
+        "pipnss": "chrome/uk/locale/uk/pipnss/"
+      },
+      "version": "20200902191509"
+    }
+  },
+  "sources": {
+    "browser": {
+      "base_path": "browser/"
+    }
+  },
+  "langpack_id": "uk",
+  "name": "Ukrainian (UA) Language Pack"
+}

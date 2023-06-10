@@ -1,0 +1,47 @@
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+@import url("chrome://messenger/content/glodaFacetView.css");
+
+#body {
+  --popupColor: Menu;
+  --popupBorder: ThreeDShadow;
+  --popupHLColor: Highlight;
+  --popupHLTextColor: HighlightText;
+  --barColor: Highlight;
+  --barHlColor: -moz-nativehyperlinktext;
+  --dateColor: rgba(0,0,0,0.1);
+  --dateHLColor: Highlight;
+  --borderRadius: 3px;
+  --buttonHoverColor: ButtonShadow;
+  --buttonHoverTextColor: -moz-ButtonHoverText;
+}
+
+.facets-sidebar {
+  background-color: -moz-Dialog;
+  color: -moz-DialogText;
+  font-size: 0.95em;
+}
+
+.facet-more,
+.show-more {
+  padding: 0;
+}
+
+.barry {
+  border-top: 1px solid GrayText;
+}
+
+.bar {
+  border-bottom: 1px solid GrayText;
+}
+
+.bar-link {
+  color: -moz-NativehyperlinkText;
+}
+
+.bar:hover > .bar-link,
+.bar:focus > .bar-link {
+  color: HighlightText;
+}

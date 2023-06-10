@@ -1,0 +1,610 @@
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+@namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
+@namespace html url("http://www.w3.org/1999/xhtml");
+
+/* ::::: msg header buttons ::::: */
+
+.headerContainer {
+  min-width: 1px;
+}
+
+#otherActionsButton > .toolbarbutton-icon {
+  display: none;
+}
+
+.toolbarbutton-1.msgHeaderView-button {
+  -moz-box-orient: horizontal;
+  fill: currentColor;
+}
+
+.msgHeaderView-button[type="menu-button"] > toolbarbutton {
+  -moz-box-orient: horizontal;
+}
+
+/* ::::: msg header toolbars ::::: */
+
+#expandedHeadersTopBox {
+  /* Use the HTML layout model to allow the message header toolbar to float to
+     the right of the From field. */
+  display: block;
+}
+
+#header-view-toolbox {
+  float: inline-end;
+  display: block;
+}
+
+/* ::::: expanded header pane ::::: */
+
+#expandedsubjectBox {
+  font-weight: bold;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow-y: auto;
+}
+
+/* ::::: attachment view ::::: */
+
+#attachmentToggle {
+  /* Override button appearance */
+  -moz-appearance: none;
+  min-width: 20px;
+  margin-block: 0;
+  margin-inline: 1px 0;
+  border: 0;
+  background-color: transparent;
+  color: inherit;
+  -moz-user-focus: normal;
+  list-style-image: url("chrome://global/skin/icons/twisty-collapsed.svg");
+  -moz-context-properties: fill, fill-opacity;
+  fill: currentColor;
+  fill-opacity: 1;
+}
+
+#attachmentToggle[checked="true"] {
+  list-style-image: url("chrome://global/skin/icons/twisty-expanded.svg");
+}
+
+#attachmentToggle:-moz-locale-dir(rtl) {
+  list-style-image: url("chrome://global/skin/icons/twisty-collapsed-rtl.svg");
+}
+
+#attachmentToggle:focus {
+  outline: 1px dotted Highlight;
+}
+
+#attachmentIcon {
+  list-style-image: url("chrome://messenger/skin/icons/attach.svg");
+  margin-inline-start: 5px;
+  -moz-context-properties: fill, fill-opacity;
+  fill: currentColor;
+  fill-opacity: var(--toolbarbutton-icon-fill-opacity);
+}
+
+#attachmentCount {
+  margin: 0;
+  padding: 2px 0;
+  margin-inline: 2px 1px;
+}
+
+#attachmentName {
+  -moz-user-focus: normal;
+  margin: 0;
+  margin-inline-end: -3px;
+  padding: 1px 2px;
+  border-radius: 2px;
+  border: 1px dotted transparent;
+}
+
+#attachmentName:focus {
+  border-color: Highlight;
+}
+
+/* ::::: msg header captions ::::: */
+
+#header-view-toolbar .msgHeaderView-button[disabled="true"] {
+  display: none;
+}
+
+#header-view-toolbar {
+  -moz-box-pack: end;
+}
+
+.headerValue {
+  overflow-wrap: anywhere;
+}
+
+.headerValue[containsEmail="true"] {
+  margin-inline-start: 0 !important;
+}
+
+#otherActionsBox {
+  white-space: nowrap;
+  margin-inline-start: 8px;
+}
+
+html|table#expandedHeaders {
+  display: inline-grid;
+  vertical-align: baseline;
+}
+
+html|table#expandedHeaders,
+html|table#expandedHeaders2 {
+  border-spacing: 0;
+}
+
+#expandedHeadersBottomBox {
+  display: flex;
+}
+
+#expandedHeadersTopBox html|th,
+#expandedHeadersBottomBox html|th {
+  font-weight: normal !important;
+  vertical-align: top;
+  text-align: right;
+  padding-top: 2px !important;
+}
+
+#expandedHeadersTopBox html|td,
+#expandedHeadersBottomBox html|td,
+mail-multi-emailheaderfield {
+  width: 100%;
+}
+
+#expandedHeadersTopBox html|th,
+#expandedHeadersBottomBox html|th,
+#expandedHeadersTopBox html|td,
+#expandedHeadersBottomBox html|td {
+  margin: 0;
+  padding: 0;
+}
+
+.headerValueBox {
+  overflow: visible;
+}
+
+mail-newsgroups-headerfield.headerValueBox {
+  padding: .1em 0;
+  margin-bottom: 4px;
+}
+
+.headerValueBox[singleline="true"] > .headerValue[containsEmail="true"] {
+  white-space: nowrap;
+}
+
+.headerValueBox[singleline="true"] {
+  overflow: hidden;
+}
+
+.headerField {
+  color: inherit;
+}
+
+.moreIndicator:hover {
+  text-decoration: underline;
+  color: darkred;
+}
+
+.tagvalue {
+  padding: 0 0.5ex;
+  margin-inline-start: 0;
+  background-image: linear-gradient(rgba(255,255,255,0.35),
+                                    rgba(255,255,255,0.35));
+  border-radius: 3px;
+  border-width: 0.5px;
+  border-style: outset;
+  text-shadow: 0 1px 0 rgba(238, 238, 236, 0.4); /* Tango Alumninum 1 */
+  color: #111111;
+}
+
+/* ::::: msg header email addresses ::::: */
+
+.emailDisplayButton {
+  display: -moz-inline-box;
+  padding-inline: 2px;
+}
+
+.emailDisplayButton:hover {
+  cursor: pointer;
+  color: HighlightText;
+  background-color: Highlight;
+}
+
+mail-emailaddress[selected="true"] > .emailDisplayButton {
+  /* when an email address context menu is selected,
+   * make sure that the email menupopup stays displayed,
+   * and tweak the bottom to blend in more w/ the menu
+   */
+  cursor: pointer;
+  color: HighlightText;
+  background-color: Highlight;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+/* this is for the comma in between email addresses */
+.emailSeparator {
+  margin: 0;
+  margin-inline-start: -3px; /* squeeze it inside the bubble, by the star */
+}
+
+/* Because there's no star for newsgroups like there is for email addresses,
+ * pushing it back the same number of pixels as emailSeparator causes
+ * the comma to be drawn too close to the last letter, which looks bad, so
+ * using a separate rule here.
+ */
+.newsgroupSeparator {
+  margin: 0;
+  margin-inline-start: -2px;
+}
+
+.messageIdSeparator {
+  margin: 0;
+}
+
+.emailStar {
+  width: 1em;
+  height: 1em;
+  margin-inline-start: 2px;
+  list-style-image: url("chrome://messenger/skin/icons/star.svg");
+  -moz-context-properties: fill;
+  fill: currentColor;
+}
+
+.emailStar[hascard="true"] {
+  list-style-image: url("chrome://messenger/skin/icons/starred.svg");
+  fill: var(--toolbarbutton-icon-fill-attention);
+}
+
+.emailDisplayButton:hover > .emailStar,
+mail-emailaddress[selected="true"] > .emailDisplayButton > .emailStar {
+  fill: HighlightText;
+}
+
+.emailStar:focus {
+  outline: 1px dotted;
+}
+
+.emaillabel {
+  max-width: 60vw; /* for very long email fields */
+}
+
+.emaillabel,
+.newsgrouplabel {
+  padding: 0;  /* override <label> defaults */
+  margin: 0;  /* override <label> defaults */
+  overflow: hidden;
+}
+
+.emailStar[chatStatus],
+.emailPresence:not([chatStatus]) {
+  display: none;
+}
+
+.emailPresence[chatStatus="available"] {
+  list-style-image: url("chrome://messenger/skin/icons/status-small.png");
+  -moz-image-region: rect(0 10px 10px 0);
+}
+
+.emailPresence[chatStatus="away"] {
+  list-style-image: url("chrome://messenger/skin/icons/status-small.png");
+  -moz-image-region: rect(0 40px 10px 30px);
+}
+
+/* ::::: email address twisty ::::: */
+
+.addresstwisty {
+  padding-inline-end: 0;
+  padding-top: 4px;
+  list-style-image:url("chrome://messenger/skin/icons/arrow/arrow-right-dim.png");
+}
+
+.addresstwisty:hover {
+  list-style-image:url("chrome://messenger/skin/icons/arrow/arrow-right.png");
+}
+
+.addresstwisty[open] {
+  list-style-image:url("chrome://messenger/skin/icons/arrow/arrow-down-dim.png");
+}
+
+.addresstwisty[open]:hover {
+  list-style-image:url("chrome://messenger/skin/icons/arrow/arrow-down.png");
+}
+
+.emailToggleHeaderfield {
+  padding-top: 1px;
+  width: 10px;
+  margin-inline: 4px 2px;
+  background: url("chrome://global/skin/icons/twisty-collapsed.svg") no-repeat center;
+  background-size: contain;
+  -moz-context-properties: fill;
+  fill: currentColor;
+}
+
+.emailToggleHeaderfield:-moz-locale-dir(rtl) {
+  background-image: url("chrome://global/skin/icons/twisty-collapsed-rtl.svg");
+}
+
+.emailToggleHeaderfield.open {
+  background-image: url("chrome://global/skin/icons/twisty-expanded.svg");
+}
+
+/* ::::: view expand and collapse twisties  ::::: */
+
+mail-multi-emailheaderfield,
+mail-headerfield,
+mail-urlfield,
+mail-newsgroups-headerfield {
+  -moz-box-align: baseline;
+}
+
+mail-headerfield {
+  -moz-user-focus: normal;
+  -moz-user-select: text;
+  word-wrap: break-word;
+}
+
+mail-headerfield:focus {
+  outline: 1px dotted;
+  outline-offset: -1px;
+}
+
+#attachmentView {
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+}
+
+#attachmentView,
+#attachmentList {
+  border-top: 1px solid var(--splitter-color); /* The same color as the splitters */
+}
+
+:root[lwt-tree] #msgHeaderView,
+:root[lwt-tree] #attachmentView,
+:root[lwt-tree] #attachmentList {
+  background-color: var(--toolbar-bgcolor) !important;
+  background-image: none !important;
+  color: var(--lwt-text-color);
+}
+
+:root[lwt-tree] .headerValue {
+  color: inherit;
+}
+
+:root[lwt-tree] #attachmentBar {
+  background-color: hsla(0, 0%, 50%, .15);
+  color: inherit;
+}
+
+:root[lwt-tree] html|input.editContactTextbox {
+  background-color: var(--lwt-toolbar-field-background-color);
+  color: var(--lwt-toolbar-field-color);
+}
+:root[lwt-tree] html|input.editContactTextbox:not([readonly]):not(:focus) {
+  border-color: var(--panel-separator-color);
+}
+
+:root[lwt-tree] #attachmentList {
+  background-color: var(--sidebar-background-color);
+  color: var(--sidebar-text-color);
+}
+
+:root[lwt-tree] #attachmentList {
+  scrollbar-color: rgba(204, 204, 204, .5) rgba(230, 230, 235, .5);
+}
+
+:root[lwt-tree-brighttext] #attachmentList {
+  scrollbar-color: rgba(249, 249, 250, .4) rgba(20, 20, 25, .3);
+}
+
+:root[lwt-tree] #attachmentList .attachmentItem {
+  color: var(--sidebar-text-color);
+}
+
+:root[lwt-tree] #attachmentList .attachmentItem:hover {
+  background-color: hsla(0, 0%, 50%, .15);
+  border-color: hsla(0, 0%, 50%, .15);
+  color: inherit;
+}
+
+:root[lwt-tree] #attachmentList .attachmentItem[selected="true"] {
+  background: var(--sidebar-highlight-background-color, hsla(0, 0%, 80%, .6));
+  border-color: var(--sidebar-highlight-background-color, hsla(0, 0%, 80%, .6));
+  color: var(--sidebar-highlight-text-color, var(--sidebar-text-color));
+}
+
+:root[lwt-tree-brighttext] #attachmentList .attachmentItem[selected="true"] {
+  background: var(--sidebar-highlight-background-color, rgba(249, 249, 250, .1));
+  border-color: var(--sidebar-highlight-background-color, rgba(249, 249, 250, .1));
+}
+
+:root[lwt-tree] #attachmentList[seltype="multiple"] .attachmentItem[current="true"] {
+  border-color: transparent;
+  outline: 1px solid var(--sidebar-highlight-background-color, hsla(0, 0%, 50%, .6));
+}
+
+/* OpenPGP and S/MIME encryption and signature status icons */
+
+.crypto-container {
+  margin-inline-end: 3px;
+}
+
+html|span.crypto-label {
+  font-weight: 600;
+  margin-inline-end: 5px;
+}
+
+html|button.crypto-button {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  margin-block: 6px 3px;
+  fill: currentColor;
+  background-color: transparent;
+}
+
+#signedHdrIcon,
+#encryptedHdrIcon {
+  list-style-image: none;
+  visibility: visible;
+}
+
+#encryptedHdrIcon:not([hidden="true"]) + #signedHdrIcon:not([hidden="true"]) {
+  margin-inline-start: 3px;
+}
+
+#signedHdrIcon[signed="verified"] {
+  list-style-image: url("chrome://messenger/skin/icons/message-signed-verified.svg");
+}
+
+#signedHdrIcon[signed="unverified"] {
+  list-style-image: url("chrome://messenger/skin/icons/message-signed-unverified.svg");
+}
+
+#signedHdrIcon[signed="ok"] {
+  list-style-image: url("chrome://messenger/skin/icons/message-signed-ok.svg");
+}
+
+#signedHdrIcon[signed="unknown"] {
+  list-style-image: url("chrome://messenger/skin/icons/message-signed-unknown.svg");
+}
+
+#signedHdrIcon[signed="mismatch"] {
+  list-style-image: url("chrome://messenger/skin/icons/message-signed-mismatch.svg");
+}
+
+#signedHdrIcon[signed="notok"] {
+  list-style-image: url("chrome://messenger/skin/icons/message-signed-mismatch.svg");
+}
+
+#encryptedHdrIcon[encrypted="ok"] {
+  list-style-image: url("chrome://messenger/skin/icons/message-encrypted-ok.svg");
+}
+
+#encryptedHdrIcon[encrypted="notok"] {
+  list-style-image: url("chrome://messenger/skin/icons/message-encrypted-notok.svg");
+}
+
+/* Encryption security pane */
+#messageSecurityPanel {
+  width: 34rem;
+}
+
+html|header.message-security-header {
+  display: flex;
+  flex-wrap: nowrap;
+  text-align: center;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+html|header.message-security-header html|h3 {
+  flex: 1;
+  margin-block: 0;
+}
+
+.message-security-body > description {
+  margin-bottom: 18px;
+}
+
+.message-security-label {
+  font-weight: 600;
+  font-size: 1.1em;
+  padding-inline-start: 21px;
+  background-position: left center;
+  background-repeat: no-repeat;
+  background-size: 16px;
+  margin-bottom: 6px;
+  fill: currentColor;
+  -moz-context-properties: fill;
+}
+
+.message-security-label.none,
+#encryptionLabel.none,
+#signatureLabel.none {
+  padding-inline-start: 0;
+}
+
+#signatureLabel.ok {
+  background-image: url("chrome://messenger/skin/icons/message-signed-ok.svg");
+}
+
+#signatureLabel.verified {
+  background-image: url("chrome://messenger/skin/icons/message-signed-verified.svg");
+}
+
+#signatureLabel.unverified {
+  background-image: url("chrome://messenger/skin/icons/message-signed-unverified.svg");
+}
+
+#signatureLabel.unknown {
+  background-image: url("chrome://messenger/skin/icons/message-signed-unknown.svg");
+}
+
+#signatureLabel.mismatch,
+#signatureLabel.notok {
+  background-image: url("chrome://messenger/skin/icons/message-signed-mismatch.svg");
+}
+
+#encryptionLabel.ok {
+  background-image: url("chrome://messenger/skin/icons/message-encrypted-ok.svg");
+}
+
+#encryptionLabel.notok {
+  background-image: url("chrome://messenger/skin/icons/message-encrypted-notok.svg");
+}
+
+.message-security-container {
+  margin-bottom: 21px;
+}
+
+#signatureKeyId,
+#encryptionKeyId,
+.cert-label {
+  font-weight: 600;
+}
+
+#otherEncryptionKeysList {
+  margin: 9px 6px;
+  max-height: 30rem;
+  overflow-y: auto;
+}
+
+.other-key-row {
+  border-radius: 2px;
+  padding: 3px 2px;
+  border: 1px solid var(--button-border-color);
+  background-color: rgba(215, 215, 219, 0.2);
+  margin-bottom: 3px;
+}
+
+.openpgp-key-id {
+  font-weight: bold;
+}
+
+.openpgp-key-name {
+  font-size: 0.9em;
+}
+
+#signatureKeyId,
+#encryptionKeyId,
+.openpgp-key-id,
+.openpgp-key-name {
+  user-select: text;
+  cursor: text;
+}
+
+#openpgpImportButton {
+  list-style-image: url("chrome://messenger/skin/icons/encryption-key.svg");
+  -moz-context-properties: fill;
+  fill: currentColor;
+}
+
+#openpgpImportButton .button-icon {
+  margin-inline-end: 2px;
+}

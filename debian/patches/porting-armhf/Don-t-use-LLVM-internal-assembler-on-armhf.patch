@@ -1,0 +1,43 @@
+From: Carsten Schoenert <c.schoenert@t-online.de>
+Date: Sat, 5 Oct 2019 19:23:45 +0200
+Subject: Don't use LLVM internal assembler on armhf
+
+Avoid the usage of LLVM own assembler implementation on specific parts
+as the assembler isn't build with NEON support.
+
+Author: Olivier Tilloy <olivier.tilloy@canonical.com>
+Bug: https://bugzilla.mozilla.org/show_bug.cgi?id=1561819
+---
+ gfx/ycbcr/moz.build     | 3 +++
+ media/libjpeg/moz.build | 4 ++++
+ 2 files changed, 7 insertions(+)
+
+diff --git a/gfx/ycbcr/moz.build b/gfx/ycbcr/moz.build
+index c643fba..59a7eab 100644
+--- a/gfx/ycbcr/moz.build
++++ b/gfx/ycbcr/moz.build
+@@ -60,6 +60,9 @@ if CONFIG['CPU_ARCH'] == 'arm' and CONFIG['HAVE_ARM_NEON']:
+     SOURCES += [
+         'yuv_convert_arm.cpp',
+     ]
++    # The integrated assembler fails to build yuv_convert_arm.cpp because it doesn't have NEON
++    if CONFIG['CC_TYPE'] == 'clang':
++        CXXFLAGS += ['-fno-integrated-as']
+ 
+ LOCAL_INCLUDES += ['/media/libyuv/libyuv/include']
+ 
+diff --git a/media/libjpeg/moz.build b/media/libjpeg/moz.build
+index c214868..dba24f2 100644
+--- a/media/libjpeg/moz.build
++++ b/media/libjpeg/moz.build
+@@ -219,6 +219,10 @@ if CONFIG['CPU_ARCH'] == 'x86_64':
+     ASFLAGS += ['-I%s/media/libjpeg/simd/nasm/' % TOPSRCDIR]
+     ASFLAGS += ['-I%s/media/libjpeg/simd/x86_64/' % TOPSRCDIR]
+ 
++# The integrated assembler fails to build simd/arm/jsimd_neon.S because it doesn't have NEON
++if CONFIG['CC_TYPE'] == 'clang' and CONFIG['CPU_ARCH'] == 'arm':
++    ASFLAGS += ['-fno-integrated-as']
++
+ # We allow warnings for third-party code that can be updated from upstream.
+ AllowCompilerWarnings()
+ 

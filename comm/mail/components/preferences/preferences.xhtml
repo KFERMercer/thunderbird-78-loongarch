@@ -1,0 +1,197 @@
+<?xml version="1.0"?>
+# -*- Mode: Java; tab-width: 2; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
+<?xml-stylesheet href="chrome://global/skin/global.css"?>
+<?xml-stylesheet href="chrome://messenger/skin/messenger.css"?>
+<?xml-stylesheet href="chrome://messenger/skin/input-fields.css"?>
+<?xml-stylesheet href="chrome://messenger/content/messenger.css"?>
+<?xml-stylesheet href="chrome://messenger/content/preferences/handlers.css"?>
+<?xml-stylesheet href="chrome://messenger/skin/preferences/applications.css"?>
+<?xml-stylesheet href="chrome://global/skin/in-content/common.css"?>
+<?xml-stylesheet href="chrome://messenger/skin/preferences/preferences.css"?>
+<?xml-stylesheet href="chrome://calendar/skin/shared/calendar-preferences.css" type="text/css"?>
+<?xml-stylesheet href="chrome://calendar/skin/lightning.css"?>
+
+<!DOCTYPE preftab [
+<!ENTITY % brandDTD SYSTEM "chrome://branding/locale/brand.dtd">
+%brandDTD;
+<!ENTITY % editorOverlayDTD SYSTEM "chrome://messenger/locale/messengercompose/editorOverlay.dtd">
+%editorOverlayDTD;
+#ifdef MOZ_UPDATER
+<!ENTITY % aboutDialogDTD SYSTEM "chrome://messenger/locale/aboutDialog.dtd" >
+%aboutDialogDTD;
+#endif
+<!ENTITY % lightningDTD SYSTEM "chrome://lightning/locale/lightning.dtd">
+%lightningDTD;
+<!ENTITY % globalDTD SYSTEM "chrome://calendar/locale/global.dtd">
+%globalDTD;
+<!ENTITY % eventDTD SYSTEM "chrome://calendar/locale/calendar-event-dialog.dtd">
+%eventDTD;
+]>
+
+<preftab id="MailPreferences" flex="1"
+         windowtype="Mail:Preferences"
+         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+         xmlns:xhtml="http://www.w3.org/1999/xhtml"
+         xmlns:html="http://www.w3.org/1999/xhtml"
+         data-l10n-id="preferences-title">
+
+  <script src="chrome://global/content/preferencesBindings.js"/>
+#ifdef MOZ_UPDATER
+  <script src="chrome://messenger/content/aboutDialog-appUpdater.js"/>
+#endif
+  <script src="chrome://global/content/globalOverlay.js"/>
+  <script src="chrome://global/content/editMenuOverlay.js"/>
+
+  <linkset>
+    <html:link rel="localization" href="branding/brand.ftl"/>
+    <html:link rel="localization" href="messenger/preferences/preferences.ftl"/>
+    <html:link rel="localization" href="messenger/preferences/fonts.ftl"/>
+    <html:link rel="localization" href="messenger/preferences/languages.ftl"/>
+
+    <!-- Links below are only used for search-l10n-ids into subdialogs -->
+    <html:link rel="localization" href="messenger/preferences/sendoptions.ftl"/>
+    <html:link rel="localization" href="messenger/preferences/receipts.ftl"/>
+    <html:link rel="localization" href="messenger/preferences/permissions.ftl"/>
+    <html:link rel="localization" href="messenger/preferences/cookies.ftl"/>
+    <html:link rel="localization" href="messenger/preferences/system-integration.ftl"/>
+    <html:link rel="localization" href="messenger/preferences/colors.ftl"/>
+    <html:link rel="localization" href="messenger/preferences/dock-options.ftl"/>
+    <html:link rel="localization" href="messenger/preferences/notifications.ftl"/>
+    <html:link rel="localization" href="messenger/preferences/new-tag.ftl"/>
+    <html:link rel="localization" href="toolkit/updates/history.ftl"/>
+    <html:link rel="localization" href="messenger/preferences/connection.ftl"/>
+    <html:link rel="localization" href="messenger/preferences/offline.ftl"/>
+    <html:link rel="localization" href="toolkit/about/aboutConfig.ftl"/>
+    <html:link rel="localization" href="messenger/preferences/attachment-reminder.ftl"/>
+    <html:link rel="localization" href="messenger/preferences/passwordManager.ftl"/>
+    <html:link rel="localization" href="security/certificates/certManager.ftl"/>
+    <html:link rel="localization" href="security/certificates/deviceManager.ftl"/>
+  </linkset>
+
+  <stack id="preferences-stack" flex="1">
+    <hbox id="prefBox" class="main-content" flex="1">
+
+      <vbox id="pref-category-box">
+
+        <!-- category list -->
+        <richlistbox id="categories">
+          <richlistitem id="category-general"
+                        class="category"
+                        value="paneGeneral"
+                        data-l10n-id="category-general"
+                        align="center">
+            <image class="category-icon"/>
+            <label class="category-name" flex="1" data-l10n-id="pane-general-title"/>
+          </richlistitem>
+
+          <richlistitem id="category-compose"
+                        class="category"
+                        value="paneCompose"
+                        data-l10n-id="category-compose"
+                        align="center">
+            <image class="category-icon"/>
+            <label class="category-name" flex="1" data-l10n-id="pane-compose-title"/>
+          </richlistitem>
+
+          <richlistitem id="category-privacy"
+                        class="category"
+                        value="panePrivacy"
+                        data-l10n-id="category-privacy"
+                        align="center">
+            <image class="category-icon"/>
+            <label class="category-name" flex="1" data-l10n-id="pane-privacy-title"/>
+          </richlistitem>
+
+          <richlistitem id="category-chat"
+                        class="category"
+                        value="paneChat"
+                        data-l10n-id="category-chat"
+                        align="center">
+            <image class="category-icon"/>
+            <label class="category-name" flex="1" data-l10n-id="pane-chat-title"/>
+          </richlistitem>
+
+          <richlistitem id="category-calendar"
+                        class="category"
+                        value="paneCalendar"
+                        data-l10n-id="category-calendar"
+                        align="center">
+            <image class="category-icon"/>
+            <label class="category-name" flex="1" data-l10n-id="pane-calendar-title"/>
+          </richlistitem>
+        </richlistbox>
+
+        <spacer flex="1"/>
+
+        <hbox class="sidebar-footer-button"
+              pack="center"
+              onclick="window.docShell.rootTreeItem.domWindow.openAddonsMgr();">
+          <label is="text-link" id="addonsButton">
+            <hbox align="center">
+              <image class="sidebar-footer-icon addons-icon"/>
+              <label data-l10n-id="addons-button" class="sidebar-footer-label" flex="1"/>
+            </hbox>
+          </label>
+        </hbox>
+
+      </vbox>
+
+      <vbox id="preferencesContainer" flex="1" align="start">
+        <vbox class="paneDeckContainer">
+          <hbox class="sticky-container" pack="end" align="top" flex="1">
+            <search-textbox id="searchInput"
+                            data-l10n-id="search-input-box"
+                            data-l10n-attrs="placeholder, style"
+                            hidden="true"/>
+          </hbox>
+          <vbox id="paneDeck">
+#include searchResults.inc.xhtml
+#include general.inc.xhtml
+#include compose.inc.xhtml
+#include privacy.inc.xhtml
+#include chat.inc.xhtml
+#include ../../../calendar/lightning/content/messenger-overlay-preferences.inc.xhtml
+          </vbox>
+        </vbox>
+      </vbox>
+    </hbox>
+    <stack id="dialogStack" hidden="true"/>
+    <vbox id="dialogTemplate"
+          class="dialogOverlay"
+          align="center"
+          pack="center"
+          topmost="true"
+          hidden="true">
+      <vbox class="dialogBox"
+            pack="end"
+            role="dialog"
+            aria-labelledby="dialogTitle">
+        <hbox class="dialogTitleBar" align="center">
+          <label class="dialogTitle" flex="1"/>
+          <button class="dialogClose close-icon" data-l10n-id="close-button"/>
+        </hbox>
+        <browser class="dialogFrame"
+                 autoscroll="false"
+                 disablehistory="true"/>
+      </vbox>
+    </vbox>
+  </stack>
+
+  <script src="chrome://global/content/globalOverlay.js"/>
+  <script src="chrome://communicator/content/contentAreaClick.js"/>
+  <script src="chrome://messenger/content/preferences/preferences.js"/>
+  <script src="chrome://messenger/content/preferences/findInPage.js"/>
+  <script src="chrome://messenger/content/preferences/subdialogs.js"/>
+
+  <script src="chrome://calendar/content/calendar-ui-utils.js"/>
+  <script src="chrome://calendar/content/calendar-dialog-utils.js"/>
+  <script src="chrome://calendar/content/preferences/general.js"/>
+  <script src="chrome://calendar/content/preferences/alarms.js"/>
+  <script src="chrome://calendar/content/preferences/categories.js"/>
+  <script src="chrome://calendar/content/preferences/views.js"/>
+  <script src="chrome://lightning/content/messenger-overlay-preferences.js"/>
+</preftab>

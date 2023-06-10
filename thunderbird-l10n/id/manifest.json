@@ -1,0 +1,57 @@
+{
+  "manifest_version": 2,
+  "languages": {
+    "id": {
+      "chrome_resources": {
+        "mozapps": "chrome/id/locale/id/mozapps/",
+        "messenger": "chrome/id/locale/id/messenger/",
+        "global": "chrome/id/locale/id/global/",
+        "autoconfig": "chrome/id/locale/id/autoconfig/",
+        "messenger-mapi": "chrome/id/locale/id/messenger-mapi/",
+        "necko": "chrome/id/locale/id/necko/",
+        "places": "chrome/id/locale/id/places/",
+        "chat": "chrome/id/locale/id/chat/",
+        "devtools-startup": "chrome/id/locale/id/devtools/startup/",
+        "pluginproblem": "chrome/id/locale/id/pluginproblem/",
+        "pipnss": "chrome/id/locale/id/pipnss/",
+        "calendar": "chrome/id/locale/id/calendar/",
+        "messenger-newsblog": "chrome/id/locale/id/messenger-newsblog/",
+        "devtools-shared": "chrome/id/locale/id/devtools/shared/",
+        "passwordmgr": "chrome/id/locale/id/passwordmgr/",
+        "devtools": "chrome/id/locale/id/devtools/client/",
+        "lightning": "chrome/id/locale/id/lightning/",
+        "communicator": "chrome/id/locale/id/communicator/",
+        "global-platform": {
+          "linux": "chrome/id/locale/id/global-platform/unix/",
+          "win": "chrome/id/locale/id/global-platform/win/",
+          "android": "chrome/id/locale/id/global-platform/unix/",
+          "macosx": "chrome/id/locale/id/global-platform/mac/"
+        },
+        "alerts": "chrome/id/locale/id/alerts/",
+        "pippki": "chrome/id/locale/id/pippki/",
+        "messenger-region": "chrome/id/locale/id/messenger-region/",
+        "branding": "chrome/id/locale/id/branding/",
+        "mozldap": "chrome/id/locale/id/mozldap/",
+        "messenger-smime": "chrome/id/locale/id/messenger-smime/"
+      },
+      "version": "20200902054052"
+    }
+  },
+  "author": "id-Mozilla - Komunitas Mozilla Indonesia (contributors: Dody Suria Wijaya, Milda Irhamni, Romi Hardiyanto)",
+  "applications": {
+    "gecko": {
+      "id": "langpack-id@thunderbird.mozilla.org",
+      "strict_max_version": "78.*",
+      "strict_min_version": "78.0"
+    }
+  },
+  "sources": {
+    "browser": {
+      "base_path": "browser/"
+    }
+  },
+  "version": "78.0buildid20210901192859",
+  "langpack_id": "id",
+  "description": "Language pack for Thunderbird for id",
+  "name": "Bahasa Indonesia (ID) Language Pack"
+}

@@ -1,0 +1,22 @@
+From: Christoph Goehre <chris@sigxcpu.org>
+Date: Mon, 5 Sep 2011 19:21:25 +0200
+Subject: sl: change Edit (Uredi) to CTRL+E
+
+Closes: #601331
+---
+ thunderbird-l10n/sl/chrome/sl/locale/sl/communicator/utilityOverlay.dtd | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/thunderbird-l10n/sl/chrome/sl/locale/sl/communicator/utilityOverlay.dtd b/thunderbird-l10n/sl/chrome/sl/locale/sl/communicator/utilityOverlay.dtd
+index 0d319bc..1f6ae24 100644
+--- a/thunderbird-l10n/sl/chrome/sl/locale/sl/communicator/utilityOverlay.dtd
++++ b/thunderbird-l10n/sl/chrome/sl/locale/sl/communicator/utilityOverlay.dtd
+@@ -10,7 +10,7 @@
+ <!ENTITY newMenu.accesskey          "N">
+ 
+ <!ENTITY editMenu.label          "Uredi">
+-<!ENTITY editMenu.accesskey        "U">
++<!ENTITY editMenu.accesskey        "e">
+ <!ENTITY undoCmd.label            "Razveljavi">
+ <!ENTITY undoCmd.accesskey          "R">
+ <!ENTITY redoCmd.label            "Uveljavi">

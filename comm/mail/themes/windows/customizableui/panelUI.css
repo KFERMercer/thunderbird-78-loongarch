@@ -1,0 +1,12 @@
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+@import url("chrome://messenger/skin/shared/customizableui/panelUI.css");
+
+/* Disabled empty item looks too small otherwise, because it has no icon. */
+menuitem.subviewbutton[disabled]:not(.menuitem-iconic) {
+  /* This is 16px for an icon + 3px for its margins + 1px for its padding +
+   * 2px for its border, see above */
+  min-height: 22px;
+}

@@ -1,0 +1,17 @@
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+
+
+
+
+<!ENTITY manageSubscriptions.label     "Obunalarni boshqarish…">
+<!ENTITY manageSubscriptions.accesskey "b">
+
+<!ENTITY feedWindowTitle.label         "Tasma hisobi ustasi">
+
+
+<!ENTITY biffAll.label                 "Enable updates for all feeds">
+<!ENTITY biffAll.accesskey             "E">
+<!ENTITY newFeedSettings.label         "Default Settings for New Feeds">
+<!ENTITY feeds.accountName             "Blogs &amp; News Feeds">

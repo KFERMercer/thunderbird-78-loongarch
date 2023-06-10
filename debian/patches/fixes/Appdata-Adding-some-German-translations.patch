@@ -1,0 +1,48 @@
+From: Carsten Schoenert <c.schoenert@t-online.de>
+Date: Sun, 18 Oct 2020 08:38:29 +0200
+Subject: Appdata: Adding some German translations
+
+---
+ .../thunderbird/net.thunderbird.Thunderbird.appdata.xml | 17 +++++++++++++++++
+ 1 file changed, 17 insertions(+)
+
+diff --git a/comm/mail/branding/thunderbird/net.thunderbird.Thunderbird.appdata.xml b/comm/mail/branding/thunderbird/net.thunderbird.Thunderbird.appdata.xml
+index ba19c75..e34eba5 100644
+--- a/comm/mail/branding/thunderbird/net.thunderbird.Thunderbird.appdata.xml
++++ b/comm/mail/branding/thunderbird/net.thunderbird.Thunderbird.appdata.xml
+@@ -3,7 +3,9 @@
+   <id>net.thunderbird.Thunderbird</id>
+   <metadata_license>CC0-1.0</metadata_license>
+   <name>Thunderbird</name>
++  <name xml:lang="de">Thunderbird</name>
+   <summary>Thunderbird is a free and open source email, newsfeed, chat, and calendaring client</summary>
++  <summary xml:lang="de">Thunderbird ist ein freier und Quelloffener Klient für E-Mail-, Newsfeed-, Chat- und Kalender</summary>
+   <description>
+     <!-- From https://www.thunderbird.net/en-US/about/  -->
+     <p>
+@@ -14,10 +16,25 @@
+       that can’t communicate with each other. We want our users to have freedom
+       and choice in how they communicate.
+     </p>
++    <!-- Von https://www.thunderbird.net/de/about/ -->
++    <p xml:lang="de">
++      Thunderbird ist ein kostenloses E-Mail-, Newsfeed-, Chat- und
++      Kalender-Programm, das einfach einzurichten und anzupassen ist. Eines
++      der Kernprinzipien von Thunderbird ist die Verwendung und Förderung
++      offener Standards – durch diesen Fokus lehnen wir die geschlossenen
++      Plattformen und Dienste unserer Welt ab, die nicht miteinander
++      kommunizieren können. Wir möchten, dass unsere Benutzer die Freiheit
++      und Wahl haben, wie sie kommunizieren.
++    </p>
++
+     <p>
+       Thunderbird is an open source project, which means anyone can contribute
+       ideas, designs, code, and time helping fellow users.
+     </p>
++    <p xml:lang="de">
++      Thunderbird ist ein Freies Softwareprojekt, jede Person kann Ideen,
++      Designs, Code und Zeit einbringen um anderen Benutzern zu helfen.
++    </p>
+   </description>
+   <categories>
+     <category>Calendar</category>

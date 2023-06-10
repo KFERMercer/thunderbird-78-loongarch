@@ -1,0 +1,22 @@
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+
+<!ENTITY AdvancedEditButton.label "Gevorderd redigeer…">
+<!ENTITY AdvancedEditButton.accessKey "r">
+<!ENTITY AdvancedEditButton.tooltip "Wysig of voeg HTML-attribute, styl-attribute en JavaScript by">
+<!ENTITY chooseFileButton.label "Kies lêer…">
+<!ENTITY chooseFileButton.accessKey "l">
+<!ENTITY chooseFileLinkButton.label "Kies lêer…">
+<!ENTITY chooseFileLinkButton.accessKey "l">
+
+
+<!ENTITY makeUrlRelative.tooltip "Verander tussen relatiewe en absolute URL. U moet eers die bladsy stoor voor u dit verander.">
+<!-- Shared by Link and Image dialogs -->
+
+
+<!ENTITY makeUrlRelative.label "URL is relative to page location">
+<!ENTITY makeUrlRelative.accessKey "r">
+<!-- Shared by Link and Image dialogs -->
+<!ENTITY LinkURLEditField2.label "Enter a web page location, a local file, or select a Named Anchor or Heading from the field's context menu:">
+<!ENTITY LinkURLEditField2.accessKey "w">

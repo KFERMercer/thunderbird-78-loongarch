@@ -1,0 +1,37 @@
+From: Carsten Schoenert <c.schoenert@t-online.de>
+Date: Sun, 6 Oct 2019 08:28:58 +0200
+Subject: Reduce memory usage while linking on arm{el,hf} platforms
+
+The build even on armhf is failing while linking mostly due exhausted
+memory usage. Reduce the memory usage on arm{el,hf} platform by telling
+the linker to not hold used memory.
+
+Author: Olivier Tilloy <olivier.tilloy@canonical.com>
+---
+ build/moz.configure/toolchain.configure | 7 ++++---
+ 1 file changed, 4 insertions(+), 3 deletions(-)
+
+diff --git a/build/moz.configure/toolchain.configure b/build/moz.configure/toolchain.configure
+index 5ef6e31..d6cadde 100755
+--- a/build/moz.configure/toolchain.configure
++++ b/build/moz.configure/toolchain.configure
+@@ -2127,15 +2127,16 @@ def select_linker(linker, c_compiler, developer_options, enable_gold,
+ set_config('LINKER_KIND', select_linker.KIND)
+ 
+ 
+-@depends_if(select_linker, macos_sdk)
+-def linker_ldflags(linker, macos_sdk):
++@depends_if(select_linker, macos_sdk, host)
++def linker_ldflags(linker, macos_sdk, host):
+     flags = list(linker.LINKER_FLAG or [])
+     if macos_sdk:
+         if linker.KIND == 'ld64':
+             flags.append('-Wl,-syslibroot,%s' % macos_sdk)
+         else:
+             flags.append('-Wl,--sysroot=%s' % macos_sdk)
+-
++    elif host.cpu == 'arm':
++        flags.append('-Wl,--no-keep-memory')
+     return flags
+ 
+ 

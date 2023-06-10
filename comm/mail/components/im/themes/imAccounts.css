@@ -1,0 +1,226 @@
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+/* large parts copied from the addon manager */
+
+#accountManager {
+  padding: 0;
+  margin: 0;
+}
+
+#accountsNotificationBox {
+  margin: 0;
+  -moz-appearance: none;
+}
+
+#noAccountScreen {
+  color: -moz-FieldText;
+  background-color: -moz-Field;
+  overflow: auto;
+  border-block: 1px solid var(--splitter-color);
+}
+
+:root[lwt-tree] #noAccountScreen {
+  color: var(--sidebar-text-color);
+  background-color: var(--sidebar-background-color);
+}
+
+#noAccountBox {
+  max-width: 30em;
+  background: url("chrome://global/skin/icons/info.svg") left 5px no-repeat;
+  background-size: 2.5em;
+  -moz-context-properties: fill;
+  fill: currentColor;
+  margin-inline: 1.5em;
+  padding-inline: 3.5em;
+}
+
+#noAccountInnerBox {
+  opacity: 0.9;
+}
+
+#noAccountTitle {
+  font-size: 2em;
+  font-weight: lighter;
+  line-height: 1.2;
+  margin: 0;
+  margin-bottom: .3em;
+  padding-bottom: .2em;
+  border-bottom: 1px solid var(--splitter-color);
+}
+
+#noAccountDesc {
+  font-size: 110%;
+  margin-right: 0;
+  margin-left: 0;
+}
+
+#accountlist {
+  margin: 0;
+  -moz-appearance: none;
+  border-block: 1px solid var(--splitter-color);
+  border-inline-style: none;
+  text-shadow: none;
+}
+
+#bottombuttons {
+  padding: 4px;
+}
+
+/* List Items */
+richlistitem[state="disconnected"] .accountIcon {
+  opacity: 0.3;
+}
+richlistitem[state="connecting"] .accountIcon,
+richlistitem[state="disconnected"][selected="true"] .accountIcon {
+  opacity: 0.7;
+}
+richlistitem[state="disconnected"]:not([selected="true"]) {
+  color: #999;
+}
+
+richlistitem[error="true"] .accountName {
+  color: rgb(150, 0, 0);
+}
+
+/* When the error message was too long, the buttons were too small */
+richlistitem .account-buttons button {
+  min-height: 1.8em;
+  color: var(--lwt-text-color) !important;
+}
+
+richlistitem .account-buttons {
+  margin-top: 2px;
+%ifdef XP_MACOSX
+  margin-left: 35px;
+%else
+  margin-left: 32px;
+%endif
+}
+
+richlistitem[dragover="down"] {
+  border-bottom: 3px solid HighLight;
+}
+
+richlistitem[dragover="up"] {
+  border-top: 3px solid HighLight;
+}
+
+:root:not([lwt-tree]) #bottombuttons button,
+:root:not([lwt-tree]) richlistbox > richlistitem button {
+  border: 1px solid var(--toolbarbutton-hover-bordercolor);
+}
+
+:root:not([lwt-tree]) #bottombuttons button:hover,
+:root:not([lwt-tree]) richlistbox > richlistitem button:hover {
+  border: 1px solid var(--toolbarbutton-active-bordercolor);
+}
+
+:root:not([lwt-tree]) #bottombuttons button:hover:active,
+:root:not([lwt-tree]) richlistbox > richlistitem button:hover:active {
+  box-shadow: var(--toolbarbutton-active-boxshadow);
+}
+
+.error {
+  color: #c80000;
+  margin-left: 6px;
+}
+.accountName {
+  font-weight: bold;
+}
+
+.accountIcon {
+  width: 32px;
+  max-width: 32px;
+  height: 32px;
+  max-height: 32px;
+}
+
+.accountStateIcon {
+  margin-inline-start: 16px;
+  margin-top: 16px;
+  width: 16px;
+  height: 16px;
+}
+
+richlistitem[state="connecting"] .accountStateIcon {
+  list-style-image: url("chrome://global/skin/icons/loading.png");
+}
+richlistitem[error="true"] .accountStateIcon {
+  list-style-image: url("chrome://global/skin/icons/warning.svg");
+}
+
+#statusArea {
+  margin: 0 0;
+  padding: 0 0;
+}
+
+#displayName,
+#displayNameInput {
+  font-size: 16px;
+  border-bottom: 1px solid hsla(0, 0%, 50%, 0.5);
+  margin: 0 0 16px;
+}
+
+#displayName[usingDefault]:not([editing]) {
+  color: #999;
+}
+
+#userIcon {
+  border: 2px solid hsla(0, 0%, 50%, 0.3);
+  border-radius: 5px;
+  max-width: 48px;
+  max-height: 48px;
+  width: 48px;
+  height: 48px;
+}
+
+#userIcon[src=""] {
+  background-image: url("chrome://messenger/skin/icons/userIcon.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  -moz-context-properties: fill, fill-opacity;
+  fill: currentColor;
+  fill-opacity: 0.25;
+}
+
+#userIcon:hover {
+  border-color: hsla(0, 0%, 50%, 0.5);
+  background-color: hsla(0, 0%, 50%, 0.3);
+  opacity: .4;
+}
+
+#statusImageStack > #statusTypeIcon {
+  margin-block: 32px 0;
+  margin-inline: 32px 0;
+  padding-inline: 0;
+  width: 16px;
+  height: 16px;
+  min-height: 16px;
+  min-width: 16px;
+  -moz-appearance: none;
+  background: transparent;
+  box-shadow: none;
+  border: none;
+}
+
+#statusImageStack > #statusTypeIcon > .button-box {
+  padding-block: 0;
+}
+
+#statusImageStack,
+#displayNameAndstatusMessageStack {
+  margin: 6px;
+}
+
+#statusTypeIcon dropmarker {
+  display: none;
+}
+
+%ifdef XP_WIN
+#statusTypeIcon .button-box {
+  padding: 0 0;
+  border: none;
+}
+%endif

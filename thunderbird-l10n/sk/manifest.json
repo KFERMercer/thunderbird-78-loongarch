@@ -1,0 +1,57 @@
+{
+  "author": "Mozilla.sk (contributors: Team Mozilla.sk)",
+  "sources": {
+    "browser": {
+      "base_path": "browser/"
+    }
+  },
+  "applications": {
+    "gecko": {
+      "id": "langpack-sk@thunderbird.mozilla.org",
+      "strict_max_version": "78.*",
+      "strict_min_version": "78.0"
+    }
+  },
+  "description": "Language pack for Thunderbird for sk",
+  "manifest_version": 2,
+  "version": "78.0buildid20210901192859",
+  "langpack_id": "sk",
+  "name": "Slovak (SK) Language Pack",
+  "languages": {
+    "sk": {
+      "version": "20200905073554",
+      "chrome_resources": {
+        "devtools": "chrome/sk/locale/sk/devtools/client/",
+        "alerts": "chrome/sk/locale/sk/alerts/",
+        "pluginproblem": "chrome/sk/locale/sk/pluginproblem/",
+        "communicator": "chrome/sk/locale/sk/communicator/",
+        "lightning": "chrome/sk/locale/sk/lightning/",
+        "places": "chrome/sk/locale/sk/places/",
+        "pippki": "chrome/sk/locale/sk/pippki/",
+        "mozapps": "chrome/sk/locale/sk/mozapps/",
+        "global": "chrome/sk/locale/sk/global/",
+        "global-platform": {
+          "win": "chrome/sk/locale/sk/global-platform/win/",
+          "macosx": "chrome/sk/locale/sk/global-platform/mac/",
+          "linux": "chrome/sk/locale/sk/global-platform/unix/",
+          "android": "chrome/sk/locale/sk/global-platform/unix/"
+        },
+        "calendar": "chrome/sk/locale/sk/calendar/",
+        "passwordmgr": "chrome/sk/locale/sk/passwordmgr/",
+        "messenger": "chrome/sk/locale/sk/messenger/",
+        "mozldap": "chrome/sk/locale/sk/mozldap/",
+        "chat": "chrome/sk/locale/sk/chat/",
+        "devtools-shared": "chrome/sk/locale/sk/devtools/shared/",
+        "messenger-newsblog": "chrome/sk/locale/sk/messenger-newsblog/",
+        "messenger-region": "chrome/sk/locale/sk/messenger-region/",
+        "autoconfig": "chrome/sk/locale/sk/autoconfig/",
+        "necko": "chrome/sk/locale/sk/necko/",
+        "devtools-startup": "chrome/sk/locale/sk/devtools/startup/",
+        "messenger-mapi": "chrome/sk/locale/sk/messenger-mapi/",
+        "branding": "chrome/sk/locale/sk/branding/",
+        "messenger-smime": "chrome/sk/locale/sk/messenger-smime/",
+        "pipnss": "chrome/sk/locale/sk/pipnss/"
+      }
+    }
+  }
+}

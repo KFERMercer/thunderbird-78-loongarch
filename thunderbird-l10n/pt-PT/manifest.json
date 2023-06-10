@@ -1,0 +1,57 @@
+{
+  "version": "78.0buildid20210901192859",
+  "manifest_version": 2,
+  "name": "Português (Europeu) Language Pack",
+  "langpack_id": "pt-PT",
+  "applications": {
+    "gecko": {
+      "strict_min_version": "78.0",
+      "id": "langpack-pt-PT@thunderbird.mozilla.org",
+      "strict_max_version": "78.*"
+    }
+  },
+  "languages": {
+    "pt-PT": {
+      "version": "20200905214440",
+      "chrome_resources": {
+        "autoconfig": "chrome/pt-PT/locale/pt-PT/autoconfig/",
+        "messenger-newsblog": "chrome/pt-PT/locale/pt-PT/messenger-newsblog/",
+        "alerts": "chrome/pt-PT/locale/pt-PT/alerts/",
+        "global": "chrome/pt-PT/locale/pt-PT/global/",
+        "places": "chrome/pt-PT/locale/pt-PT/places/",
+        "messenger": "chrome/pt-PT/locale/pt-PT/messenger/",
+        "lightning": "chrome/pt-PT/locale/pt-PT/lightning/",
+        "chat": "chrome/pt-PT/locale/pt-PT/chat/",
+        "communicator": "chrome/pt-PT/locale/pt-PT/communicator/",
+        "calendar": "chrome/pt-PT/locale/pt-PT/calendar/",
+        "pipnss": "chrome/pt-PT/locale/pt-PT/pipnss/",
+        "passwordmgr": "chrome/pt-PT/locale/pt-PT/passwordmgr/",
+        "devtools": "chrome/pt-PT/locale/pt-PT/devtools/client/",
+        "messenger-mapi": "chrome/pt-PT/locale/pt-PT/messenger-mapi/",
+        "branding": "chrome/pt-PT/locale/pt-PT/branding/",
+        "messenger-smime": "chrome/pt-PT/locale/pt-PT/messenger-smime/",
+        "pippki": "chrome/pt-PT/locale/pt-PT/pippki/",
+        "devtools-shared": "chrome/pt-PT/locale/pt-PT/devtools/shared/",
+        "necko": "chrome/pt-PT/locale/pt-PT/necko/",
+        "mozapps": "chrome/pt-PT/locale/pt-PT/mozapps/",
+        "pluginproblem": "chrome/pt-PT/locale/pt-PT/pluginproblem/",
+        "messenger-region": "chrome/pt-PT/locale/pt-PT/messenger-region/",
+        "mozldap": "chrome/pt-PT/locale/pt-PT/mozldap/",
+        "devtools-startup": "chrome/pt-PT/locale/pt-PT/devtools/startup/",
+        "global-platform": {
+          "win": "chrome/pt-PT/locale/pt-PT/global-platform/win/",
+          "linux": "chrome/pt-PT/locale/pt-PT/global-platform/unix/",
+          "macosx": "chrome/pt-PT/locale/pt-PT/global-platform/mac/",
+          "android": "chrome/pt-PT/locale/pt-PT/global-platform/unix/"
+        }
+      }
+    }
+  },
+  "description": "Language pack for Thunderbird for pt-PT",
+  "author": "mozilla.org (contributors: Joe Solon, Suzy Solon)",
+  "sources": {
+    "browser": {
+      "base_path": "browser/"
+    }
+  }
+}

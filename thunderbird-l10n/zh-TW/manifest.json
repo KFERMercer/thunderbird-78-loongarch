@@ -1,0 +1,57 @@
+{
+  "sources": {
+    "browser": {
+      "base_path": "browser/"
+    }
+  },
+  "name": "Traditional Chinese (zh-TW) Language Pack",
+  "applications": {
+    "gecko": {
+      "strict_max_version": "78.*",
+      "id": "langpack-zh-TW@thunderbird.mozilla.org",
+      "strict_min_version": "78.0"
+    }
+  },
+  "manifest_version": 2,
+  "author": "Mozilla Taiwan Community (MozTW) (contributors: Hung-Te Lin(piaip), Wei-Lun Sun(josesun), Wei-Chen Lai(abev66), Tim Guan-Tin Chien(timdream), Peter Pin-Guang Chen(petercpg))",
+  "description": "Language pack for Thunderbird for zh-TW",
+  "version": "78.0buildid20210901192859",
+  "languages": {
+    "zh-TW": {
+      "chrome_resources": {
+        "mozldap": "chrome/zh-TW/locale/zh-TW/mozldap/",
+        "pluginproblem": "chrome/zh-TW/locale/zh-TW/pluginproblem/",
+        "global-platform": {
+          "android": "chrome/zh-TW/locale/zh-TW/global-platform/unix/",
+          "macosx": "chrome/zh-TW/locale/zh-TW/global-platform/mac/",
+          "linux": "chrome/zh-TW/locale/zh-TW/global-platform/unix/",
+          "win": "chrome/zh-TW/locale/zh-TW/global-platform/win/"
+        },
+        "chat": "chrome/zh-TW/locale/zh-TW/chat/",
+        "devtools-startup": "chrome/zh-TW/locale/zh-TW/devtools/startup/",
+        "devtools-shared": "chrome/zh-TW/locale/zh-TW/devtools/shared/",
+        "mozapps": "chrome/zh-TW/locale/zh-TW/mozapps/",
+        "messenger": "chrome/zh-TW/locale/zh-TW/messenger/",
+        "pippki": "chrome/zh-TW/locale/zh-TW/pippki/",
+        "calendar": "chrome/zh-TW/locale/zh-TW/calendar/",
+        "pipnss": "chrome/zh-TW/locale/zh-TW/pipnss/",
+        "places": "chrome/zh-TW/locale/zh-TW/places/",
+        "lightning": "chrome/zh-TW/locale/zh-TW/lightning/",
+        "alerts": "chrome/zh-TW/locale/zh-TW/alerts/",
+        "global": "chrome/zh-TW/locale/zh-TW/global/",
+        "messenger-smime": "chrome/zh-TW/locale/zh-TW/messenger-smime/",
+        "branding": "chrome/zh-TW/locale/zh-TW/branding/",
+        "necko": "chrome/zh-TW/locale/zh-TW/necko/",
+        "autoconfig": "chrome/zh-TW/locale/zh-TW/autoconfig/",
+        "devtools": "chrome/zh-TW/locale/zh-TW/devtools/client/",
+        "communicator": "chrome/zh-TW/locale/zh-TW/communicator/",
+        "messenger-mapi": "chrome/zh-TW/locale/zh-TW/messenger-mapi/",
+        "passwordmgr": "chrome/zh-TW/locale/zh-TW/passwordmgr/",
+        "messenger-region": "chrome/zh-TW/locale/zh-TW/messenger-region/",
+        "messenger-newsblog": "chrome/zh-TW/locale/zh-TW/messenger-newsblog/"
+      },
+      "version": "20200903081029"
+    }
+  },
+  "langpack_id": "zh-TW"
+}

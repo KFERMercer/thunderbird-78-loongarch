@@ -1,0 +1,38 @@
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+@namespace html url("http://www.w3.org/1999/xhtml");
+
+:root:-moz-lwtheme {
+  background-color: var(--lwt-accent-color);
+  color: var(--lwt-text-color);
+}
+
+#calendar-properties-table {
+  margin-inline-start: 20px;
+}
+
+#calendar-properties-table th,
+#calendar-properties-table td {
+  min-height: 26px;
+}
+
+#calendar-properties-table th {
+  text-align: start;
+  font-weight: normal;
+}
+
+#calendar-properties-table td {
+  width: 100%;
+}
+
+#calendar-email-identity-row > td,
+#calendar-refreshInterval-row > td {
+  display: flex;
+}
+
+#calendar-refreshInterval-menulist,
+#email-identity-menulist {
+  flex: 1;
+}

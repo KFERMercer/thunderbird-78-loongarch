@@ -1,0 +1,40 @@
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+/* ===== filterDialog.css ===============================================
+  == Styles for the Mail Filters dialog.
+  ======================================================================= */
+
+@import url("chrome://messenger/skin/shared/filterDialog.css");
+
+@namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
+
+/* ::::: columns :::::: */
+
+#gray_horizontal_splitter {
+  margin-inline: -6px;
+}
+
+#filterHeader,
+#filterListGrid {
+  margin: 8px 6px 0;
+}
+
+#FilterEditor {
+  padding-inline: 4px;
+}
+
+.small-button {
+  min-width: 3em;
+  padding: 0;
+  margin: 2px;
+}
+
+.small-button + .small-button {
+  margin-inline: 0 4px;
+}
+
+.search-value-textbox {
+  padding-block: 0;
+}

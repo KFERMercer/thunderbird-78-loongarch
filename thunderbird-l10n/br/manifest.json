@@ -1,0 +1,57 @@
+{
+  "name": "Breton Language Pack",
+  "version": "78.0buildid20210901192859",
+  "description": "Language pack for Thunderbird for br",
+  "manifest_version": 2,
+  "langpack_id": "br",
+  "languages": {
+    "br": {
+      "version": "20200831200553",
+      "chrome_resources": {
+        "necko": "chrome/br/locale/br/necko/",
+        "devtools": "chrome/br/locale/br/devtools/client/",
+        "devtools-shared": "chrome/br/locale/br/devtools/shared/",
+        "global": "chrome/br/locale/br/global/",
+        "messenger-region": "chrome/br/locale/br/messenger-region/",
+        "mozapps": "chrome/br/locale/br/mozapps/",
+        "branding": "chrome/br/locale/br/branding/",
+        "alerts": "chrome/br/locale/br/alerts/",
+        "mozldap": "chrome/br/locale/br/mozldap/",
+        "pipnss": "chrome/br/locale/br/pipnss/",
+        "lightning": "chrome/br/locale/br/lightning/",
+        "chat": "chrome/br/locale/br/chat/",
+        "devtools-startup": "chrome/br/locale/br/devtools/startup/",
+        "messenger": "chrome/br/locale/br/messenger/",
+        "places": "chrome/br/locale/br/places/",
+        "global-platform": {
+          "win": "chrome/br/locale/br/global-platform/win/",
+          "macosx": "chrome/br/locale/br/global-platform/mac/",
+          "linux": "chrome/br/locale/br/global-platform/unix/",
+          "android": "chrome/br/locale/br/global-platform/unix/"
+        },
+        "messenger-mapi": "chrome/br/locale/br/messenger-mapi/",
+        "pluginproblem": "chrome/br/locale/br/pluginproblem/",
+        "messenger-newsblog": "chrome/br/locale/br/messenger-newsblog/",
+        "autoconfig": "chrome/br/locale/br/autoconfig/",
+        "passwordmgr": "chrome/br/locale/br/passwordmgr/",
+        "messenger-smime": "chrome/br/locale/br/messenger-smime/",
+        "communicator": "chrome/br/locale/br/communicator/",
+        "calendar": "chrome/br/locale/br/calendar/",
+        "pippki": "chrome/br/locale/br/pippki/"
+      }
+    }
+  },
+  "author": "Thunderbird Breton Team (contributors: Alan Monfort, Philippe Basciano-Le Gall, Denis Arnaud, Michel Nédélec)",
+  "sources": {
+    "browser": {
+      "base_path": "browser/"
+    }
+  },
+  "applications": {
+    "gecko": {
+      "strict_max_version": "78.*",
+      "id": "langpack-br@thunderbird.mozilla.org",
+      "strict_min_version": "78.0"
+    }
+  }
+}

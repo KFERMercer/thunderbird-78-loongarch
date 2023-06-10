@@ -1,0 +1,57 @@
+{
+  "description": "Language pack for Thunderbird for si",
+  "author": "mozilla.org (contributors: රෝහන දසනායක, මහේෂා හතරසිංහ, කසුන් කරුණාරත්න)",
+  "sources": {
+    "browser": {
+      "base_path": "browser/"
+    }
+  },
+  "langpack_id": "si",
+  "languages": {
+    "si": {
+      "chrome_resources": {
+        "global-platform": {
+          "linux": "chrome/si/locale/si/global-platform/unix/",
+          "android": "chrome/si/locale/si/global-platform/unix/",
+          "macosx": "chrome/si/locale/si/global-platform/mac/",
+          "win": "chrome/si/locale/si/global-platform/win/"
+        },
+        "necko": "chrome/si/locale/si/necko/",
+        "communicator": "chrome/si/locale/si/communicator/",
+        "calendar": "chrome/si/locale/si/calendar/",
+        "mozapps": "chrome/si/locale/si/mozapps/",
+        "pipnss": "chrome/si/locale/si/pipnss/",
+        "devtools-startup": "chrome/si/locale/si/devtools/startup/",
+        "branding": "chrome/si/locale/si/branding/",
+        "alerts": "chrome/si/locale/si/alerts/",
+        "mozldap": "chrome/si/locale/si/mozldap/",
+        "places": "chrome/si/locale/si/places/",
+        "autoconfig": "chrome/si/locale/si/autoconfig/",
+        "pippki": "chrome/si/locale/si/pippki/",
+        "lightning": "chrome/si/locale/si/lightning/",
+        "messenger": "chrome/si/locale/si/messenger/",
+        "pluginproblem": "chrome/si/locale/si/pluginproblem/",
+        "messenger-mapi": "chrome/si/locale/si/messenger-mapi/",
+        "devtools-shared": "chrome/si/locale/si/devtools/shared/",
+        "devtools": "chrome/si/locale/si/devtools/client/",
+        "global": "chrome/si/locale/si/global/",
+        "messenger-newsblog": "chrome/si/locale/si/messenger-newsblog/",
+        "passwordmgr": "chrome/si/locale/si/passwordmgr/",
+        "chat": "chrome/si/locale/si/chat/",
+        "messenger-region": "chrome/si/locale/si/messenger-region/",
+        "messenger-smime": "chrome/si/locale/si/messenger-smime/"
+      },
+      "version": "20200625123444"
+    }
+  },
+  "manifest_version": 2,
+  "applications": {
+    "gecko": {
+      "strict_min_version": "78.0",
+      "id": "langpack-si@thunderbird.mozilla.org",
+      "strict_max_version": "78.*"
+    }
+  },
+  "version": "78.0buildid20210901192859",
+  "name": "Sinhala (si-LK) Language Pack"
+}

@@ -1,0 +1,57 @@
+{
+  "description": "Language pack for Thunderbird for sv-SE",
+  "languages": {
+    "sv-SE": {
+      "chrome_resources": {
+        "messenger-smime": "chrome/sv-SE/locale/sv-SE/messenger-smime/",
+        "chat": "chrome/sv-SE/locale/sv-SE/chat/",
+        "pluginproblem": "chrome/sv-SE/locale/sv-SE/pluginproblem/",
+        "messenger": "chrome/sv-SE/locale/sv-SE/messenger/",
+        "devtools": "chrome/sv-SE/locale/sv-SE/devtools/client/",
+        "calendar": "chrome/sv-SE/locale/sv-SE/calendar/",
+        "global-platform": {
+          "win": "chrome/sv-SE/locale/sv-SE/global-platform/win/",
+          "linux": "chrome/sv-SE/locale/sv-SE/global-platform/unix/",
+          "macosx": "chrome/sv-SE/locale/sv-SE/global-platform/mac/",
+          "android": "chrome/sv-SE/locale/sv-SE/global-platform/unix/"
+        },
+        "messenger-newsblog": "chrome/sv-SE/locale/sv-SE/messenger-newsblog/",
+        "autoconfig": "chrome/sv-SE/locale/sv-SE/autoconfig/",
+        "places": "chrome/sv-SE/locale/sv-SE/places/",
+        "branding": "chrome/sv-SE/locale/sv-SE/branding/",
+        "global": "chrome/sv-SE/locale/sv-SE/global/",
+        "communicator": "chrome/sv-SE/locale/sv-SE/communicator/",
+        "pipnss": "chrome/sv-SE/locale/sv-SE/pipnss/",
+        "devtools-shared": "chrome/sv-SE/locale/sv-SE/devtools/shared/",
+        "mozapps": "chrome/sv-SE/locale/sv-SE/mozapps/",
+        "messenger-mapi": "chrome/sv-SE/locale/sv-SE/messenger-mapi/",
+        "alerts": "chrome/sv-SE/locale/sv-SE/alerts/",
+        "pippki": "chrome/sv-SE/locale/sv-SE/pippki/",
+        "devtools-startup": "chrome/sv-SE/locale/sv-SE/devtools/startup/",
+        "passwordmgr": "chrome/sv-SE/locale/sv-SE/passwordmgr/",
+        "lightning": "chrome/sv-SE/locale/sv-SE/lightning/",
+        "messenger-region": "chrome/sv-SE/locale/sv-SE/messenger-region/",
+        "necko": "chrome/sv-SE/locale/sv-SE/necko/",
+        "mozldap": "chrome/sv-SE/locale/sv-SE/mozldap/"
+      },
+      "version": "20200906095537"
+    }
+  },
+  "langpack_id": "sv-SE",
+  "author": "Mozilla-sv (contributors: Andreas Pettersson)",
+  "name": "Svenska (SE) Language Pack",
+  "applications": {
+    "gecko": {
+      "strict_min_version": "78.0",
+      "strict_max_version": "78.*",
+      "id": "langpack-sv-SE@thunderbird.mozilla.org"
+    }
+  },
+  "version": "78.0buildid20210901192859",
+  "sources": {
+    "browser": {
+      "base_path": "browser/"
+    }
+  },
+  "manifest_version": 2
+}

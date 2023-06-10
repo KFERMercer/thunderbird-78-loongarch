@@ -1,0 +1,21 @@
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+/**
+ * Tests that the main menu will be collapsed by default if Thunderbird starts
+ * with no accounts created.
+ */
+
+"use strict";
+
+var { Services } = ChromeUtils.import("resource://gre/modules/Services.jsm");
+
+add_task(function test_main_menu_collapsed() {
+  let mainMenu = document.getElementById("mail-toolbar-menubar2");
+  Assert.equal(
+    mainMenu.getAttribute("autohide"),
+    "true",
+    "The main menu should have the autohide attribute set to true."
+  );
+});

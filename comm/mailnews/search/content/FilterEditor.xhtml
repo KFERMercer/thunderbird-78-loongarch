@@ -1,0 +1,141 @@
+<?xml version="1.0"?>
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+
+<?xml-stylesheet href="chrome://messenger/skin/filterDialog.css" type="text/css"?>
+<?xml-stylesheet href="chrome://messenger/skin/folderPane.css" type="text/css"?>
+<?xml-stylesheet href="chrome://messenger/skin/folderMenus.css" type="text/css"?>
+<?xml-stylesheet type="text/css" href="chrome://messenger/skin/input-fields.css"?>
+<?xml-stylesheet type="text/css" href="chrome://messenger/skin/themeableDialog.css"?>
+
+<!DOCTYPE window [
+  <!ENTITY % filterEditorDTD SYSTEM "chrome://messenger/locale/FilterEditor.dtd">
+  %filterEditorDTD;
+  <!ENTITY % searchTermDTD SYSTEM "chrome://messenger/locale/searchTermOverlay.dtd">
+  %searchTermDTD;
+]>
+
+<window xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        xmlns:html="http://www.w3.org/1999/xhtml"
+        title="&window.title;"
+        style="&filterEditorDialog.dimensions;"
+        windowtype="mailnews:filtereditor"
+        persist="width height screenX screenY"
+        lightweightthemes="true"
+        onload="filterEditorOnLoad();">
+<dialog id="FilterEditor"
+        buttons="accept,cancel">
+  <stringbundle id="bundle_messenger" src="chrome://messenger/locale/messenger.properties"/>
+  <stringbundle id="bundle_filter" src="chrome://messenger/locale/filter.properties"/>
+  <stringbundle id="bundle_search" src="chrome://messenger/locale/search.properties"/>
+
+  <script src="chrome://global/content/globalOverlay.js"/>
+  <script src="chrome://global/content/editMenuOverlay.js"/>
+  <script src="chrome://messenger/content/searchWidgets.js"/>
+  <script src="chrome://messenger/content/mailWindowOverlay.js"/>
+  <script src="chrome://messenger/content/mailCommands.js"/>
+  <script src="chrome://messenger/content/FilterEditor.js"/>
+  <script src="chrome://messenger/content/searchTerm.js"/>
+  <script src="chrome://messenger/content/dateFormat.js"/>
+  <script src="chrome://messenger/content/dialogShadowDom.js"/>
+
+  <commandset>
+    <command id="cmd_updateFilterType" oncommand="updateFilterType();"/>
+    <command id="cmd_updateClassificationMenu" oncommand="gFilterTypeSelector.updateClassificationMenu();"/>
+  </commandset>
+
+  <vbox>
+    <hbox align="center" class="input-container">
+      <label id="filterNameLabel"
+             value="&filterName.label;"
+             accesskey="&filterName.accesskey;"
+             control="filterName"/>
+      <html:input id="filterName"
+                  type="text"
+                  class="input-inline"
+                  aria-labelledby="filterNameLabel"/>
+      <spacer class="spacer-inline"/>
+    </hbox>
+  </vbox>
+
+  <vbox>
+    <html:fieldset>
+      <html:legend>&contextDesc.label;</html:legend>
+      <vbox>
+        <hbox flex="1" align="center">
+          <checkbox id="runManual"
+                    label="&contextManual.label;"
+                    accesskey="&contextManual.accesskey;"
+                    command="cmd_updateFilterType"/>
+        </hbox>
+        <hbox flex="1" align="center">
+          <checkbox id="runIncoming"
+                    label="&contextIncomingMail.label;"
+                    accesskey="&contextIncomingMail.accesskey;"
+                    command="cmd_updateClassificationMenu"/>
+          <menulist id="pluginsRunOrder"
+                    command="cmd_updateFilterType">
+            <menupopup>
+              <menuitem id="runBeforePlugins"
+                        label="&contextBeforeCls.label;"/>
+              <menuitem id="runAfterPlugins"
+                        label="&contextAfterCls.label;"/>
+            </menupopup>
+          </menulist>
+        </hbox>
+        <hbox flex="1" align="center">
+          <checkbox id="runArchive"
+                    label="&contextArchive.label;"
+                    accesskey="&contextArchive.accesskey;"
+                    command="cmd_updateFilterType"/>
+        </hbox>
+        <hbox flex="1" align="center">
+          <checkbox id="runOutgoing"
+                    label="&contextOutgoing.label;"
+                    accesskey="&contextOutgoing.accesskey;"
+                    command="cmd_updateFilterType"/>
+        </hbox>
+        <hbox flex="1" align="center">
+          <checkbox id="runPeriodic"
+                    accesskey="&contextPeriodic.accesskey;"
+                    command="cmd_updateFilterType"/>
+          <label id="periodLength"/>
+        </hbox>
+      </vbox>
+    </html:fieldset>
+  </vbox>
+
+    <vbox id="searchTermListBox" flex="1">
+#include searchTerm.inc.xhtml
+
+  <splitter id="gray_horizontal_splitter" persist="state" orient="vertical"/>
+
+  <vbox flex="1">
+    <label value="&filterActionDesc.label;"
+           accesskey="&filterActionDesc.accesskey;"
+           control="filterActionList"/>
+    <richlistbox id="filterActionList"
+                 flex="1"
+                 style="min-height: 100px;"
+                 onfocus="setLastActionFocus();"
+                 focusedAction="0">
+      <treecols hidden="true">
+        <treecol flex="&filterActionTypeFlexValue;"/>
+        <treecol flex="&filterActionTargetFlexValue;"/>
+        <treecol/>
+      </treecols>
+    </richlistbox>
+  </vbox>
+
+  <vbox id="statusbar" style="visibility: hidden;">
+    <hbox align="center">
+      <label>
+        &filterActionOrderWarning.label;
+      </label>
+      <label id="seeExecutionOrder" class="text-link"
+             onclick="showActionsOrder();">&filterActionOrder.label;</label>
+    </hbox>
+  </vbox>
+</dialog>
+</window>

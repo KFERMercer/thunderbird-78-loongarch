@@ -1,0 +1,30 @@
+From: Mike Hommey <glandium@debian.org>
+Date: Sat, 21 Jun 2008 03:09:21 +0200
+Subject: Add another preferences directory for applications:
+ preferences/syspref
+
+This can be used to symlink to /etc/thunderbird/pref.
+---
+ toolkit/xre/nsXREDirProvider.cpp | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/toolkit/xre/nsXREDirProvider.cpp b/toolkit/xre/nsXREDirProvider.cpp
+index 62b5694..73b337d 100644
+--- a/toolkit/xre/nsXREDirProvider.cpp
++++ b/toolkit/xre/nsXREDirProvider.cpp
+@@ -834,6 +834,7 @@ static nsresult DeleteDirIfExists(nsIFile* dir) {
+ 
+ static const char* const kAppendPrefDir[] = {"defaults", "preferences",
+                                              nullptr};
++static const char *const kAppendSysPrefDir[] = { "defaults", "syspref", nullptr };
+ 
+ nsresult nsXREDirProvider::GetFilesInternal(const char* aProperty,
+                                             nsISimpleEnumerator** aResult) {
+@@ -844,6 +845,7 @@ nsresult nsXREDirProvider::GetFilesInternal(const char* aProperty,
+     nsCOMArray<nsIFile> directories;
+ 
+     LoadDirIntoArray(mXULAppDir, kAppendPrefDir, directories);
++    LoadDirIntoArray(mXULAppDir, kAppendSysPrefDir, directories);
+ 
+     rv = NS_NewArrayEnumerator(aResult, directories, NS_GET_IID(nsIFile));
+   } else if (!strcmp(aProperty, NS_APP_CHROME_DIR_LIST)) {

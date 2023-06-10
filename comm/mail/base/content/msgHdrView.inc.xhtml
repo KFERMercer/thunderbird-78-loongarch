@@ -1,0 +1,456 @@
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
+                        <deck id="msgHeaderViewDeck" selectedIndex="0"
+                              persist="selectedIndex" flex="1">
+
+                          <!-- the message pane consists of 3 'boxes'. Box #2 is the expanded headers view (the default view) -->
+                          <vbox id="expandedHeaderView" flex="1">
+
+                            <!-- a convenience box for ease of extension overlaying -->
+                            <vbox id="expandedHeadersBox" flex="1">
+
+                              <!-- This hbox has display:block set to imbue it with the HTML layout
+                                   model. This lets us float the message header toolbar to the right
+                                   so we don't waste space when the From field and the toolbar could
+                                   fit alongside each other. -->
+                              <hbox id="expandedHeadersTopBox">
+
+                                <vbox id="header-view-toolbox" class="inline-toolbox">
+                                  <hbox id="header-view-toolbar" class="toolbar">
+                                    <!-- XXXdmose need to move these commands to a controller, either
+                                         on the header view, the message pane, or the default
+                                         controller -->
+
+                                    <!-- XXXdmose need to audit our shortcut/a11y setup and make sure
+                                         these buttons are doing the right thing -->
+
+                                    <toolbarbutton id="hdrReplyToSenderButton" label="&hdrReplyButton1.label;"
+                                                   tooltiptext="&hdrReplyButton2.tooltip;"
+                                                   oncommand="MsgReplySender(event); RestoreFocusAfterHdrButton();"
+                                                   observes="button_reply"
+                                                   class="toolbarbutton-1 msgHeaderView-button hdrReplyToSenderButton"/>
+                                    <toolbaritem id="hdrSmartReplyButton" label="&hdrSmartReplyButton1.label;">
+                                      <!-- This button is a dummy and should only be shown when
+                                           customizing the toolbar to distinguish the smart reply
+                                           button from the reply to sender button. -->
+                                      <toolbarbutton id="hdrDummyReplyButton" label="&hdrSmartReplyButton1.label;"
+                                                     hidden="true"
+                                                     class="toolbarbutton-1 msgHeaderView-button hdrDummyReplyButton"/>
+                                      <toolbarbutton id="hdrReplyButton" label="&hdrReplyButton1.label;"
+                                                     tooltiptext="&hdrReplyButton2.tooltip;"
+                                                     oncommand="MsgReplySender(event); RestoreFocusAfterHdrButton();"
+                                                     observes="button_reply"
+                                                     class="toolbarbutton-1 msgHeaderView-button hdrReplyButton"/>
+                                      <toolbarbutton is="toolbarbutton-menu-button" id="hdrReplyAllButton"
+                                                     type="menu-button"
+                                                     label="&hdrReplyAllButton1.label;"
+                                                     tooltiptext="&hdrReplyAllButton1.tooltip;"
+                                                     oncommand="MsgReplyToAllMessage(event); RestoreFocusAfterHdrButton();"
+                                                     observes="button_replyall"
+                                                     class="toolbarbutton-1 msgHeaderView-button hdrReplyButton hdrReplyAllButton"
+                                                     hidden="true">
+                                        <menupopup id="hdrReplyAllDropdown">
+                                          <menuitem id="hdrReplyAll_ReplyAllSubButton"
+                                                    label="&hdrReplyAllButton1.label;"
+                                                    tooltiptext="&hdrReplyAllButton1.tooltip;"
+                                                    observes="button_replyall"/>
+                                          <menuseparator id="hdrReplyAllSubSeparator"/>
+                                          <menuitem id="hdrReplySubButton"
+                                                    label="&hdrReplyButton1.label;"
+                                                    tooltiptext="&hdrReplyButton2.tooltip;"
+                                                    observes="button_reply"
+                                                    oncommand="MsgReplySender(event); event.stopPropagation();
+                                                               RestoreFocusAfterHdrButton();"/>
+                                        </menupopup>
+                                      </toolbarbutton>
+                                      <toolbarbutton is="toolbarbutton-menu-button" id="hdrReplyListButton"
+                                                     type="menu-button"
+                                                     label="&hdrReplyListButton1.label;"
+                                                     tooltiptext="&hdrReplyListButton1.tooltip;"
+                                                     oncommand="MsgReplyToListMessage(event); RestoreFocusAfterHdrButton();"
+                                                     observes="button_replylist"
+                                                     class="toolbarbutton-1 msgHeaderView-button hdrReplyButton hdrReplyListButton"
+                                                     hidden="true">
+                                        <menupopup id="hdrReplyListDropdown">
+                                          <menuitem id="hdrReplyList_ReplyListSubButton"
+                                                    label="&hdrReplyListButton1.label;"
+                                                    tooltiptext="&hdrReplyListButton1.tooltip;"
+                                                    observes="button_replylist"/>
+                                          <menuseparator id="hdrReplyListSubSeparator"/>
+                                          <menuitem id="hdrRelplyList_ReplyAllSubButton"
+                                                    label="&hdrReplyAllButton1.label;"
+                                                    tooltiptext="&hdrReplyAllButton1.tooltip;"
+                                                    observes="button_replyall"
+                                                    oncommand="MsgReplyToAllMessage(event); event.stopPropagation();
+                                                               RestoreFocusAfterHdrButton();"/>
+                                          <menuitem id="hdrReplyList_ReplySubButton"
+                                                    label="&hdrReplyButton1.label;"
+                                                    tooltiptext="&hdrReplyButton2.tooltip;"
+                                                    observes="button_reply"
+                                                    oncommand="MsgReplySender(event); event.stopPropagation();
+                                                               RestoreFocusAfterHdrButton();"/>
+                                        </menupopup>
+                                      </toolbarbutton>
+                                      <toolbarbutton is="toolbarbutton-menu-button" id="hdrFollowupButton" label="&hdrFollowupButton1.label;"
+                                                     type="menu-button"
+                                                     tooltiptext="&hdrFollowupButton1.tooltip;"
+                                                     oncommand="MsgReplyGroup(event); RestoreFocusAfterHdrButton();"
+                                                     observes="button_followup"
+                                                     class="toolbarbutton-1 msgHeaderView-button hdrFollowupButton">
+                                        <menupopup id="hdrFollowupDropdown">
+                                          <menuitem id="hdrFollowup_FollowupSubButton"
+                                                    label="&hdrFollowupButton1.label;"
+                                                    tooltiptext="&hdrFollowupButton1.tooltip;"
+                                                    observes="button_followup"/>
+                                          <menuseparator id="hdrFollowupSubSeparator"/>
+                                          <menuitem id="hdrFollowup_ReplyAllSubButton"
+                                                    label="&hdrReplyAllButton1.label;"
+                                                    tooltiptext="&hdrReplyAllButton1.tooltip;"
+                                                    observes="button_replyall"
+                                                    oncommand="MsgReplyToAllMessage(event); event.stopPropagation();
+                                                               RestoreFocusAfterHdrButton();"/>
+                                          <menuitem id="hdrFollowup_ReplySubButton"
+                                                    label="&hdrReplyButton1.label;"
+                                                    tooltiptext="&hdrReplyButton2.tooltip;"
+                                                    observes="button_reply"
+                                                    oncommand="MsgReplySender(event); event.stopPropagation();
+                                                               RestoreFocusAfterHdrButton();"/>
+                                        </menupopup>
+                                      </toolbarbutton>
+                                    </toolbaritem>
+                                    <toolbarbutton id="hdrForwardButton"
+                                                   label="&hdrForwardButton1.label;"
+                                                   tooltiptext="&hdrForwardButton1.tooltip;"
+                                                   oncommand="MsgForwardMessage(event); RestoreFocusAfterHdrButton();"
+                                                   observes="button_forward"
+                                                   class="toolbarbutton-1 msgHeaderView-button hdrForwardButton"/>
+                                    <toolbarbutton id="hdrArchiveButton"
+                                                   label="&hdrArchiveButton1.label;"
+                                                   tooltiptext="&hdrArchiveButton1.tooltip;"
+                                                   oncommand="MsgArchiveSelectedMessages(event); RestoreFocusAfterHdrButton();"
+                                                   observes="button_archive"
+                                                   class="toolbarbutton-1 msgHeaderView-button hdrArchiveButton"/>
+                                    <toolbarbutton id="hdrJunkButton" label="&hdrJunkButton1.label;"
+                                                   tooltiptext="&hdrJunkButton1.tooltip;"
+                                                   observes="button_junk"
+                                                   class="toolbarbutton-1 msgHeaderView-button hdrJunkButton"
+                                                   oncommand="goDoCommand('button_junk'); RestoreFocusAfterHdrButton();"/>
+                                    <toolbarbutton id="hdrTrashButton"
+                                                   label="&hdrTrashButton1.label;"
+                                                   tooltiptext="&hdrTrashButton1.tooltip;"
+                                                   observes="button_delete"
+                                                   class="toolbarbutton-1 msgHeaderView-button hdrTrashButton"
+                                                   oncommand="goDoCommand(event.shiftKey ? 'button_shiftDelete' :
+                                                                          'button_delete'); RestoreFocusAfterHdrButton();"/>
+                                    <toolbarbutton id="otherActionsButton"
+                                                   type="menu"
+                                                   wantdropmarker="true"
+                                                   label="&otherActionsButton2.label;"
+                                                   tooltiptext="&otherActionsButton.tooltip;"
+                                                   class="toolbarbutton-1 msgHeaderView-button">
+                                      <menupopup id="otherActionsPopup"
+                                                 onpopupshowing="onShowOtherActionsPopup();">
+#ifdef MAIN_WINDOW
+                                        <menuitem id="otherActionsOpenConversation"
+                                                  label="&otherActionsOpenConversation1.label;"
+                                                  accesskey="&otherActionsOpenConversation1.accesskey;"
+                                                  oncommand="gConversationOpener.openConversationForMessages(gFolderDisplay.selectedMessages);"/>
+#endif
+                                        <menuitem id="otherActionsOpenInNewWindow"
+                                                  label="&otherActionsOpenInNewWindow1.label;"
+                                                  accesskey="&otherActionsOpenInNewWindow1.accesskey;"
+                                                  oncommand="MsgOpenNewWindowForMessage();"/>
+                                        <menuitem id="otherActionsOpenInNewTab"
+                                                  label="&otherActionsOpenInNewTab1.label;"
+                                                  accesskey="&otherActionsOpenInNewTab1.accesskey;"
+                                                  oncommand="OpenMessageInNewTab(event);"/>
+                                        <menuitem id="viewSourceMenuItem"
+                                                  label="&viewSourceMenuItem1.label;"
+                                                  accesskey="&viewSourceMenuItem1.accesskey;"
+                                                  oncommand="ViewPageSource(gFolderDisplay.selectedMessageUris);" />
+                                        <menuseparator id="otherActionsSeparator"/>
+                                        <menu id="otherActionsTag"
+                                              label="&tagMenu.label;"
+                                              accesskey="&tagMenu.accesskey;">
+                                          <menupopup id="hdrTagDropdown"
+                                                     onpopupshowing="InitMessageTags(this);">
+                                            <menuitem id="hdrTagDropdown-addNewTag"
+                                                      label="&addNewTag.label;"
+                                                      accesskey="&addNewTag.accesskey;"
+                                                      command="cmd_addTag"/>
+                                            <menuitem id="manageTags"
+                                                      label="&manageTags.label;"
+                                                      accesskey="&manageTags.accesskey;"
+                                                      command="cmd_manageTags"/>
+                                            <menuseparator id="hdrTagDropdown-sep-afterAddNewTag"/>
+                                            <menuitem id="hdrTagDropdown-tagRemoveAll"
+                                                      command="cmd_removeTags"/>
+                                            <menuseparator id="hdrTagDropdown-sep-afterTagRemoveAll"/>
+                                          </menupopup>
+                                        </menu>
+                                        <menuitem id="markAsReadMenuItem"
+                                                  label="&markAsReadMenuItem1.label;"
+                                                  accesskey="&markAsReadMenuItem1.accesskey;"
+                                                  oncommand="MsgMarkMsgAsRead();"/>
+                                        <menuitem id="markAsUnreadMenuItem"
+                                                  label="&markAsUnreadMenuItem1.label;"
+                                                  accesskey="&markAsUnreadMenuItem1.accesskey;"
+                                                  oncommand="MsgMarkMsgAsRead();"/>
+                                        <menuitem id="saveAsMenuItem" label="&saveAsMenuItem1.label;"
+                                                  accesskey="&saveAsMenuItem1.accesskey;"
+                                                  oncommand="MsgSaveAsFile();"/>
+                                        <menuitem id="otherActionsPrint"
+                                                  label="&otherActionsPrint1.label;"
+                                                  accesskey="&otherActionsPrint1.accesskey;"
+                                                  oncommand="PrintEnginePrint();"/>
+                                        <menu id="otherActions-calendar-convert-menu"
+                                              label="&calendar.context.convertmenu.label;"
+                                              accesskey="&calendar.context.convertmenu.accesskey.mail;">
+                                          <menupopup id="otherActions-calendar-convert-menupopup">
+                                            <menuitem id="otherActions-calendar-convert-event-menuitem"
+                                                      label="&calendar.context.convertmenu.event.label;"
+                                                      accesskey="&calendar.context.convertmenu.event.accesskey;"
+                                                      oncommand="calendarExtract.extractFromEmail(true)" />
+                                            <menuitem id="otherActions-calendar-convert-task-menuitem"
+                                                      label="&calendar.context.convertmenu.task.label;"
+                                                      accesskey="&calendar.context.convertmenu.task.accesskey;"
+                                                      oncommand="calendarExtract.extractFromEmail(false)" />
+                                          </menupopup>
+                                        </menu>
+                                      </menupopup>
+                                    </toolbarbutton>
+                                  </hbox>
+                                </vbox>
+
+                                <!-- This box ensures that the expandedHeaders grid below is aligned
+                                     with the bottom of the message header toolbar. Like the
+                                     expandedHeadersTopBox, this uses display:block to give us HTML
+                                     layouting. -->
+                                <box id="expandedBoxSpacer"/>
+
+                                <!-- Theoretically, we should be able to replace this grid with just
+                                     an hbox.  Unfortunately, doing that makes it very hard to sync
+                                     the column sizes between the name columns, because for currently
+                                     unclear reasons, the .clientWidth of a column is wider than the
+                                     .clientWidth of its largest contained child by an unspecified
+                                     amount. -->
+                                <html:table id="expandedHeaders">
+                                  <html:tr id="expandedfromRow">
+                                    <html:th id="expandedfromTableHeader">
+                                      <label id="expandedfromLabel" class="headerName"
+                                             value="&fromField4.label;"
+                                             valueFrom="&fromField4.label;" valueAuthor="&author.label;"
+                                             control="expandedfromBox"/>
+                                    </html:th>
+                                    <html:td>
+                                      <mail-multi-emailheaderfield id="expandedfromBox"
+                                                                   aria-labelledby="expandedfromLabel"/>
+                                    </html:td>
+                                  </html:tr>
+                                </html:table>
+                              </hbox>
+
+                              <hbox id="expandedHeadersBottomBox">
+
+                                <!-- The grid that contains all headers except the first one,
+                                      including any headers created dynamically from JavaScript -->
+                                <html:table id="expandedHeaders2">
+                                    <!-- Commonly used rows are pre-specified in the XUL to avoid the
+                                         performance hit of creating them dynamically. -->
+                                  <html:tr id="expandedsubjectRow">
+                                    <html:th id="expandedsubjectTableHeader">
+                                      <label id="expandedsubjectLabel" class="headerName"
+                                             value="&subjectField4.label;"
+                                             control="expandedsubjectBox"/>
+                                    </html:th>
+                                    <html:td>
+                                      <mail-headerfield id="expandedsubjectBox"
+                                                        aria-labelledby="expandedsubjectLabel"
+                                                        headerName="subject" flex="1"/>
+                                    </html:td>
+                                  </html:tr>
+                                  <html:tr id="expandedorganizationRow" hidden="hidden">
+                                    <html:th>
+                                      <label id="expandedorganizationLabel" class="headerName"
+                                             value="&organizationField4.label;"
+                                             control="expandedorganizationBox"/>
+                                    </html:th>
+                                    <html:td>
+                                      <mail-headerfield id="expandedorganizationBox"
+                                                        aria-labelledby="expandedorganizationLabel"/>
+                                    </html:td>
+                                  </html:tr>
+                                  <html:tr id="expandedsenderRow" hidden="hidden">
+                                    <html:th>
+                                      <label id="expandedsenderLabel" class="headerName"
+                                             value="&senderField4.label;" control="expandedsenderBox"/>
+                                    </html:th>
+                                    <html:td>
+                                      <mail-emailheaderfield id="expandedsenderBox"
+                                                             aria-labelledby="expandedsenderLabel"/>
+                                    </html:td>
+                                  </html:tr>
+                                  <html:tr id="expandedreply-toRow">
+                                    <html:th>
+                                      <label id="expandedreply-toLabel" class="headerName"
+                                             value="&replyToField4.label;"
+                                             control="expandedreply-toBox"/>
+                                    </html:th>
+                                    <html:td>
+                                      <mail-multi-emailheaderfield id="expandedreply-toBox"
+                                                                   aria-labelledby="expandedreply-toLabel"/>
+                                    </html:td>
+                                  </html:tr>
+                                  <html:tr id="expandedtoRow">
+                                    <html:th>
+                                      <label id="expandedtoLabel" class="headerName"
+                                             value="&toField4.label;" control="expandedtoBox"/>
+                                    </html:th>
+                                    <html:td>
+                                      <mail-multi-emailheaderfield id="expandedtoBox"
+                                                                   aria-labelledby="expandedtoLabel"/>
+                                    </html:td>
+                                  </html:tr>
+                                  <html:tr id="expandedccRow">
+                                    <html:th>
+                                      <label id="expandedccLabel" class="headerName"
+                                             value="&ccField4.label;" control="expandedccBox"/>
+                                    </html:th>
+                                    <html:td>
+                                      <mail-multi-emailheaderfield id="expandedccBox"
+                                                                   aria-labelledby="expandedccLabel"/>
+                                    </html:td>
+                                  </html:tr>
+                                  <html:tr id="expandedbccRow">
+                                    <html:th>
+                                      <label id="expandedbccLabel" class="headerName"
+                                             value="&bccField4.label;" control="expandedbccBox"/>
+                                    </html:th>
+                                    <html:td>
+                                      <mail-multi-emailheaderfield id="expandedbccBox"
+                                                                   aria-labelledby="expandedbccLabel"/>
+                                    </html:td>
+                                  </html:tr>
+                                  <html:tr id="expandednewsgroupsRow" hidden="hidden">
+                                    <html:th>
+                                      <label id="expandednewsgroupsLabel" class="headerName"
+                                             value="&newsgroupsField4.label;"
+                                             control="expandednewsgroupsBox"/>
+                                    </html:th>
+                                    <html:td>
+                                      <mail-newsgroups-headerfield id="expandednewsgroupsBox"
+                                                                   aria-labelledby="expandednewsgroupsLabel"/>
+                                    </html:td>
+                                  </html:tr>
+                                  <html:tr id="expandedfollowup-toRow" hidden="hidden">
+                                    <html:th>
+                                      <label id="expandedfollowup-toLabel" class="headerName"
+                                             value="&followupToField4.label;"
+                                             control="expandedfollowup-toBox"/>
+                                    </html:th>
+                                    <html:td>
+                                      <mail-newsgroups-headerfield id="expandedfollowup-toBox"
+                                                                   aria-labelledby="expandedfollowup-toLabel"/>
+                                    </html:td>
+                                  </html:tr>
+                                  <html:tr id="expandeddateRow" hidden="hidden">
+                                    <html:th>
+                                      <label id="expandeddateLabel" class="headerName"
+                                             value="&dateField4.label;" control="expandeddateBox"/>
+                                    </html:th>
+                                    <html:td>
+                                      <mail-headerfield id="expandeddateBox"
+                                                        aria-labelledby="expandeddateLabel"/>
+                                    </html:td>
+                                  </html:tr>
+                                  <html:tr id="expandedmessage-idRow" hidden="hidden">
+                                    <html:th>
+                                      <label id="expandedmessage-idLabel" class="headerName"
+                                             value="&messageIdField4.label;"
+                                             control="expandedmessage-idBox"/>
+                                    </html:th>
+                                    <html:td>
+                                      <mail-messageids-headerfield id="expandedmessage-idBox"
+                                                                   aria-labelledby="expandedmessage-idLabel"/>
+                                    </html:td>
+                                  </html:tr>
+                                  <html:tr id="expandedin-reply-toRow" hidden="hidden">
+                                    <html:th>
+                                      <label id="expandedin-reply-toLabel" class="headerName"
+                                             value="&inReplyToField4.label;"
+                                             control="expandedin-reply-toBox"/>
+                                    </html:th>
+                                    <html:td>
+                                      <mail-messageids-headerfield id="expandedin-reply-toBox"
+                                                                   aria-labelledby="expandedin-reply-toLabel"/>
+                                    </html:td>
+                                  </html:tr>
+                                  <html:tr id="expandedreferencesRow" hidden="hidden">
+                                    <html:th>
+                                      <label id="expandedreferencesLabel" class="headerName"
+                                             value="&referencesField4.label;"
+                                             control="expandedreferencesBox"/>
+                                    </html:th>
+                                    <html:td>
+                                      <mail-messageids-headerfield id="expandedreferencesBox"
+                                                                   aria-labelledby="expandedreferencesLabel"/>
+                                    </html:td>
+                                  </html:tr>
+                                  <html:tr id="expandedtagsRow" hidden="hidden">
+                                    <html:th>
+                                      <label id="expandedtagsLabel" class="headerName"
+                                             value="&tagsHdr4.label;" control="expandedtagsBox"/>
+                                    </html:th>
+                                    <html:td>
+                                      <mail-tagfield id="expandedtagsBox"
+                                                     aria-labelledby="expandedtagsLabel"/>
+                                    </html:td>
+                                  </html:tr>
+                                  <html:tr id="expandedcontent-baseRow" hidden="hidden">
+                                    <html:th>
+                                      <label id="expandedcontent-baseLabel" class="headerName"
+                                             value="&originalWebsite4.label;"
+                                             control="expandedcontent-baseBox"/>
+                                    </html:th>
+                                    <html:td>
+                                      <mail-urlfield id="expandedcontent-baseBox"
+                                                     aria-labelledby="expandedcontent-baseLabel"/>
+                                    </html:td>
+                                  </html:tr>
+                                  <html:tr id="expandeduser-agentRow" hidden="hidden">
+                                    <html:th>
+                                      <label id="expandeduser-agentLabel" class="headerName"
+                                             value="&userAgentField4.label;"
+                                             control="expandeduser-agentBox"/>
+                                    </html:th>
+                                    <html:td>
+                                      <mail-headerfield id="expandeduser-agentBox"
+                                                        aria-labelledby="expandeduser-agentLabel"/>
+                                    </html:td>
+                                  </html:tr>
+                                </html:table>
+
+                                <!-- perhaps this should be a customizable toolbar too -->
+                                <vbox id="otherActionsBox" align="end">
+                                  <hbox id="dateValueBox" align="start">
+                                    <label id="dateLabel" class="dateLabel" flex="1" role="textbox"
+                                           aria-readonly="true"/>
+                                  </hbox>
+                                  <hbox id="cryptoBox" class="crypto-container" align="center"
+                                        collapsed="true">
+                                    <html:button id="encryptionTechBtn"
+                                                 class="toolbarbutton-1 crypto-button"
+                                                 onclick="showMessageReadSecurityInfo();"
+                                                 onkeypress="if (event.key == 'Enter') { showMessageReadSecurityInfo(); }">
+                                      <html:span class="crypto-label"></html:span>
+                                      <image id="encryptedHdrIcon" hidden="true"/>
+                                      <image id="signedHdrIcon" hidden="true"/>
+                                    </html:button>
+                                  </hbox>
+                                </vbox>
+                              </hbox>
+                            </vbox>
+                          </vbox>
+                        </deck>

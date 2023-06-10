@@ -1,0 +1,57 @@
+{
+  "name": "Français Language Pack",
+  "author": "mozfr.org (contributors: Frédéric Chateaux, Théo Chevalier, Cédric Corazza, Philippe Dessante, Benoît Leseul, Jean-Bernard Marcon)",
+  "langpack_id": "fr",
+  "description": "Language pack for Thunderbird for fr",
+  "applications": {
+    "gecko": {
+      "id": "langpack-fr@thunderbird.mozilla.org",
+      "strict_max_version": "78.*",
+      "strict_min_version": "78.0"
+    }
+  },
+  "sources": {
+    "browser": {
+      "base_path": "browser/"
+    }
+  },
+  "manifest_version": 2,
+  "version": "78.0buildid20210901192859",
+  "languages": {
+    "fr": {
+      "version": "20200902053656",
+      "chrome_resources": {
+        "messenger-newsblog": "chrome/fr/locale/fr/messenger-newsblog/",
+        "mozapps": "chrome/fr/locale/fr/mozapps/",
+        "pippki": "chrome/fr/locale/fr/pippki/",
+        "devtools": "chrome/fr/locale/fr/devtools/client/",
+        "lightning": "chrome/fr/locale/fr/lightning/",
+        "communicator": "chrome/fr/locale/fr/communicator/",
+        "branding": "chrome/fr/locale/fr/branding/",
+        "messenger-mapi": "chrome/fr/locale/fr/messenger-mapi/",
+        "pipnss": "chrome/fr/locale/fr/pipnss/",
+        "messenger-region": "chrome/fr/locale/fr/messenger-region/",
+        "passwordmgr": "chrome/fr/locale/fr/passwordmgr/",
+        "calendar": "chrome/fr/locale/fr/calendar/",
+        "chat": "chrome/fr/locale/fr/chat/",
+        "devtools-startup": "chrome/fr/locale/fr/devtools/startup/",
+        "places": "chrome/fr/locale/fr/places/",
+        "devtools-shared": "chrome/fr/locale/fr/devtools/shared/",
+        "autoconfig": "chrome/fr/locale/fr/autoconfig/",
+        "messenger-smime": "chrome/fr/locale/fr/messenger-smime/",
+        "pluginproblem": "chrome/fr/locale/fr/pluginproblem/",
+        "alerts": "chrome/fr/locale/fr/alerts/",
+        "messenger": "chrome/fr/locale/fr/messenger/",
+        "mozldap": "chrome/fr/locale/fr/mozldap/",
+        "necko": "chrome/fr/locale/fr/necko/",
+        "global-platform": {
+          "win": "chrome/fr/locale/fr/global-platform/win/",
+          "macosx": "chrome/fr/locale/fr/global-platform/mac/",
+          "android": "chrome/fr/locale/fr/global-platform/unix/",
+          "linux": "chrome/fr/locale/fr/global-platform/unix/"
+        },
+        "global": "chrome/fr/locale/fr/global/"
+      }
+    }
+  }
+}

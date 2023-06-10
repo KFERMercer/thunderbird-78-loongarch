@@ -1,0 +1,57 @@
+{
+  "version": "78.0buildid20210901192859",
+  "languages": {
+    "uz": {
+      "version": "20200831184453",
+      "chrome_resources": {
+        "alerts": "chrome/uz/locale/uz/alerts/",
+        "mozldap": "chrome/uz/locale/uz/mozldap/",
+        "calendar": "chrome/uz/locale/uz/calendar/",
+        "pluginproblem": "chrome/uz/locale/uz/pluginproblem/",
+        "messenger-newsblog": "chrome/uz/locale/uz/messenger-newsblog/",
+        "necko": "chrome/uz/locale/uz/necko/",
+        "pippki": "chrome/uz/locale/uz/pippki/",
+        "lightning": "chrome/uz/locale/uz/lightning/",
+        "chat": "chrome/uz/locale/uz/chat/",
+        "branding": "chrome/uz/locale/uz/branding/",
+        "places": "chrome/uz/locale/uz/places/",
+        "passwordmgr": "chrome/uz/locale/uz/passwordmgr/",
+        "global-platform": {
+          "win": "chrome/uz/locale/uz/global-platform/win/",
+          "macosx": "chrome/uz/locale/uz/global-platform/mac/",
+          "android": "chrome/uz/locale/uz/global-platform/unix/",
+          "linux": "chrome/uz/locale/uz/global-platform/unix/"
+        },
+        "devtools-shared": "chrome/uz/locale/uz/devtools/shared/",
+        "messenger-region": "chrome/uz/locale/uz/messenger-region/",
+        "global": "chrome/uz/locale/uz/global/",
+        "messenger-smime": "chrome/uz/locale/uz/messenger-smime/",
+        "communicator": "chrome/uz/locale/uz/communicator/",
+        "messenger-mapi": "chrome/uz/locale/uz/messenger-mapi/",
+        "devtools-startup": "chrome/uz/locale/uz/devtools/startup/",
+        "pipnss": "chrome/uz/locale/uz/pipnss/",
+        "devtools": "chrome/uz/locale/uz/devtools/client/",
+        "messenger": "chrome/uz/locale/uz/messenger/",
+        "mozapps": "chrome/uz/locale/uz/mozapps/",
+        "autoconfig": "chrome/uz/locale/uz/autoconfig/"
+      }
+    }
+  },
+  "description": "Language pack for Thunderbird for uz",
+  "manifest_version": 2,
+  "applications": {
+    "gecko": {
+      "strict_max_version": "78.*",
+      "id": "langpack-uz@thunderbird.mozilla.org",
+      "strict_min_version": "78.0"
+    }
+  },
+  "author": "mozilla.org (contributors: Akmal Xushvaqov, Akmal Xushvaqov)",
+  "name": "Uzbek Language Pack",
+  "sources": {
+    "browser": {
+      "base_path": "browser/"
+    }
+  },
+  "langpack_id": "uz"
+}

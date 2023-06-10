@@ -1,0 +1,120 @@
+<?xml version="1.0"?>
+
+# -*- Mode: Java; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
+<?xml-stylesheet href="chrome://global/skin/global.css"?>
+<?xml-stylesheet href="chrome://messenger/skin/input-fields.css"?>
+
+<!DOCTYPE dialog>
+
+<window id="CookiesDialog" windowtype="mailnews:cookies"
+        class="windowDialog"
+        xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        xmlns:html="http://www.w3.org/1999/xhtml"
+        data-l10n-id="cookies-window-dialog"
+        data-l10n-attrs="style"
+        onload="gCookiesWindow.init();"
+        onunload="gCookiesWindow.uninit();"
+        persist="screenX screenY width height">
+
+  <script src="chrome://global/content/globalOverlay.js"/>
+  <script src="chrome://global/content/editMenuOverlay.js"/>
+  <script src="chrome://messenger/content/preferences/cookies.js"/>
+
+  <stringbundle id="bundlePreferences"
+                src="chrome://messenger/locale/preferences/preferences.properties"/>
+
+  <linkset>
+    <html:link rel="localization" href="messenger/preferences/cookies.ftl"/>
+  </linkset>
+
+  <keyset>
+    <key data-l10n-id="window-close-key" data-l10n-attrs="key"
+         modifiers="accel" oncommand="window.close();"/>
+    <key data-l10n-id="window-focus-search-key" data-l10n-attrs="key"
+         modifiers="accel" oncommand="gCookiesWindow.focusFilterBox();"/>
+    <key data-l10n-id="window-focus-search-alt-key" data-l10n-attrs="key"
+         modifiers="accel" oncommand="gCookiesWindow.focusFilterBox();"/>
+  </keyset>
+
+  <vbox flex="1" class="contentPane largeDialogContainer">
+    <hbox align="center">
+      <label data-l10n-id="filter-search-label" control="filter"/>
+      <search-textbox id="filter"
+                      flex="1"
+                      aria-controls="cookiesList"
+                      oncommand="gCookiesWindow.filter();"/>
+    </hbox>
+    <separator class="thin"/>
+    <label control="cookiesList" id="cookiesIntro" data-l10n-id="cookies-on-system-label"/>
+    <separator class="thin"/>
+    <tree id="cookiesList" flex="1" style="height: 10em;"
+          onkeypress="gCookiesWindow.onCookieKeyPress(event)"
+          onselect="gCookiesWindow.onCookieSelected();"
+          hidecolumnpicker="true" seltype="single">
+      <treecols>
+        <treecol id="domainCol" data-l10n-id="treecol-site-header" flex="2"
+                 primary="true"
+                 persist="width"
+                 onclick="gCookiesWindow.sort('rawHost');"/>
+        <splitter class="tree-splitter"/>
+        <treecol id="nameCol" data-l10n-id="treecol-name-header" flex="1"
+                 persist="width"
+                 onclick="gCookiesWindow.sort('name');"/>
+      </treecols>
+      <treechildren id="cookiesChildren"/>
+    </tree>
+    <hbox id="cookieInfoSettings" flex="1">
+      <vbox>
+        <vbox flex="1" pack="center" align="end">
+          <label id="nameLabel" control="name" data-l10n-id="props-name-label"/>
+        </vbox>
+        <vbox flex="1" pack="center" align="end">
+          <label id="valueLabel" control="value" data-l10n-id="props-value-label"/>
+        </vbox>
+        <vbox flex="1" pack="center" align="end">
+          <label id="isDomain" control="host" data-l10n-id="props-domain-label"/>
+        </vbox>
+        <vbox flex="1" pack="center" align="end">
+          <label id="pathLabel" control="path" data-l10n-id="props-path-label"/>
+        </vbox>
+        <vbox flex="1" pack="center" align="end">
+          <label id="isSecureLabel" control="isSecure" data-l10n-id="props-secure-label"/>
+        </vbox>
+        <vbox flex="1" pack="center" align="end">
+          <label id="expiresLabel" control="expires" data-l10n-id="props-expires-label"/>
+        </vbox>
+        <vbox id="userContextLabel" flex="1" pack="center" align="end">
+          <label control="userContext" data-l10n-id="props-container-label"/>
+        </vbox>
+      </vbox>
+      <vbox flex="1">
+        <html:input id="name" type="text" readonly="readonly"/>
+        <html:input id="value" type="text" readonly="readonly"/>
+        <html:input id="host" type="text" readonly="readonly"/>
+        <html:input id="path" type="text" readonly="readonly"/>
+        <html:input id="isSecure" type="text" readonly="readonly"/>
+        <html:input id="expires" type="text" readonly="readonly"/>
+        <html:input id="userContext" type="text" readonly="readonly"/>
+      </vbox>
+    </hbox>
+  </vbox>
+  <hbox align="end">
+    <hbox class="actionButtons" flex="1">
+      <button id="removeSelectedCookies" disabled="true"
+              data-l10n-id="remove-cookie-button"
+              oncommand="gCookiesWindow.deleteCookie();"/>
+      <button id="removeAllCookies" disabled="true"
+              data-l10n-id="remove-all-cookies-button"
+              oncommand="gCookiesWindow.deleteAllCookies();"/>
+      <spacer flex="1"/>
+#ifndef XP_MACOSX
+      <button oncommand="window.close();"
+              data-l10n-id="cookie-close-button"/>
+#endif
+    </hbox>
+  </hbox>
+</window>

@@ -1,0 +1,57 @@
+{
+  "author": "Mark Tyndall (contributors: Ian Neal)",
+  "version": "78.0buildid20210901192859",
+  "description": "Language pack for Thunderbird for en-GB",
+  "applications": {
+    "gecko": {
+      "strict_max_version": "78.*",
+      "id": "langpack-en-GB@thunderbird.mozilla.org",
+      "strict_min_version": "78.0"
+    }
+  },
+  "sources": {
+    "browser": {
+      "base_path": "browser/"
+    }
+  },
+  "languages": {
+    "en-GB": {
+      "version": "20200902214354",
+      "chrome_resources": {
+        "necko": "chrome/en-GB/locale/en-GB/necko/",
+        "chat": "chrome/en-GB/locale/en-GB/chat/",
+        "autoconfig": "chrome/en-GB/locale/en-GB/autoconfig/",
+        "messenger": "chrome/en-GB/locale/en-GB/messenger/",
+        "devtools-startup": "chrome/en-GB/locale/en-GB/devtools/startup/",
+        "pluginproblem": "chrome/en-GB/locale/en-GB/pluginproblem/",
+        "devtools": "chrome/en-GB/locale/en-GB/devtools/client/",
+        "mozapps": "chrome/en-GB/locale/en-GB/mozapps/",
+        "calendar": "chrome/en-GB/locale/en-GB/calendar/",
+        "messenger-smime": "chrome/en-GB/locale/en-GB/messenger-smime/",
+        "mozldap": "chrome/en-GB/locale/en-GB/mozldap/",
+        "messenger-mapi": "chrome/en-GB/locale/en-GB/messenger-mapi/",
+        "messenger-region": "chrome/en-GB/locale/en-GB/messenger-region/",
+        "devtools-shared": "chrome/en-GB/locale/en-GB/devtools/shared/",
+        "pipnss": "chrome/en-GB/locale/en-GB/pipnss/",
+        "pippki": "chrome/en-GB/locale/en-GB/pippki/",
+        "places": "chrome/en-GB/locale/en-GB/places/",
+        "passwordmgr": "chrome/en-GB/locale/en-GB/passwordmgr/",
+        "messenger-newsblog": "chrome/en-GB/locale/en-GB/messenger-newsblog/",
+        "communicator": "chrome/en-GB/locale/en-GB/communicator/",
+        "alerts": "chrome/en-GB/locale/en-GB/alerts/",
+        "global": "chrome/en-GB/locale/en-GB/global/",
+        "branding": "chrome/en-GB/locale/en-GB/branding/",
+        "global-platform": {
+          "linux": "chrome/en-GB/locale/en-GB/global-platform/unix/",
+          "android": "chrome/en-GB/locale/en-GB/global-platform/unix/",
+          "win": "chrome/en-GB/locale/en-GB/global-platform/win/",
+          "macosx": "chrome/en-GB/locale/en-GB/global-platform/mac/"
+        },
+        "lightning": "chrome/en-GB/locale/en-GB/lightning/"
+      }
+    }
+  },
+  "manifest_version": 2,
+  "name": "English (GB) Language Pack",
+  "langpack_id": "en-GB"
+}

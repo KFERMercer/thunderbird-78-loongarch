@@ -1,0 +1,247 @@
+From: Carsten Schoenert <c.schoenert@t-online.de>
+Date: Sat, 29 Mar 2014 20:58:55 +0100
+Subject: FTBFS hurd: fixing unsupported platform Hurd
+
+On the Hurd platform the build failed in
+js/src/jit/AsmJSSignalHandlers.cpp:131 because of unsupported
+mode for reading / writing thead state with following message.
+
+ # error "Don't know how to read/write to the thread state via the mcontext_t."
+
+The original patch comes from Richard Brown <rbraun@sceen.net>
+https://lists.alioth.debian.org/pipermail/pkg-mozilla-maintainers/2014-March/015565.html
+
+After release of Thunderbird 44 there are additional changes made as the
+various configuration files where split into more files.
+---
+ dom/plugins/ipc/PluginModuleChild.cpp              |  6 +++---
+ dom/plugins/ipc/PluginModuleChild.h                |  2 +-
+ ipc/chromium/chromium-config.mozbuild              |  5 +++++
+ ipc/chromium/moz.build                             |  2 +-
+ ipc/chromium/src/base/message_loop.cc              |  4 ++--
+ ipc/chromium/src/base/process_util_posix.cc        |  2 +-
+ ipc/chromium/src/build/build_config.h              |  3 ++-
+ .../src/third_party/libeventcommon.mozbuild        |  5 +++++
+ ipc/glue/GeckoChildProcessHost.cpp                 | 25 +++++++++++++++++++---
+ js/src/wasm/WasmSignalHandlers.cpp                 |  2 +-
+ 10 files changed, 43 insertions(+), 13 deletions(-)
+
+diff --git a/dom/plugins/ipc/PluginModuleChild.cpp b/dom/plugins/ipc/PluginModuleChild.cpp
+index 5811141..75f9b76 100644
+--- a/dom/plugins/ipc/PluginModuleChild.cpp
++++ b/dom/plugins/ipc/PluginModuleChild.cpp
+@@ -284,7 +284,7 @@ bool PluginModuleChild::InitForChrome(const std::string& aPluginFilename,
+ 
+   GetIPCChannel()->SetAbortOnError(true);
+ 
+-#if defined(OS_LINUX) || defined(OS_BSD) || defined(OS_SOLARIS)
++#if defined(OS_LINUX) || defined(OS_BSD) || defined(OS_SOLARIS) || defined(OS_HURD)
+   mShutdownFunc =
+       (NP_PLUGINSHUTDOWN)PR_FindFunctionSymbol(mLibrary, "NP_Shutdown");
+ 
+@@ -1529,7 +1529,7 @@ mozilla::ipc::IPCResult PluginModuleChild::AnswerNP_GetEntryPoints(
+   AssertPluginThread();
+   MOZ_ASSERT(mIsChrome);
+ 
+-#if defined(OS_LINUX) || defined(OS_BSD) || defined(OS_SOLARIS)
++#if defined(OS_LINUX) || defined(OS_BSD) || defined(OS_SOLARIS) || defined(OS_HURD)
+   return IPC_OK();
+ #elif defined(OS_WIN) || defined(OS_MACOSX)
+   *_retval = mGetEntryPointsFunc(&mFunctions);
+@@ -1570,7 +1570,7 @@ NPError PluginModuleChild::DoNP_Initialize(const PluginSettings& aSettings) {
+ #endif
+ 
+   NPError result;
+-#if defined(OS_LINUX) || defined(OS_BSD) || defined(OS_SOLARIS)
++#if defined(OS_LINUX) || defined(OS_BSD) || defined(OS_SOLARIS) || defined(OS_HURD)
+   result = mInitializeFunc(&sBrowserFuncs, &mFunctions);
+ #elif defined(OS_WIN) || defined(OS_MACOSX)
+   result = mInitializeFunc(&sBrowserFuncs);
+diff --git a/dom/plugins/ipc/PluginModuleChild.h b/dom/plugins/ipc/PluginModuleChild.h
+index 84df35e..a3cbb78 100644
+--- a/dom/plugins/ipc/PluginModuleChild.h
++++ b/dom/plugins/ipc/PluginModuleChild.h
+@@ -227,7 +227,7 @@ class PluginModuleChild : public PPluginModuleChild {
+ 
+   // we get this from the plugin
+   NP_PLUGINSHUTDOWN mShutdownFunc;
+-#if defined(OS_LINUX) || defined(OS_BSD) || defined(OS_SOLARIS)
++#if defined(OS_LINUX) || defined(OS_BSD) || defined(OS_SOLARIS) || defined(OS_HURD)
+   NP_PLUGINUNIXINIT mInitializeFunc;
+ #elif defined(OS_WIN) || defined(OS_MACOSX)
+   NP_PLUGININIT mInitializeFunc;
+diff --git a/ipc/chromium/chromium-config.mozbuild b/ipc/chromium/chromium-config.mozbuild
+index a8271cb..e128ad7 100644
+--- a/ipc/chromium/chromium-config.mozbuild
++++ b/ipc/chromium/chromium-config.mozbuild
+@@ -57,5 +57,10 @@ else:
+         DEFINES['OS_OPENBSD'] = 1
+         DEFINES['OS_BSD'] = 1
+ 
++    elif CONFIG['OS_ARCH'] == 'GNU':
++        DEFINES.update({
++            'OS_HURD': 1,
++        })
++
+     else:
+         DEFINES['OS_LINUX'] = 1
+diff --git a/ipc/chromium/moz.build b/ipc/chromium/moz.build
+index d29817b..930c2f3 100644
+--- a/ipc/chromium/moz.build
++++ b/ipc/chromium/moz.build
+@@ -110,7 +110,7 @@ if os_bsd or os_linux:
+             'src/base/message_pump_glib.cc',
+         ]
+ 
+-if os_solaris:
++if os_solaris or os_hurd:
+     SOURCES += [
+         'src/base/process_util_linux.cc',
+         'src/base/time_posix.cc',
+diff --git a/ipc/chromium/src/base/message_loop.cc b/ipc/chromium/src/base/message_loop.cc
+index 07785b6..394ffe0 100644
+--- a/ipc/chromium/src/base/message_loop.cc
++++ b/ipc/chromium/src/base/message_loop.cc
+@@ -21,7 +21,7 @@
+ #if defined(OS_POSIX)
+ #  include "base/message_pump_libevent.h"
+ #endif
+-#if defined(OS_LINUX) || defined(OS_BSD)
++#if defined(OS_LINUX) || defined(OS_BSD)|| defined(OS_HURD)
+ #  if defined(MOZ_WIDGET_GTK)
+ #    include "base/message_pump_glib.h"
+ #  endif
+@@ -235,7 +235,7 @@ MessageLoop::MessageLoop(Type type, nsIEventTarget* aEventTarget)
+   if (type_ == TYPE_UI) {
+ #  if defined(OS_MACOSX)
+     pump_ = base::MessagePumpMac::Create();
+-#  elif defined(OS_LINUX) || defined(OS_BSD)
++#  elif defined(OS_LINUX) || defined(OS_BSD) || defined(OS_HURD)
+     pump_ = new base::MessagePumpForUI();
+ #  endif  // OS_LINUX
+   } else if (type_ == TYPE_IO) {
+diff --git a/ipc/chromium/src/base/process_util_posix.cc b/ipc/chromium/src/base/process_util_posix.cc
+index 513396d..745e099 100644
+--- a/ipc/chromium/src/base/process_util_posix.cc
++++ b/ipc/chromium/src/base/process_util_posix.cc
+@@ -132,7 +132,7 @@ void CloseSuperfluousFds(void* aCtx, bool (*aShouldPreserve)(void*, int)) {
+ #if defined(ANDROID)
+   static const rlim_t kSystemDefaultMaxFds = 1024;
+   static const char kFDDir[] = "/proc/self/fd";
+-#elif defined(OS_LINUX) || defined(OS_SOLARIS)
++#elif defined(OS_LINUX) || defined(OS_SOLARIS) || defined(OS_HURD)
+   static const rlim_t kSystemDefaultMaxFds = 8192;
+   static const char kFDDir[] = "/proc/self/fd";
+ #elif defined(OS_MACOSX)
+diff --git a/ipc/chromium/src/build/build_config.h b/ipc/chromium/src/build/build_config.h
+index 4e0711d..72105fc 100644
+--- a/ipc/chromium/src/build/build_config.h
++++ b/ipc/chromium/src/build/build_config.h
+@@ -24,6 +24,7 @@
+ #  define OS_MACOSX 1
+ #elif defined(__linux__) || defined(__GLIBC__) || defined(__GNU__)
+ #  define OS_LINUX 1
++#  define OS_HURD 1
+ #elif defined(__DragonFly__)
+ #  define OS_DRAGONFLY 1
+ #elif defined(__FreeBSD__) || defined(__FreeBSD_kernel__)
+@@ -50,7 +51,7 @@
+ // For access to standard POSIX features, use OS_POSIX instead of a more
+ // specific macro.
+ #if defined(OS_MACOSX) || defined(OS_LINUX) || defined(OS_BSD) || \
+-    defined(OS_SOLARIS)
++    defined(OS_SOLARIS) || defined(OS_HURD)
+ #  define OS_POSIX 1
+ #endif
+ 
+diff --git a/ipc/chromium/src/third_party/libeventcommon.mozbuild b/ipc/chromium/src/third_party/libeventcommon.mozbuild
+index 5037ec7..c858d9c 100644
+--- a/ipc/chromium/src/third_party/libeventcommon.mozbuild
++++ b/ipc/chromium/src/third_party/libeventcommon.mozbuild
+@@ -8,6 +8,7 @@ os_win = 0
+ os_posix = 0
+ os_macosx = 0
+ os_bsd = 0
++os_hurd = 0
+ os_linux = 0
+ os_solaris = 0
+ 
+@@ -25,6 +26,10 @@ else:
+     elif CONFIG['OS_ARCH'] == 'SunOS':
+         os_solaris = 1
+         libevent_include_suffix = 'solaris'
++    # attempt to get GNU hurd into the build again, further modification probably needed
++    elif CONFIG['OS_ARCH'] == 'GNU':
++        os_hurd = 1
++        libevent_include_suffix = 'gnu'
+     else:
+         os_linux = 1
+         if CONFIG['OS_TARGET'] == 'Android':
+diff --git a/ipc/glue/GeckoChildProcessHost.cpp b/ipc/glue/GeckoChildProcessHost.cpp
+index 0624e5f..aa4ced9 100644
+--- a/ipc/glue/GeckoChildProcessHost.cpp
++++ b/ipc/glue/GeckoChildProcessHost.cpp
+@@ -1108,12 +1108,31 @@ bool LinuxProcessLauncher::DoSetup() {
+ }
+ #endif  // MOZ_WIDGET_GTK
+ 
+-#ifdef OS_POSIX
++#if defined(OS_POSIX) || defined(OS_HURD)
+ bool PosixProcessLauncher::DoSetup() {
+   if (!BaseProcessLauncher::DoSetup()) {
+     return false;
+   }
+ 
++//--------------------------------------------------
++  // For POSIX, we have to be extremely anal about *not* using
++  // std::wstring in code compiled with Mozilla's -fshort-wchar
++  // configuration, because chromium is compiled with -fno-short-wchar
++  // and passing wstrings from one config to the other is unsafe.  So
++  // we split the logic here.
++
++#    if defined(MOZ_WIDGET_GTK)
++  if (mProcessType == GeckoProcessType_Content) {
++    // disable IM module to avoid sandbox violation
++    mLaunchOptions->env_map["GTK_IM_MODULE"] = "gtk-im-context-simple";
++
++    // Disable ATK accessibility code in content processes because it conflicts
++    // with the sandbox, and we proxy that information through the main process
++    // anyway.
++    mLaunchOptions->env_map["NO_AT_BRIDGE"] = "1";
++  }
++#    endif  // defined(MOZ_WIDGET_GTK)
++
+   // XPCOM may not be initialized in some subprocesses.  We don't want
+   // to initialize XPCOM just for the directory service, especially
+   // since LD_LIBRARY_PATH is already set correctly in subprocesses
+@@ -1122,7 +1141,7 @@ bool PosixProcessLauncher::DoSetup() {
+     MOZ_ASSERT(gGREBinPath);
+     nsCString path;
+     NS_CopyUnicodeToNative(nsDependentString(gGREBinPath), path);
+-#  if defined(OS_LINUX) || defined(OS_BSD)
++#  if defined(OS_LINUX) || defined(OS_BSD) || defined(OS_HURD)
+     const char* ld_library_path = PR_GetEnv("LD_LIBRARY_PATH");
+     nsCString new_ld_lib_path(path.get());
+ 
+@@ -1221,7 +1240,7 @@ bool PosixProcessLauncher::DoSetup() {
+   mChildArgv.push_back(mPidString);
+ 
+   if (!CrashReporter::IsDummy()) {
+-#  if defined(OS_LINUX) || defined(OS_BSD) || defined(OS_SOLARIS)
++#  if defined(OS_LINUX) || defined(OS_BSD) || defined(OS_SOLARIS) || defined(OS_HURD)
+     int childCrashFd, childCrashRemapFd;
+     if (!CrashReporter::CreateNotificationPipeForChild(&childCrashFd,
+                                                        &childCrashRemapFd)) {
+diff --git a/js/src/wasm/WasmSignalHandlers.cpp b/js/src/wasm/WasmSignalHandlers.cpp
+index 78d1544..a6610f3 100644
+--- a/js/src/wasm/WasmSignalHandlers.cpp
++++ b/js/src/wasm/WasmSignalHandlers.cpp
+@@ -109,7 +109,7 @@ using mozilla::DebugOnly;
+ #    define R01_sig(p) ((p)->sc_frame.fixreg[1])
+ #    define R32_sig(p) ((p)->sc_frame.srr0)
+ #  endif
+-#elif defined(__linux__) || defined(__sun)
++#elif defined(__linux__) || defined(__sun) || defined(__GNU__)
+ #  if defined(__linux__)
+ #    define EIP_sig(p) ((p)->uc_mcontext.gregs[REG_EIP])
+ #    define EBP_sig(p) ((p)->uc_mcontext.gregs[REG_EBP])

@@ -1,0 +1,89 @@
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+/* ===== filterDialog.css ===============================================
+  == Styles for the Mail Filters dialog.
+  ======================================================================= */
+
+@import url("chrome://messenger/skin/messenger.css");
+
+@namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
+
+#filterListDialog:not([lwt-tree]):-moz-lwtheme {
+  background: -moz-Dialog !important;
+  color: -moz-DialogText;
+  text-shadow: none;
+
+  --button-background: rgba(128, 128, 128, .15);
+  --button-background-hover: rgba(128, 128, 128, .25);
+  --button-background-active: rgba(128, 128, 128, .35);
+  --button-border-color: rgba(128, 128, 128, .4);
+  --box-text-color: MenuText;
+  --box-background-color: Menu;
+  --box-border-color: ThreeDShadow;
+  --field-text-color: -moz-FieldText;
+  --field-background-color: -moz-Field;
+  --field-border-color: rgba(128, 128, 128, .6);
+  --field-border-hover-color: rgba(128, 128, 128, .8);
+  --highlight-color: Highlight;
+  --popup-item-hover: rgba(128, 128, 128, .2);
+  --popup-item-hover-text: MenuText;
+  --popup-item-selected: Highlight;
+  --popup-selected-text: HighlightText;
+  --richlist-button-background: -moz-Dialog;
+}
+
+#searchBox {
+  max-width: 30ch;
+}
+
+/* ::::: columns :::::: */
+
+treecolpicker {
+  display: none;
+}
+
+richlistitem {
+  padding-block: 1px;
+}
+
+richlistitem > checkbox {
+  width: 100px;
+  margin: 0;
+  -moz-user-focus: none;
+}
+
+checkbox:not([label]) .checkbox-label-box {
+  display: none;
+}
+
+.search-menulist,
+.search-value-menulist {
+  width: 12em;
+}
+
+.search-menulist[unavailable="true"] {
+  opacity: 0.6;
+}
+
+.ruleactionitem {
+  min-width: 20em;
+}
+
+.ruleaction-type {
+  min-width: 15em;
+}
+
+#countBox[filterActive="matches"] {
+  color: #4e9a06;
+}
+
+#countBox[filterActive="nomatches"] {
+  color: #c00;
+}
+
+#statusbar {
+  height: 1.8em;
+  padding: 2px 4px;
+}

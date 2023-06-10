@@ -1,0 +1,57 @@
+{
+  "name": "Bahasa Melayu (ms) Language Pack",
+  "sources": {
+    "browser": {
+      "base_path": "browser/"
+    }
+  },
+  "description": "Language pack for Thunderbird for ms",
+  "version": "78.0buildid20210901192859",
+  "applications": {
+    "gecko": {
+      "strict_max_version": "78.*",
+      "strict_min_version": "78.0",
+      "id": "langpack-ms@thunderbird.mozilla.org"
+    }
+  },
+  "languages": {
+    "ms": {
+      "version": "20200827124816",
+      "chrome_resources": {
+        "mozapps": "chrome/ms/locale/ms/mozapps/",
+        "messenger-mapi": "chrome/ms/locale/ms/messenger-mapi/",
+        "branding": "chrome/ms/locale/ms/branding/",
+        "mozldap": "chrome/ms/locale/ms/mozldap/",
+        "messenger-smime": "chrome/ms/locale/ms/messenger-smime/",
+        "messenger": "chrome/ms/locale/ms/messenger/",
+        "passwordmgr": "chrome/ms/locale/ms/passwordmgr/",
+        "lightning": "chrome/ms/locale/ms/lightning/",
+        "pipnss": "chrome/ms/locale/ms/pipnss/",
+        "autoconfig": "chrome/ms/locale/ms/autoconfig/",
+        "devtools-startup": "chrome/ms/locale/ms/devtools/startup/",
+        "pluginproblem": "chrome/ms/locale/ms/pluginproblem/",
+        "chat": "chrome/ms/locale/ms/chat/",
+        "messenger-region": "chrome/ms/locale/ms/messenger-region/",
+        "communicator": "chrome/ms/locale/ms/communicator/",
+        "alerts": "chrome/ms/locale/ms/alerts/",
+        "devtools-shared": "chrome/ms/locale/ms/devtools/shared/",
+        "calendar": "chrome/ms/locale/ms/calendar/",
+        "global": "chrome/ms/locale/ms/global/",
+        "places": "chrome/ms/locale/ms/places/",
+        "global-platform": {
+          "linux": "chrome/ms/locale/ms/global-platform/unix/",
+          "android": "chrome/ms/locale/ms/global-platform/unix/",
+          "win": "chrome/ms/locale/ms/global-platform/win/",
+          "macosx": "chrome/ms/locale/ms/global-platform/mac/"
+        },
+        "messenger-newsblog": "chrome/ms/locale/ms/messenger-newsblog/",
+        "pippki": "chrome/ms/locale/ms/pippki/",
+        "devtools": "chrome/ms/locale/ms/devtools/client/",
+        "necko": "chrome/ms/locale/ms/necko/"
+      }
+    }
+  },
+  "manifest_version": 2,
+  "langpack_id": "ms",
+  "author": "mozilla.org (contributors: Joe Solon, Suzy Solon)"
+}

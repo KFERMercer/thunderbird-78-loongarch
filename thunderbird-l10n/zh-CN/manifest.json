@@ -1,0 +1,57 @@
+{
+  "languages": {
+    "zh-CN": {
+      "version": "20200902071818",
+      "chrome_resources": {
+        "messenger-smime": "chrome/zh-CN/locale/zh-CN/messenger-smime/",
+        "mozldap": "chrome/zh-CN/locale/zh-CN/mozldap/",
+        "devtools-startup": "chrome/zh-CN/locale/zh-CN/devtools/startup/",
+        "pippki": "chrome/zh-CN/locale/zh-CN/pippki/",
+        "pluginproblem": "chrome/zh-CN/locale/zh-CN/pluginproblem/",
+        "global-platform": {
+          "linux": "chrome/zh-CN/locale/zh-CN/global-platform/unix/",
+          "win": "chrome/zh-CN/locale/zh-CN/global-platform/win/",
+          "android": "chrome/zh-CN/locale/zh-CN/global-platform/unix/",
+          "macosx": "chrome/zh-CN/locale/zh-CN/global-platform/mac/"
+        },
+        "messenger-newsblog": "chrome/zh-CN/locale/zh-CN/messenger-newsblog/",
+        "messenger-region": "chrome/zh-CN/locale/zh-CN/messenger-region/",
+        "messenger": "chrome/zh-CN/locale/zh-CN/messenger/",
+        "branding": "chrome/zh-CN/locale/zh-CN/branding/",
+        "mozapps": "chrome/zh-CN/locale/zh-CN/mozapps/",
+        "places": "chrome/zh-CN/locale/zh-CN/places/",
+        "calendar": "chrome/zh-CN/locale/zh-CN/calendar/",
+        "global": "chrome/zh-CN/locale/zh-CN/global/",
+        "devtools": "chrome/zh-CN/locale/zh-CN/devtools/client/",
+        "communicator": "chrome/zh-CN/locale/zh-CN/communicator/",
+        "lightning": "chrome/zh-CN/locale/zh-CN/lightning/",
+        "pipnss": "chrome/zh-CN/locale/zh-CN/pipnss/",
+        "alerts": "chrome/zh-CN/locale/zh-CN/alerts/",
+        "chat": "chrome/zh-CN/locale/zh-CN/chat/",
+        "autoconfig": "chrome/zh-CN/locale/zh-CN/autoconfig/",
+        "devtools-shared": "chrome/zh-CN/locale/zh-CN/devtools/shared/",
+        "necko": "chrome/zh-CN/locale/zh-CN/necko/",
+        "passwordmgr": "chrome/zh-CN/locale/zh-CN/passwordmgr/",
+        "messenger-mapi": "chrome/zh-CN/locale/zh-CN/messenger-mapi/"
+      }
+    }
+  },
+  "name": "Chinese Simplified (zh-CN) Language Pack",
+  "description": "Language pack for Thunderbird for zh-CN",
+  "version": "78.0buildid20210901192859",
+  "author": "mozilla.org (contributors: Wen Shaohua)",
+  "manifest_version": 2,
+  "applications": {
+    "gecko": {
+      "id": "langpack-zh-CN@thunderbird.mozilla.org",
+      "strict_max_version": "78.*",
+      "strict_min_version": "78.0"
+    }
+  },
+  "sources": {
+    "browser": {
+      "base_path": "browser/"
+    }
+  },
+  "langpack_id": "zh-CN"
+}

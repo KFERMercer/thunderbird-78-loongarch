@@ -1,0 +1,692 @@
+/* - This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this file,
+   - You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+@namespace html url("http://www.w3.org/1999/xhtml");
+
+:root {
+  --in-content-categories-background: #ebebef;
+  --in-content-warning-container: var(--grey-20);
+  --in-content-item-selected-unfocused: var(--grey-20);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --in-content-categories-background: rgba(249,249,250,0.1);
+    --in-content-warning-container: var(--grey-90-a30);
+    --in-content-item-selected-unfocused: rgba(249,249,250,0.05);
+  }
+}
+
+#MailPreferences {
+  -moz-appearance: none;
+  font: message-box;
+  background-color: var(--in-content-page-background);
+  color: var(--in-content-page-color);
+}
+
+#prefBox {
+  position: relative;
+}
+
+#pref-category-box {
+  background-color: var(--in-content-categories-background);
+  width: 240px;
+}
+
+/*
+  The stack has some very tall content but it shouldn't be taller than the
+  viewport (and we know the tall content will still be accessible via scrollbars
+  regardless if the stack has a shorter height). So we use min-height: 0 to allow
+  the stack to be smaller than its content height so it can fit the viewport size.
+*/
+#preferences-stack {
+  min-height: 0;
+}
+
+.main-content {
+  padding: 0;
+}
+
+/**
+ * The first subcategory title for each category should not have margin-top.
+ */
+
+.subcategory:not([hidden]) ~ .subcategory {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--in-content-border-color);
+}
+
+fieldset[data-category] {
+  margin: 0 0 32px;
+  padding: 0;
+}
+
+html|h1 {
+  margin: 0 0 8px;
+  font-size: 1.46em;
+  font-weight: 300;
+  line-height: 1.3em;
+}
+
+html|legend {
+  margin: 16px 0 4px;
+  font-size: 1.1em;
+  font-weight: 600;
+  line-height: 1.4em;
+}
+
+html|th {
+  font-weight: normal;
+  text-align: start;
+}
+
+description,
+label {
+  line-height: 1.8em;
+  margin: 0;
+}
+
+#preferencesContainer {
+  padding: 0 28px 40px;
+  overflow: auto;
+}
+
+.paneDeckContainer {
+  display: block;
+  width: 800px;
+}
+
+.sticky-container {
+  width: 100%;
+  position: sticky;
+  background-color: var(--in-content-page-background);
+  top: 0;
+  z-index: 1;
+  padding-inline: 4px;
+}
+
+#searchInput {
+  min-height: 32px;
+  margin: 20px 0 30px;
+}
+
+#paneDeck {
+  width: 100%;
+}
+
+.search-tooltip {
+  max-width: 150px;
+  font-size: 1.25rem;
+  position: absolute;
+  padding: 0 10px;
+  background-color: #ffe900;
+  color: #000;
+  border: 1px solid #d7b600;
+  bottom: 36px;
+  opacity: 0.85;
+}
+
+.search-tooltip:hover {
+  opacity: 0.1;
+}
+
+.search-tooltip::before {
+  position: absolute;
+  content: "";
+  border: 7px solid transparent;
+  border-top-color: #d7b600;
+  top: 100%;
+  inset-inline-start: calc(50% - 7px);
+}
+
+.search-tooltip::after {
+  position: absolute;
+  content: "";
+  border: 6px solid transparent;
+  border-top-color: #ffe900;
+  top: 100%;
+  inset-inline-start: calc(50% - 6px);
+}
+
+.search-tooltip-parent {
+  position: relative;
+}
+
+.search-tooltip > span {
+  -moz-user-select: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.visually-hidden {
+  visibility: collapse;
+}
+
+tabpanel > label,
+tabpanel > description,
+tabpanel > hbox > description {
+  margin-inline-start: 0;
+}
+
+/* Web search menulist */
+#defaultWebSearch::part(icon) {
+  margin-inline: 5px 8px;
+  width: 16px;
+  height: 16px;
+}
+
+/* Category List */
+
+#categories {
+  overflow: visible !important; /* Cancel scrollbar and do not clip overflow content when window size goes very small */
+  padding: 1px; /* Adding padding around richlistitem in order to make entire keyboard focusing outline visible */
+}
+
+.paneSelector {
+  padding: 71px 0 0;
+  margin: 0;
+}
+
+radio[pane] {
+  -moz-box-orient: horizontal;
+  -moz-box-align: center;
+  -moz-appearance: none;
+  width: 240px;
+  color: var(--in-content-text-color);
+  border-right-width: 0;
+  border-left-width: 0;
+  border-radius: 2px;
+  border-end-end-radius: 0;
+  border-start-end-radius: 0;
+  margin-block: 0;
+  margin-inline: 34px 0;
+  padding: 5px 10px;
+  min-height: 42px;
+  outline-offset: -1px;
+  transition: background-color 150ms;
+}
+
+radio[pane][selected] {
+  color: var(--in-content-category-text-selected);
+  background: none;
+}
+
+radio[pane]:not([selected]):hover {
+  background: var(--in-content-category-background-hover);
+}
+
+radio[pane][selected]:hover {
+  background-color: var(--in-content-category-background-selected-hover);
+}
+
+radio[pane]:hover:active {
+  color: var(--in-content-category-text-selected-active);
+  background-color: var(--in-content-category-background-selected-active);
+}
+
+.sidebar-footer-link:hover,
+.sidebar-footer-button > .text-link:hover {
+  border-end-end-radius: 0;
+  border-start-end-radius: 0;
+}
+
+.paneSelector[focused="true"][keyboard-navigation="true"] > radio[pane][focused="true"] {
+  outline: var(--in-content-category-outline-focus);
+}
+
+radio[pane]:hover::before,
+radio[pane][selected]::before {
+  display: none;
+}
+
+radio[pane] > .radio-label-box {
+  line-height: 22px;
+  padding-bottom: 2px;
+  padding-inline-start: 9px;
+  margin: 0;
+  -moz-user-select: none;
+}
+
+radio[pane][focused="true"] > .radio-label-box {
+  outline: none;
+}
+
+radio[pane] > .radio-label-box > .radio-label {
+  margin: 0;
+}
+
+radio[pane] > .radio-check {
+  width: 24px;
+  height: 24px;
+  border-width: 0;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+  margin-inline-end: 0;
+  -moz-image-region: auto;
+  -moz-context-properties: fill, fill-opacity;
+  fill: currentColor;
+  fill-opacity: 0.8;
+}
+
+radio[pane][selected] > .radio-check {
+  fill-opacity: 1;
+}
+
+@media (max-width: 830px) {
+  #pref-category-box {
+    width: 118px;
+  }
+
+  radio[pane] > .radio-label-box {
+    display: none;
+  }
+
+  radio[pane] {
+    min-width: 44px;
+    padding-inline-start: 13px; /* make icons align center */
+    margin-inline-end: 35px;
+  }
+
+  #preferencesContainer {
+    padding-inline: 15px;
+  }
+}
+
+#category-general > .category-icon {
+  list-style-image: url("chrome://messenger/skin/shared/preferences/general.svg");
+}
+
+#category-privacy > .category-icon {
+  list-style-image: url("chrome://messenger/skin/shared/preferences/security.svg");
+}
+
+#category-compose > .category-icon {
+  list-style-image: url("chrome://messenger/skin/icons/newmsg.svg");
+}
+
+#category-chat > .category-icon {
+  list-style-image: url("chrome://messenger/skin/shared/preferences/chat.svg");
+}
+
+#category-calendar > .category-icon {
+  list-style-image: url("chrome://messenger/skin/shared/preferences/calendar.svg");
+}
+
+html|input[type="number"] {
+  margin-inline-start: 4px;
+  padding: 1px;
+}
+/* sizes: chars + 8px padding + 1px borders + spin buttons 25+2+10px  */
+html|input[type="number"].size2 {
+  width: calc(2ch + 55px);
+}
+html|input[type="number"].size3 {
+  width: calc(3ch + 55px);
+}
+html|input[type="number"].size4 {
+  width: calc(4ch + 55px);
+}
+html|input[type="number"].size5 {
+  width: calc(5ch + 55px);
+}
+
+html|input[type="number"]::-moz-number-spin-box {
+  margin-inline-start: 10px;
+}
+
+html|input[type="number"]::-moz-number-spin-up,
+html|input[type="number"]::-moz-number-spin-down {
+  -moz-appearance: none;
+  min-width: 25px;
+  border-color: var(--in-content-box-border-color);
+  background-color: var(--in-content-button-background);
+  background-position: center;
+  -moz-context-properties: fill;
+  fill: currentColor;
+}
+
+html|input[type="number"]::-moz-number-spin-up:hover,
+html|input[type="number"]::-moz-number-spin-down:hover {
+  background-color: var(--in-content-button-background-hover);
+}
+
+html|input[type="number"]::-moz-number-spin-up {
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  border-radius: 1px 1px 0 0;
+  background-image: url("chrome://global/skin/icons/arrow-up-12.svg");
+}
+
+html|input[type="number"]::-moz-number-spin-down {
+  border-radius: 0 0 1px 1px;
+  background-image: url("chrome://global/skin/icons/arrow-dropdown-12.svg");
+}
+
+separator.groove:not([orient="vertical"]) {
+  border-top-color: #c1c1c1;
+  border-bottom-width: 0;
+}
+
+tab:-moz-focusring {
+  outline: var(--in-content-category-outline-focus);
+}
+
+tab:-moz-focusring > .tab-middle {
+  outline: none;
+}
+
+#defaultWebSearchPopup > menuitem > .menu-iconic-left {
+  display: -moz-box;
+}
+
+/* Applications Pane Styles */
+
+#filter {
+  margin-inline: 0;
+}
+
+/* XXX This style is for bug 740213 and should be removed once that
+   bug has a solution. */
+description > html|a {
+  cursor: pointer;
+}
+#previewDeck {
+  height: 220px;
+}
+
+.indent,
+html|input.indent {
+  margin-inline-start: 33px;
+}
+
+.align-no-label {
+  margin-inline-start: 4px;
+}
+
+.tail-with-learn-more {
+  margin-inline-end: 10px;
+}
+
+.learnMore {
+  margin-inline-start: 0;
+  font-weight: normal;
+  white-space: nowrap;
+}
+
+.update-throbber {
+  width: 16px;
+  min-height: 16px;
+  margin-inline: 6px 4px;
+  list-style-image: url("chrome://global/skin/icons/loading.png");
+}
+
+@media (min-resolution: 1.1dppx) {
+  .update-throbber {
+    list-style-image: url("chrome://global/skin/icons/loading@2x.png");
+  }
+}
+
+.updateSettingCrossUserWarningContainer {
+  background: var(--in-content-warning-container);
+  border-radius: 5px;
+  padding: 2px 8px 8px;
+  margin-block-end: 17px;
+}
+
+#updateSettingCrossUserWarning {
+  padding-inline-start: 30px;
+  margin-block-start: 20px;
+  line-height: 20px;
+  background-image: url("chrome://messenger/skin/icons/info.svg");
+  background-position-x: left 2px;
+  background-position-y: top 2px;
+  background-size: 16px 16px;
+  background-repeat: no-repeat;
+  -moz-context-properties: fill;
+  fill: currentColor;
+}
+
+#updateSettingCrossUserWarning:-moz-locale-dir(rtl) {
+  background-position-x: right 2px;
+}
+
+#releasenotes {
+  margin-inline-start: 6px !important;
+}
+
+#telemetry-container {
+  border-radius: 4px;
+  background-color: rgba(12, 12, 13, 0.2);
+  font-size: 85%;
+  padding: 3px;
+  margin-block: 4px;
+  width: 100%;
+}
+
+#dataDescriptionBox {
+  line-height: 1.3em;
+}
+
+#submitHealthReportBox {
+  display: -moz-inline-box;
+}
+
+/* Remove the start margin to align these elements */
+#addCloudFileAccount,
+#chatStartupAction,
+#defaults-itemtype-menulist,
+#manageCertificatesButton {
+  margin-inline-start: 0;
+}
+
+/**
+ * Font dialog menulist fixes
+ */
+
+#fontsTitle {
+  margin-block: 4px;
+}
+
+#defaultFontType,
+#serif,
+#sans-serif,
+#monospace {
+  min-width: 30ch;
+}
+
+/**
+ * toolkit element overrides
+ */
+
+#preferencesContainer richlistbox {
+  -moz-appearance: none;
+  background-color: var(--in-content-box-background);
+  color: var(--in-content-text-color);
+}
+
+#preferencesContainer richlistbox richlistitem {
+  padding: 0.3em;
+  margin: 0;
+  border: none;
+  border-radius: 0;
+  background-image: none;
+}
+
+#containerBox richlistbox richlistitem:hover,
+#preferencesContainer richlistbox richlistitem:hover {
+  background-color: var(--in-content-item-hover);
+}
+
+#containerBox richlistitem[selected="true"],
+#preferencesContainer richlistitem[selected="true"] {
+  background-color: var(--in-content-item-selected-unfocused);
+  color: inherit;
+}
+
+#containerBox richlistbox:focus > richlistitem[selected="true"],
+#preferencesContainer richlistbox:focus > richlistitem[selected="true"] {
+  background-color: var(--in-content-item-selected);
+  color: var(--in-content-selected-text) !important;
+}
+
+#defaultWebSearch {
+  margin-inline: 0 4px;
+}
+
+#defaultFontSize,
+#directoriesList,
+#localDirectoriesList,
+#defaultStartupDirList {
+  margin-inline-end: 4px;
+}
+
+#messengerLanguagesDialogPane {
+  min-height: 360px;
+}
+
+#defaultMessengerLanguage {
+  margin-inline: 0 4px;
+  min-width: 20em;
+}
+
+#availableLocales {
+  margin-inline: 0;
+}
+
+#warning-message {
+  margin-top: 8px;
+}
+
+#warning-message > .message-bar-description {
+  width: 32em;
+}
+
+.action-button {
+  margin-inline-start: 8px;
+}
+
+#tagList,
+#categorieslist {
+  margin-inline-end: 4px;
+}
+
+#new-tag-button,
+#newCButton {
+  margin-top: 0;
+}
+
+/* Menulist styles */
+.label-item {
+  font-size: .8em;
+}
+
+.menu-iconic-icon {
+  -moz-context-properties: fill;
+  fill: currentColor;
+}
+
+#datePrefsBox {
+  display: grid;
+  grid-template-columns: auto 1fr 1fr;
+}
+
+/**
+ * Dialog
+ */
+
+.dialogOverlay {
+  visibility: hidden;
+}
+.dialogOverlay[topmost="true"] {
+  background-color: rgba(0,0,0,0.5);
+}
+
+.dialogBox {
+  -moz-appearance: none;
+  background-color: var(--in-content-page-background);
+  color: var(--in-content-page-color);
+  /* `transparent` will use the dialogText color in high-contrast themes and
+     when page colors are disabled */
+  border: 1px solid transparent;
+  border-radius: 2.5px;
+  box-shadow: 0 2px 4px 0 rgba(0,0,0,0.5);
+  display: -moz-box;
+  margin: 0;
+  padding: 0;
+}
+
+.dialogBox[resizable="true"] {
+  resize: both;
+  overflow: hidden;
+  min-height: 20em;
+  min-width: 66ch;
+}
+
+.dialogTitleBar {
+  margin-top: 0;
+  padding: 3.5px 0;
+  background-color: var(--in-content-dialog-header-background);
+  border-bottom: 1px solid var(--in-content-border-color);
+}
+
+.dialogTitle {
+  font-size: 1.026em;
+  font-weight: 600;
+  text-align: center;
+}
+
+.close-icon {
+  border: none;
+  background: none !important;
+  min-width: 0;
+  min-height: auto;
+  padding-inline: 0;
+  margin-inline: 0 8px;
+}
+
+.dialogFrame {
+  margin: 20px;
+  -moz-box-flex: 1;
+  /* Default dialog dimensions */
+  height: 12em;
+  width: 40ch;
+}
+
+.largeDialogContainer.doScroll {
+  overflow-y: auto;
+  -moz-box-flex: 1;
+}
+
+/**
+ * End Dialog
+ */
+
+
+/**
+ * Connection dialog
+ */
+
+#proxy-grid,
+#dnsOverHttps-grid {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+}
+
+.proxy-grid-row:not([hidden]),
+.dnsOverHttps-grid-row:not([hidden]) {
+  display: contents;
+}
+
+#proxy-grid > .thin {
+  grid-column: span 2;
+  height: 20px;
+}
+
+/**
+ * End connection dialog
+ */

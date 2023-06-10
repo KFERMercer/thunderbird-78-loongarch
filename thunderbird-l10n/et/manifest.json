@@ -1,0 +1,57 @@
+{
+  "langpack_id": "et",
+  "languages": {
+    "et": {
+      "version": "20200828121020",
+      "chrome_resources": {
+        "mozapps": "chrome/et/locale/et/mozapps/",
+        "messenger-region": "chrome/et/locale/et/messenger-region/",
+        "devtools-startup": "chrome/et/locale/et/devtools/startup/",
+        "mozldap": "chrome/et/locale/et/mozldap/",
+        "messenger-mapi": "chrome/et/locale/et/messenger-mapi/",
+        "devtools-shared": "chrome/et/locale/et/devtools/shared/",
+        "passwordmgr": "chrome/et/locale/et/passwordmgr/",
+        "alerts": "chrome/et/locale/et/alerts/",
+        "chat": "chrome/et/locale/et/chat/",
+        "pipnss": "chrome/et/locale/et/pipnss/",
+        "communicator": "chrome/et/locale/et/communicator/",
+        "places": "chrome/et/locale/et/places/",
+        "pippki": "chrome/et/locale/et/pippki/",
+        "pluginproblem": "chrome/et/locale/et/pluginproblem/",
+        "devtools": "chrome/et/locale/et/devtools/client/",
+        "messenger-smime": "chrome/et/locale/et/messenger-smime/",
+        "global-platform": {
+          "macosx": "chrome/et/locale/et/global-platform/mac/",
+          "linux": "chrome/et/locale/et/global-platform/unix/",
+          "android": "chrome/et/locale/et/global-platform/unix/",
+          "win": "chrome/et/locale/et/global-platform/win/"
+        },
+        "messenger-newsblog": "chrome/et/locale/et/messenger-newsblog/",
+        "lightning": "chrome/et/locale/et/lightning/",
+        "autoconfig": "chrome/et/locale/et/autoconfig/",
+        "messenger": "chrome/et/locale/et/messenger/",
+        "calendar": "chrome/et/locale/et/calendar/",
+        "branding": "chrome/et/locale/et/branding/",
+        "global": "chrome/et/locale/et/global/",
+        "necko": "chrome/et/locale/et/necko/"
+      }
+    }
+  },
+  "applications": {
+    "gecko": {
+      "id": "langpack-et@thunderbird.mozilla.org",
+      "strict_max_version": "78.*",
+      "strict_min_version": "78.0"
+    }
+  },
+  "version": "78.0buildid20210901192859",
+  "author": "mozilla.org (contributors: Sander Lepik, Marek Laane, Ain Vagula)",
+  "manifest_version": 2,
+  "description": "Language pack for Thunderbird for et",
+  "sources": {
+    "browser": {
+      "base_path": "browser/"
+    }
+  },
+  "name": "Estonian Language Pack"
+}

@@ -1,0 +1,281 @@
+From: Carsten Schoenert <c.schoenert@t-online.de>
+Date: Sun, 24 Apr 2016 20:49:46 +0200
+Subject: adding missed HURD adoptions
+
+Based on https://lists.alioth.debian.org/pipermail/pkg-mozilla-maintainers/2016-April/027634.html
+---
+ ipc/chromium/src/base/platform_thread.h            |  2 +-
+ ipc/chromium/src/base/platform_thread_posix.cc     |  2 +-
+ ipc/chromium/src/base/port.h                       |  2 +-
+ ipc/chromium/src/base/process_util.h               |  2 +-
+ ipc/chromium/src/base/process_util_posix.cc        | 38 ++++++++++++
+ media/webrtc/signaling/src/sdp/sipcc/cpr_types.h   |  2 +-
+ media/webrtc/trunk/webrtc/build/build_config.h     |  6 +-
+ .../gtest/include/gtest/internal/gtest-port.h      | 67 ++++++++++++++++++++++
+ security/sandbox/chromium/build/build_config.h     |  4 +-
+ 9 files changed, 118 insertions(+), 7 deletions(-)
+
+diff --git a/ipc/chromium/src/base/platform_thread.h b/ipc/chromium/src/base/platform_thread.h
+index 42f4865..41e84dc 100644
+--- a/ipc/chromium/src/base/platform_thread.h
++++ b/ipc/chromium/src/base/platform_thread.h
+@@ -25,7 +25,7 @@ typedef void* PlatformThreadHandle;  // HANDLE
+ #  include <pthread.h>
+ typedef pthread_t PlatformThreadHandle;
+ #  if defined(OS_LINUX) || defined(OS_OPENBSD) || defined(OS_SOLARIS) || \
+-      defined(__GLIBC__)
++      defined(__GLIBC__) || defined(OS_HURD)
+ #    include <unistd.h>
+ typedef pid_t PlatformThreadId;
+ #  elif defined(OS_BSD)
+diff --git a/ipc/chromium/src/base/platform_thread_posix.cc b/ipc/chromium/src/base/platform_thread_posix.cc
+index 31b1592..609260e 100644
+--- a/ipc/chromium/src/base/platform_thread_posix.cc
++++ b/ipc/chromium/src/base/platform_thread_posix.cc
+@@ -56,7 +56,7 @@ PlatformThreadId PlatformThread::CurrentId() {
+ #else
+    return getpid();
+ #endif
+-#elif defined(OS_OPENBSD) || defined(OS_SOLARIS) || defined(__GLIBC__)
++#elif defined(OS_OPENBSD) || defined(OS_SOLARIS) || defined(__GLIBC__) || defined(OS_HURD)
+   return (intptr_t)(pthread_self());
+ #elif defined(OS_NETBSD)
+   return _lwp_self();
+diff --git a/ipc/chromium/src/base/port.h b/ipc/chromium/src/base/port.h
+index 9d78f52..d6176c8 100644
+--- a/ipc/chromium/src/base/port.h
++++ b/ipc/chromium/src/base/port.h
+@@ -58,7 +58,7 @@ namespace base {
+ // Define an OS-neutral wrapper for shared library entry points
+ #if defined(OS_WIN)
+ #  define API_CALL __stdcall
+-#elif defined(OS_LINUX) || defined(OS_MACOSX)
++#elif defined(OS_LINUX) || defined(OS_MACOSX) || defined(OS_HURD)
+ #  define API_CALL
+ #endif
+ 
+diff --git a/ipc/chromium/src/base/process_util.h b/ipc/chromium/src/base/process_util.h
+index 20e1174..7361b4c 100644
+--- a/ipc/chromium/src/base/process_util.h
++++ b/ipc/chromium/src/base/process_util.h
+@@ -15,7 +15,7 @@
+ #if defined(OS_WIN)
+ #  include <windows.h>
+ #  include <tlhelp32.h>
+-#elif defined(OS_LINUX) || defined(__GLIBC__)
++#elif defined(OS_LINUX) || defined(__GLIBC__) || defined(OS_HURD)
+ #  include <dirent.h>
+ #  include <limits.h>
+ #  include <sys/types.h>
+diff --git a/ipc/chromium/src/base/process_util_posix.cc b/ipc/chromium/src/base/process_util_posix.cc
+index 745e099..d4eaf28 100644
+--- a/ipc/chromium/src/base/process_util_posix.cc
++++ b/ipc/chromium/src/base/process_util_posix.cc
+@@ -143,6 +143,10 @@ void CloseSuperfluousFds(void* aCtx, bool (*aShouldPreserve)(void*, int)) {
+   static const rlim_t kSystemDefaultMaxFds = 1024;
+   // at least /dev/fd will exist
+   static const char kFDDir[] = "/dev/fd";
++#elif defined(OS_HURD)
++  static const rlim_t kSystemDefaultMaxFds = 1024;
++  // Currently always empty, but it exists
++  static const char kFDDir[] = "/dev/fd";
+ #endif
+ 
+   // Get the maximum number of FDs possible.
+@@ -205,6 +209,40 @@ void CloseSuperfluousFds(void* aCtx, bool (*aShouldPreserve)(void*, int)) {
+   }
+ }
+ 
++// Sets all file descriptors to close on exec except for stdin, stdout
++// and stderr.
++// TODO(agl): Remove this function. It's fundamentally broken for multithreaded
++// apps.
++void SetAllFDsToCloseOnExec() {
++#if defined(OS_LINUX) || defined(OS_SOLARIS)
++  const char fd_dir[] = "/proc/self/fd";
++#elif defined(OS_MACOSX) || defined(OS_BSD) || defined(OS_HURD)
++  const char fd_dir[] = "/dev/fd";
++#endif
++  ScopedDIR dir_closer(opendir(fd_dir));
++  DIR *dir = dir_closer.get();
++  if (NULL == dir) {
++    DLOG(ERROR) << "Unable to open " << fd_dir;
++    return;
++  }
++
++  struct dirent *ent;
++  while ((ent = readdir(dir))) {
++    // Skip . and .. entries.
++    if (ent->d_name[0] == '.')
++      continue;
++    int i = atoi(ent->d_name);
++    // We don't close stdin, stdout or stderr.
++    if (i <= STDERR_FILENO)
++      continue;
++
++    int flags = fcntl(i, F_GETFD);
++    if ((flags == -1) || (fcntl(i, F_SETFD, flags | FD_CLOEXEC) == -1)) {
++      DLOG(ERROR) << "fcntl failure.";
++    }
++  }
++}
++
+ bool DidProcessCrash(bool* child_exited, ProcessHandle handle) {
+ #ifdef MOZ_ENABLE_FORKSERVER
+   // We only know if a process exists, but not if it has crashed.
+diff --git a/media/webrtc/signaling/src/sdp/sipcc/cpr_types.h b/media/webrtc/signaling/src/sdp/sipcc/cpr_types.h
+index f048e72..8bb0b59 100644
+--- a/media/webrtc/signaling/src/sdp/sipcc/cpr_types.h
++++ b/media/webrtc/signaling/src/sdp/sipcc/cpr_types.h
+@@ -7,7 +7,7 @@
+ 
+ #include <inttypes.h>
+ 
+-#if defined SIP_OS_LINUX
++#if defined SIP_OS_LINUX || defined(SIP_OS_HURD)
+ #include "cpr_linux_types.h"
+ #elif defined SIP_OS_WINDOWS
+ #include "cpr_win_types.h"
+diff --git a/media/webrtc/trunk/webrtc/build/build_config.h b/media/webrtc/trunk/webrtc/build/build_config.h
+index 229d1f4..9654654 100644
+--- a/media/webrtc/trunk/webrtc/build/build_config.h
++++ b/media/webrtc/trunk/webrtc/build/build_config.h
+@@ -37,6 +37,9 @@
+ #elif defined(_WIN32)
+ #define OS_WIN 1
+ #define TOOLKIT_VIEWS 1
++#elif defined(__GNU__)
++#define OS_HURD 1
++#define TOOLKIT_GTK
+ #elif defined(__DragonFly__)
+ #define OS_DRAGONFLY 1
+ #define TOOLKIT_GTK
+@@ -70,7 +73,8 @@
+ // For access to standard POSIXish features, use OS_POSIX instead of a
+ // more specific macro.
+ #if defined(OS_MACOSX) || defined(OS_LINUX) || defined(OS_BSD) ||	\
+-    defined(OS_SOLARIS) || defined(OS_ANDROID) || defined(OS_NACL)
++    defined(OS_SOLARIS) || defined(OS_ANDROID) || defined(OS_NACL) ||   \
++    defined(OS_HURD)
+ #define OS_POSIX 1
+ #endif
+ 
+diff --git a/security/nss/gtests/google_test/gtest/include/gtest/internal/gtest-port.h b/security/nss/gtests/google_test/gtest/include/gtest/internal/gtest-port.h
+index 786497d..2f2cbb6 100644
+--- a/security/nss/gtests/google_test/gtest/include/gtest/internal/gtest-port.h
++++ b/security/nss/gtests/google_test/gtest/include/gtest/internal/gtest-port.h
+@@ -310,6 +310,64 @@
+     (__GNUC__*10000 + __GNUC_MINOR__*100 + __GNUC_PATCHLEVEL__)
+ #endif  // __GNUC__
+ 
++// Determines the platform on which Google Test is compiled.
++#ifdef __CYGWIN__
++# define GTEST_OS_CYGWIN 1
++#elif defined __SYMBIAN32__
++# define GTEST_OS_SYMBIAN 1
++#elif defined _WIN32
++# define GTEST_OS_WINDOWS 1
++# ifdef _WIN32_WCE
++#  define GTEST_OS_WINDOWS_MOBILE 1
++# elif defined(__MINGW__) || defined(__MINGW32__)
++#  define GTEST_OS_WINDOWS_MINGW 1
++# elif defined(WINAPI_FAMILY)
++#  include <winapifamily.h>
++#  if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
++#   define GTEST_OS_WINDOWS_DESKTOP 1
++#  elif WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_PHONE_APP)
++#   define GTEST_OS_WINDOWS_PHONE 1
++#  elif WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)
++#   define GTEST_OS_WINDOWS_RT 1
++#  else
++    // WINAPI_FAMILY defined but no known partition matched.
++    // Default to desktop.
++#   define GTEST_OS_WINDOWS_DESKTOP 1
++#  endif
++# else
++#  define GTEST_OS_WINDOWS_DESKTOP 1
++# endif  // _WIN32_WCE
++#elif defined __APPLE__
++# define GTEST_OS_MAC 1
++# if TARGET_OS_IPHONE
++#  define GTEST_OS_IOS 1
++#  if TARGET_IPHONE_SIMULATOR
++#   define GTEST_OS_IOS_SIMULATOR 1
++#  endif
++# endif
++#elif defined __linux__
++# define GTEST_OS_LINUX 1
++# if defined __ANDROID__
++#  define GTEST_OS_LINUX_ANDROID 1
++# endif
++#elif defined __MVS__
++# define GTEST_OS_ZOS 1
++#elif defined(__sun) && defined(__SVR4)
++# define GTEST_OS_SOLARIS 1
++#elif defined(_AIX)
++# define GTEST_OS_AIX 1
++#elif defined(__hpux)
++# define GTEST_OS_HPUX 1
++#elif defined __native_client__
++# define GTEST_OS_NACL 1
++#elif defined __OpenBSD__
++# define GTEST_OS_OPENBSD 1
++#elif defined __QNX__
++# define GTEST_OS_QNX 1
++#elif defined(__GNU__)
++# define GTEST_OS_HURD 1
++#endif  // __CYGWIN__
++
+ // Macros for disabling Microsoft Visual C++ warnings.
+ //
+ //   GTEST_DISABLE_MSC_WARNINGS_PUSH_(4800 4385)
+@@ -635,9 +693,14 @@ typedef struct _RTL_CRITICAL_SECTION GTEST_CRITICAL_SECTION;
+ //
+ // To disable threading support in Google Test, add -DGTEST_HAS_PTHREAD=0
+ // to your compiler flags.
++<<<<<<< HEAD
+ #define GTEST_HAS_PTHREAD                                             \
+   (GTEST_OS_LINUX || GTEST_OS_MAC || GTEST_OS_HPUX || GTEST_OS_QNX || \
+    GTEST_OS_FREEBSD || GTEST_OS_NACL || GTEST_OS_NETBSD || GTEST_OS_FUCHSIA)
++=======
++# define GTEST_HAS_PTHREAD (GTEST_OS_LINUX || GTEST_OS_MAC || GTEST_OS_HPUX \
++    || GTEST_OS_QNX || GTEST_OS_HURD)
++>>>>>>> 8e31d5a9318... adding missed HURD adoptions
+ #endif  // GTEST_HAS_PTHREAD
+ 
+ #if GTEST_HAS_PTHREAD
+@@ -828,8 +891,12 @@ typedef struct _RTL_CRITICAL_SECTION GTEST_CRITICAL_SECTION;
+      (GTEST_OS_MAC && !GTEST_OS_IOS) ||                         \
+      (GTEST_OS_WINDOWS_DESKTOP && _MSC_VER >= 1400) ||          \
+      GTEST_OS_WINDOWS_MINGW || GTEST_OS_AIX || GTEST_OS_HPUX || \
++<<<<<<< HEAD
+      GTEST_OS_OPENBSD || GTEST_OS_QNX || GTEST_OS_FREEBSD || \
+      GTEST_OS_NETBSD || GTEST_OS_FUCHSIA)
++=======
++     GTEST_OS_OPENBSD || GTEST_OS_QNX || GTEST_OS_HURD)
++>>>>>>> 8e31d5a9318... adding missed HURD adoptions
+ # define GTEST_HAS_DEATH_TEST 1
+ #endif
+ 
+diff --git a/security/sandbox/chromium/build/build_config.h b/security/sandbox/chromium/build/build_config.h
+index 4d1ba77..e34024e 100644
+--- a/security/sandbox/chromium/build/build_config.h
++++ b/security/sandbox/chromium/build/build_config.h
+@@ -47,6 +47,8 @@
+ // we really are using glibc, not uClibc pretending to be glibc
+ #define LIBC_GLIBC 1
+ #endif
++#elif defined(__GNU__)
++#define OS_HURD 1
+ #elif defined(_WIN32)
+ #define OS_WIN 1
+ #elif defined(__Fuchsia__)
+@@ -82,7 +84,7 @@
+ #if defined(OS_AIX) || defined(OS_ANDROID) || defined(OS_ASMJS) ||    \
+     defined(OS_FREEBSD) || defined(OS_LINUX) || defined(OS_MACOSX) || \
+     defined(OS_NACL) || defined(OS_NETBSD) || defined(OS_OPENBSD) ||  \
+-    defined(OS_QNX) || defined(OS_SOLARIS)
++    defined(OS_QNX) || defined(OS_SOLARIS) || defined(OS_HURD)
+ #define OS_POSIX 1
+ #endif
+ 

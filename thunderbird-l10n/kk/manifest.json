@@ -1,0 +1,57 @@
+{
+  "applications": {
+    "gecko": {
+      "strict_min_version": "78.0",
+      "strict_max_version": "78.*",
+      "id": "langpack-kk@thunderbird.mozilla.org"
+    }
+  },
+  "sources": {
+    "browser": {
+      "base_path": "browser/"
+    }
+  },
+  "langpack_id": "kk",
+  "description": "Language pack for Thunderbird for kk",
+  "languages": {
+    "kk": {
+      "version": "20200906174317",
+      "chrome_resources": {
+        "devtools-shared": "chrome/kk/locale/kk/devtools/shared/",
+        "devtools": "chrome/kk/locale/kk/devtools/client/",
+        "chat": "chrome/kk/locale/kk/chat/",
+        "places": "chrome/kk/locale/kk/places/",
+        "autoconfig": "chrome/kk/locale/kk/autoconfig/",
+        "passwordmgr": "chrome/kk/locale/kk/passwordmgr/",
+        "global": "chrome/kk/locale/kk/global/",
+        "lightning": "chrome/kk/locale/kk/lightning/",
+        "communicator": "chrome/kk/locale/kk/communicator/",
+        "messenger-mapi": "chrome/kk/locale/kk/messenger-mapi/",
+        "alerts": "chrome/kk/locale/kk/alerts/",
+        "mozldap": "chrome/kk/locale/kk/mozldap/",
+        "branding": "chrome/kk/locale/kk/branding/",
+        "pippki": "chrome/kk/locale/kk/pippki/",
+        "calendar": "chrome/kk/locale/kk/calendar/",
+        "messenger": "chrome/kk/locale/kk/messenger/",
+        "necko": "chrome/kk/locale/kk/necko/",
+        "messenger-smime": "chrome/kk/locale/kk/messenger-smime/",
+        "pipnss": "chrome/kk/locale/kk/pipnss/",
+        "pluginproblem": "chrome/kk/locale/kk/pluginproblem/",
+        "devtools-startup": "chrome/kk/locale/kk/devtools/startup/",
+        "mozapps": "chrome/kk/locale/kk/mozapps/",
+        "global-platform": {
+          "android": "chrome/kk/locale/kk/global-platform/unix/",
+          "win": "chrome/kk/locale/kk/global-platform/win/",
+          "macosx": "chrome/kk/locale/kk/global-platform/mac/",
+          "linux": "chrome/kk/locale/kk/global-platform/unix/"
+        },
+        "messenger-newsblog": "chrome/kk/locale/kk/messenger-newsblog/",
+        "messenger-region": "chrome/kk/locale/kk/messenger-region/"
+      }
+    }
+  },
+  "manifest_version": 2,
+  "version": "78.0buildid20210901192859",
+  "name": "Kazakh (KZ) Language Pack",
+  "author": "mozilla.org (contributors: Baurzhan Muftakhidinov, Timur Timirkhanov, Zhanbolat Satybaldinov)"
+}

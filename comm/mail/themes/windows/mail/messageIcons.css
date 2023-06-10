@@ -1,0 +1,43 @@
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+@import url("chrome://messenger/skin/shared/messageIcons.css");
+
+/* ..... junkStatus column ..... */
+
+.junkStatusHeader {
+  padding-inline-end: 3px;
+}
+
+/* ..... correspondent column ..... */
+
+#correspondentCol {
+  padding-inline-start: 20px;
+}
+
+/* ..... subject column ..... */
+
+#subjectCol {
+  padding-inline-start: 20px;
+}
+
+#subjectCol[primary="true"] {
+  padding-inline-start: 40px;
+}
+
+/* ..... read column ..... */
+
+treechildren::-moz-tree-image(unreadButtonColHeader) {
+  margin-inline-start: -2px;
+}
+
+@media (-moz-windows-default-theme: 0) {
+  #subjectCol {
+    padding-inline-start: 23px;
+  }
+
+  #subjectCol[primary="true"] {
+    padding-inline-start: 43px;
+  }
+}

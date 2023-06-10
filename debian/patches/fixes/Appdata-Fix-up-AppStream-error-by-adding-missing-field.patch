@@ -1,0 +1,21 @@
+From: Carsten Schoenert <c.schoenert@t-online.de>
+Date: Sun, 18 Oct 2020 08:39:44 +0200
+Subject: Appdata: Fix up AppStream error by adding missing field
+
+The AppStream data is missing the lauchable element.
+---
+ comm/mail/branding/thunderbird/net.thunderbird.Thunderbird.appdata.xml | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/comm/mail/branding/thunderbird/net.thunderbird.Thunderbird.appdata.xml b/comm/mail/branding/thunderbird/net.thunderbird.Thunderbird.appdata.xml
+index e34eba5..822a5af 100644
+--- a/comm/mail/branding/thunderbird/net.thunderbird.Thunderbird.appdata.xml
++++ b/comm/mail/branding/thunderbird/net.thunderbird.Thunderbird.appdata.xml
+@@ -2,6 +2,7 @@
+ <component type="desktop-application">
+   <id>net.thunderbird.Thunderbird</id>
+   <metadata_license>CC0-1.0</metadata_license>
++  <launchable type="desktop-id">thunderbird.desktop</launchable>
+   <name>Thunderbird</name>
+   <name xml:lang="de">Thunderbird</name>
+   <summary>Thunderbird is a free and open source email, newsfeed, chat, and calendaring client</summary>

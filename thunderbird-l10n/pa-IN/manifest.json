@@ -1,0 +1,57 @@
+{
+  "manifest_version": 2,
+  "version": "78.0buildid20210901192859",
+  "name": "Punjabi (Gurmukhi) Language Pack",
+  "description": "Language pack for Thunderbird for pa-IN",
+  "langpack_id": "pa-IN",
+  "author": "mozilla.org",
+  "languages": {
+    "pa-IN": {
+      "version": "20200902054856",
+      "chrome_resources": {
+        "global-platform": {
+          "win": "chrome/pa-IN/locale/pa-IN/global-platform/win/",
+          "android": "chrome/pa-IN/locale/pa-IN/global-platform/unix/",
+          "macosx": "chrome/pa-IN/locale/pa-IN/global-platform/mac/",
+          "linux": "chrome/pa-IN/locale/pa-IN/global-platform/unix/"
+        },
+        "chat": "chrome/pa-IN/locale/pa-IN/chat/",
+        "autoconfig": "chrome/pa-IN/locale/pa-IN/autoconfig/",
+        "devtools-shared": "chrome/pa-IN/locale/pa-IN/devtools/shared/",
+        "pippki": "chrome/pa-IN/locale/pa-IN/pippki/",
+        "branding": "chrome/pa-IN/locale/pa-IN/branding/",
+        "messenger-smime": "chrome/pa-IN/locale/pa-IN/messenger-smime/",
+        "calendar": "chrome/pa-IN/locale/pa-IN/calendar/",
+        "pluginproblem": "chrome/pa-IN/locale/pa-IN/pluginproblem/",
+        "messenger": "chrome/pa-IN/locale/pa-IN/messenger/",
+        "messenger-mapi": "chrome/pa-IN/locale/pa-IN/messenger-mapi/",
+        "mozldap": "chrome/pa-IN/locale/pa-IN/mozldap/",
+        "places": "chrome/pa-IN/locale/pa-IN/places/",
+        "global": "chrome/pa-IN/locale/pa-IN/global/",
+        "communicator": "chrome/pa-IN/locale/pa-IN/communicator/",
+        "passwordmgr": "chrome/pa-IN/locale/pa-IN/passwordmgr/",
+        "alerts": "chrome/pa-IN/locale/pa-IN/alerts/",
+        "pipnss": "chrome/pa-IN/locale/pa-IN/pipnss/",
+        "mozapps": "chrome/pa-IN/locale/pa-IN/mozapps/",
+        "messenger-region": "chrome/pa-IN/locale/pa-IN/messenger-region/",
+        "devtools-startup": "chrome/pa-IN/locale/pa-IN/devtools/startup/",
+        "lightning": "chrome/pa-IN/locale/pa-IN/lightning/",
+        "devtools": "chrome/pa-IN/locale/pa-IN/devtools/client/",
+        "messenger-newsblog": "chrome/pa-IN/locale/pa-IN/messenger-newsblog/",
+        "necko": "chrome/pa-IN/locale/pa-IN/necko/"
+      }
+    }
+  },
+  "applications": {
+    "gecko": {
+      "id": "langpack-pa-IN@thunderbird.mozilla.org",
+      "strict_min_version": "78.0",
+      "strict_max_version": "78.*"
+    }
+  },
+  "sources": {
+    "browser": {
+      "base_path": "browser/"
+    }
+  }
+}

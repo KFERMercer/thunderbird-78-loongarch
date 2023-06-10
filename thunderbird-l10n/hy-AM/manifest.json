@@ -1,0 +1,57 @@
+{
+  "applications": {
+    "gecko": {
+      "id": "langpack-hy-AM@thunderbird.mozilla.org",
+      "strict_max_version": "78.*",
+      "strict_min_version": "78.0"
+    }
+  },
+  "langpack_id": "hy-AM",
+  "name": "Armenian (AM) Language Pack",
+  "author": "haysoft.org (contributors: Hrant Ohanyan)",
+  "languages": {
+    "hy-AM": {
+      "chrome_resources": {
+        "mozldap": "chrome/hy-AM/locale/hy-AM/mozldap/",
+        "branding": "chrome/hy-AM/locale/hy-AM/branding/",
+        "pluginproblem": "chrome/hy-AM/locale/hy-AM/pluginproblem/",
+        "communicator": "chrome/hy-AM/locale/hy-AM/communicator/",
+        "autoconfig": "chrome/hy-AM/locale/hy-AM/autoconfig/",
+        "pippki": "chrome/hy-AM/locale/hy-AM/pippki/",
+        "devtools": "chrome/hy-AM/locale/hy-AM/devtools/client/",
+        "calendar": "chrome/hy-AM/locale/hy-AM/calendar/",
+        "alerts": "chrome/hy-AM/locale/hy-AM/alerts/",
+        "messenger": "chrome/hy-AM/locale/hy-AM/messenger/",
+        "devtools-startup": "chrome/hy-AM/locale/hy-AM/devtools/startup/",
+        "messenger-newsblog": "chrome/hy-AM/locale/hy-AM/messenger-newsblog/",
+        "messenger-mapi": "chrome/hy-AM/locale/hy-AM/messenger-mapi/",
+        "places": "chrome/hy-AM/locale/hy-AM/places/",
+        "devtools-shared": "chrome/hy-AM/locale/hy-AM/devtools/shared/",
+        "passwordmgr": "chrome/hy-AM/locale/hy-AM/passwordmgr/",
+        "global": "chrome/hy-AM/locale/hy-AM/global/",
+        "messenger-region": "chrome/hy-AM/locale/hy-AM/messenger-region/",
+        "messenger-smime": "chrome/hy-AM/locale/hy-AM/messenger-smime/",
+        "mozapps": "chrome/hy-AM/locale/hy-AM/mozapps/",
+        "necko": "chrome/hy-AM/locale/hy-AM/necko/",
+        "global-platform": {
+          "linux": "chrome/hy-AM/locale/hy-AM/global-platform/unix/",
+          "win": "chrome/hy-AM/locale/hy-AM/global-platform/win/",
+          "macosx": "chrome/hy-AM/locale/hy-AM/global-platform/mac/",
+          "android": "chrome/hy-AM/locale/hy-AM/global-platform/unix/"
+        },
+        "lightning": "chrome/hy-AM/locale/hy-AM/lightning/",
+        "pipnss": "chrome/hy-AM/locale/hy-AM/pipnss/",
+        "chat": "chrome/hy-AM/locale/hy-AM/chat/"
+      },
+      "version": "20200903160603"
+    }
+  },
+  "description": "Language pack for Thunderbird for hy-AM",
+  "sources": {
+    "browser": {
+      "base_path": "browser/"
+    }
+  },
+  "manifest_version": 2,
+  "version": "78.0buildid20210901192859"
+}

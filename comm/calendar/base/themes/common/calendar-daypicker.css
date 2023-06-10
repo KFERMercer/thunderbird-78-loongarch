@@ -1,0 +1,28 @@
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this file,
+ * You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+button.calendar-daypicker {
+  cursor: pointer;
+  margin: 0;
+}
+
+button.calendar-daypicker[mode="monthly-days"] {
+  min-width: 35px;
+  height: 15px;
+}
+
+button.calendar-daypicker[mode="daypicker-weekday"] {
+  min-width: 36px;
+  height: 32px;
+}
+
+hbox:last-child > button.calendar-daypicker:last-child[mode="monthly-days"] {
+  width: 140px;
+  height: 15px;
+}
+
+button.calendar-daypicker[checked="true"] {
+  background-color: Highlight !important;
+  color: HighlightText !important;
+}

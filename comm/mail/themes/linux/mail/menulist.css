@@ -1,0 +1,31 @@
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+@import url("chrome://messenger/content/menulist.css");
+@namespace html url("http://www.w3.org/1999/xhtml");
+
+menulist::part(text-input) {
+  padding: 2px 2px 3px;
+}
+
+menulist[is="menulist-editable"][editable="true"] {
+  -moz-appearance: textfield;
+  margin-inline-end: 2.4em;
+}
+
+menulist[is="menulist-editable"][editable="true"]::part(dropmarker) {
+  display: -moz-box;
+  width: 2em;
+  margin-top: -2px;
+  margin-bottom: -2px;
+  margin-inline-end: -2.4em;
+}
+
+menulist[is="menulist-editable"][editable="true"]::part(text-input) {
+  margin-inline-end: 6px;
+}
+
+menulist[open="true"]::part(text-input) {
+  color: -moz-FieldText;
+}

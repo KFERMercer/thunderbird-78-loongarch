@@ -1,0 +1,18 @@
+# The embedded libjpeg is libjpeg-turbo, not libjpeg.
+thunderbird: embedded-library usr/lib/thunderbird/libxul.so: libjpeg
+# Upstream code is not ready to use system library.
+#thunderbird: embedded-library usr/lib/thunderbird/libxul.so: srtp
+thunderbird: embedded-library usr/lib/thunderbird/libxul.so: libtheora
+# The embedded libpng is patched for APNG support.
+thunderbird: embedded-library usr/lib/thunderbird/libxul.so: libpng
+# We currently need to use the embedded libjsoncpp library.
+thunderbird: embedded-library usr/lib/thunderbird/libxul.so: libjsoncpp
+
+# This is a false positive, can be ignored.
+thunderbird: maintainer-script-supports-ancient-package-version postinst:74 5.0-1 (2011-08-03 < 2017-06-18)
+
+## Uncomment entries if NSPR4 and/or NSS3 are not available in the archive
+# NSPR isn't packaged in the required version yet
+#thunderbird: embedded-library usr/lib/thunderbird/libnspr4.so: nspr
+# NSS isn't packaged in the required version yet
+#thunderbird: embedded-library usr/lib/thunderbird/libnss3.so: nss

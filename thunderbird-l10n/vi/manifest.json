@@ -1,0 +1,57 @@
+{
+  "applications": {
+    "gecko": {
+      "id": "langpack-vi@thunderbird.mozilla.org",
+      "strict_min_version": "78.0",
+      "strict_max_version": "78.*"
+    }
+  },
+  "langpack_id": "vi",
+  "name": "Tiếng Việt Language Pack",
+  "version": "78.0buildid20210901192859",
+  "sources": {
+    "browser": {
+      "base_path": "browser/"
+    }
+  },
+  "languages": {
+    "vi": {
+      "chrome_resources": {
+        "messenger-mapi": "chrome/vi/locale/vi/messenger-mapi/",
+        "calendar": "chrome/vi/locale/vi/calendar/",
+        "messenger-region": "chrome/vi/locale/vi/messenger-region/",
+        "mozldap": "chrome/vi/locale/vi/mozldap/",
+        "pippki": "chrome/vi/locale/vi/pippki/",
+        "branding": "chrome/vi/locale/vi/branding/",
+        "places": "chrome/vi/locale/vi/places/",
+        "devtools-startup": "chrome/vi/locale/vi/devtools/startup/",
+        "chat": "chrome/vi/locale/vi/chat/",
+        "global-platform": {
+          "macosx": "chrome/vi/locale/vi/global-platform/mac/",
+          "win": "chrome/vi/locale/vi/global-platform/win/",
+          "linux": "chrome/vi/locale/vi/global-platform/unix/",
+          "android": "chrome/vi/locale/vi/global-platform/unix/"
+        },
+        "messenger-smime": "chrome/vi/locale/vi/messenger-smime/",
+        "devtools": "chrome/vi/locale/vi/devtools/client/",
+        "passwordmgr": "chrome/vi/locale/vi/passwordmgr/",
+        "pluginproblem": "chrome/vi/locale/vi/pluginproblem/",
+        "mozapps": "chrome/vi/locale/vi/mozapps/",
+        "global": "chrome/vi/locale/vi/global/",
+        "messenger-newsblog": "chrome/vi/locale/vi/messenger-newsblog/",
+        "lightning": "chrome/vi/locale/vi/lightning/",
+        "autoconfig": "chrome/vi/locale/vi/autoconfig/",
+        "messenger": "chrome/vi/locale/vi/messenger/",
+        "devtools-shared": "chrome/vi/locale/vi/devtools/shared/",
+        "alerts": "chrome/vi/locale/vi/alerts/",
+        "necko": "chrome/vi/locale/vi/necko/",
+        "communicator": "chrome/vi/locale/vi/communicator/",
+        "pipnss": "chrome/vi/locale/vi/pipnss/"
+      },
+      "version": "20200902060311"
+    }
+  },
+  "description": "Language pack for Thunderbird for vi",
+  "manifest_version": 2,
+  "author": "mozilla.org (contributors: Nguyễn Xuân Minh, Quế Tùng, Nguyễn Mạnh Hùng, Huỳnh Hải Đăng, Bùi Việt Khoa, Trần Nguyễn Sơn, Pierre Neter)"
+}

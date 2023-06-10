@@ -1,0 +1,57 @@
+{
+  "applications": {
+    "gecko": {
+      "id": "langpack-nn-NO@thunderbird.mozilla.org",
+      "strict_max_version": "78.*",
+      "strict_min_version": "78.0"
+    }
+  },
+  "name": "Norsk (nynorsk) Language Pack",
+  "description": "Language pack for Thunderbird for nn-NO",
+  "author": "firefox.no (contributors: Kurt-Rune Bergset, Eirik Ulltang Birkeland, Håvar Henriksen, Torstein Hønsi, Erik Klepsvik, Håvard Mork, Jan-Espen Pettersen, Tom Ottar Røw, Åsmund Skjæveland, Pascual Strømsnæs, Vebjørn Sture, Kristian Svanes, Bjørn I. Svindseth, Ronny Vårdal)",
+  "languages": {
+    "nn-NO": {
+      "version": "20200906090659",
+      "chrome_resources": {
+        "devtools": "chrome/nn-NO/locale/nn-NO/devtools/client/",
+        "autoconfig": "chrome/nn-NO/locale/nn-NO/autoconfig/",
+        "communicator": "chrome/nn-NO/locale/nn-NO/communicator/",
+        "messenger": "chrome/nn-NO/locale/nn-NO/messenger/",
+        "messenger-mapi": "chrome/nn-NO/locale/nn-NO/messenger-mapi/",
+        "necko": "chrome/nn-NO/locale/nn-NO/necko/",
+        "global": "chrome/nn-NO/locale/nn-NO/global/",
+        "branding": "chrome/nn-NO/locale/nn-NO/branding/",
+        "mozldap": "chrome/nn-NO/locale/nn-NO/mozldap/",
+        "lightning": "chrome/nn-NO/locale/nn-NO/lightning/",
+        "messenger-smime": "chrome/nn-NO/locale/nn-NO/messenger-smime/",
+        "pluginproblem": "chrome/nn-NO/locale/nn-NO/pluginproblem/",
+        "devtools-startup": "chrome/nn-NO/locale/nn-NO/devtools/startup/",
+        "calendar": "chrome/nn-NO/locale/nn-NO/calendar/",
+        "pippki": "chrome/nn-NO/locale/nn-NO/pippki/",
+        "chat": "chrome/nn-NO/locale/nn-NO/chat/",
+        "pipnss": "chrome/nn-NO/locale/nn-NO/pipnss/",
+        "messenger-newsblog": "chrome/nn-NO/locale/nn-NO/messenger-newsblog/",
+        "global-platform": {
+          "linux": "chrome/nn-NO/locale/nn-NO/global-platform/unix/",
+          "win": "chrome/nn-NO/locale/nn-NO/global-platform/win/",
+          "android": "chrome/nn-NO/locale/nn-NO/global-platform/unix/",
+          "macosx": "chrome/nn-NO/locale/nn-NO/global-platform/mac/"
+        },
+        "alerts": "chrome/nn-NO/locale/nn-NO/alerts/",
+        "messenger-region": "chrome/nn-NO/locale/nn-NO/messenger-region/",
+        "passwordmgr": "chrome/nn-NO/locale/nn-NO/passwordmgr/",
+        "devtools-shared": "chrome/nn-NO/locale/nn-NO/devtools/shared/",
+        "mozapps": "chrome/nn-NO/locale/nn-NO/mozapps/",
+        "places": "chrome/nn-NO/locale/nn-NO/places/"
+      }
+    }
+  },
+  "langpack_id": "nn-NO",
+  "sources": {
+    "browser": {
+      "base_path": "browser/"
+    }
+  },
+  "version": "78.0buildid20210901192859",
+  "manifest_version": 2
+}

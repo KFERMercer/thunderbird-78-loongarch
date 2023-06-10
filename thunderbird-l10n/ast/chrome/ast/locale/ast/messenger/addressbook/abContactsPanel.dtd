@@ -1,0 +1,49 @@
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+
+
+<!ENTITY addressbookPicker.label            "Llibreta de direiciones:">
+<!ENTITY addressbookPicker.accesskey        "L">
+<!ENTITY SearchNameOrEmail.label            "Nome o direición de corréu">
+
+<!ENTITY addtoToFieldMenu.label             "Amestar a campu Pa">
+<!ENTITY addtoToFieldMenu.accesskey         "P">
+<!ENTITY addtoCcFieldMenu.label             "Amestar a campu Cc">
+<!ENTITY addtoCcFieldMenu.accesskey         "C">
+<!ENTITY addtoBccFieldMenu.label            "Amestar a campu CCt">
+<!ENTITY addtoBccFieldMenu.accesskey        "t">
+<!ENTITY deleteAddrBookCard.label           "Desaniciar">
+<!ENTITY deleteAddrBookCard.accesskey       "D">
+
+<!ENTITY toButton.label                     "Amestar a Pa:">
+<!ENTITY toButton.accesskey                 "A">
+<!ENTITY ccButton.label                     "Amestar a Cc:">
+<!ENTITY ccButton.accesskey                 "s">
+<!ENTITY bccButton.label                    "Amestar a Cct:">
+<!ENTITY bccButton.accesskey                "t">
+
+<!ENTITY propertiesMenu.label               "Properties">
+<!ENTITY propertiesMenu.accesskey           "i">
+<!ENTITY propertiesCmd.key                  "i">
+<!ENTITY abPropertiesMenu.label             "Address Book Properties">
+<!ENTITY abPropertiesMenu.accesskey         "i">
+<!ENTITY contactPropertiesMenu.label        "Contact Properties">
+<!ENTITY contactPropertiesMenu.accesskey    "i">
+<!ENTITY mailingListPropertiesMenu.label    "Mailing List Properties">
+<!ENTITY mailingListPropertiesMenu.accesskey "i">
+<!ENTITY abContextMenuButton.tooltip        "Display Address Book Context Menu">
+<!ENTITY searchContacts.label               "Search Contacts:">
+<!ENTITY searchContacts.accesskey           "n">
+<!ENTITY propertiesContext.label            "Properties">
+<!ENTITY propertiesContext.accesskey        "i">
+<!ENTITY abPropertiesContext.label          "Properties">
+<!ENTITY abPropertiesContext.accesskey      "i">
+<!ENTITY editContactContext.label           "Edit Contact">
+<!ENTITY editContactContext.accesskey       "E">
+<!ENTITY editMailingListContext.label       "Edit List">
+<!ENTITY editMailingListContext.accesskey   "E">
+<!ENTITY newContactAbContext.label          "New Contact">
+<!ENTITY newContactAbContext.accesskey      "C">
+<!ENTITY newListAbContext.label             "New List">
+<!ENTITY newListAbContext.accesskey         "L">

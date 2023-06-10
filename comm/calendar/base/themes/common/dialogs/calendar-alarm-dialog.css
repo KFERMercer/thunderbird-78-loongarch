@@ -1,0 +1,110 @@
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this file,
+ * You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+#calendar-alarm-dialog[lwt-tree]  {
+  background-color: var(--lwt-accent-color);
+  color: var(--lwt-text-color);
+}
+
+/* Alarm dialog styles */
+#alarm-richlist {
+    margin: 10px;
+    text-shadow: none;
+}
+
+#alarm-actionbar {
+    min-width: 1px;
+    margin: 0 5px 10px;
+}
+
+/* Alarm widget specific styles */
+richlistitem[is="calendar-alarm-widget-richlistitem"] {
+    border-bottom: 1px dotted ThreeDShadow;
+    padding: 6px 7px;
+}
+
+richlistitem[is="calendar-alarm-widget-richlistitem"][selected="true"] {
+    padding: 0 5px;
+}
+
+richlistitem[is="calendar-alarm-widget-richlistitem"][selected="true"] .alarm-title-label {
+   font-weight: bold;
+}
+
+richlistitem[is="calendar-alarm-widget-richlistitem"][selected="true"] .alarm-action-buttons {
+    display: -moz-box;
+    color: var(--field-text-color);
+}
+
+richlistitem[is="calendar-alarm-widget-richlistitem"][selected="true"] > hbox {
+    margin: 5px;
+}
+
+richlistitem[is="calendar-alarm-widget-richlistitem"][selected="true"] .alarm-relative-date-label,
+.additional-information-box,
+.alarm-action-buttons {
+    display: none;
+}
+
+richlistitem[is="calendar-alarm-widget-richlistitem"][selected="true"] .additional-information-box,
+richlistitem[is="calendar-alarm-widget-richlistitem"][selected="true"] .action-buttons-box {
+    display: -moz-box;
+}
+
+.alarm-details-label {
+    color: inherit !important;
+    text-decoration: underline;
+}
+
+richlistitem[is="calendar-alarm-widget-richlistitem"][selected="true"] .alarm-calendar-image {
+    -moz-context-properties: fill;
+    fill: currentColor;
+    list-style-image: url(chrome://calendar/skin/shared/icons/icon32.svg);
+    margin-top: 2px;
+}
+
+.snooze-popup-button {
+    min-width: 0;
+    -moz-appearance: none;
+    -moz-context-properties: fill;
+    fill: currentColor;
+}
+
+.snooze-popup-button:hover {
+    background-color: var(--button-background-hover);
+}
+
+.snooze-popup-ok-button {
+    list-style-image: url(chrome://calendar/skin/shared/icons/complete.svg);
+}
+
+.snooze-popup-cancel-button {
+    list-style-image: url(chrome://calendar/skin/shared/icons/decline.svg);
+}
+
+.snooze-popup-button > .button-box > .button-icon {
+    margin: 0;
+}
+
+.snooze-popup-button > .button-box {
+    border: 0;
+    padding: 0;
+    -moz-box-pack: center;
+    -moz-box-align: center;
+}
+
+.snooze-popup-button:focus > .button-box {
+    border: 1px dotted ThreeDDarkShadow;
+    padding: 0;
+}
+
+:root[lwt-tree] #alarm-snooze-all-popup,
+:root[lwt-tree] menupopup[is="calendar-snooze-popup"] {
+  -moz-appearance: none;
+  border: 1px solid var(--box-border-color);
+  border-radius: var(--button-border-radius);
+  background-color: var(--box-background-color);
+  color: var(--box-text-color);
+}
+

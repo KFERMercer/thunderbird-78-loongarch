@@ -1,0 +1,57 @@
+{
+  "description": "Language pack for Thunderbird for en-CA",
+  "sources": {
+    "browser": {
+      "base_path": "browser/"
+    }
+  },
+  "author": "mozilla.org (contributors: Kohei Yoshino)",
+  "manifest_version": 2,
+  "version": "78.0buildid20210901192859",
+  "langpack_id": "en-CA",
+  "languages": {
+    "en-CA": {
+      "version": "20200902133413",
+      "chrome_resources": {
+        "calendar": "chrome/en-CA/locale/en-CA/calendar/",
+        "branding": "chrome/en-CA/locale/en-CA/branding/",
+        "places": "chrome/en-CA/locale/en-CA/places/",
+        "chat": "chrome/en-CA/locale/en-CA/chat/",
+        "global": "chrome/en-CA/locale/en-CA/global/",
+        "pipnss": "chrome/en-CA/locale/en-CA/pipnss/",
+        "devtools-startup": "chrome/en-CA/locale/en-CA/devtools/startup/",
+        "messenger-mapi": "chrome/en-CA/locale/en-CA/messenger-mapi/",
+        "mozapps": "chrome/en-CA/locale/en-CA/mozapps/",
+        "necko": "chrome/en-CA/locale/en-CA/necko/",
+        "pluginproblem": "chrome/en-CA/locale/en-CA/pluginproblem/",
+        "messenger": "chrome/en-CA/locale/en-CA/messenger/",
+        "devtools": "chrome/en-CA/locale/en-CA/devtools/client/",
+        "alerts": "chrome/en-CA/locale/en-CA/alerts/",
+        "messenger-region": "chrome/en-CA/locale/en-CA/messenger-region/",
+        "lightning": "chrome/en-CA/locale/en-CA/lightning/",
+        "devtools-shared": "chrome/en-CA/locale/en-CA/devtools/shared/",
+        "pippki": "chrome/en-CA/locale/en-CA/pippki/",
+        "autoconfig": "chrome/en-CA/locale/en-CA/autoconfig/",
+        "global-platform": {
+          "macosx": "chrome/en-CA/locale/en-CA/global-platform/mac/",
+          "linux": "chrome/en-CA/locale/en-CA/global-platform/unix/",
+          "win": "chrome/en-CA/locale/en-CA/global-platform/win/",
+          "android": "chrome/en-CA/locale/en-CA/global-platform/unix/"
+        },
+        "passwordmgr": "chrome/en-CA/locale/en-CA/passwordmgr/",
+        "mozldap": "chrome/en-CA/locale/en-CA/mozldap/",
+        "messenger-smime": "chrome/en-CA/locale/en-CA/messenger-smime/",
+        "communicator": "chrome/en-CA/locale/en-CA/communicator/",
+        "messenger-newsblog": "chrome/en-CA/locale/en-CA/messenger-newsblog/"
+      }
+    }
+  },
+  "name": "English (CA) Language Pack",
+  "applications": {
+    "gecko": {
+      "strict_max_version": "78.*",
+      "strict_min_version": "78.0",
+      "id": "langpack-en-CA@thunderbird.mozilla.org"
+    }
+  }
+}

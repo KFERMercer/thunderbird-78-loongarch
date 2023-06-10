@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+
+<?xml-stylesheet type="text/css" href="chrome://global/skin/global.css"?>
+<?xml-stylesheet type="text/css" href="chrome://calendar/skin/shared/calendar-alarms.css"?>
+<?xml-stylesheet type="text/css" href="chrome://calendar/skin/shared/calendar-attendees.css"?>
+<?xml-stylesheet type="text/css" href="chrome://messenger/skin/input-fields.css"?>
+<?xml-stylesheet type="text/css" href="chrome://calendar/skin/calendar-event-dialog.css"?>
+<?xml-stylesheet type="text/css" href="chrome://calendar/skin/shared/dialogs/calendar-event-dialog.css"?>
+<?xml-stylesheet type="text/css" href="chrome://calendar/content/widgets/calendar-item-summary.css"?>
+<?xml-stylesheet type="text/css" href="chrome://calendar/content/calendar-ics-file-dialog.css"?>
+
+<window windowtype="Calendar:ICSFile"
+        xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        xmlns:html="http://www.w3.org/1999/xhtml"
+        data-l10n-id="calendar-ics-file-window-2"
+        height="600">
+
+  <dialog id="calendar-ics-file-dialog"
+          buttons="accept,cancel"
+          data-l10n-id="calendar-ics-file-dialog-2"
+          data-l10n-attrs="buttonlabelaccept">
+
+    <html:link rel="localization" href="calendar/calendar-ics-file-dialog.ftl"/>
+
+    <script src="chrome://calendar/content/calendar-ics-file-dialog.js"></script>
+    <script src="chrome://calendar/content/import-export.js"></script>
+    <script src="chrome://calendar/content/widgets/calendar-item-summary.js"></script>
+    <script src="chrome://calendar/content/calendar-dialog-utils.js"></script>
+    <script src="chrome://calendar/content/calendar-ui-utils.js"></script>
+
+    <vbox id="calendar-ics-file-dialog-header">
+      <description id="calendar-ics-file-dialog-message"
+                   data-l10n-id="calendar-ics-file-dialog-message-2"></description>
+      <description id="calendar-ics-file-dialog-file-path"></description>
+
+      <label id="calendar-ics-file-dialog-calendar-menu-label"
+             data-l10n-id="calendar-ics-file-dialog-calendar-menu-label"
+             control="calendar-ics-file-dialog-calendar-menu"></label>
+
+      <menulist id="calendar-ics-file-dialog-calendar-menu"/>
+    </vbox>
+
+    <vbox id="calendar-ics-file-dialog-items-container" flex="1"></vbox>
+
+  </dialog>
+</window>

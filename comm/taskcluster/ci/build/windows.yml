@@ -1,0 +1,416 @@
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at http://mozilla.org/MPL/2.0/.
+---
+job-defaults:
+    run:
+        using: mozharness
+        comm-checkout: true
+        config-paths:
+            - comm/mozharness
+        tooltool-downloads: internal
+    fetches:
+        toolchain:
+            - win64-dump-syms
+            - win64-pdbstr
+
+win32/opt:
+    description: "Win32 Opt (Cross)"
+    index:
+        product: thunderbird
+        job-name: win32-opt
+    attributes:
+        enable-build-signing: true
+        enable-full-crashsymbols: true
+    treeherder:
+        platform: windows2012-32/opt
+        symbol: B
+        tier: 1
+    worker-type: b-linux
+    worker:
+        docker-image: {in-tree: debian9-amd64-build}
+        max-run-time: 7200
+        env:
+            PERFHERDER_EXTRA_OPTIONS: cross
+            TOOLTOOL_MANIFEST: "comm/mail/config/tooltool-manifests/win32/releng.manifest"
+            MOZ_AUTOMATION_PACKAGE_TESTS: "1"
+    run:
+        actions: [build]
+        options: [append-env-variables-from-configs]
+        script: mozharness/scripts/fx_desktop_build.py
+        config:
+            - builds/taskcluster_base_thunderbird.py
+            - builds/releng_base_linux_64_builds.py
+        extra-config:
+            stage_platform: win32
+            mozconfig_platform: win32
+            env:
+                LD_PRELOAD: "/builds/worker/fetches/liblowercase/liblowercase.so"
+                LOWERCASE_DIRS: "/builds/worker/checkouts/gecko/vs2017_15.8.4:/builds/worker/checkouts/gecko/mapiheader"
+    fetches:
+        toolchain:
+            - linux64-binutils
+            - linux64-cbindgen
+            - linux64-clang-win-cross
+            - linux64-dump-syms
+            - linux64-liblowercase
+            - linux64-nasm
+            - linux64-node
+            - linux64-rust-cross
+            - linux64-rust-size
+            - linux64-sccache
+            - linux64-winchecksec
+            - linux64-wine
+            - win32-libotr
+        fetch:
+            - nsis-3.01-win
+            - upx-3.95-win
+
+win32-shippable/opt:
+    description: "Win32 Opt Shippable"
+    index:
+        product: thunderbird
+        job-name: win32-opt
+        type: shippable
+    attributes:
+        shippable: true
+        nightly: true
+        enable-build-signing: true
+        enable-full-crashsymbols: true
+    shipping-phase: build
+    shipping-product: thunderbird
+    treeherder:
+        platform: windows2012-32-shippable/opt
+        symbol: B
+        tier: 1
+    worker-type: b-linux
+    worker:
+        docker-image: {in-tree: debian9-amd64-build}
+        max-run-time: 7200
+        env:
+            PERFHERDER_EXTRA_OPTIONS: cross
+            TOOLTOOL_MANIFEST: "comm/mail/config/tooltool-manifests/win32/releng.manifest"
+            MOZ_AUTOMATION_PACKAGE_TESTS: "1"
+    run:
+        actions: [build]
+        options: [append-env-variables-from-configs]
+        script: mozharness/scripts/fx_desktop_build.py
+        config:
+            - builds/taskcluster_base_thunderbird.py
+            - builds/releng_base_linux_64_builds.py
+            - taskcluster_nightly.py
+        extra-config:
+            stage_platform: win32
+            mozconfig_platform: win32
+            env:
+                LD_PRELOAD: "/builds/worker/fetches/liblowercase/liblowercase.so"
+                LOWERCASE_DIRS: "/builds/worker/checkouts/gecko/vs2017_15.8.4:/builds/worker/checkouts/gecko/mapiheader"
+    fetches:
+        toolchain:
+            - linux64-binutils
+            - linux64-cbindgen
+            - linux64-clang-win-cross
+            - linux64-dump-syms
+            - linux64-liblowercase
+            - linux64-nasm
+            - linux64-node
+            - linux64-rust-cross
+            - linux64-rust-size
+            - linux64-winchecksec
+            - linux64-wine
+            - win32-libotr
+        fetch:
+            - nsis-3.01-win
+            - upx-3.95-win
+
+win32/debug:
+    description: "Win32 Debug (Cross)"
+    index:
+        product: thunderbird
+        job-name: win32-debug
+    attributes:
+        enable-build-signing: true
+        enable-full-crashsymbols: true
+    treeherder:
+        platform: windows2012-32/debug
+        symbol: B
+        tier: 1
+    worker-type: b-linux
+    worker:
+        docker-image: {in-tree: debian9-amd64-build}
+        max-run-time: 7200
+        env:
+            PERFHERDER_EXTRA_OPTIONS: cross
+            TOOLTOOL_MANIFEST: "comm/mail/config/tooltool-manifests/win32/releng.manifest"
+            MOZ_AUTOMATION_PACKAGE_TESTS: "1"
+    run:
+        actions: [build]
+        options: [append-env-variables-from-configs]
+        script: mozharness/scripts/fx_desktop_build.py
+        config:
+            - builds/taskcluster_base_thunderbird.py
+            - builds/releng_base_linux_64_builds.py
+            - builds/taskcluster_sub_win32/debug.py
+        mozconfig-variant: debug
+        extra-config:
+            mozconfig_platform: win32
+            env:
+                LD_PRELOAD: "/builds/worker/fetches/liblowercase/liblowercase.so"
+                LOWERCASE_DIRS: "/builds/worker/checkouts/gecko/vs2017_15.8.4:/builds/worker/checkouts/gecko/mapiheader"
+    fetches:
+        toolchain:
+            - linux64-binutils
+            - linux64-cbindgen
+            - linux64-clang-win-cross
+            - linux64-dump-syms
+            - linux64-liblowercase
+            - linux64-nasm
+            - linux64-node
+            - linux64-rust-cross
+            - linux64-rust-size
+            - linux64-sccache
+            - linux64-winchecksec
+            - linux64-wine
+            - win32-libotr
+        fetch:
+            - nsis-3.01-win
+            - upx-3.95-win
+
+win64/opt:
+    description: "Win64 Opt (Cross)"
+    index:
+        product: thunderbird
+        job-name: win64-opt
+    attributes:
+        enable-build-signing: true
+        enable-full-crashsymbols: true
+    treeherder:
+        platform: windows2012-64/opt
+        symbol: B
+        tier: 1
+    worker-type: b-linux
+    worker:
+        docker-image: {in-tree: debian9-amd64-build}
+        max-run-time: 7200
+        env:
+            PERFHERDER_EXTRA_OPTIONS: cross
+            TOOLTOOL_MANIFEST: "comm/mail/config/tooltool-manifests/win64/releng.manifest"
+            MOZ_AUTOMATION_PACKAGE_TESTS: "1"
+    run:
+        actions: [build]
+        options: [append-env-variables-from-configs]
+        script: mozharness/scripts/fx_desktop_build.py
+        config:
+            - builds/taskcluster_base_thunderbird.py
+            - builds/releng_base_linux_64_builds.py
+        extra-config:
+            stage_platform: win64
+            mozconfig_platform: win64
+            env:
+                LD_PRELOAD: "/builds/worker/fetches/liblowercase/liblowercase.so"
+                LOWERCASE_DIRS: "/builds/worker/checkouts/gecko/vs2017_15.8.4:/builds/worker/checkouts/gecko/mapiheader"
+    fetches:
+        toolchain:
+            - linux64-binutils
+            - linux64-cbindgen
+            - linux64-clang-win-cross
+            - linux64-dump-syms
+            - linux64-liblowercase
+            - linux64-nasm
+            - linux64-node
+            - linux64-rust-cross
+            - linux64-rust-size
+            - linux64-sccache
+            - linux64-winchecksec
+            - linux64-wine
+            - win64-libotr
+        fetch:
+            - nsis-3.01-win
+            - upx-3.95-win
+
+win64-shippable/opt:
+    description: "Win64 Opt Shippable"
+    index:
+        product: thunderbird
+        job-name: win64-opt
+        type: shippable
+    attributes:
+        shippable: true
+        nightly: true
+        enable-build-signing: true
+        enable-full-crashsymbols: true
+    shipping-phase: build
+    shipping-product: thunderbird
+    treeherder:
+        platform: windows2012-64-shippable/opt
+        symbol: B
+        tier: 1
+    worker-type: b-linux
+    worker:
+        docker-image: {in-tree: debian9-amd64-build}
+        max-run-time: 7200
+        env:
+            PERFHERDER_EXTRA_OPTIONS: cross
+            TOOLTOOL_MANIFEST: "comm/mail/config/tooltool-manifests/win64/releng.manifest"
+            MOZ_AUTOMATION_PACKAGE_TESTS: "1"
+    run:
+        actions: [build]
+        options: [append-env-variables-from-configs]
+        script: mozharness/scripts/fx_desktop_build.py
+        config:
+            - builds/taskcluster_base_thunderbird.py
+            - builds/releng_base_linux_64_builds.py
+            - taskcluster_nightly.py
+        extra-config:
+            stage_platform: win64
+            mozconfig_platform: win64
+            env:
+                LD_PRELOAD: "/builds/worker/fetches/liblowercase/liblowercase.so"
+                LOWERCASE_DIRS: "/builds/worker/checkouts/gecko/vs2017_15.8.4:/builds/worker/checkouts/gecko/mapiheader"
+    fetches:
+        toolchain:
+            - linux64-binutils
+            - linux64-cbindgen
+            - linux64-clang-win-cross
+            - linux64-dump-syms
+            - linux64-liblowercase
+            - linux64-nasm
+            - linux64-node
+            - linux64-rust-cross
+            - linux64-rust-size
+            - linux64-winchecksec
+            - linux64-wine
+            - win64-libotr
+        fetch:
+            - nsis-3.01-win
+            - upx-3.95-win
+
+win64/debug:
+    description: "Win64 Debug (Cross)"
+    index:
+        product: thunderbird
+        job-name: win64-debug
+    attributes:
+        enable-build-signing: true
+        enable-full-crashsymbols: true
+    treeherder:
+        platform: windows2012-64/debug
+        symbol: B
+        tier: 1
+    worker-type: b-linux
+    worker:
+        docker-image: {in-tree: debian9-amd64-build}
+        max-run-time: 7200
+        env:
+            PERFHERDER_EXTRA_OPTIONS: cross
+            TOOLTOOL_MANIFEST: "comm/mail/config/tooltool-manifests/win64/releng.manifest"
+            MOZ_AUTOMATION_PACKAGE_TESTS: "1"
+    run:
+        actions: [build]
+        options: [append-env-variables-from-configs]
+        script: mozharness/scripts/fx_desktop_build.py
+        config:
+            - builds/taskcluster_base_thunderbird.py
+            - builds/releng_base_linux_64_builds.py
+            - builds/taskcluster_sub_win64/debug.py
+        mozconfig-variant: debug
+        extra-config:
+            mozconfig_platform: win64
+            env:
+                LD_PRELOAD: "/builds/worker/fetches/liblowercase/liblowercase.so"
+                LOWERCASE_DIRS: "/builds/worker/checkouts/gecko/vs2017_15.8.4:/builds/worker/checkouts/gecko/mapiheader"
+    fetches:
+        toolchain:
+            - linux64-binutils
+            - linux64-cbindgen
+            - linux64-clang-win-cross
+            - linux64-dump-syms
+            - linux64-liblowercase
+            - linux64-nasm
+            - linux64-node
+            - linux64-rust-cross
+            - linux64-rust-size
+            - linux64-sccache
+            - linux64-winchecksec
+            - linux64-wine
+            - win64-libotr
+        fetch:
+            - nsis-3.01-win
+            - upx-3.95-win
+
+
+win64-plain/debug:
+    description: "Win64 Debug Plain"
+    index:
+        product: thunderbird
+        job-name: win64-plain-debug
+    treeherder:
+        platform: windows2012-64/debug
+        symbol: Bp
+        tier: 2
+    worker-type: b-win2012
+    worker:
+        max-run-time: 7200
+        env:
+            PERFHERDER_EXTRA_OPTIONS: plain
+            TOOLTOOL_MANIFEST: "comm/mail/config/tooltool-manifests/win64/releng.manifest"
+    run:
+        actions: [build]
+        options: [append-env-variables-from-configs]
+        script: mozharness/scripts/fx_desktop_build.py
+        config:
+            - builds/taskcluster_base_thunderbird.py
+            - builds/taskcluster_base_windows.py
+            - builds/taskcluster_base_win64.py
+        extra-config:
+            disable_package_metrics: true
+            stage_platform: win64
+        mozconfig-variant: plain-debug
+    run-on-projects: ['comm-central']
+    fetches:
+        toolchain:
+            - win64-cbindgen
+            - win64-clang-cl
+            - win64-libotr
+            - win64-node
+            - win64-nasm
+            - win64-rust
+            - win64-winchecksec
+
+win64-plain/opt:
+    description: "Win64 Opt Plain"
+    index:
+        product: thunderbird
+        job-name: win64-plain-opt
+    treeherder:
+        platform: windows2012-64/opt
+        symbol: Bp
+        tier: 2
+    worker-type: b-win2012
+    worker:
+        max-run-time: 7200
+        env:
+            PERFHERDER_EXTRA_OPTIONS: plain
+            TOOLTOOL_MANIFEST: "comm/mail/config/tooltool-manifests/win64/releng.manifest"
+    run:
+        actions: [build]
+        options: [append-env-variables-from-configs]
+        script: mozharness/scripts/fx_desktop_build.py
+        config:
+            - builds/taskcluster_base_thunderbird.py
+            - builds/taskcluster_base_windows.py
+            - builds/taskcluster_base_win64.py
+        extra-config:
+            disable_package_metrics: true
+            stage_platform: win64
+        mozconfig-variant: plain-opt
+    run-on-projects: ['comm-central']
+    fetches:
+        toolchain:
+            - win64-cbindgen
+            - win64-clang-cl
+            - win64-libotr
+            - win64-node
+            - win64-nasm
+            - win64-rust
+            - win64-winchecksec

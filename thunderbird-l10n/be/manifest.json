@@ -1,0 +1,57 @@
+{
+  "author": "mozilla.org (contributors: mozilla by)",
+  "languages": {
+    "be": {
+      "chrome_resources": {
+        "chat": "chrome/be/locale/be/chat/",
+        "devtools-startup": "chrome/be/locale/be/devtools/startup/",
+        "mozapps": "chrome/be/locale/be/mozapps/",
+        "mozldap": "chrome/be/locale/be/mozldap/",
+        "pluginproblem": "chrome/be/locale/be/pluginproblem/",
+        "messenger-mapi": "chrome/be/locale/be/messenger-mapi/",
+        "autoconfig": "chrome/be/locale/be/autoconfig/",
+        "necko": "chrome/be/locale/be/necko/",
+        "messenger-newsblog": "chrome/be/locale/be/messenger-newsblog/",
+        "global-platform": {
+          "android": "chrome/be/locale/be/global-platform/unix/",
+          "macosx": "chrome/be/locale/be/global-platform/mac/",
+          "win": "chrome/be/locale/be/global-platform/win/",
+          "linux": "chrome/be/locale/be/global-platform/unix/"
+        },
+        "devtools-shared": "chrome/be/locale/be/devtools/shared/",
+        "devtools": "chrome/be/locale/be/devtools/client/",
+        "pippki": "chrome/be/locale/be/pippki/",
+        "branding": "chrome/be/locale/be/branding/",
+        "passwordmgr": "chrome/be/locale/be/passwordmgr/",
+        "global": "chrome/be/locale/be/global/",
+        "communicator": "chrome/be/locale/be/communicator/",
+        "pipnss": "chrome/be/locale/be/pipnss/",
+        "places": "chrome/be/locale/be/places/",
+        "messenger-region": "chrome/be/locale/be/messenger-region/",
+        "calendar": "chrome/be/locale/be/calendar/",
+        "messenger-smime": "chrome/be/locale/be/messenger-smime/",
+        "lightning": "chrome/be/locale/be/lightning/",
+        "messenger": "chrome/be/locale/be/messenger/",
+        "alerts": "chrome/be/locale/be/alerts/"
+      },
+      "version": "20200906184423"
+    }
+  },
+  "manifest_version": 2,
+  "name": "Беларуская Language Pack",
+  "description": "Language pack for Thunderbird for be",
+  "langpack_id": "be",
+  "applications": {
+    "gecko": {
+      "id": "langpack-be@thunderbird.mozilla.org",
+      "strict_max_version": "78.*",
+      "strict_min_version": "78.0"
+    }
+  },
+  "version": "78.0buildid20210901192859",
+  "sources": {
+    "browser": {
+      "base_path": "browser/"
+    }
+  }
+}

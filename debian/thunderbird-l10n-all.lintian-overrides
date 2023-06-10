@@ -1,0 +1,2 @@
+# no, this is metapackage
+thunderbird-l10n-all: wrong-section-according-to-package-name thunderbird-l10n-all => localization

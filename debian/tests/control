@@ -1,0 +1,14 @@
+Tests: help.sh
+Depends: thunderbird, xvfb, xauth
+
+#Tests: xpcshellTest.sh
+#Depends: thunderbird-dev
+
+#Tests: idlTest.sh
+#Depends: thunderbird-dev, build-essential
+
+#Tests: icudatfileTest.sh
+#Depends: thunderbird-dev
+
+#Tests: soSymlinkTest.sh
+#Depends: thunderbird-dev

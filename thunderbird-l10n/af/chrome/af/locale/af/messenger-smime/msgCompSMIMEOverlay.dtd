@@ -1,0 +1,37 @@
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+
+<!--LOCALIZATION NOTE msgCompSMIMEOverlay.dtd UI for s/mime hooks in message composition -->
+
+
+<!-- not yet used
+<!ENTITY menu_securityEncryptOptional.label "Allow Encryption">
+<!ENTITY menu_securityEncryptOptional.accesskey "w">
+-->
+
+<!ENTITY menu_securityEncryptRequire.accesskey "E">
+
+<!ENTITY menu_securitySign.label "Digitaal onderteken dié boodskap">
+<!ENTITY menu_securitySign.accesskey "o">
+
+<!ENTITY menu_securityStatus.label "Bekyk sekuriteitsinligting">
+<!ENTITY menu_securityStatus.accesskey "i">
+
+<!ENTITY securityButton.label "Sekuriteit">
+<!ENTITY securityButton.tooltip "Bekyk of wysig sekuriteitsopstelling">
+
+<!ENTITY menu_viewSecurityStatus.label "Boodskapsekuriteitsinligting">
+<!ENTITY menu_viewSecurityStatus.accesskey "i">
+
+<!ENTITY menu_securityDoNotEncrypt.label "Do Not Encrypt">
+<!ENTITY menu_securityDoNotEncrypt.accesskey "o">
+<!ENTITY menu_securityEncryptRequire2.label "Require Encryption">
+<!ENTITY menu_securityAttachMyKey.label "Attach My Public Key">
+<!ENTITY menu_securityAttachMyKey.accesskey "A">
+<!ENTITY menu_securityTech.label "Encryption Technology">
+<!ENTITY menu_securityTech.accesskey "T">
+<!ENTITY menu_techPGP.label "OpenPGP">
+<!ENTITY menu_techPGP.accesskey "O">
+<!ENTITY menu_techSMIME.label "S/MIME">
+<!ENTITY menu_techSMIME.accesskey "S">

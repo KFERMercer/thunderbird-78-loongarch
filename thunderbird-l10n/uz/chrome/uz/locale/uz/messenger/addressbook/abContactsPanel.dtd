@@ -1,0 +1,70 @@
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+
+
+
+
+
+
+
+
+
+<!ENTITY addressbookPicker.label            "Manzil kitobi:">
+<!ENTITY addressbookPicker.accesskey        "k">
+
+
+<!ENTITY SearchNameOrEmail.label            "Nomi yoki e-pochtasi">
+
+<!ENTITY addtoToFieldMenu.label             "Qabul qiluvchi maydoniga qo‘shish">
+<!ENTITY addtoToFieldMenu.accesskey         "q">
+<!ENTITY addtoCcFieldMenu.label             "Cc maydoniga qo‘shish">
+<!ENTITY addtoCcFieldMenu.accesskey         "C">
+<!ENTITY addtoBccFieldMenu.label            "Bcc maydoniga qo‘shish">
+<!ENTITY addtoBccFieldMenu.accesskey        "B">
+<!ENTITY deleteAddrBookCard.label           "O‘chirish">
+<!ENTITY deleteAddrBookCard.accesskey       "O">
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!ENTITY toButton.label                     "Qabul qiluvchiga qo‘shish:">
+<!ENTITY toButton.accesskey                 "q">
+<!ENTITY ccButton.label                     "Cc qatoriga qo‘shish:">
+<!ENTITY ccButton.accesskey                 "C">
+<!ENTITY bccButton.label                    "Bcc qatoriga qo‘shish:">
+<!ENTITY bccButton.accesskey                "B">
+
+<!ENTITY propertiesMenu.label               "Properties">
+<!ENTITY propertiesMenu.accesskey           "i">
+<!ENTITY propertiesCmd.key                  "i">
+<!ENTITY abPropertiesMenu.label             "Address Book Properties">
+<!ENTITY abPropertiesMenu.accesskey         "i">
+<!ENTITY contactPropertiesMenu.label        "Contact Properties">
+<!ENTITY contactPropertiesMenu.accesskey    "i">
+<!ENTITY mailingListPropertiesMenu.label    "Mailing List Properties">
+<!ENTITY mailingListPropertiesMenu.accesskey "i">
+<!ENTITY abContextMenuButton.tooltip        "Display Address Book Context Menu">
+<!ENTITY searchContacts.label               "Search Contacts:">
+<!ENTITY searchContacts.accesskey           "n">
+<!ENTITY propertiesContext.label            "Properties">
+<!ENTITY propertiesContext.accesskey        "i">
+<!ENTITY abPropertiesContext.label          "Properties">
+<!ENTITY abPropertiesContext.accesskey      "i">
+<!ENTITY editContactContext.label           "Edit Contact">
+<!ENTITY editContactContext.accesskey       "E">
+<!ENTITY editMailingListContext.label       "Edit List">
+<!ENTITY editMailingListContext.accesskey   "E">
+<!ENTITY newContactAbContext.label          "New Contact">
+<!ENTITY newContactAbContext.accesskey      "C">
+<!ENTITY newListAbContext.label             "New List">
+<!ENTITY newListAbContext.accesskey         "L">

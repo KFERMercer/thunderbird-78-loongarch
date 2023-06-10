@@ -1,0 +1,53 @@
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+@import url("chrome://messenger/skin/shared/preferences/preferences.css");
+@namespace html "http://www.w3.org/1999/xhtml";
+
+.dialogBox,
+#MailPreferences #paneDeck,
+#categories {
+  font-size: 1.11em;
+}
+
+.treecol-sortdirection {
+  /* override the Linux only toolkit rule */
+  -moz-appearance: none;
+}
+
+menulist.actionsMenu::part(dropmarker) {
+  margin-block: 11px;
+}
+
+html|input[type="number"] {
+  min-height: 28px;
+}
+
+html|input[type="number"]::-moz-number-spin-box {
+  margin-inline-end: 0;
+}
+
+html|input[type="number"]::-moz-number-spin-up {
+  min-height: 12px;
+}
+
+html|input[type="number"]::-moz-number-spin-down {
+  min-height: 13px;
+}
+
+.sidebar-footer-label {
+  font-size: 1em;
+}
+
+/**
+ * Dialog
+ */
+
+#dialogTitle {
+  font-size: 1.05em;
+}
+
+#defaultWebSearchPopup > menuitem > .menu-iconic-left {
+  margin-inline: 5px !important;
+}

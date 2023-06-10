@@ -1,0 +1,57 @@
+{
+  "langpack_id": "ga-IE",
+  "description": "Language pack for Thunderbird for ga-IE",
+  "languages": {
+    "ga-IE": {
+      "version": "20200827124707",
+      "chrome_resources": {
+        "devtools": "chrome/ga-IE/locale/ga-IE/devtools/client/",
+        "devtools-startup": "chrome/ga-IE/locale/ga-IE/devtools/startup/",
+        "chat": "chrome/ga-IE/locale/ga-IE/chat/",
+        "devtools-shared": "chrome/ga-IE/locale/ga-IE/devtools/shared/",
+        "alerts": "chrome/ga-IE/locale/ga-IE/alerts/",
+        "communicator": "chrome/ga-IE/locale/ga-IE/communicator/",
+        "necko": "chrome/ga-IE/locale/ga-IE/necko/",
+        "autoconfig": "chrome/ga-IE/locale/ga-IE/autoconfig/",
+        "global-platform": {
+          "win": "chrome/ga-IE/locale/ga-IE/global-platform/win/",
+          "linux": "chrome/ga-IE/locale/ga-IE/global-platform/unix/",
+          "macosx": "chrome/ga-IE/locale/ga-IE/global-platform/mac/",
+          "android": "chrome/ga-IE/locale/ga-IE/global-platform/unix/"
+        },
+        "messenger-smime": "chrome/ga-IE/locale/ga-IE/messenger-smime/",
+        "pippki": "chrome/ga-IE/locale/ga-IE/pippki/",
+        "global": "chrome/ga-IE/locale/ga-IE/global/",
+        "calendar": "chrome/ga-IE/locale/ga-IE/calendar/",
+        "mozapps": "chrome/ga-IE/locale/ga-IE/mozapps/",
+        "places": "chrome/ga-IE/locale/ga-IE/places/",
+        "messenger": "chrome/ga-IE/locale/ga-IE/messenger/",
+        "lightning": "chrome/ga-IE/locale/ga-IE/lightning/",
+        "pipnss": "chrome/ga-IE/locale/ga-IE/pipnss/",
+        "messenger-newsblog": "chrome/ga-IE/locale/ga-IE/messenger-newsblog/",
+        "pluginproblem": "chrome/ga-IE/locale/ga-IE/pluginproblem/",
+        "passwordmgr": "chrome/ga-IE/locale/ga-IE/passwordmgr/",
+        "messenger-region": "chrome/ga-IE/locale/ga-IE/messenger-region/",
+        "messenger-mapi": "chrome/ga-IE/locale/ga-IE/messenger-mapi/",
+        "mozldap": "chrome/ga-IE/locale/ga-IE/mozldap/",
+        "branding": "chrome/ga-IE/locale/ga-IE/branding/"
+      }
+    }
+  },
+  "version": "78.0buildid20210901192859",
+  "sources": {
+    "browser": {
+      "base_path": "browser/"
+    }
+  },
+  "applications": {
+    "gecko": {
+      "id": "langpack-ga-IE@thunderbird.mozilla.org",
+      "strict_min_version": "78.0",
+      "strict_max_version": "78.*"
+    }
+  },
+  "author": "mozilla.org (contributors: Séamus Ó Ciardhuáin, Kevin Scannell, Brian King)",
+  "manifest_version": 2,
+  "name": "Béarla (SAM) Language Pack"
+}

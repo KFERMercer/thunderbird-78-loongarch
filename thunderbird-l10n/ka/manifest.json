@@ -1,0 +1,57 @@
+{
+  "name": "Georgian (ქართული) Language Pack",
+  "languages": {
+    "ka": {
+      "version": "20200902193515",
+      "chrome_resources": {
+        "global-platform": {
+          "win": "chrome/ka/locale/ka/global-platform/win/",
+          "linux": "chrome/ka/locale/ka/global-platform/unix/",
+          "android": "chrome/ka/locale/ka/global-platform/unix/",
+          "macosx": "chrome/ka/locale/ka/global-platform/mac/"
+        },
+        "messenger": "chrome/ka/locale/ka/messenger/",
+        "chat": "chrome/ka/locale/ka/chat/",
+        "places": "chrome/ka/locale/ka/places/",
+        "devtools-startup": "chrome/ka/locale/ka/devtools/startup/",
+        "calendar": "chrome/ka/locale/ka/calendar/",
+        "autoconfig": "chrome/ka/locale/ka/autoconfig/",
+        "mozapps": "chrome/ka/locale/ka/mozapps/",
+        "messenger-smime": "chrome/ka/locale/ka/messenger-smime/",
+        "messenger-region": "chrome/ka/locale/ka/messenger-region/",
+        "pippki": "chrome/ka/locale/ka/pippki/",
+        "pipnss": "chrome/ka/locale/ka/pipnss/",
+        "branding": "chrome/ka/locale/ka/branding/",
+        "devtools-shared": "chrome/ka/locale/ka/devtools/shared/",
+        "messenger-mapi": "chrome/ka/locale/ka/messenger-mapi/",
+        "mozldap": "chrome/ka/locale/ka/mozldap/",
+        "necko": "chrome/ka/locale/ka/necko/",
+        "alerts": "chrome/ka/locale/ka/alerts/",
+        "devtools": "chrome/ka/locale/ka/devtools/client/",
+        "communicator": "chrome/ka/locale/ka/communicator/",
+        "pluginproblem": "chrome/ka/locale/ka/pluginproblem/",
+        "global": "chrome/ka/locale/ka/global/",
+        "messenger-newsblog": "chrome/ka/locale/ka/messenger-newsblog/",
+        "lightning": "chrome/ka/locale/ka/lightning/",
+        "passwordmgr": "chrome/ka/locale/ka/passwordmgr/"
+      }
+    }
+  },
+  "version": "78.0buildid20210901192859",
+  "author": "giasher.com (contributors: გია შერვაშიძე, http://giasher.com)",
+  "applications": {
+    "gecko": {
+      "strict_max_version": "78.*",
+      "strict_min_version": "78.0",
+      "id": "langpack-ka@thunderbird.mozilla.org"
+    }
+  },
+  "sources": {
+    "browser": {
+      "base_path": "browser/"
+    }
+  },
+  "description": "Language pack for Thunderbird for ka",
+  "manifest_version": 2,
+  "langpack_id": "ka"
+}

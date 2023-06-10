@@ -1,0 +1,53 @@
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+@import url("chrome://messenger/skin/shared/accountCreation.css");
+@namespace html url("http://www.w3.org/1999/xhtml");
+
+/* ::::: BUTTONS ::::: */
+
+.errordescription {
+  color: InfoText;
+  background-color: InfoBackground;
+  border-radius: 4px;
+  margin-top: 2px;
+  padding-inline-start: 3px;
+  padding-inline-end: 3px;
+}
+
+.initialDesc, .columnHeader {
+  margin-top: 2px;
+  color: GrayText;
+}
+
+menulist[disabled="true"] {
+  -moz-appearance: menulist;
+  color: -moz-DialogText;
+}
+
+menulist[disabled="true"]::part(dropmarker) {
+  -moz-appearance: none;
+  color: -moz-DialogText;
+}
+
+.mastervbox {
+  padding: 8px;
+}
+
+/* Fix to show the menulist-dropmarker under newer GTK3 versions */
+menulist[editable="true"]::part(dropmarker) {
+  min-width: 2em;
+}
+
+textbox.port[disabled="true"] {
+  padding-top: 4px;
+}
+
+#outgoing_server_area {
+  padding-top: 2px;
+}
+
+#incoming_protocol[disabled="true"] {
+  padding-left: 5px;
+}

@@ -1,0 +1,112 @@
+thunderbird (1:78.3.1-1) unstable; urgency=medium
+
+  The Thunderbird ESR series starting with version 78.x has finally dropped the
+  support for legacy Add-ons and also for legacy WebExtension Add-ons.
+  By this some packaged Add-ons within Debian, but also some external installed
+  Add-ons might not working any more!
+
+  The very popular Add-on Enigmail, which was providing OpenPGP support within
+  the Thunderbird application, isn't getting further development as an external
+  Add-on due a consequence of the changed Add-on API.
+  Instead Thunderbird now has Built-In OpenPGP support since version 78.0.
+  The latest version of the Enigmail Add-on (>= 2.2) will provide an migration
+  wizard which helps to migrate the existing OpenPGP keys into Thunderbird.
+
+  Please have a look for further information about Enigmail on the project
+  homepage and the Add-on website.
+
+  https://www.enigmail.net/index.php/en/home/news
+  https://addons.thunderbird.net/en/thunderbird/addon/enigmail/
+  https://wiki.mozilla.org/Thunderbird:OpenPGP:Smartcards
+
+  You might also want to have a look at README.Debian for more information.
+
+ -- Carsten Schoenert <c.schoenert@t-online.de>  Sun, 20 Sep 2020 8:40:00 +0200
+
+thunderbird (1:68.2.2-1) unstable; urgency=medium
+
+  Starting with version 68.2.2-1 src:thunderbird isn't building the binary
+  package calendar-google-provider any more.
+
+  If you want or need to use this Add-on please install this extension from
+
+  https://addons.thunderbird.net/en-GB/thunderbird/addon/provider-for-google-calendar/
+
+  (Please choose your preferred language!)
+
+  The removal of this Add-on from the Thunderbird source was discussed within
+  this issue:
+
+  https://bugzilla.mozilla.org/show_bug.cgi?id=1584614
+
+ -- Carsten Schoenert <c.schoenert@t-online.de>  Sun, 10 Nov 2019 11:07:00 +0100
+
+thunderbird (1:60.0-3) unstable; urgency=medium
+
+  intl.locale.matchOS is replaced by intl.locale.requested
+
+  Thunderbird has taken the locale from the user session by using the
+  preference 'intl.locale.matchOS' up until version 57.
+  This preference is replaced by 'intl.locale.requested' since version 58.
+
+  Thunderbird is detecting (again) the locale from the system by using this
+  preference with an empty string as value.
+  Starting with this version Thunderbird is taking care of this possibility
+  by adding this preference to the system wide configuration within
+  '/etc/thunderbird/pref/thunderbird.js.
+
+  If you have used Thunderbird packages < 1:60.0-3 *and* you have used this
+  environment settings within your profile by adding a dedicated locale value
+  which is equal to the system language you can remove this and let
+  Thunderbird pick up the locale from the system automatically. To do so
+  remove the following key completely from your local settings:
+
+    intl.locale.requested
+
+  More information can be found here
+
+  https://bugzilla.mozilla.org/show_bug.cgi?id=1437480
+  https://bugzilla.mozilla.org/show_bug.cgi?id=1413866
+
+  Please have also a look into README.Debian for a more in deep explanation,
+  especially section
+  'Enable l10n languages in Thunderbird >= 1:60.0~b2'.
+
+ -- Carsten Schoenert <c.schoenert@t-online.de>  Wed, 5 Aug 2018 20:45:00 +0200
+
+thunderbird (1:60.0~b2-1) experimental; urgency=medium
+
+  thunderbird-l10n and lightning-l10n packages are known broken
+
+  Due the modifications by upstream started with Thunderbird 59 related to the
+  needed changes for the WebExtensions the various l10n packages for
+  thunderbird itself but also for lightning are currently not working like
+  previously out of the box.
+  This is a known fact and mostly confirmed by upstream.
+
+  By a manual workaround for the local profile it's possible to (re-)enable the
+  requested l10n language. Please have a look at the file README.Debian in the
+  section 'Enable l10n languages in Thunderbird >= 1:60.0~b2'.
+
+  For more information on this issue you can visit
+
+  https://bugzilla.mozilla.org/show_bug.cgi?id=1437480
+
+ -- Carsten Schoenert <c.schoenert@t-online.de>  Sat, 7 Apr 2018 10:21:00 +0200
+
+thunderbird (1:52.5.0-1) unstable; urgency=high
+
+  The profile for AppArmor within Thunderbird is now disabled by default.
+  Since the activated Recommends for the apparmor package in recent
+  kernel-image packages it turns out there are to many things that simply not
+  working like before if Thunderbird is using the current AppArmor profile.
+
+  Please read README.apparmor for getting more information about the
+  re-enabling of the AppArmor profile.
+  People who wants to help to improve the AppAprmor profile are appreciated.
+  
+  Take also a look at #882048 for the reason behind that decision.
+
+  https://bugs.debian.org/882048
+
+ -- Carsten Schoenert <c.schoenert@t-online.de>  Sun, 26 Nov 2017 12:45:00 +0200

@@ -1,0 +1,161 @@
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+@namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
+
+#tabmail:-moz-lwtheme {
+  text-shadow: none;
+}
+
+#messengerBox {
+  color: -moz-DialogText;
+}
+
+#messagepaneboxwrapper {
+  overflow: hidden;
+}
+
+#folderUnreadCol,
+#folderTotalCol,
+#folderSizeCol {
+  text-align: right;
+}
+
+#folderUnreadCol:-moz-locale-dir(rtl),
+#folderTotalCol:-moz-locale-dir(rtl),
+#folderSizeCol:-moz-locale-dir(rtl) {
+  text-align: left;
+}
+
+#folderNameCol [sortDirection="ascending"],
+#folderNameCol [sortDirection="descending"] {
+  list-style-image: none;
+}
+
+/* ::::: thread decoration ::::: */
+
+treechildren::-moz-tree-cell-text(read) {
+  font-weight: normal;
+}
+
+treechildren::-moz-tree-cell-text(unread) {
+  font-weight: bold;
+}
+
+:root[lwt-tree-brighttext] treechildren::-moz-tree-cell-text(untagged, unread) {
+  color: #fff !important;
+}
+
+/* on a collapsed thread, if the top level message is read, but the thread has
+ * unread children, underline the text.  4.x mac did this, very slick
+ */
+treechildren::-moz-tree-cell-text(container, closed, hasUnread, read) {
+  text-decoration: underline;
+}
+
+/* ..... grouped by sort header rows ..... */
+
+treechildren::-moz-tree-row(dummy) {
+  background-color: var(--row-grouped-header-bg-color) !important;
+  border-color: transparent !important;
+  padding-inline-start: 2px;
+  margin-bottom: 1px;
+}
+
+treechildren::-moz-tree-row(dummy, selected, focus) {
+  background-color: var(--row-grouped-header-bg-color-selected) !important;
+}
+
+treechildren::-moz-tree-cell-text(dummy) {
+  font-weight: bold;
+}
+
+:root[lwt-tree] treechildren::-moz-tree-cell-text(dummy, selected) {
+  color: var(--sidebar-highlight-text-color);
+}
+
+/* ..... message pane adjustments ..... */
+
+/* We need to hide overflow in messagepanebox, so that resizing doesn't spill
+   header content over the statusbar. */
+
+#messagepanebox {
+  overflow: hidden;
+}
+
+#multimessage {
+  background-color: -moz-Field;
+}
+
+@media (prefers-color-scheme: dark) {
+  #messagepanewrapper {
+    background-color: #2a2a2e;
+  }
+}
+
+/* Quick-Filter-Bar */
+:root[lwt-tree] #quick-filter-bar:-moz-lwtheme {
+  background-color: var(--lwt-accent-color);
+  color: var(--lwt-text-color);
+}
+
+:root[lwt-tree-brighttext] #quick-filter-bar {
+  --toolbarbutton-hover-background: var(--lwt-toolbarbutton-hover-background);
+  --toolbarbutton-hover-bordercolor: var(--lwt-toolbarbutton-hover-background);
+
+  --toolbarbutton-checkedhover-backgroundcolor: var(--lwt-toolbarbutton-hover-background);
+
+  --toolbarbutton-active-background: var(--lwt-toolbarbutton-active-background);
+  --toolbarbutton-active-bordercolor: var(--lwt-toolbarbutton-active-background);
+  --toolbarbutton-active-boxshadow: 0 0 0 1px var(--lwt-toolbarbutton-active-background) inset;
+}
+
+:root[lwt-tree] #qfb-qs-textbox {
+  background-color: var(--lwt-toolbar-field-background-color, hsla(0, 0%, 100%, .8));
+  color: var(--lwt-toolbar-field-color, black);
+}
+
+:root[lwt-tree] #qfb-qs-textbox:not([focused="true"]) {
+  border-color: var(--lwt-toolbar-field-border-color, hsla(240, 5%, 5%, .25));
+}
+
+:root[lwt-tree] #qfb-qs-textbox:hover {
+  background-color: var(--lwt-toolbar-field-background-color, white);
+}
+
+:root[lwt-tree-brighttext] #qfb-qs-textbox:hover {
+  box-shadow: 0 1px 3px rgba(255, 255, 255, .15);
+}
+
+:root[lwt-tree] #qfb-qs-textbox[focused="true"] {
+  background-color: var(--lwt-toolbar-field-focus, var(--lwt-toolbar-field-background-color, white));
+  color: var(--lwt-toolbar-field-focus-color, var(--lwt-toolbar-field-color, black));
+  border-color: var(--toolbar-field-focus-border-color);
+}
+
+/* virtual folder list dialog */
+
+:root[windowtype="mailnews:virtualFolderList"]:not(:-moz-lwtheme) {
+  background-color: -moz-dialog;
+}
+
+treechildren::-moz-tree-image(selectedColumn) {
+  width: 14px;
+  height: 14px;
+  list-style-image: url("chrome://messenger/skin/icons/checkbox.svg");
+  -moz-context-properties: fill, fill-opacity, stroke, stroke-opacity;
+  fill: currentColor;
+  stroke: currentColor;
+  fill-opacity: 0;
+  stroke-opacity: 0;
+}
+
+treechildren::-moz-tree-image(selectedColumn, selected-true) {
+  fill-opacity: 1;
+}
+
+treechildren::-moz-tree-image(selectedColumn, selected, focus) {
+  fill: var(--select-focus-text-color);
+  stroke: var(--select-focus-text-color);
+}

@@ -1,0 +1,28 @@
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this file,
+ * You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+/* only format Unifinder lists */
+#unifinder-search-results-tree > treechildren::-moz-tree-cell-text(highpriority) {
+   font-weight: bold;
+}
+
+#unifinder-search-results-tree > treechildren::-moz-tree-cell-text(lowpriority) {
+   font-style: italic;
+   opacity: 0.6;
+}
+
+/* workaround to avoid Window Flick */
+#unifinder-search-results-tree {
+    -moz-appearance: none;
+    min-height: 92px;
+    margin: 0;
+}
+
+:root[lwt-tree] #unifinder-searchBox,
+:root[lwt-tree-brighttext] #unifinder-searchBox {
+    background-color: var(--toolbar-bgcolor);
+    background-image: none;
+    color: var(--toolbar-color);
+    border-bottom-color: var(--sidebar-border-color, var(--splitter-color));
+}

@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+
+<?xml-stylesheet href="chrome://messenger/skin/dialogs.css" type="text/css"?>
+<?xml-stylesheet href="chrome://messenger/skin/input-fields.css" type="text/css"?>
+<?xml-stylesheet href="chrome://messenger/skin/themeableDialog.css" type="text/css"?>
+
+<!DOCTYPE window SYSTEM "chrome://messenger/locale/addressbook/abAddressBookNameDialog.dtd">
+
+<window xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        xmlns:html="http://www.w3.org/1999/xhtml"
+        style="width: 36em;"
+        lightweightthemes="true"
+        onload="abNameOnLoad();">
+<dialog>
+  <stringbundle id="bundle_addressBook" src="chrome://messenger/locale/addressbook/addressBook.properties"/>
+
+  <script src="chrome://global/content/globalOverlay.js"/>
+  <script src="chrome://global/content/editMenuOverlay.js"/>
+  <script src="chrome://messenger/content/addressbook/abAddressBookNameDialog.js"/>
+  <script src="chrome://messenger/content/dialogShadowDom.js"/>
+
+  <hbox align="center" class="input-container">
+    <label id="nameLabel" control="name" value="&name.label;"
+           accesskey="&name.accesskey;"/>
+    <html:input id="name" type="text" class="input-inline"
+                aria-labelledby="nameLabel" oninput="abNameDoOkEnabling();"/>
+  </hbox>
+</dialog>
+</window>

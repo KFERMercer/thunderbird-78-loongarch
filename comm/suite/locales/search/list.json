@@ -1,0 +1,210 @@
+{
+  "default": {
+    "searchDefault": "DuckDuckGo",
+    "searchOrder": ["DuckDuckGo", "Google", "Yahoo"],
+    "visibleDefaultEngines": [
+      "duckduckgo", "google", "wikipedia", "yahoo"
+    ]
+  },
+  "regionOverrides": {},
+  "locales": {
+    "en-US": {
+      "default": {
+        "visibleDefaultEngines": [
+          "duckduckgo", "google", "wikipedia", "yahoo", "amazon", "ebay"
+        ]
+      }
+    },
+    "cs": {
+      "default": {
+        "searchDefault": "Google",
+        "searchOrder": ["Google", "Seznam", "DuckDuckGo"],
+        "visibleDefaultEngines": [
+          "google", "seznam-cz", "duckduckgo-cs-CZ", "heureka-cz", "mapy-cz", "wikipedia-cz"
+        ]
+      }
+    },
+    "de": {
+      "default": {
+        "visibleDefaultEngines": [
+          "duckduckgo-de-DE", "google", "amazon-de", "wikipedia-de", "yahoo-de", "ebay-de"
+        ]
+      }
+    },
+    "en-GB": {
+      "default": {
+        "searchOrder": ["DuckDuckGo", "Google", "Yahoo.co.uk"],
+        "visibleDefaultEngines": [
+          "duckduckgo-en-GB", "google", "yahoo-en-GB", "amazon-en-GB", "chambers-en-GB", "wikipedia", "ebay-en-GB"
+        ]
+      }
+    },
+    "es-AR": {
+      "default": {
+        "searchDefault": "Google",
+        "searchOrder": ["Google", "Yahoo Argentina", "DuckDuckGo"],
+        "visibleDefaultEngines": [
+          "duckduckgo-es-AR", "google", "yahoo-ar", "wikipedia-es"
+        ]
+      }
+    },
+    "es-ES": {
+      "default": {
+        "visibleDefaultEngines": [
+          "drae", "duckduckgo-es-ES", "google", "amazon-es", "wikipedia-es", "yahoo-es", "ebay-es"
+        ]
+      }
+    },
+    "fi": {
+      "default": {
+        "searchDefault": "Google",
+        "searchOrder": ["Google", "Yahoo", "DuckDuckGo"],
+        "visibleDefaultEngines": [
+          "duckduckgo-fi-FI", "huuto-fi", "google", "wikipedia-fi", "yahoo-fi"
+        ]
+      }
+    },
+    "fr": {
+      "default": {
+        "searchDefault": "Google",
+        "searchOrder": ["Google", "Yahoo", "DuckDuckGo"],
+        "visibleDefaultEngines": [
+          "cnrtl-tlfi-fr", "duckduckgo-fr-FR", "google", "amazon-fr", "wikipedia-fr", "yahoo-fr", "ebay-fr"
+        ]
+      }
+    },
+    "hu": {
+      "default": {
+        "searchDefault": "Google",
+        "searchOrder": ["Google", "DuckDuckGo"],
+        "visibleDefaultEngines": [
+          "duckduckgo-hu-HU", "google", "vatera", "wikipedia-hu"
+        ]
+      }
+    },
+    "it": {
+      "default": {
+        "searchDefault": "Google",
+        "searchOrder": ["Google", "Yahoo", "DuckDuckGo"],
+        "visibleDefaultEngines": [
+          "bing", "google", "hoepli", "duckduckgo-it-IT", "amazon-it", "wikipedia-it", "yahoo-it", "ebay-it"
+        ]
+      }
+    },
+    "ja-JP-mac": {
+      "default": {
+        "searchDefault": "Google",
+        "searchOrder": ["Google", "Yahoo! JAPAN", "DuckDuckGo"],
+        "visibleDefaultEngines": [
+          "google-jp", "yahoo-jp", "amazon-jp", "wikipedia-ja", "duckduckgo-ja-JP"
+        ]
+      }
+    },
+    "ja": {
+      "default": {
+        "searchDefault": "Google",
+        "searchOrder": ["Google", "Yahoo! JAPAN", "DuckDuckGo"],
+        "visibleDefaultEngines": [
+          "google-jp", "yahoo-jp", "amazon-jp", "wikipedia-ja", "duckduckgo-ja-JP"
+        ]
+      }
+    },
+    "ka": {
+      "default": {
+        "searchDefault": "Google",
+        "searchOrder": ["Google", "DuckDuckGo"],
+        "visibleDefaultEngines": [
+          "google", "duckduckgo", "wikipedia-ka"
+        ]
+      }
+    },
+    "nb-NO": {
+      "default": {
+        "searchDefault": "Google",
+        "searchOrder": ["Google", "Yahoo", "DuckDuckGo"],
+        "visibleDefaultEngines": [
+          "duckduckgo-nb-NO", "google", "wikipedia-NO", "yahoo-NO"
+        ]
+      }
+    },
+    "nl": {
+      "default": {
+        "searchDefault": "Google",
+        "searchOrder": ["Google", "Yahoo", "DuckDuckGo"],
+        "visibleDefaultEngines": [
+          "google", "duckduckgo-nl-NL", "bolcom-nl", "wikipedia-nl", "marktplaats-nl", "yahoo-nl", "ebay-nl"
+        ]
+      }
+    },
+    "pl": {
+      "default": {
+        "searchDefault": "Google",
+        "searchOrder": ["Google", "Startpage", "DuckDuckGo"],
+        "visibleDefaultEngines": [
+          "allegro-pl", "duckduckgo-pl-PL", "google", "pwn-pl", "startpage-pl", "wikipedia-pl", "wolnelektury-pl"
+        ]
+      }
+    },
+    "pt-BR": {
+      "default": {
+        "searchDefault": "Google",
+        "visibleDefaultEngines": [
+          "google", "duckduckgo-pt-BR", "yahoo-br", "amazon-br", "bing", "wikipedia-pt"
+        ]
+      }
+    },
+    "pt-PT": {
+      "default": {
+        "searchOrder": ["DuckDuckGo", "Google", "SAPO", "Priberam", "Wikipedia (pt)"],
+        "visibleDefaultEngines": [
+          "duckduckgo-pt-PT", "google", "sapo", "priberam", "wikipedia-pt"
+        ]
+      }
+    },
+    "ru": {
+      "default": {
+        "searchDefault": "Google",
+        "searchOrder": ["Google", "DuckDuckGo"],
+        "visibleDefaultEngines": [
+          "duckduckgo-ru-RU", "google", "wikipedia-ru"
+        ]
+      }
+    },
+    "sk": {
+      "default": {
+        "searchDefault": "Google",
+        "searchOrder": ["Google", "Azet", "DuckDuckGo"],
+        "visibleDefaultEngines": [
+          "google", "azet-sk", "atlas-sk", "zoznam-sk", "wikipedia-sk", "duckduckgo-sk-SK"
+        ]
+      }
+    },
+    "sv-SE": {
+      "default": {
+        "searchDefault": "Google",
+        "searchOrder": ["Google", "Bing", "DuckDuckGo"],
+        "visibleDefaultEngines": [
+          "duckduckgo-sv-SE", "bing", "google", "prisjakt-sv-SE", "tyda-sv-SE", "wikipedia-sv-SE", "yahoo-sv-SE"
+        ]
+      }
+    },
+    "zh-CN": {
+      "default": {
+        "searchDefault": "Google",
+        "searchOrder": ["Google", "Yahoo!", "DuckDuckGo"],
+        "visibleDefaultEngines": [
+          "google", "duckduckgo-zh-CN", "amazon-zh-CN", "wikipedia-zh-CN", "yahoo-zh-CN"
+        ]
+      }
+    },
+    "zh-TW": {
+      "default": {
+        "searchDefault": "Google",
+        "searchOrder": ["Google", "Yahoo!", "DuckDuckGo"],
+        "visibleDefaultEngines": [
+          "yahoo-zh-TW", "google", "duckduckgo-zh-TW", "yahoo-bid-zh-TW", "wikipedia-zh-TW"
+        ]
+      }
+    }
+  }
+}

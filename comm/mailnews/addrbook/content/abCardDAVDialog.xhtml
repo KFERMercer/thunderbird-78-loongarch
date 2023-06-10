@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, you can obtain one at http://mozilla.org/MPL/2.0/. -->
+
+<?xml-stylesheet href="chrome://messenger/skin/dialogs.css" type="text/css"?>
+<?xml-stylesheet href="chrome://messenger/skin/shared/cardDAV.css" type="text/css"?>
+<?xml-stylesheet href="chrome://messenger/skin/input-fields.css" type="text/css"?>
+<?xml-stylesheet href="chrome://messenger/skin/themeableDialog.css" type="text/css"?>
+
+<window data-l10n-id="carddav-window"
+        data-l10n-attrs="title"
+        xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        xmlns:html="http://www.w3.org/1999/xhtml"
+        lightweightthemes="true">
+<dialog id="carddav-dialog"
+        data-l10n-id="carddav-dialog"
+        data-l10n-attrs="buttonlabelaccept,buttonaccesskeyaccept">
+
+  <linkset>
+    <html:link rel="localization" href="messenger/addressbook/abCardDAVDialog.ftl"/>
+  </linkset>
+
+  <script src="chrome://global/content/globalOverlay.js"/>
+  <script src="chrome://global/content/editMenuOverlay.js"/>
+  <script src="chrome://messenger/content/addressbook/abCardDAVDialog.js"/>
+  <script src="chrome://messenger/content/dialogShadowDom.js"/>
+
+  <hbox id="bigScaryWarning"
+        align="center">
+    <image src="chrome://global/skin/icons/warning.svg"
+           width="32"
+           height="32"/>
+    <description data-l10n-id="carddav-experimental-warning"/>
+  </hbox>
+
+  <html:div id="carddav-properties-table">
+    <!-- <html:div>
+      <label control="carddav-provider"
+             data-l10n-id="carddav-provider-label"
+             data-l10n-attrs="value,accesskey"/>
+    </html:div>
+    <html:div class="input-container">
+      <html:select id="carddav-provider" onchange="handleChangeProvider(event);">
+      </html:select>
+    </html:div> -->
+    <html:div>
+      <label control="carddav-url"
+             data-l10n-id="carddav-url-label"
+             data-l10n-attrs="value,accesskey"/>
+    </html:div>
+    <html:div class="input-container">
+      <html:input id="carddav-url" type="url"
+                  placeholder="https://carddav.example.com/"
+                  required="required"
+                  onblur="handleCardDAVURLBlur(event);"
+                  oninput="handleCardDAVURLInput(event);"/>
+    </html:div>
+  </html:div>
+
+  <vbox id="carddav-statusArea"
+        align="center"
+        pack="center">
+    <hbox align="center"
+          pack="center">
+      <image id="statusImageBefore"/>
+      <description id="carddav-statusMessage"
+                   flex="1">&#160;</description>
+        <!-- Include 160 = nbsp, to make the element occupy the
+            full height, for at least one line. With a normal space,
+            it does not have sufficient height. -->
+    </hbox>
+  </vbox>
+
+  <vbox id="carddav-resultsArea"
+        hidden="true">
+    <label data-l10n-id="carddav-available-books"/>
+    <vbox id="carddav-availableBooks"></vbox>
+  </vbox>
+</dialog>
+</window>

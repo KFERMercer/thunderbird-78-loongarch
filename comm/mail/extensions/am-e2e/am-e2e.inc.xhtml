@@ -1,0 +1,228 @@
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
+    <vbox id="e2eEditing">
+
+      <stringbundle id="bundle_e2e" src="chrome://messenger/locale/am-smime.properties"/>
+      <stringbundle id="bundle_brand" src="chrome://branding/locale/brand.properties"/>
+
+      <linkset>
+        <html:link rel="localization" href="messenger/openpgp/openpgp.ftl"/>
+      </linkset>
+
+      <label hidden="true" wsm_persist="true" id="identity_encryptionpolicy"/>
+      <label hidden="true" wsm_persist="true" id="identity_e2etechpref"/>
+
+      <vbox>
+        <description flex="1">
+          <html:p class="intro-paragraph"
+                  data-l10n-id="e2e-intro-description"></html:p>
+          <html:span class="tail-with-learn-more"
+                     data-l10n-id="e2e-intro-description-more"></html:span>
+          <label is="text-link" id="acceptLearnMoreE2E"
+                 href="https://support.mozilla.org/kb/introduction-to-e2e-encryption"
+                 value="&e2eLearnMore.label;"/>
+        </description>
+      </vbox>
+
+#ifdef MOZ_OPENPGP
+      <html:div>
+        <html:fieldset id="openpgpOptions" class="openpgp-item"
+                       aria-describedby="openPgpDescription">
+          <html:legend>&openpgpKeys.label;</html:legend>
+
+          <vbox data-subcategory="openpgp" class="openpgp-container">
+            <hbox align="center" class="opengpg-intro-section">
+              <image id="openPgpKey"/>
+              <vbox flex="1">
+                <description class="description-with-side-element openpgp-description">
+                  <html:p id="openPgpDescription"></html:p>
+                  <image id="openPgpStatusImage" class="openpgp-status"
+                         hidden="true"/>
+                  <html:span id="openPgpSelectionStatus"
+                             class="tail-with-learn-more"
+                             hidden="hidden"></html:span>
+                  <label is="text-link" id="openPgpLearnMore"
+                         href="https://support.mozilla.org/kb/introduction-to-e2e-encryption"
+                         data-l10n-id="e2e-learn-more"
+                         class="learnMore"
+                         hidden="true"/>
+                </description>
+              </vbox>
+              <vbox>
+                <!-- Please don't remove the wrapping hbox/vbox/box for these elements. It's used to properly compute the search tooltip position. -->
+                <hbox>
+                  <button id="addOpenPgpButton"
+                          data-l10n-id="openpgp-add-key-button"
+                          oncommand="openKeyWizard();"
+                          class="accessory-button openpgp-add-key-button openpgp-image-btn"
+                          flex="1"/>
+                </hbox>
+              </vbox>
+            </hbox>
+
+            <hbox id="openPgpNotification"
+                  class="inline-notification-container success-container"
+                  collapsed="true">
+              <hbox class="inline-notification-wrapper align-center">
+                <image class="notification-image notification-image-success"/>
+                <description id="openPgpNotificationDescription"/>
+                <button class="close-icon" oncommand="closeNotification()"/>
+              </hbox>
+            </hbox>
+
+            <vbox id="openPgpKeyList">
+              <radiogroup id="openPgpKeyListRadio">
+                <vbox id="openPgpOptionNone" class="content-blocking-category">
+                  <hbox>
+                    <radio id="openPgpNone"
+                          value=""
+                          data-l10n-id="openpgp-radio-none"
+                          flex="1"/>
+                  </hbox>
+                  <vbox class="indent">
+                    <description data-l10n-id="openpgp-radio-none-desc"/>
+                  </vbox>
+                </vbox>
+                <!-- All available keys will be appended here. -->
+              </radiogroup>
+            </vbox>
+          </vbox>
+
+          <separator/>
+
+          <description flex="1" data-l10n-id="openpgp-manager-description"/>
+
+          <separator class="thin"/>
+
+          <hbox>
+            <button id="openOpenPGPKeyManagerButton"
+                    data-l10n-id="openpgp-manager-button"
+                    class="first-element"
+                    oncommand="openKeyManager()"/>
+          </hbox>
+        </html:fieldset>
+      </html:div>
+
+      <separator/>
+#endif
+
+      <html:div>
+      <html:fieldset id="smimeOptions">
+        <html:legend>&certificates2.label;</html:legend>
+
+        <label id="identity_signing_cert_nameLabel"
+               value="&signingCert2.message;" control="identity_signing_cert_name"
+               prefstring="mail.identity.%identitykey%.encryptionpolicy"/>
+
+        <hbox align="center" class="input-container">
+          <html:input id="identity_signing_cert_name" type="text"
+                      class="input-inline"
+                      readonly="readonly"
+                      disabled="disabled"
+                      aria-labelledby="identity_signing_cert_nameLabel"
+                      wsm_persist="true"
+                      prefstring="mail.identity.%identitykey%.signing_cert_name"/>
+
+          <button id="signingCertSelectButton"
+                  label="&digitalSign.certificate.button;"
+                  accesskey="&digitalSign.certificate.accesskey;"
+                  oncommand="smimeSelectCert('identity_signing_cert_name')"/>
+
+          <button id="signingCertClearButton"
+                  label="&digitalSign.certificate_clear.button;"
+                  accesskey="&digitalSign.certificate_clear.accesskey;"
+                  oncommand="smimeClearCert('identity_signing_cert_name')"/>
+        </hbox>
+
+        <separator class="thin"/>
+
+        <label value="&encryptionCert2.message;"
+               control="identity_encryption_cert_name"/>
+
+        <hbox align="center" class="input-container">
+          <html:input id="identity_encryption_cert_name" type="text"
+                      class="input-inline"
+                      readonly="readonly"
+                      disabled="disabled"
+                      wsm_persist="true"
+                      prefstring="mail.identity.%identitykey%.encryption_cert_name"/>
+
+          <button id="encryptionCertSelectButton"
+                  label="&encryption.certificate.button;"
+                  accesskey="&encryption.certificate.accesskey;"
+                  oncommand="smimeSelectCert('identity_encryption_cert_name')"/>
+
+          <button id="encryptionCertClearButton"
+                  label="&encryption.certificate_clear.button;"
+                  accesskey="&encryption.certificate_clear.accesskey;"
+                  oncommand="smimeClearCert('identity_encryption_cert_name')"/>
+        </hbox>
+
+        <separator class="thin"/>
+
+        <hbox align="right">
+          <button id="openCertManagerButton" oncommand="openCertManager();"
+                  label="&manageCerts3.label;" accesskey="&manageCerts3.accesskey;"/>
+          <button id="openDeviceManagerButton" oncommand="openDeviceManager();"
+                  label="&manageDevices2.label;" accesskey="&manageDevices2.accesskey;"/>
+        </hbox>
+
+      </html:fieldset>
+      </html:div>
+
+      <separator/>
+
+      <html:legend>&sendingDefaults.label;</html:legend>
+
+      <html:div>
+      <html:fieldset id="encryption_titlebox">
+        <description flex="1">&e2eEnc.description;</description>
+
+        <radiogroup id="encryptionChoices" class="indent">
+          <radio id="encrypt_no" wsm_persist="true" value="0"
+                 label="&doNotEncrypt.label;"
+                 accesskey="&doNotEncrypt.accesskey;"/>
+          <!--
+          <radio id="encrypt_allow" wsm_persist="true" value="1"
+                 label=""/>
+          -->
+          <radio id="encrypt_require" wsm_persist="true" value="2"
+                 label="&requireEncryptMessage.label;"
+                 accesskey="&requireEncryptMessage.accesskey;"/>
+        </radiogroup>
+
+        <hbox class="indent">
+          <description flex="1" class="option-description tip-caption">
+            &e2eeReqWarning.description;
+          </description>
+        </hbox>
+
+        <separator/>
+
+        <description flex="1">&e2eSigning.description;</description>
+        <checkbox id="identity_sign_mail" wsm_persist="true"
+                  prefstring="mail.identity.%identitykey%.sign_mail"
+                  label="&signMessage2.label;" accesskey="&signMessage.accesskey;"/>
+
+#ifdef MOZ_OPENPGP
+        <separator/>
+
+        <html:div class="openpgp-item">
+        <description>&e2eTechPref.description;</description>
+        <radiogroup id="technologyChoices" class="indent">
+          <radio id="technology_automatic" wsm_persist="true" value="0"
+                 label="&technologyAutomatic.label;"/>
+
+          <radio id="technology_prefer_openpgp" wsm_persist="true" value="2"
+                 label="&technologyOpenPGP.label;"/>
+
+          <radio id="technology_prefer_smime" wsm_persist="true" value="1"
+                 label="&technologySMIME.label;"/>
+        </radiogroup>
+        </html:div>
+#endif
+      </html:fieldset>
+      </html:div>
+    </vbox>

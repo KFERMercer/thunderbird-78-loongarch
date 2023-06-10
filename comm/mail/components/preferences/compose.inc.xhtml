@@ -1,0 +1,335 @@
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at http://mozilla.org/MPL/2.0/.
+  <script src="chrome://messenger/content/preferences/compose.js"/>
+  <script src="chrome://global/content/contentAreaUtils.js"/>
+  <script src="chrome://messenger/content/preferences/downloads.js"/>
+  <script src="chrome://communicator/content/utilityOverlay.js"/>
+
+  <stringbundle id="bundle_addressBook" src="chrome://messenger/locale/addressbook/addressBook.properties"/>
+  <html:template id="paneCompose">
+    <hbox id="compositionMainCategory"
+          class="subcategory"
+          data-category="paneCompose">
+      <html:h1 data-l10n-id="composition-category-header"/>
+    </hbox>
+
+    <html:div data-category="paneCompose">
+    <html:fieldset data-category="paneCompose">
+      <separator class="thin"/>
+      <hbox align="center">
+        <label data-l10n-id="forward-label" control="forwardMessageMode"/>
+        <hbox>
+          <menulist id="forwardMessageMode" preference="mail.forward_message_mode">
+            <menupopup>
+              <menuitem value="2" data-l10n-id="inline-label"/>
+              <menuitem value="0" data-l10n-id="as-attachment-label"/>
+            </menupopup>
+          </menulist>
+        </hbox>
+        <separator orient="vertical" class="thin"/>
+        <checkbox id="addExtension" preference="mail.forward_add_extension"
+                  data-l10n-id="extension-label"/>
+      </hbox>
+
+      <separator class="thin"/>
+
+      <hbox align="center" pack="start">
+        <checkbox id="autoSave" preference="mail.compose.autosave"
+                  data-l10n-id="auto-save-label"/>
+        <html:input id="autoSaveInterval" type="number" class="size2"
+                    min="1" max="35790"
+                    preference="mail.compose.autosaveinterval"
+                    aria-labelledby="autoSave autoSaveInterval autoSaveEnd"/>
+        <label id="autoSaveEnd" data-l10n-id="auto-save-end"/>
+      </hbox>
+      <hbox>
+        <checkbox id="mailWarnOnSendAccelKey"
+                  data-l10n-id="warn-on-send-accel-key"
+                  preference="mail.warn_on_send_accel_key"/>
+        <spacer flex="1"/>
+      </hbox>
+    </html:fieldset>
+    </html:div>
+
+    <html:div data-category="paneCompose">
+    <html:fieldset data-category="paneCompose">
+      <html:legend data-l10n-id="composition-spelling-title"></html:legend>
+      <hbox>
+        <checkbox id="spellCheckBeforeSend"
+                  data-l10n-id="spellcheck-label"
+                  preference="mail.SpellCheckBeforeSend"/>
+        <spacer flex="1"/>
+      </hbox>
+      <hbox>
+        <checkbox id="inlineSpellCheck"
+                  data-l10n-id="spellcheck-inline-label"
+                  preference="mail.spellcheck.inline"/>
+        <spacer flex="1"/>
+      </hbox>
+
+      <separator class="thin"/>
+
+      <hbox align="center" pack="start">
+        <label data-l10n-id="language-popup-label" control="languageMenuList"/>
+        <hbox flex="1">
+          <menulist id="languageMenuList" preference="spellchecker.dictionary" flex="1">
+            <menupopup onpopupshowing="gComposePane.initLanguageMenu();">
+              <!-- dynamic content populated by JS -->
+            </menupopup>
+          </menulist>
+        </hbox>
+        <label id="downloadDictionaries" class="text-link"
+                onclick="if (event.button == 0) { openDictionaryList('tab'); }"
+                data-l10n-id="download-dictionaries-link"/>
+        <spacer flex="1"/>
+      </hbox>
+    </html:fieldset>
+    </html:div>
+
+    <html:div data-category="paneCompose">
+    <html:fieldset data-category="paneCompose">
+      <html:legend data-l10n-id="compose-html-style-title"></html:legend>
+      <hbox>
+        <vbox flex="1">
+          <hbox align="center">
+            <label control="FontSelect" data-l10n-id="font-label"/>
+            <hbox flex="1">
+              <menulist id="FontSelect" preference="msgcompose.font_face"
+                        sizetopopup="pref" crop="center" flex="1">
+                <menupopup>
+                  <menuitem value="" label="&fontVarWidth.label;"/>
+                  <menuitem value="monospace" label="&fontFixedWidth.label;"/>
+                  <menuseparator/>
+                  <menuitem value="Helvetica, Arial, sans-serif" label="&fontHelvetica.label;"/>
+                  <menuitem value="Times New Roman, Times, serif" label="&fontTimes.label;"/>
+                  <menuitem value="Courier New, Courier, monospace" label="&fontCourier.label;"/>
+                  <menuseparator/>
+                </menupopup>
+              </menulist>
+            </hbox>
+
+            <label control="fontSizeSelect" data-l10n-id="font-size-label"/>
+            <hbox>
+              <menulist id="fontSizeSelect" preference="msgcompose.font_size">
+                <menupopup>
+                  <menuitem value="x-small" label="&size-tinyCmd.label;"/>
+                  <menuitem value="small" label="&size-smallCmd.label;"/>
+                  <menuitem value="medium" label="&size-mediumCmd.label;"/>
+                  <menuitem value="large" label="&size-largeCmd.label;"/>
+                  <menuitem value="x-large" label="&size-extraLargeCmd.label;"/>
+                  <menuitem value="xx-large" label="&size-hugeCmd.label;"/>
+                </menupopup>
+              </menulist>
+            </hbox>
+          </hbox>
+
+          <separator class="thin"/>
+
+          <hbox align="center">
+            <checkbox id="useReaderDefaults"
+                      data-l10n-id="default-colors-label"
+                      preference="msgcompose.default_colors"/>
+          </hbox>
+          <hbox align="center" class="indent">
+            <label id="textColorLabel"
+                   control="textColorButton"
+                   data-l10n-id="font-color-label"/>
+            <html:input type="color" id="textColorButton" preference="msgcompose.text_color"/>
+            <separator orient="vertical" class="thin"/>
+            <label id="backgroundColorLabel"
+                   control="backgroundColorButton"
+                   data-l10n-id="bg-color-label"/>
+            <html:input type="color" id="backgroundColorButton" preference="msgcompose.background_color"/>
+          </hbox>
+        </vbox>
+        <vbox>
+          <spacer flex="1"/>
+          <button is="highlightable-button"
+                  data-l10n-id="restore-html-label"
+                  oncommand="gComposePane.restoreHTMLDefaults();"/>
+        </vbox>
+      </hbox>
+
+      <separator class="thin"/>
+
+      <hbox align="center">
+        <checkbox id="defaultToParagraph"
+                  data-l10n-id="default-format-label"
+                  preference="mail.compose.default_to_paragraph"/>
+      </hbox>
+
+      <hbox align="center">
+        <description flex="1" data-l10n-id="format-description"/>
+        <hbox>
+          <button is="highlightable-button"
+                  data-l10n-id="send-options-label"
+                  search-l10n-ids="
+                    sendoptions-dialog-window.title,
+                    send-mail-title,
+                    auto-downgrade-label.label,
+                    default-html-format-label,
+                    html-format-ask.label,
+                    html-format-convert.label,
+                    html-format-send-html.label,
+                    html-format-send-both.label,
+                    default-html-format-info,
+                    html-tab-label.label,
+                    plain-tab-label.label,
+                    send-message-domain-label,
+                    add-domain-button.label,
+                    delete-domain-button.label"
+                  oncommand="gComposePane.sendOptionsDialog();"/>
+        </hbox>
+      </hbox>
+    </html:fieldset>
+    </html:div>
+
+    <hbox id="compositionAddressingCategory"
+          class="subcategory"
+          data-category="paneCompose">
+      <html:h1 data-l10n-id="composition-addressing-header"/>
+    </hbox>
+
+    <html:div data-category="paneCompose">
+    <html:fieldset data-category="paneCompose">
+      <!-- Address Autocomplete -->
+      <separator class="thin"/>
+
+      <description data-l10n-id="autocomplete-description"/>
+
+      <hbox align="center">
+        <checkbox id="addressingAutocomplete" data-l10n-id="ab-label"
+                  preference="mail.enable_autocomplete"/>
+      </hbox>
+
+      <hbox align="center">
+        <checkbox id="autocompleteLDAP" data-l10n-id="directories-label"
+                  preference="ldap_2.autoComplete.useDirectory"/>
+        <hbox flex="1">
+          <menulist is="menulist-addrbooks" id="directoriesList"
+                    aria-labelledby="autocompleteLDAP"
+                    preference="ldap_2.autoComplete.directoryServer"
+                    data-l10n-id="directories-none-label"
+                    data-l10n-attrs="none"
+                    remoteonly="true"
+                    flex="1"/>
+        </hbox>
+        <button is="highlightable-button" id="editButton"
+                data-l10n-id="edit-directories-label"
+                oncommand="gComposePane.editDirectories();"
+                preference="pref.ldap.disable_button.edit_directories"/>
+      </hbox>
+
+      <separator class="thin"/>
+
+      <hbox align="center" pack="start">
+        <checkbox id="emailCollectionOutgoing" data-l10n-id="email-picker-label"
+                  preference="mail.collect_email_address_outgoing"/>
+        <hbox flex="1">
+          <menulist is="menulist-addrbooks" id="localDirectoriesList"
+                    aria-labelledby="emailCollectionOutgoing"
+                    preference="mail.collect_addressbook"
+                    localonly="true"
+                    writable="true"
+                    flex="1"/>
+        </hbox>
+      </hbox>
+
+      <hbox align="center" pack="start">
+        <label data-l10n-id="default-directory-label"
+               control="defaultStartupDirList"/>
+        <hbox flex="1">
+          <menulist is="menulist-addrbooks" id="defaultStartupDirList"
+                    oncommand="gComposePane.setDefaultStartupDir(this.value);"
+                    data-l10n-id="default-last-label"
+                    data-l10n-attrs="none"
+                    alladdressbooks="true"
+                    mailinglists="true"
+                    flex="1"/>
+        </hbox>
+      </hbox>
+    </html:fieldset>
+    </html:div>
+
+    <hbox id="compositionAttachmentsCategory"
+          class="subcategory"
+          data-category="paneCompose">
+      <html:h1 data-l10n-id="composition-attachments-header"/>
+    </hbox>
+
+    <html:div data-category="paneCompose">
+    <html:fieldset data-category="paneCompose">
+      <hbox align="center">
+        <checkbox id="attachment_reminder_label"
+                  data-l10n-id="attachment-label"
+                  preference="mail.compose.attachment_reminder"/>
+        <spacer flex="1"/>
+        <hbox>
+          <button is="highlightable-button" id="attachment_reminder_button"
+                  data-l10n-id="attachment-options-label"
+                  oncommand="gComposePane.attachmentReminderOptionsDialog();"
+                  search-l10n-ids="
+                    attachment-reminder-window.title,
+                    attachment-reminder-label,
+                    keyword-new-button.label,
+                    keyword-edit-button.label,
+                    keyword-remove-button.label,
+                    new-keyword-title,
+                    new-keyword-label,
+                    edit-keyword-title,
+                    edit-keyword-label"/>
+        </hbox>
+      </hbox>
+      <vbox id="cloudFileBox" flex="1">
+        <hbox id="cloudFileToggleAndThreshold" align="center">
+          <checkbox id="enableThreshold"
+                    data-l10n-id="enable-cloud-share"
+                    preference="mail.compose.big_attachments.notify"/>
+          <html:input id="cloudFileThreshold" type="number" class="size3"
+                      preference="mail.compose.big_attachments.threshold_kb"/>
+          <label control="cloudFileThreshold" data-l10n-id="cloud-share-size"/>
+        </hbox>
+        <hbox flex="1" style="height: 480px;">
+          <vbox id="provider-listing">
+            <richlistbox id="cloudFileView" orient="vertical" flex="1"
+                         seltype="single"
+                         onoverflow="gCloudFile.onListOverflow();"
+                         onselect="gCloudFile.onSelectionChanged(event);">
+            </richlistbox>
+            <vbox id="addCloudFileAccountButtons">
+            </vbox>
+            <hbox>
+              <menulist id="addCloudFileAccount"
+                        hidden="true"
+                        data-l10n-id="add-cloud-account"
+                        data-l10n-attrs="defaultlabel"
+                        oncommand="gCloudFile.addCloudFileAccount(this.value);">
+                <menupopup id="addCloudFileAccountListItems"/>
+              </menulist>
+            </hbox>
+            <button is="highlightable-button" id="removeCloudFileAccount"
+                    disabled="true"
+                    data-l10n-id="remove-cloud-account"
+                    oncommand="gCloudFile.removeCloudFileAccount();"/>
+            <label is="text-link"
+                   id="moreProvidersLink"
+                   href="https://addons.thunderbird.net/thunderbird/tag/filelink"
+                   data-l10n-id="find-cloud-providers"/>
+          </vbox>
+          <separator class="thin" orient="vertical"/>
+          <vbox flex="1">
+            <deck id="cloudFileSettingsDeck" flex="1">
+              <vbox id="cloudFileDefaultPanel" flex="1">
+                <description data-l10n-id="cloud-account-description"/>
+              </vbox>
+              <vbox id="cloudFileSettingsWrapper" flex="1">
+              </vbox>
+            </deck>
+          </vbox>
+        </hbox>
+      </vbox>
+    </html:fieldset>
+    </html:div>
+
+  </html:template>

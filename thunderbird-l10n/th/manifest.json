@@ -1,0 +1,57 @@
+{
+  "applications": {
+    "gecko": {
+      "strict_min_version": "78.0",
+      "id": "langpack-th@thunderbird.mozilla.org",
+      "strict_max_version": "78.*"
+    }
+  },
+  "name": "ไทย Language Pack",
+  "version": "78.0buildid20210901192859",
+  "languages": {
+    "th": {
+      "chrome_resources": {
+        "devtools-shared": "chrome/th/locale/th/devtools/shared/",
+        "calendar": "chrome/th/locale/th/calendar/",
+        "communicator": "chrome/th/locale/th/communicator/",
+        "lightning": "chrome/th/locale/th/lightning/",
+        "global": "chrome/th/locale/th/global/",
+        "pippki": "chrome/th/locale/th/pippki/",
+        "places": "chrome/th/locale/th/places/",
+        "branding": "chrome/th/locale/th/branding/",
+        "pluginproblem": "chrome/th/locale/th/pluginproblem/",
+        "autoconfig": "chrome/th/locale/th/autoconfig/",
+        "messenger-newsblog": "chrome/th/locale/th/messenger-newsblog/",
+        "global-platform": {
+          "android": "chrome/th/locale/th/global-platform/unix/",
+          "linux": "chrome/th/locale/th/global-platform/unix/",
+          "macosx": "chrome/th/locale/th/global-platform/mac/",
+          "win": "chrome/th/locale/th/global-platform/win/"
+        },
+        "mozapps": "chrome/th/locale/th/mozapps/",
+        "necko": "chrome/th/locale/th/necko/",
+        "messenger-region": "chrome/th/locale/th/messenger-region/",
+        "alerts": "chrome/th/locale/th/alerts/",
+        "pipnss": "chrome/th/locale/th/pipnss/",
+        "messenger": "chrome/th/locale/th/messenger/",
+        "devtools": "chrome/th/locale/th/devtools/client/",
+        "mozldap": "chrome/th/locale/th/mozldap/",
+        "passwordmgr": "chrome/th/locale/th/passwordmgr/",
+        "chat": "chrome/th/locale/th/chat/",
+        "messenger-mapi": "chrome/th/locale/th/messenger-mapi/",
+        "messenger-smime": "chrome/th/locale/th/messenger-smime/",
+        "devtools-startup": "chrome/th/locale/th/devtools/startup/"
+      },
+      "version": "20200906205509"
+    }
+  },
+  "langpack_id": "th",
+  "sources": {
+    "browser": {
+      "base_path": "browser/"
+    }
+  },
+  "author": "mozilla.org",
+  "description": "Language pack for Thunderbird for th",
+  "manifest_version": 2
+}

@@ -1,0 +1,57 @@
+{
+  "languages": {
+    "cy": {
+      "version": "20200904103442",
+      "chrome_resources": {
+        "chat": "chrome/cy/locale/cy/chat/",
+        "autoconfig": "chrome/cy/locale/cy/autoconfig/",
+        "global": "chrome/cy/locale/cy/global/",
+        "calendar": "chrome/cy/locale/cy/calendar/",
+        "devtools-startup": "chrome/cy/locale/cy/devtools/startup/",
+        "communicator": "chrome/cy/locale/cy/communicator/",
+        "pipnss": "chrome/cy/locale/cy/pipnss/",
+        "alerts": "chrome/cy/locale/cy/alerts/",
+        "places": "chrome/cy/locale/cy/places/",
+        "global-platform": {
+          "android": "chrome/cy/locale/cy/global-platform/unix/",
+          "linux": "chrome/cy/locale/cy/global-platform/unix/",
+          "win": "chrome/cy/locale/cy/global-platform/win/",
+          "macosx": "chrome/cy/locale/cy/global-platform/mac/"
+        },
+        "devtools": "chrome/cy/locale/cy/devtools/client/",
+        "pippki": "chrome/cy/locale/cy/pippki/",
+        "messenger-mapi": "chrome/cy/locale/cy/messenger-mapi/",
+        "messenger": "chrome/cy/locale/cy/messenger/",
+        "mozapps": "chrome/cy/locale/cy/mozapps/",
+        "mozldap": "chrome/cy/locale/cy/mozldap/",
+        "messenger-smime": "chrome/cy/locale/cy/messenger-smime/",
+        "passwordmgr": "chrome/cy/locale/cy/passwordmgr/",
+        "lightning": "chrome/cy/locale/cy/lightning/",
+        "necko": "chrome/cy/locale/cy/necko/",
+        "devtools-shared": "chrome/cy/locale/cy/devtools/shared/",
+        "pluginproblem": "chrome/cy/locale/cy/pluginproblem/",
+        "branding": "chrome/cy/locale/cy/branding/",
+        "messenger-region": "chrome/cy/locale/cy/messenger-region/",
+        "messenger-newsblog": "chrome/cy/locale/cy/messenger-newsblog/"
+      }
+    }
+  },
+  "version": "78.0buildid20210901192859",
+  "manifest_version": 2,
+  "name": "Cymraeg Language Pack",
+  "description": "Language pack for Thunderbird for cy",
+  "langpack_id": "cy",
+  "sources": {
+    "browser": {
+      "base_path": "browser/"
+    }
+  },
+  "applications": {
+    "gecko": {
+      "strict_max_version": "78.*",
+      "strict_min_version": "78.0",
+      "id": "langpack-cy@thunderbird.mozilla.org"
+    }
+  },
+  "author": "mozilla.org (contributors: Rhoslyn Prys)"
+}

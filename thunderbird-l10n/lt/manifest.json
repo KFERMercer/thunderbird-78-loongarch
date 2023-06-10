@@ -1,0 +1,57 @@
+{
+  "sources": {
+    "browser": {
+      "base_path": "browser/"
+    }
+  },
+  "applications": {
+    "gecko": {
+      "strict_min_version": "78.0",
+      "id": "langpack-lt@thunderbird.mozilla.org",
+      "strict_max_version": "78.*"
+    }
+  },
+  "author": "Mozilla Lietuvoje (contributors: Gintautas Grigas, Tatjana Jevsikova, Rimas Kudelis, Sigita Pedzevičienė)",
+  "name": "Lietuvių Language Pack",
+  "langpack_id": "lt",
+  "languages": {
+    "lt": {
+      "version": "20200906110547",
+      "chrome_resources": {
+        "calendar": "chrome/lt/locale/lt/calendar/",
+        "branding": "chrome/lt/locale/lt/branding/",
+        "places": "chrome/lt/locale/lt/places/",
+        "necko": "chrome/lt/locale/lt/necko/",
+        "mozldap": "chrome/lt/locale/lt/mozldap/",
+        "messenger-newsblog": "chrome/lt/locale/lt/messenger-newsblog/",
+        "pipnss": "chrome/lt/locale/lt/pipnss/",
+        "messenger-smime": "chrome/lt/locale/lt/messenger-smime/",
+        "mozapps": "chrome/lt/locale/lt/mozapps/",
+        "devtools": "chrome/lt/locale/lt/devtools/client/",
+        "messenger-mapi": "chrome/lt/locale/lt/messenger-mapi/",
+        "alerts": "chrome/lt/locale/lt/alerts/",
+        "devtools-startup": "chrome/lt/locale/lt/devtools/startup/",
+        "pippki": "chrome/lt/locale/lt/pippki/",
+        "devtools-shared": "chrome/lt/locale/lt/devtools/shared/",
+        "global": "chrome/lt/locale/lt/global/",
+        "chat": "chrome/lt/locale/lt/chat/",
+        "lightning": "chrome/lt/locale/lt/lightning/",
+        "communicator": "chrome/lt/locale/lt/communicator/",
+        "passwordmgr": "chrome/lt/locale/lt/passwordmgr/",
+        "autoconfig": "chrome/lt/locale/lt/autoconfig/",
+        "messenger-region": "chrome/lt/locale/lt/messenger-region/",
+        "messenger": "chrome/lt/locale/lt/messenger/",
+        "global-platform": {
+          "linux": "chrome/lt/locale/lt/global-platform/unix/",
+          "macosx": "chrome/lt/locale/lt/global-platform/mac/",
+          "win": "chrome/lt/locale/lt/global-platform/win/",
+          "android": "chrome/lt/locale/lt/global-platform/unix/"
+        },
+        "pluginproblem": "chrome/lt/locale/lt/pluginproblem/"
+      }
+    }
+  },
+  "version": "78.0buildid20210901192859",
+  "manifest_version": 2,
+  "description": "Language pack for Thunderbird for lt"
+}

@@ -1,0 +1,57 @@
+{
+  "manifest_version": 2,
+  "applications": {
+    "gecko": {
+      "strict_max_version": "78.*",
+      "id": "langpack-da@thunderbird.mozilla.org",
+      "strict_min_version": "78.0"
+    }
+  },
+  "description": "Language pack for Thunderbird for da",
+  "name": "Dansk (da) Language Pack",
+  "languages": {
+    "da": {
+      "version": "20200906195453",
+      "chrome_resources": {
+        "lightning": "chrome/da/locale/da/lightning/",
+        "mozldap": "chrome/da/locale/da/mozldap/",
+        "communicator": "chrome/da/locale/da/communicator/",
+        "autoconfig": "chrome/da/locale/da/autoconfig/",
+        "messenger": "chrome/da/locale/da/messenger/",
+        "pipnss": "chrome/da/locale/da/pipnss/",
+        "global": "chrome/da/locale/da/global/",
+        "messenger-region": "chrome/da/locale/da/messenger-region/",
+        "messenger-mapi": "chrome/da/locale/da/messenger-mapi/",
+        "messenger-smime": "chrome/da/locale/da/messenger-smime/",
+        "chat": "chrome/da/locale/da/chat/",
+        "mozapps": "chrome/da/locale/da/mozapps/",
+        "devtools-shared": "chrome/da/locale/da/devtools/shared/",
+        "devtools-startup": "chrome/da/locale/da/devtools/startup/",
+        "messenger-newsblog": "chrome/da/locale/da/messenger-newsblog/",
+        "devtools": "chrome/da/locale/da/devtools/client/",
+        "pluginproblem": "chrome/da/locale/da/pluginproblem/",
+        "global-platform": {
+          "android": "chrome/da/locale/da/global-platform/unix/",
+          "linux": "chrome/da/locale/da/global-platform/unix/",
+          "macosx": "chrome/da/locale/da/global-platform/mac/",
+          "win": "chrome/da/locale/da/global-platform/win/"
+        },
+        "pippki": "chrome/da/locale/da/pippki/",
+        "passwordmgr": "chrome/da/locale/da/passwordmgr/",
+        "calendar": "chrome/da/locale/da/calendar/",
+        "places": "chrome/da/locale/da/places/",
+        "necko": "chrome/da/locale/da/necko/",
+        "alerts": "chrome/da/locale/da/alerts/",
+        "branding": "chrome/da/locale/da/branding/"
+      }
+    }
+  },
+  "version": "78.0buildid20210901192859",
+  "langpack_id": "da",
+  "sources": {
+    "browser": {
+      "base_path": "browser/"
+    }
+  },
+  "author": "mozilla.org (contributors: Kim Ludvigsen, Jørgen Rasmussen, Mikkel Herold)"
+}

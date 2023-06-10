@@ -1,0 +1,57 @@
+{
+  "manifest_version": 2,
+  "description": "Language pack for Thunderbird for hr",
+  "author": "mozilla.org (contributors: Mihovil Stanić, Saša Teković)",
+  "languages": {
+    "hr": {
+      "chrome_resources": {
+        "pluginproblem": "chrome/hr/locale/hr/pluginproblem/",
+        "devtools-startup": "chrome/hr/locale/hr/devtools/startup/",
+        "global": "chrome/hr/locale/hr/global/",
+        "mozapps": "chrome/hr/locale/hr/mozapps/",
+        "chat": "chrome/hr/locale/hr/chat/",
+        "messenger-smime": "chrome/hr/locale/hr/messenger-smime/",
+        "passwordmgr": "chrome/hr/locale/hr/passwordmgr/",
+        "mozldap": "chrome/hr/locale/hr/mozldap/",
+        "devtools-shared": "chrome/hr/locale/hr/devtools/shared/",
+        "communicator": "chrome/hr/locale/hr/communicator/",
+        "branding": "chrome/hr/locale/hr/branding/",
+        "autoconfig": "chrome/hr/locale/hr/autoconfig/",
+        "places": "chrome/hr/locale/hr/places/",
+        "messenger-region": "chrome/hr/locale/hr/messenger-region/",
+        "global-platform": {
+          "android": "chrome/hr/locale/hr/global-platform/unix/",
+          "macosx": "chrome/hr/locale/hr/global-platform/mac/",
+          "win": "chrome/hr/locale/hr/global-platform/win/",
+          "linux": "chrome/hr/locale/hr/global-platform/unix/"
+        },
+        "messenger-mapi": "chrome/hr/locale/hr/messenger-mapi/",
+        "pipnss": "chrome/hr/locale/hr/pipnss/",
+        "messenger-newsblog": "chrome/hr/locale/hr/messenger-newsblog/",
+        "alerts": "chrome/hr/locale/hr/alerts/",
+        "calendar": "chrome/hr/locale/hr/calendar/",
+        "messenger": "chrome/hr/locale/hr/messenger/",
+        "devtools": "chrome/hr/locale/hr/devtools/client/",
+        "necko": "chrome/hr/locale/hr/necko/",
+        "lightning": "chrome/hr/locale/hr/lightning/",
+        "pippki": "chrome/hr/locale/hr/pippki/"
+      },
+      "version": "20200902053923"
+    }
+  },
+  "sources": {
+    "browser": {
+      "base_path": "browser/"
+    }
+  },
+  "applications": {
+    "gecko": {
+      "strict_max_version": "78.*",
+      "id": "langpack-hr@thunderbird.mozilla.org",
+      "strict_min_version": "78.0"
+    }
+  },
+  "version": "78.0buildid20210901192859",
+  "langpack_id": "hr",
+  "name": "Hrvatski (HR) Language Pack"
+}

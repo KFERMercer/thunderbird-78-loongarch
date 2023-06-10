@@ -1,0 +1,27 @@
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+<!-- Title -->
+<!-- Labels and Access Keys -->
+
+<!ENTITY addToAddressBook.label         "Voeg by: ">
+<!ENTITY addToAddressBook.accesskey     "V">
+<!ENTITY ListName.label                 "Lysnaam: ">
+<!ENTITY ListName.accesskey             "L">
+<!ENTITY ListNickName.label             "Lys-kennaam: ">
+<!ENTITY ListNickName.accesskey         "k">
+
+
+<!-- See bug 58485, when we implement drag and drop, add 'or drag addresses' back in -->
+
+<!ENTITY UpButton.label                 "Skuif op">
+<!ENTITY DownButton.label               "Skuif af">
+
+
+<!-- Title -->
+<!ENTITY mailListWindowAdd.title        "New Mailing List">
+<!ENTITY ListDescription.label          "Description: ">
+<!ENTITY ListDescription.accesskey      "D">
+<!-- See bug 58485, when we implement drag and drop, add 'or drag addresses' back in -->
+<!ENTITY AddressTitle.label             "Type email addresses to add them to the mailing list:">
+<!ENTITY AddressTitle.accesskey         "m">

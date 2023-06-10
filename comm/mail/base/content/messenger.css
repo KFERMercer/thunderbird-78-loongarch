@@ -1,0 +1,268 @@
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+/* ===== messenger.css ==================================================
+  == Content specific styles for Messenger.
+  ======================================================================= */
+@import url("chrome://messenger/content/notification.css");
+
+@namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
+
+:root {
+  --lwt-additional-images: none;
+  --lwt-background-alignment: right top;
+  --lwt-background-tiling: no-repeat;
+
+  --toolbar-bgcolor: var(--toolbar-non-lwt-bgcolor);
+  --toolbar-bgimage: var(--toolbar-non-lwt-bgimage);
+  --toolbar-color: var(--toolbar-non-lwt-textcolor);
+
+  --panelui-subview-transition-duration: 150ms;
+}
+
+/* message header widgets */
+.emailDisplayButton {
+  -moz-user-focus: normal;
+}
+
+.emailStar {
+  -moz-user-focus: normal;
+}
+
+mail-tagfield[collapsed="true"] {
+  display: none;
+}
+
+search-value {
+  display: -moz-deck;
+}
+
+.remote-gloda-search-container {
+  min-width: 10em;
+}
+
+.chromeclass-toolbar {
+  overflow-x: hidden;
+}
+
+/* Lightweight themes support */
+
+:root:-moz-lwtheme {
+  --toolbar-color: var(--lwt-text-color, inherit);
+
+  background-color: var(--lwt-accent-color);
+  color: var(--lwt-text-color);
+}
+
+:root:-moz-lwtheme[lwtheme-image] {
+  background-image: var(--lwt-header-image) !important;
+  background-repeat: no-repeat;
+  background-position: right top !important;
+}
+
+:root:-moz-lwtheme:-moz-window-inactive {
+  background-color: var(--lwt-accent-color-inactive, var(--lwt-accent-color));
+}
+
+/* Add a box to draw additional background images. */
+#LW-background-box {
+  display: none;
+}
+
+#LW-background-box:-moz-lwtheme {
+  display: block;
+  height: 60px;
+  position: fixed;
+  pointer-events: none;
+  top: 0;
+  width: -moz-available;
+}
+
+#messengerWindow[windowtype="mail:3pane"] > #LW-background-box:-moz-lwtheme {
+  z-index: -1;
+}
+
+/* Set additional backgrounds alignment relative to toolbox.
+   This rule needs to be in content to avoid CSP issues. */
+#LW-background-box:-moz-lwtheme,
+#ab-toolbox:-moz-lwtheme,
+#compose-toolbox:-moz-lwtheme {
+  background-image: var(--lwt-additional-images);
+  background-position: var(--lwt-background-alignment);
+  background-repeat: var(--lwt-background-tiling);
+}
+
+#status-bar:-moz-lwtheme {
+  background-repeat: no-repeat, var(--lwt-background-tiling);
+  background-position: bottom right, var(--lwt-background-alignment);
+  background-color: var(--lwt-accent-color);
+  background-image: var(--lwt-header-image), var(--lwt-additional-images);
+  color: var(--lwt-text-color);
+}
+
+#titlebar {
+  -moz-window-dragging: drag;
+}
+
+#messengerWindow:not([chromemargin]) > #titlebar {
+  display: none;
+}
+
+#titlebar-spacer {
+  pointer-events: none;
+}
+
+%ifndef XP_MACOSX
+toolbar[type="menubar"][autohide="true"] {
+  overflow: hidden;
+}
+
+toolbar[type="menubar"][autohide="true"][inactive="true"]:not([customizing="true"]) {
+  min-height: 0 !important;
+  height: 0 !important;
+  -moz-appearance: none !important;
+}
+%endif
+
+/* Rules to help integrate WebExtension buttons */
+
+.webextension-action > .toolbarbutton-badge-stack > .toolbarbutton-icon {
+  height: 18px;
+  width: 18px;
+}
+
+@media not all and (min-resolution: 1.1dppx) {
+  .webextension-action {
+    list-style-image: var(--webextension-toolbar-image, inherit);
+  }
+
+  toolbar[brighttext] .webextension-action {
+    list-style-image: var(--webextension-toolbar-image-light, inherit);
+  }
+
+  toolbar:not([brighttext]) .webextension-action:-moz-lwtheme {
+    list-style-image: var(--webextension-toolbar-image-dark, inherit);
+  }
+
+  .webextension-action[cui-areatype="menu-panel"] {
+    list-style-image: var(--webextension-menupanel-image, inherit);
+  }
+
+  :root[lwt-popup-brighttext] .webextension-action[cui-areatype="menu-panel"] {
+    list-style-image: var(--webextension-menupanel-image-light, inherit);
+  }
+
+  :root:not([lwt-popup-brighttext]) .webextension-action[cui-areatype="menu-panel"]:-moz-lwtheme {
+    list-style-image: var(--webextension-menupanel-image-dark, inherit);
+  }
+
+  .webextension-menuitem {
+    list-style-image: var(--webextension-menuitem-image, inherit) !important;
+  }
+}
+
+@media (min-resolution: 1.1dppx) {
+  .webextension-action {
+    list-style-image: var(--webextension-toolbar-image-2x, inherit);
+  }
+
+  toolbar[brighttext] .webextension-action {
+    list-style-image: var(--webextension-toolbar-image-2x-light, inherit);
+  }
+
+  toolbar:not([brighttext]) .webextension-action:-moz-lwtheme {
+    list-style-image: var(--webextension-toolbar-image-2x-dark, inherit);
+  }
+
+  .webextension-action[cui-areatype="menu-panel"] {
+    list-style-image: var(--webextension-menupanel-image-2x, inherit);
+  }
+
+  :root[lwt-popup-brighttext] .webextension-action[cui-areatype="menu-panel"] {
+    list-style-image: var(--webextension-menupanel-image-2x-light, inherit);
+  }
+
+  :root:not([lwt-popup-brighttext]) .webextension-action[cui-areatype="menu-panel"]:-moz-lwtheme {
+    list-style-image: var(--webextension-menupanel-image-2x-dark, inherit);
+  }
+
+  .webextension-menuitem {
+    list-style-image: var(--webextension-menuitem-image-2x, inherit) !important;
+  }
+}
+
+panelmultiview[transitioning] {
+  pointer-events: none;
+}
+
+.panel-viewcontainer {
+  overflow: hidden;
+}
+
+.panel-viewcontainer[panelopen] {
+  transition-property: height;
+  transition-timing-function: var(--animation-easing-function);
+  transition-duration: var(--panelui-subview-transition-duration);
+  will-change: height;
+}
+
+.panel-viewcontainer.offscreen {
+  display: block;
+}
+
+.panel-viewstack {
+  overflow: visible;
+  transition: height var(--panelui-subview-transition-duration);
+}
+
+/* Status panel */
+
+statuspanel {
+  position: fixed;
+  display: block;
+  margin-top: -3em;
+  left: 0;
+  z-index: 20;
+  max-width: 50%;
+  transition: opacity 120ms ease-out, visibility 120ms;
+}
+
+statuspanel:-moz-locale-dir(ltr)[mirror],
+statuspanel:-moz-locale-dir(rtl):not([mirror]) {
+  left: auto;
+  right: 0;
+}
+
+statuspanel[label=""],
+statuspanel:not([label]) {
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+}
+
+.statuspanel-inner {
+  height: 3em;
+  -moz-box-align: end;
+}
+
+/* Frame used for rendering the DevTools inspector highlighters */
+iframe.devtools-highlighter-renderer {
+  border: none;
+  pointer-events: none;
+}
+
+/* Highlighter for the Developer Toolbox */
+:root > iframe.devtools-highlighter-renderer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+}
+
+/* Show hidden toolbars in customize mode */
+toolbar[customizing="true"][collapsed="true"] {
+  visibility: visible;
+}

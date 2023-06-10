@@ -1,0 +1,31 @@
+From: Carsten Schoenert <c.schoenert@t-online.de>
+Date: Sun, 6 Oct 2019 10:03:15 +0200
+Subject: Make Thunderbird build reproducible
+
+Cherry picked from OpenSuse
+https://build.opensuse.org/request/show/732106
+---
+ python/mozbuild/mozbuild/action/langpack_manifest.py | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/python/mozbuild/mozbuild/action/langpack_manifest.py b/python/mozbuild/mozbuild/action/langpack_manifest.py
+index 4395235..1455b90 100644
+--- a/python/mozbuild/mozbuild/action/langpack_manifest.py
++++ b/python/mozbuild/mozbuild/action/langpack_manifest.py
+@@ -16,6 +16,7 @@ import os
+ import json
+ import io
+ import datetime
++import time
+ import requests
+ import mozversioncontrol
+ import mozpack.path as mozpath
+@@ -99,7 +100,7 @@ def get_timestamp_for_locale(path):
+         dt = get_dt_from_hg(path)
+ 
+     if dt is None:
+-        dt = datetime.datetime.utcnow()
++        dt = datetime.datetime.utcfromtimestamp(int(os.environ.get('SOURCE_DATE_EPOCH', time.time())))
+ 
+     dt = dt.replace(microsecond=0)
+     return dt.strftime("%Y%m%d%H%M%S")

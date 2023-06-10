@@ -1,0 +1,82 @@
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+/* ===== notification.css ===============================================
+  == Content specific styles for Notification.
+  ======================================================================= */
+
+notification {
+  --notification-button-background: #e2e2e3;
+  --notification-button-color: #0c0c0d;
+  --notification-button-border: #c2c2c3;
+  --notification-button-hover-background: #d2d2d3;
+  --notification-button-active-background: #c2c2c3;
+  --notification-button-active-border: #a2a2a3;
+}
+
+:root[lwt-tree-brighttext] notification[type="info"] {
+  background: #49494b;
+  color: #fff;
+  border-color: var(--splitter-color);
+  --notification-button-background: #636364;
+  --notification-button-color: #f9f9fa;
+  --notification-button-border: #828283;
+  --notification-button-hover-background: #777778;
+  --notification-button-active-background: #878788;
+  --notification-button-active-border: #929293;
+}
+
+notification[type="warning"] {
+  background: #fff160;
+}
+
+notification[type="info"] > hbox > .messageImage {
+  list-style-image: url("chrome://global/skin/icons/help.svg");
+}
+
+notification[type="warning"] > hbox > .messageImage {
+  list-style-image: url("chrome://global/skin/icons/warning.svg");
+}
+
+notification[type="critical"] > hbox > .messageImage {
+  list-style-image: url("chrome://global/skin/icons/error.svg");
+}
+
+notification[value="draftMsgContent"] > hbox > .messageImage {
+  list-style-image: url("chrome://messenger/skin/icons/newmsg.svg");
+}
+
+.notification-inline {
+  display: block;
+}
+
+.notification-inline notification {
+  border-width: 1px;
+  border-radius: 2px;
+}
+
+.messageText > .text-link {
+  margin-inline-start: 6px;
+}
+
+button.notification-button {
+  color: var(--notification-button-color) !important;
+  border: 1px solid var(--notification-button-border);
+  border-radius: var(--toolbarbutton-border-radius);
+  background: var(--notification-button-background);
+}
+
+button.notification-button:hover {
+  background-color: var(--notification-button-hover-background);
+}
+
+button[open="true"],
+button.notification-button:hover:active {
+  background-color: var(--notification-button-active-background);
+  border-color: var(--notification-button-active-border);
+}
+
+button.notification-button[type="menu-button"] > .button-box > button {
+  border-inline-end-color: var(--notification-button-active-border);
+}

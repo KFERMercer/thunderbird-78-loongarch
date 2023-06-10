@@ -1,0 +1,120 @@
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+@namespace html url(http://www.w3.org/1999/xhtml);
+
+richlistitem[is="chat-group-richlistitem"] {
+  -moz-box-align: center;
+}
+
+richlistitem[is="chat-contact-richlistitem"] {
+  -moz-box-align: center;
+}
+
+.startChatBubble, .closeConversationButton {
+  cursor: pointer;
+  -moz-user-focus: ignore;
+}
+
+.startChatBubble {
+  display: none;
+}
+
+richlistitem[is="chat-contact-richlistitem"][cansend]:hover .startChatBubble {
+  display: -moz-box;
+}
+
+richlistitem[is="chat-imconv-richlistitem"] {
+  -moz-box-align: center;
+}
+
+.convUnreadCount[value="0"],
+.convUnreadTargetedCount[value="0"] {
+  display: none;
+}
+
+#contextPaneFlexibleBox {
+  overflow: hidden;
+}
+
+#statusTypeIcon:not([disabled]) {
+  cursor: pointer;
+}
+
+.status-container {
+  width: 15em;
+}
+
+#statusMessageLabel:not([statusType="offline"]):not([disabled]), .statusMessageInput[editable] {
+  cursor: text;
+}
+
+#statusMessageInput[editing], .statusMessageInput[editing] {
+  -moz-appearance: textfield;
+}
+
+#statusMessageInput.status-message-input {
+  margin: 0;
+}
+
+toolbar[mode="text"] #button-chat {
+  -moz-box-orient: horizontal;
+}
+
+.badgeButton-badge {
+  display: none;
+  background-color: red;
+  border: 1px solid white;
+  border-radius: 12px;
+  box-shadow: 1px 1px 1px black;
+  color: white;
+  font: 8px Helvetica, Verdana, Tahoma;
+  height: 11px;
+  min-width: 11px;
+  text-align: center;
+  margin-top: -1px;
+  margin-inline-start: 5px;
+  margin-inline-end: 0;
+  margin-bottom: 5px;
+  padding: 0 2px;
+}
+
+toolbar[mode="text"] .badgeButton-badge {
+  margin: 0;
+  margin-bottom: 3px;
+}
+
+#button-chat[showingBadge="true"] > stack > .badgeButton-badge {
+  display: block;
+}
+
+.badgeButton-badgeLabel {
+  margin: 0;
+}
+
+#joinChatGrid {
+  display: inline-grid;
+  grid-template-columns: auto auto auto;
+}
+
+#joinChatGrid textbox, menulist {
+  width: 100%;
+}
+
+#joinChatGrid html|div {
+  display: flex;
+  align-items: center;
+}
+
+#joinChatGrid html|div html|input:not([type="number"]):not([type="color"]) {
+  flex: 1;
+}
+
+.required {
+  visibility: hidden;
+}
+
+#participantCount {
+  background: transparent;
+}

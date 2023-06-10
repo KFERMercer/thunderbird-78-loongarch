@@ -1,0 +1,57 @@
+{
+  "version": "78.0buildid20210901192859",
+  "author": "mozilla.org (contributors: Marcelo Poli)",
+  "langpack_id": "es-AR",
+  "languages": {
+    "es-AR": {
+      "version": "20200905054530",
+      "chrome_resources": {
+        "devtools-shared": "chrome/es-AR/locale/es-AR/devtools/shared/",
+        "messenger": "chrome/es-AR/locale/es-AR/messenger/",
+        "chat": "chrome/es-AR/locale/es-AR/chat/",
+        "mozldap": "chrome/es-AR/locale/es-AR/mozldap/",
+        "places": "chrome/es-AR/locale/es-AR/places/",
+        "messenger-region": "chrome/es-AR/locale/es-AR/messenger-region/",
+        "pluginproblem": "chrome/es-AR/locale/es-AR/pluginproblem/",
+        "lightning": "chrome/es-AR/locale/es-AR/lightning/",
+        "mozapps": "chrome/es-AR/locale/es-AR/mozapps/",
+        "calendar": "chrome/es-AR/locale/es-AR/calendar/",
+        "messenger-newsblog": "chrome/es-AR/locale/es-AR/messenger-newsblog/",
+        "messenger-mapi": "chrome/es-AR/locale/es-AR/messenger-mapi/",
+        "communicator": "chrome/es-AR/locale/es-AR/communicator/",
+        "necko": "chrome/es-AR/locale/es-AR/necko/",
+        "alerts": "chrome/es-AR/locale/es-AR/alerts/",
+        "passwordmgr": "chrome/es-AR/locale/es-AR/passwordmgr/",
+        "pipnss": "chrome/es-AR/locale/es-AR/pipnss/",
+        "pippki": "chrome/es-AR/locale/es-AR/pippki/",
+        "global": "chrome/es-AR/locale/es-AR/global/",
+        "autoconfig": "chrome/es-AR/locale/es-AR/autoconfig/",
+        "global-platform": {
+          "android": "chrome/es-AR/locale/es-AR/global-platform/unix/",
+          "macosx": "chrome/es-AR/locale/es-AR/global-platform/mac/",
+          "linux": "chrome/es-AR/locale/es-AR/global-platform/unix/",
+          "win": "chrome/es-AR/locale/es-AR/global-platform/win/"
+        },
+        "branding": "chrome/es-AR/locale/es-AR/branding/",
+        "devtools-startup": "chrome/es-AR/locale/es-AR/devtools/startup/",
+        "devtools": "chrome/es-AR/locale/es-AR/devtools/client/",
+        "messenger-smime": "chrome/es-AR/locale/es-AR/messenger-smime/"
+      }
+    }
+  },
+  "sources": {
+    "browser": {
+      "base_path": "browser/"
+    }
+  },
+  "applications": {
+    "gecko": {
+      "id": "langpack-es-AR@thunderbird.mozilla.org",
+      "strict_max_version": "78.*",
+      "strict_min_version": "78.0"
+    }
+  },
+  "description": "Language pack for Thunderbird for es-AR",
+  "name": "Español (AR) Language Pack",
+  "manifest_version": 2
+}

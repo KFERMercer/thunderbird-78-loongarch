@@ -1,0 +1,41 @@
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
+# This file requires the following localization files:
+# chrome://lightning/locale/lightning.dtd
+# chrome://calendar/locale/global.dtd
+# chrome://calendar/locale/calendar-event-dialog.dtd
+  <linkset>
+    <html:link rel="localization" href="calendar/preferences.ftl"/>
+    <html:link rel="localization" href="calendar/category-dialog.ftl"/>
+  </linkset>
+  <html:template id="paneCalendar"
+                 flex="1"
+                 insertbefore="paneChat">
+
+    <hbox id="calendarPaneCategory"
+          class="subcategory"
+          data-category="paneCalendar">
+      <html:h1 data-l10n-id="calendar-title"></html:h1>
+    </hbox>
+
+#include ../../base/content/preferences/views.inc.xhtml
+#include ../../base/content/preferences/general.inc.xhtml
+
+    <hbox id="calendarReminderCategory"
+          class="subcategory"
+          data-category="paneCalendar">
+      <html:h1 data-l10n-id="calendar-title-reminder"></html:h1>
+    </hbox>
+
+#include ../../base/content/preferences/alarms.inc.xhtml
+
+    <hbox id="calendarCategoriesCategory"
+          class="subcategory"
+          data-category="paneCalendar">
+      <html:h1 data-l10n-id="calendar-title-category"></html:h1>
+    </hbox>
+
+#include ../../base/content/preferences/categories.inc.xhtml
+  </html:template>

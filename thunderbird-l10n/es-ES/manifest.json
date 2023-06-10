@@ -1,0 +1,57 @@
+{
+  "name": "Español (España) Language Pack",
+  "version": "78.0buildid20210901192859",
+  "description": "Language pack for Thunderbird for es-ES",
+  "langpack_id": "es-ES",
+  "author": "mozilla.org",
+  "manifest_version": 2,
+  "applications": {
+    "gecko": {
+      "strict_max_version": "78.*",
+      "id": "langpack-es-ES@thunderbird.mozilla.org",
+      "strict_min_version": "78.0"
+    }
+  },
+  "languages": {
+    "es-ES": {
+      "chrome_resources": {
+        "pluginproblem": "chrome/es-ES/locale/es-ES/pluginproblem/",
+        "pippki": "chrome/es-ES/locale/es-ES/pippki/",
+        "branding": "chrome/es-ES/locale/es-ES/branding/",
+        "necko": "chrome/es-ES/locale/es-ES/necko/",
+        "autoconfig": "chrome/es-ES/locale/es-ES/autoconfig/",
+        "messenger": "chrome/es-ES/locale/es-ES/messenger/",
+        "lightning": "chrome/es-ES/locale/es-ES/lightning/",
+        "messenger-region": "chrome/es-ES/locale/es-ES/messenger-region/",
+        "chat": "chrome/es-ES/locale/es-ES/chat/",
+        "devtools-startup": "chrome/es-ES/locale/es-ES/devtools/startup/",
+        "communicator": "chrome/es-ES/locale/es-ES/communicator/",
+        "mozldap": "chrome/es-ES/locale/es-ES/mozldap/",
+        "places": "chrome/es-ES/locale/es-ES/places/",
+        "devtools-shared": "chrome/es-ES/locale/es-ES/devtools/shared/",
+        "calendar": "chrome/es-ES/locale/es-ES/calendar/",
+        "global": "chrome/es-ES/locale/es-ES/global/",
+        "pipnss": "chrome/es-ES/locale/es-ES/pipnss/",
+        "messenger-newsblog": "chrome/es-ES/locale/es-ES/messenger-newsblog/",
+        "mozapps": "chrome/es-ES/locale/es-ES/mozapps/",
+        "passwordmgr": "chrome/es-ES/locale/es-ES/passwordmgr/",
+        "alerts": "chrome/es-ES/locale/es-ES/alerts/",
+        "global-platform": {
+          "linux": "chrome/es-ES/locale/es-ES/global-platform/unix/",
+          "win": "chrome/es-ES/locale/es-ES/global-platform/win/",
+          "macosx": "chrome/es-ES/locale/es-ES/global-platform/mac/",
+          "android": "chrome/es-ES/locale/es-ES/global-platform/unix/"
+        },
+        "messenger-smime": "chrome/es-ES/locale/es-ES/messenger-smime/",
+        "devtools": "chrome/es-ES/locale/es-ES/devtools/client/",
+        "messenger-mapi": "chrome/es-ES/locale/es-ES/messenger-mapi/"
+      },
+      "version": "20200906163526"
+    }
+  },
+  "sources": {
+    "browser": {
+      "base_path": "browser/"
+    }
+  }
+}

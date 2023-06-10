@@ -1,0 +1,355 @@
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+/* ===== messengercompose.css ===========================================
+  == Styles for the main Messenger Compose window.
+  ======================================================================= */
+
+@import url("chrome://messenger/skin/messenger.css");
+@import url("chrome://messenger/skin/shared/messengercompose.css");
+
+@namespace html url("http://www.w3.org/1999/xhtml");
+
+#attachments-box[empty] > #attachmentBucket:focus {
+  box-shadow: 0 0 2px Highlight inset, 0 0 2px Highlight inset;
+}
+
+#attachmentBucket .attachmentItem {
+  border-top: 1px solid transparent;
+}
+
+#attachmentBucket .attachmentItem:last-child {
+  border-bottom: 1px solid transparent;
+}
+
+#attachmentBucket .attachmentItem[dropOn="top"] {
+  border-top-color: Highlight;
+}
+
+#attachmentBucket .attachmentItem[dropOn="bottom"] {
+  border-bottom-color: Highlight;
+}
+
+#compose-toolbox {
+  background-color: var(--toolbar-bgcolor);
+  border-bottom: 1px solid var(--chrome-content-separator-color);
+}
+
+/* ::::: menulists on toolbar ::::: */
+
+menulist {
+  -moz-appearance: none;
+  min-height: 24px;
+  color: inherit;
+  margin: 1px 4px;
+  padding: 1px 6px;
+  border: 1px solid;
+  border-radius: var(--toolbarbutton-border-radius);
+  border-color: var(--toolbarbutton-hover-bordercolor);
+  box-shadow: var(--toolbarbutton-hover-boxshadow);
+  transition: background-color 150ms;
+}
+
+#composeToolbar2 menulist {
+  background: var(--toolbarbutton-hover-background);
+}
+
+#FormatToolbar menulist {
+  background: transparent;
+}
+
+#composeToolbar2 menulist:not([disabled="true"]):not([open="true"]):hover {
+  background: var(--toolbarbutton-active-background);
+  border-color: var(--toolbarbutton-active-bordercolor);
+  color: inherit;
+}
+
+#FormatToolbar menulist:not([disabled="true"]):not([open="true"]):hover {
+  background: var(--toolbarbutton-hover-background);
+  color: inherit;
+}
+
+#FormatToolbar menulist[open="true"],
+#composeToolbar2 menulist[open="true"] {
+  background: var(--toolbarbutton-active-background);
+  border-color: var(--toolbarbutton-active-bordercolor);
+  box-shadow: var(--toolbarbutton-active-boxshadow);
+}
+
+menulist[disabled="true"] {
+  opacity: .6;
+}
+
+menulist::part(label-box) {
+  -moz-appearance: none;
+  padding-inline-end: 12px;
+  background-repeat: no-repeat;
+  background-position: right;
+  background-size: 9px 7px;
+  background-image: url("chrome://messenger/skin/icons/toolbarbutton-arrow.svg");
+  -moz-context-properties: fill;
+  fill: currentColor;
+}
+
+menulist:-moz-locale-dir(rtl)::part(label-box) {
+  background-position: left;
+}
+
+/* ::::: special toolbar colors ::::: */
+
+#attachmentbucket-sizer {
+  -moz-appearance: none;
+}
+
+#attachments-header-box {
+  min-height: 28px;
+}
+
+#attachmentBucketSize {
+  color: GrayText;
+  padding-inline-end: 2px;
+}
+
+#attachmentBucketCloseButton {
+  padding: 0 1px;
+}
+
+#subjectLabel {
+  margin-bottom: 0;
+  margin-inline-end: 6px;
+}
+
+/* ::::: autocomplete icons ::::: */
+
+.autocomplete-richlistitem[type$="-abook"] > .ac-site-icon {
+  display: -moz-box;
+  margin: 1px 5px;
+}
+
+#composeContentBox {
+  background-color: -moz-dialog;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2) inset;
+}
+
+#composeContentBox:-moz-window-inactive {
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1) inset;
+}
+
+#composeContentBox splitter[orient="vertical"] {
+  -moz-appearance: none;
+  height: 5px;
+  margin-top: -5px;
+  position: relative;
+  z-index: 10;
+}
+
+#headers-box {
+  background-color: transparent;
+}
+
+#MsgHeadersToolbar {
+  -moz-appearance: none !important;
+  color: WindowText;
+  text-shadow: none;
+  padding-top: 3px;
+}
+
+#addresses-box {
+  padding-top: 4px;
+}
+
+.address-container {
+  padding: 1px 4px;
+}
+
+.address-label-container {
+  padding-top: 6px;
+}
+
+#msgIdentity,
+.address-container {
+  min-height: 30px;
+}
+
+#msgSubject {
+  min-height: 28px;
+}
+
+.address-pill {
+  padding-block: 2px;
+}
+
+.address-pill label {
+  margin-block: 0;
+}
+
+#identityLabel-box {
+  margin-top: 1px;
+}
+
+#msgIdentity {
+  margin-block: 2px 0;
+  padding-block: 4px;
+  padding-inline: 2px 20px;
+}
+
+#msgIdentity::part(label-box) {
+  background: none;
+  padding-inline-end: initial;
+}
+
+#msgIdentity::part(text-input) {
+  -moz-appearance: none;
+  padding-block: 1px 2px;
+  padding-inline: 3px 12px;
+  background-color: transparent;
+  color: inherit;
+}
+
+#msgIdentity[editable="true"]::part(dropmarker) {
+  display: none;
+}
+
+#msgIdentity.addressingWidget-separator::after {
+  margin-inline-end: -32px;
+}
+
+#msgIdentity[open="true"] {
+  color: -moz-FieldText;
+}
+
+:root[lwt-tree] #msgIdentity[open="true"] {
+  color: var(--lwt-toolbar-field-color);
+}
+
+:root[lwt-tree] #msgIdentityPopup > menuitem {
+  padding-block: 5px;
+}
+
+/* ::::: format toolbar ::::: */
+
+#FormatToolbar {
+  -moz-appearance: none;
+  color: WindowText;
+  margin-inline: 3px;
+  padding-block: 4px;
+}
+
+toolbarbutton.formatting-button {
+  -moz-appearance: none;
+  border: 1px solid transparent;
+  border-radius: var(--toolbarbutton-border-radius);
+  margin: 1px;
+  color: inherit;
+  -moz-context-properties: fill;
+  fill: currentColor;
+  transition-property: background-color, border-color, box-shadow;
+  transition-duration: 150ms;
+}
+
+toolbarbutton.formatting-button:not([disabled="true"]):hover {
+  background: var(--toolbarbutton-hover-background);
+  border-color: var(--toolbarbutton-hover-bordercolor);
+  box-shadow: var(--toolbarbutton-hover-boxshadow);
+}
+
+toolbarbutton.formatting-button:not([disabled="true"]):-moz-any([open="true"],[checked="true"],:hover:active) {
+  background: var(--toolbarbutton-active-background);
+  border-color: var(--toolbarbutton-active-bordercolor);
+  box-shadow: var(--toolbarbutton-active-boxshadow);
+}
+
+.formatting-button > .toolbarbutton-menu-dropmarker {
+  -moz-appearance: none !important;
+  list-style-image: url("chrome://messenger/skin/messengercompose/format-dropmarker.svg");
+  -moz-context-properties: fill;
+  fill: currentColor;
+  margin-inline-start: 3px;
+}
+
+toolbarbutton.formatting-button[disabled="true"] > .toolbarbutton-icon,
+.formatting-button[disabled="true"] > .toolbarbutton-menu-dropmarker {
+  opacity: 0.4;
+}
+
+/* ..... smiley menu ..... */
+
+#smileButtonMenu .menu-iconic-left {
+  /* Ensure that the smileys are visible even if the Gnome theme says menus
+     shouldn't have icons. */
+  visibility: visible;
+}
+
+/* ..... fg/bg color picker ..... */
+
+.ColorPickerLabel {
+  border: 1px inset ThreeDFace;
+  margin: 0;
+  padding: 2px;
+}
+
+.color-button {
+  border: 1px inset ThreeDFace;
+  padding: 0;
+  width: 14px;
+  height: 12px;
+  margin: 2px;
+}
+
+.color-button:hover {
+  border: 1px solid ThreeDDarkShadow;
+}
+
+.color-button[disabled="true"],
+.color-button[disabled="true"]:hover {
+  border: 1px inset ThreeDFace;
+  opacity: 0.5;
+}
+
+/* ::::: address book sidebar ::::: */
+.ab-closebutton > .toolbarbutton-icon {
+  margin-inline-end: 0; /* override toolkit's default value */
+}
+
+#sidebar {
+  background-color: Window;
+}
+
+#sidebar-splitter {
+  -moz-appearance: none;
+  border-inline-start: 1px solid ThreeDShadow;
+  /* splitter grip area */
+  width: 5px;
+  /* make only the splitter border visible */
+  margin-inline-end: -5px;
+  /* because of the negative margin needed to make the splitter visible */
+  position: relative;
+  z-index: 10;
+}
+
+menu[command="cmd_attachCloud"] .menu-iconic-left,
+menu[command="cmd_convertCloud"] .menu-iconic-left {
+  /* Ensure that the provider icons are visible even if the Gnome theme says
+     menus shouldn't have icons. */
+  visibility: visible;
+}
+
+#languageStatusButton {
+  min-height: 22px;
+}
+
+/* Styles for the default system dark theme */
+
+:root[lwt-tree] #MsgHeadersToolbar {
+  background-image: none;
+}
+
+:root[lwt-tree] #headers-box {
+  -moz-appearance: none;
+}
+
+:root[lwt-tree] #FormatToolbar {
+  color: inherit;
+  background-image: none;
+}

@@ -1,0 +1,57 @@
+{
+  "sources": {
+    "browser": {
+      "base_path": "browser/"
+    }
+  },
+  "applications": {
+    "gecko": {
+      "strict_min_version": "78.0",
+      "strict_max_version": "78.*",
+      "id": "langpack-bg@thunderbird.mozilla.org"
+    }
+  },
+  "manifest_version": 2,
+  "languages": {
+    "bg": {
+      "version": "20200827124546",
+      "chrome_resources": {
+        "messenger": "chrome/bg/locale/bg/messenger/",
+        "messenger-newsblog": "chrome/bg/locale/bg/messenger-newsblog/",
+        "mozapps": "chrome/bg/locale/bg/mozapps/",
+        "places": "chrome/bg/locale/bg/places/",
+        "communicator": "chrome/bg/locale/bg/communicator/",
+        "devtools": "chrome/bg/locale/bg/devtools/client/",
+        "alerts": "chrome/bg/locale/bg/alerts/",
+        "necko": "chrome/bg/locale/bg/necko/",
+        "pluginproblem": "chrome/bg/locale/bg/pluginproblem/",
+        "passwordmgr": "chrome/bg/locale/bg/passwordmgr/",
+        "calendar": "chrome/bg/locale/bg/calendar/",
+        "messenger-mapi": "chrome/bg/locale/bg/messenger-mapi/",
+        "global": "chrome/bg/locale/bg/global/",
+        "chat": "chrome/bg/locale/bg/chat/",
+        "global-platform": {
+          "win": "chrome/bg/locale/bg/global-platform/win/",
+          "android": "chrome/bg/locale/bg/global-platform/unix/",
+          "linux": "chrome/bg/locale/bg/global-platform/unix/",
+          "macosx": "chrome/bg/locale/bg/global-platform/mac/"
+        },
+        "mozldap": "chrome/bg/locale/bg/mozldap/",
+        "devtools-startup": "chrome/bg/locale/bg/devtools/startup/",
+        "lightning": "chrome/bg/locale/bg/lightning/",
+        "pipnss": "chrome/bg/locale/bg/pipnss/",
+        "autoconfig": "chrome/bg/locale/bg/autoconfig/",
+        "messenger-region": "chrome/bg/locale/bg/messenger-region/",
+        "branding": "chrome/bg/locale/bg/branding/",
+        "messenger-smime": "chrome/bg/locale/bg/messenger-smime/",
+        "devtools-shared": "chrome/bg/locale/bg/devtools/shared/",
+        "pippki": "chrome/bg/locale/bg/pippki/"
+      }
+    }
+  },
+  "langpack_id": "bg",
+  "author": "mozilla.org (contributors: Огнян Кулев, Митко Митев, Златко Попов, Милен Иванов, Стоян Димитров)",
+  "version": "78.0buildid20210901192859",
+  "name": "Български Language Pack",
+  "description": "Language pack for Thunderbird for bg"
+}

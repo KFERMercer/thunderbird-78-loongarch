@@ -1,0 +1,38 @@
+From: Carsten Schoenert <c.schoenert@t-online.de>
+Date: Wed, 30 Sep 2020 17:21:27 +0200
+Subject: reduce the rust debuginfo level on selected architectures
+
+Compiling with debuginfo=2 causes the OOM killer to interrupt the build on
+launchpad builders. Initially this was only on 32 bit architectures, but with
+firefox 63 it started happening frequently on arm64 and ppc64el too, and with
+newer versions it started happening very frequently on s390x too.
+
+Patch cherry-picked from Ubuntu.
+---
+ build/moz.configure/toolchain.configure | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
+
+diff --git a/build/moz.configure/toolchain.configure b/build/moz.configure/toolchain.configure
+index d6cadde..8b46285 100755
+--- a/build/moz.configure/toolchain.configure
++++ b/build/moz.configure/toolchain.configure
+@@ -1875,8 +1875,8 @@ def rustc_opt_level(opt_level_option, moz_optimize):
+         return '1' if moz_optimize.optimize else '0'
+ 
+ 
+-@depends(rustc_opt_level, debug_rust, '--enable-debug-symbols', '--enable-frame-pointers')
+-def rust_compile_flags(opt_level, debug_rust, debug_symbols, frame_pointers):
++@depends(rustc_opt_level, debug_rust, '--enable-debug-symbols', '--enable-frame-pointers', host)
++def rust_compile_flags(opt_level, debug_rust, debug_symbols, frame_pointers, host):
+     # Cargo currently supports only two interesting profiles for building:
+     # development and release. Those map (roughly) to --enable-debug and
+     # --disable-debug in Gecko, respectively.
+@@ -1899,6 +1899,8 @@ def rust_compile_flags(opt_level, debug_rust, debug_symbols, frame_pointers):
+ 
+     if debug_symbols:
+         debug_info = '2'
++        if host.bitness == 32 or host.cpu in ('aarch64', 'ppc64', 's390x', 'x86'):
++            debug_info = '1'
+ 
+     opts = []
+ 

@@ -1,0 +1,29 @@
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+/* ===== accountCentral.css ==========================================
+  == Styles for the Messenger Account Central panel.
+  ======================================================================= */
+
+@import url("chrome://messenger/skin/shared/accountCentral.css");
+
+@media (-moz-windows-default-theme: 0) {
+  :root:not(:-moz-lwtheme) {
+    --bg-color: Window;
+    --text-color: WindowText;
+    --title-color: -moz-DialogText;
+    --primary-color: Highlight;
+    --primary-color-hover: Highlight;
+    --btn-color: -moz-DialogText;
+    --btn-color-hover: HighlightText;
+    --btn-bg: Dialog;
+    --btn-bg-hover: Highlight;
+    --btn-shadow-hover: transparent;
+    --popup-bg: Window;
+  }
+
+  :root:not(:-moz-lwtheme) .btn-hub {
+    border: 1px solid -moz-DialogText;
+  }
+}

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+
+<?xml-stylesheet href="chrome://global/skin/global.css" type="text/css"?>
+
+<!DOCTYPE window>
+
+<window id="editCategoryWindow"
+        xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        xmlns:html="http://www.w3.org/1999/xhtml"
+        onload="editCategoryLoad();">
+
+<dialog id="editCategory"
+        buttons="accept,cancel">
+
+  <script src="chrome://global/content/globalOverlay.js"/>
+  <script src="chrome://global/content/editMenuOverlay.js"/>
+  <script src="chrome://calendar/content/preferences/editCategory.js"/>
+
+  <linkset>
+    <html:link rel="localization" href="calendar/category-dialog.ftl"/>
+  </linkset>
+
+  <vbox id="dialog-box">
+    <label id="categoryNameLabel"
+           data-l10n-id="category-name-label"
+           control="categoryName"/>
+    <html:input id="categoryName"
+                type="text"
+                onchange="categoryNameChanged()"
+                oninput="delay(500, categoryNameChanged)"
+                aria-labelledby="categoryNameLabel"/>
+    <hbox id="colorSelectRow">
+      <checkbox id="useColor"
+                data-l10n-id="category-color-label"
+                oncommand="toggleColor(); categoryNameChanged()"/>
+      <html:input id="categoryColor"
+                  type="color"
+                  style="width: 64px; height: 23px"
+                  onclick="clickColor()"
+                  onchange="colorPickerChanged()"
+                  aria-labelledby="useColor"/>
+    </hbox>
+  </vbox>
+</dialog>
+</window>

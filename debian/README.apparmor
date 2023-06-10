@@ -1,0 +1,30 @@
+﻿AppArmor policy
+---------------
+
+The thunderbird package includes an AppArmor profile
+(/etc/apparmor.d/usr.bin.thunderbird). This profile is disabled by
+default because it has to break a number of common use cases in order
+to provide meaningful application confinement.
+
+If you want to trade additional security against potential
+functionality breakage, you can enable this profile by running:
+
+    sudo rm /etc/apparmor.d/disable/usr.bin.thunderbird && \
+    sudo apparmor_parser -r -T -W /etc/apparmor.d/usr.bin.thunderbird
+
+To display the current state of the Thunderbird profile, run:
+
+    sudo apt install jq && \
+    sudo aa-status  --pretty-json | jq .profiles.thunderbird
+
+To debug issues with this AppArmor profile, see:
+
+  https://wiki.debian.org/AppArmor/Debug
+
+This AppArmor profile is maintained collaboratively, in
+a cross-distribution manner, within the AppArmor upstream project.
+You can report issues or propose improvements there:
+
+  https://gitlab.com/apparmor/apparmor-profiles
+
+ -- Carsten Schoenert <c.schoenert@t-online.de>  Sun, 3 Dec 2017 18:03:00 +0200

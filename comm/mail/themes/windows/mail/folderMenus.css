@@ -1,0 +1,21 @@
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+/* ===== folderMenus.css ================================================
+  == Icons for menus which represent mail folder.
+  ======================================================================= */
+
+@import url("chrome://messenger/skin/shared/folderMenus.css");
+
+@namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
+
+/* Don't apply the here needless -moz-image-region to the dropmarker. */
+menulist::part(dropmarker) {
+  -moz-image-region: unset;
+}
+
+.menulist-menupopup[is="folder-menupopup"] {
+  list-style-image: none;
+  -moz-image-region: unset;
+}

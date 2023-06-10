@@ -1,0 +1,20 @@
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+
+<!ENTITY identitiesListAdd.label  "Add…">
+<!ENTITY identitiesListAdd.accesskey  "A">
+<!ENTITY identitiesListEdit.label "ویرایش…">
+<!ENTITY identitiesListEdit.accesskey "و">
+
+
+<!ENTITY identitiesListDelete.label "حذف">
+<!ENTITY identitiesListDelete.accesskey "ح">
+
+
+
+<!ENTITY identitiesListManageDesc.label "Manage the identities for this account. The first identity is used by default.">
+<!ENTITY identitiesListDefault.label "Set Default">
+<!ENTITY identitiesListDefault.accesskey "S">
+<!ENTITY identitiesListClose.label "Close">
+<!ENTITY identitiesListClose.accesskey "C">

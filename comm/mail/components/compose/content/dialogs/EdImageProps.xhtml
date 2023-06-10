@@ -1,0 +1,112 @@
+<?xml version="1.0"?>
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
+<?xml-stylesheet href="chrome://global/skin/global.css" type="text/css"?>
+<?xml-stylesheet href="chrome://editor/skin/EditorDialog.css" type="text/css"?>
+<?xml-stylesheet href="chrome://messenger/skin/input-fields.css" type="text/css"?>
+<?xml-stylesheet href="chrome://messenger/skin/themeableDialog.css" type="text/css"?>
+
+<!DOCTYPE window [
+<!ENTITY % edImageProperties SYSTEM "chrome://messenger/locale/messengercompose/EditorImageProperties.dtd">
+%edImageProperties;
+<!ENTITY % composeEditorOverlayDTD SYSTEM "chrome://messenger/locale/messengercompose/mailComposeEditorOverlay.dtd">
+%composeEditorOverlayDTD;
+<!ENTITY % edDialogOverlay SYSTEM "chrome://messenger/locale/messengercompose/EdDialogOverlay.dtd">
+%edDialogOverlay;
+]>
+
+<!-- dialog containing a control requiring initial setup -->
+<window windowtype="Mail:image"
+        title="&windowTitle.label;"
+        xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        xmlns:html="http://www.w3.org/1999/xhtml"
+        lightweightthemes="true"
+        onload="Startup()">
+<dialog id="imageDlg"
+        buttons="accept,cancel">
+
+  <script src="chrome://global/content/globalOverlay.js"/>
+  <script src="chrome://global/content/editMenuOverlay.js"/>
+  <script src="chrome://messenger/content/messengercompose/editorUtilities.js"/>
+  <script src="chrome://messenger/content/messengercompose/EdDialogCommon.js"/>
+  <script src="chrome://messenger/content/messengercompose/EdImageProps.js"/>
+  <script src="chrome://messenger/content/messengercompose/EdImageDialog.js"/>
+  <script src="chrome://messenger/content/messengercompose/EdImageLinkLoader.js"/>
+  <script src="chrome://messenger/content/dialogShadowDom.js"/>
+
+  <spacer id="location" offsetY="50" persist="offsetX offsetY"/>
+
+  <tabbox id="TabBox">
+    <tabs flex="1">
+      <tab id="imageLocationTab" label="&imageLocationTab.label;"/>
+      <tab id="imageDimensionsTab" label="&imageDimensionsTab.label;"/>
+      <tab id="imageAppearanceTab" label="&imageAppearanceTab.label;"/>
+      <tab id="imageLinkTab" label="&imageLinkTab.label;"/>
+    </tabs>
+    <tabpanels>
+#include edImage.inc.xhtml
+      <vbox>
+        <spacer class="spacer"/>
+        <vbox id="LinkLocationBox">
+          <label id="hrefLabel"
+                 control="hrefInput"
+                 accesskey="&LinkURLEditField2.accessKey;"
+                 width="1">&LinkURLEditField2.label;</label>
+          <html:input id="hrefInput" type="text"
+                      class="uri-element padded input-inline" oninput="ChangeLinkLocation();"
+                      aria-labelledby="hrefLabel"/>
+          <hbox align="center">
+            <checkbox id="MakeRelativeLink"
+                      for="hrefInput"
+                      label="&makeUrlRelative.label;"
+                      accesskey="&makeUrlRelative.accessKey;"
+                      oncommand="MakeInputValueRelativeOrAbsolute(this);"
+                      tooltiptext="&makeUrlRelative.tooltip;"/>
+            <spacer flex="1"/>
+            <button label="&chooseFileLinkButton.label;" accesskey="&chooseFileLinkButton.accessKey;"
+                    oncommand="chooseLinkFile();"/>
+          </hbox>
+        </vbox>
+        <spacer class="spacer"/>
+        <hbox>
+          <checkbox id="showLinkBorder"
+                    label="&showImageLinkBorder.label;"
+                    accesskey="&showImageLinkBorder.accessKey;"
+                    oncommand="ToggleShowLinkBorder();"/>
+          <spacer flex="1"/>
+          <button id="LinkAdvancedEditButton"
+                  label="&LinkAdvancedEditButton.label;"
+                  accesskey="&LinkAdvancedEditButton.accessKey;"
+                  tooltiptext="&LinkAdvancedEditButton.tooltip;"
+                  oncommand="onLinkAdvancedEdit();"/>
+        </hbox>
+      </vbox>
+    </tabpanels>
+  </tabbox>
+
+  <spacer flex="1"/>
+
+  <html:fieldset id="imagePreview" hidden="hidden">
+    <html:legend>&previewBox.label;</html:legend>
+
+    <html:figure>
+      <html:img id="preview-image" style="display:inline-block;"/>
+      <html:figcaption style="float:right;">
+        <label value="&actualSize.label;"/> <label id="PreviewWidth"/>x<label id="PreviewHeight"/>
+      </html:figcaption>
+    </html:figure>
+  </html:fieldset>
+
+  <hbox pack="end">
+    <button id="AdvancedEditButton1" oncommand="onAdvancedEdit()"
+            label="&AdvancedEditButton.label;"
+            accesskey="&AdvancedEditButton.accessKey;"
+            tooltiptext="&AdvancedEditButton.tooltip;"/>
+  </hbox>
+
+  <separator class="groove"/>
+
+</dialog>
+</window>

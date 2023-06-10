@@ -1,0 +1,57 @@
+{
+  "description": "Language pack for Thunderbird for ca",
+  "author": "Mozilla.org / Softcatalà (contributors: Softcatalà)",
+  "manifest_version": 2,
+  "name": "Català Language Pack",
+  "langpack_id": "ca",
+  "version": "78.0buildid20210901192859",
+  "sources": {
+    "browser": {
+      "base_path": "browser/"
+    }
+  },
+  "applications": {
+    "gecko": {
+      "strict_min_version": "78.0",
+      "id": "langpack-ca@thunderbird.mozilla.org",
+      "strict_max_version": "78.*"
+    }
+  },
+  "languages": {
+    "ca": {
+      "version": "20200906131408",
+      "chrome_resources": {
+        "pluginproblem": "chrome/ca/locale/ca/pluginproblem/",
+        "places": "chrome/ca/locale/ca/places/",
+        "branding": "chrome/ca/locale/ca/branding/",
+        "lightning": "chrome/ca/locale/ca/lightning/",
+        "messenger-region": "chrome/ca/locale/ca/messenger-region/",
+        "devtools-startup": "chrome/ca/locale/ca/devtools/startup/",
+        "necko": "chrome/ca/locale/ca/necko/",
+        "calendar": "chrome/ca/locale/ca/calendar/",
+        "messenger-newsblog": "chrome/ca/locale/ca/messenger-newsblog/",
+        "messenger-mapi": "chrome/ca/locale/ca/messenger-mapi/",
+        "global-platform": {
+          "macosx": "chrome/ca/locale/ca/global-platform/mac/",
+          "win": "chrome/ca/locale/ca/global-platform/win/",
+          "linux": "chrome/ca/locale/ca/global-platform/unix/",
+          "android": "chrome/ca/locale/ca/global-platform/unix/"
+        },
+        "communicator": "chrome/ca/locale/ca/communicator/",
+        "mozapps": "chrome/ca/locale/ca/mozapps/",
+        "pippki": "chrome/ca/locale/ca/pippki/",
+        "messenger-smime": "chrome/ca/locale/ca/messenger-smime/",
+        "passwordmgr": "chrome/ca/locale/ca/passwordmgr/",
+        "devtools-shared": "chrome/ca/locale/ca/devtools/shared/",
+        "global": "chrome/ca/locale/ca/global/",
+        "mozldap": "chrome/ca/locale/ca/mozldap/",
+        "alerts": "chrome/ca/locale/ca/alerts/",
+        "messenger": "chrome/ca/locale/ca/messenger/",
+        "devtools": "chrome/ca/locale/ca/devtools/client/",
+        "pipnss": "chrome/ca/locale/ca/pipnss/",
+        "autoconfig": "chrome/ca/locale/ca/autoconfig/",
+        "chat": "chrome/ca/locale/ca/chat/"
+      }
+    }
+  }
+}

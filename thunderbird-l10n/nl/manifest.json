@@ -1,0 +1,57 @@
+{
+  "manifest_version": 2,
+  "author": "mozilla.org (contributors: Gert-Paul van der Beek, Tim Maks van den Broek, Onno Ekker, Laurens Holst, Ton Kensen, Anne van Kesteren, Hendrik Maryns, Martijn Ras, leden MozBrowser-forum)",
+  "langpack_id": "nl",
+  "sources": {
+    "browser": {
+      "base_path": "browser/"
+    }
+  },
+  "languages": {
+    "nl": {
+      "version": "20200904142629",
+      "chrome_resources": {
+        "pluginproblem": "chrome/nl/locale/nl/pluginproblem/",
+        "branding": "chrome/nl/locale/nl/branding/",
+        "alerts": "chrome/nl/locale/nl/alerts/",
+        "messenger-newsblog": "chrome/nl/locale/nl/messenger-newsblog/",
+        "places": "chrome/nl/locale/nl/places/",
+        "global": "chrome/nl/locale/nl/global/",
+        "messenger-mapi": "chrome/nl/locale/nl/messenger-mapi/",
+        "mozapps": "chrome/nl/locale/nl/mozapps/",
+        "communicator": "chrome/nl/locale/nl/communicator/",
+        "devtools-startup": "chrome/nl/locale/nl/devtools/startup/",
+        "pipnss": "chrome/nl/locale/nl/pipnss/",
+        "calendar": "chrome/nl/locale/nl/calendar/",
+        "lightning": "chrome/nl/locale/nl/lightning/",
+        "messenger": "chrome/nl/locale/nl/messenger/",
+        "messenger-smime": "chrome/nl/locale/nl/messenger-smime/",
+        "messenger-region": "chrome/nl/locale/nl/messenger-region/",
+        "passwordmgr": "chrome/nl/locale/nl/passwordmgr/",
+        "global-platform": {
+          "win": "chrome/nl/locale/nl/global-platform/win/",
+          "android": "chrome/nl/locale/nl/global-platform/unix/",
+          "macosx": "chrome/nl/locale/nl/global-platform/mac/",
+          "linux": "chrome/nl/locale/nl/global-platform/unix/"
+        },
+        "mozldap": "chrome/nl/locale/nl/mozldap/",
+        "devtools-shared": "chrome/nl/locale/nl/devtools/shared/",
+        "pippki": "chrome/nl/locale/nl/pippki/",
+        "necko": "chrome/nl/locale/nl/necko/",
+        "devtools": "chrome/nl/locale/nl/devtools/client/",
+        "autoconfig": "chrome/nl/locale/nl/autoconfig/",
+        "chat": "chrome/nl/locale/nl/chat/"
+      }
+    }
+  },
+  "applications": {
+    "gecko": {
+      "strict_max_version": "78.*",
+      "strict_min_version": "78.0",
+      "id": "langpack-nl@thunderbird.mozilla.org"
+    }
+  },
+  "version": "78.0buildid20210901192859",
+  "name": "Nederlands (NL) Language Pack",
+  "description": "Language pack for Thunderbird for nl"
+}

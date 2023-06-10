@@ -1,0 +1,57 @@
+{
+  "applications": {
+    "gecko": {
+      "strict_min_version": "78.0",
+      "id": "langpack-ar@thunderbird.mozilla.org",
+      "strict_max_version": "78.*"
+    }
+  },
+  "version": "78.0buildid20210901192859",
+  "sources": {
+    "browser": {
+      "base_path": "browser/"
+    }
+  },
+  "author": "arabeyes.org (contributors: Ayman Hourieh, Khaled Hosny, Anas Husseini)",
+  "name": "العربية Language Pack",
+  "languages": {
+    "ar": {
+      "version": "20200905100503",
+      "chrome_resources": {
+        "mozapps": "chrome/ar/locale/ar/mozapps/",
+        "lightning": "chrome/ar/locale/ar/lightning/",
+        "messenger-region": "chrome/ar/locale/ar/messenger-region/",
+        "pipnss": "chrome/ar/locale/ar/pipnss/",
+        "messenger": "chrome/ar/locale/ar/messenger/",
+        "autoconfig": "chrome/ar/locale/ar/autoconfig/",
+        "devtools-startup": "chrome/ar/locale/ar/devtools/startup/",
+        "alerts": "chrome/ar/locale/ar/alerts/",
+        "passwordmgr": "chrome/ar/locale/ar/passwordmgr/",
+        "necko": "chrome/ar/locale/ar/necko/",
+        "devtools-shared": "chrome/ar/locale/ar/devtools/shared/",
+        "global-platform": {
+          "macosx": "chrome/ar/locale/ar/global-platform/mac/",
+          "android": "chrome/ar/locale/ar/global-platform/unix/",
+          "linux": "chrome/ar/locale/ar/global-platform/unix/",
+          "win": "chrome/ar/locale/ar/global-platform/win/"
+        },
+        "pluginproblem": "chrome/ar/locale/ar/pluginproblem/",
+        "messenger-smime": "chrome/ar/locale/ar/messenger-smime/",
+        "global": "chrome/ar/locale/ar/global/",
+        "devtools": "chrome/ar/locale/ar/devtools/client/",
+        "messenger-mapi": "chrome/ar/locale/ar/messenger-mapi/",
+        "places": "chrome/ar/locale/ar/places/",
+        "messenger-newsblog": "chrome/ar/locale/ar/messenger-newsblog/",
+        "pippki": "chrome/ar/locale/ar/pippki/",
+        "branding": "chrome/ar/locale/ar/branding/",
+        "calendar": "chrome/ar/locale/ar/calendar/",
+        "chat": "chrome/ar/locale/ar/chat/",
+        "mozldap": "chrome/ar/locale/ar/mozldap/",
+        "communicator": "chrome/ar/locale/ar/communicator/"
+      }
+    }
+  },
+  "langpack_id": "ar",
+  "description": "Language pack for Thunderbird for ar",
+  "manifest_version": 2
+}

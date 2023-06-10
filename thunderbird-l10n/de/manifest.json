@@ -1,0 +1,57 @@
+{
+  "manifest_version": 2,
+  "langpack_id": "de",
+  "version": "78.0buildid20210901192859",
+  "languages": {
+    "de": {
+      "chrome_resources": {
+        "branding": "chrome/de/locale/de/branding/",
+        "chat": "chrome/de/locale/de/chat/",
+        "necko": "chrome/de/locale/de/necko/",
+        "pluginproblem": "chrome/de/locale/de/pluginproblem/",
+        "devtools-startup": "chrome/de/locale/de/devtools/startup/",
+        "alerts": "chrome/de/locale/de/alerts/",
+        "global-platform": {
+          "win": "chrome/de/locale/de/global-platform/win/",
+          "linux": "chrome/de/locale/de/global-platform/unix/",
+          "macosx": "chrome/de/locale/de/global-platform/mac/",
+          "android": "chrome/de/locale/de/global-platform/unix/"
+        },
+        "messenger": "chrome/de/locale/de/messenger/",
+        "messenger-newsblog": "chrome/de/locale/de/messenger-newsblog/",
+        "mozldap": "chrome/de/locale/de/mozldap/",
+        "places": "chrome/de/locale/de/places/",
+        "devtools-shared": "chrome/de/locale/de/devtools/shared/",
+        "messenger-smime": "chrome/de/locale/de/messenger-smime/",
+        "messenger-mapi": "chrome/de/locale/de/messenger-mapi/",
+        "passwordmgr": "chrome/de/locale/de/passwordmgr/",
+        "messenger-region": "chrome/de/locale/de/messenger-region/",
+        "lightning": "chrome/de/locale/de/lightning/",
+        "mozapps": "chrome/de/locale/de/mozapps/",
+        "pippki": "chrome/de/locale/de/pippki/",
+        "pipnss": "chrome/de/locale/de/pipnss/",
+        "calendar": "chrome/de/locale/de/calendar/",
+        "devtools": "chrome/de/locale/de/devtools/client/",
+        "communicator": "chrome/de/locale/de/communicator/",
+        "autoconfig": "chrome/de/locale/de/autoconfig/",
+        "global": "chrome/de/locale/de/global/"
+      },
+      "version": "20200906195423"
+    }
+  },
+  "author": "thunderbird-mail.de (contributors: Sebastian Hengst, Alexander Ihrig, Robert Kaiser, Abdulkadir Topal)",
+  "description": "Language pack for Thunderbird for de",
+  "applications": {
+    "gecko": {
+      "id": "langpack-de@thunderbird.mozilla.org",
+      "strict_max_version": "78.*",
+      "strict_min_version": "78.0"
+    }
+  },
+  "sources": {
+    "browser": {
+      "base_path": "browser/"
+    }
+  },
+  "name": "Deutsch (DE) Language Pack"
+}

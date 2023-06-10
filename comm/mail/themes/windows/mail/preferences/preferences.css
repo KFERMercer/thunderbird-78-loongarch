@@ -1,0 +1,50 @@
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+@import url("chrome://messenger/skin/shared/preferences/preferences.css");
+@namespace html "http://www.w3.org/1999/xhtml";
+
+.dialogBox,
+#MailPreferences #paneDeck,
+#categories {
+  font-size: 1.25em;
+}
+
+html|fieldset {
+  border-style: none;
+}
+
+html|legend {
+  padding-inline: 0;
+  background-color: transparent;
+}
+
+html|h2 {
+  background-color: transparent;
+}
+
+.sidebar-footer-label {
+  font-size: 1.125em;
+}
+
+html|input[type="number"] {
+  min-height: 27px;
+}
+
+html|input[type="number"]::-moz-number-spin-box {
+  margin-inline-end: 11px;
+}
+
+html|input[type="number"]::-moz-number-spin-up,
+html|input[type="number"]::-moz-number-spin-down {
+  min-height: 12px;
+}
+
+/**
+ * Dialog
+ */
+
+#dialogTitle {
+  font-size: 1.05em;
+}

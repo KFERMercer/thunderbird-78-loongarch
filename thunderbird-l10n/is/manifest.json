@@ -1,0 +1,57 @@
+{
+  "languages": {
+    "is": {
+      "chrome_resources": {
+        "devtools-shared": "chrome/is/locale/is/devtools/shared/",
+        "pluginproblem": "chrome/is/locale/is/pluginproblem/",
+        "messenger-newsblog": "chrome/is/locale/is/messenger-newsblog/",
+        "global": "chrome/is/locale/is/global/",
+        "messenger-smime": "chrome/is/locale/is/messenger-smime/",
+        "chat": "chrome/is/locale/is/chat/",
+        "messenger": "chrome/is/locale/is/messenger/",
+        "mozldap": "chrome/is/locale/is/mozldap/",
+        "calendar": "chrome/is/locale/is/calendar/",
+        "lightning": "chrome/is/locale/is/lightning/",
+        "messenger-region": "chrome/is/locale/is/messenger-region/",
+        "devtools-startup": "chrome/is/locale/is/devtools/startup/",
+        "places": "chrome/is/locale/is/places/",
+        "pipnss": "chrome/is/locale/is/pipnss/",
+        "alerts": "chrome/is/locale/is/alerts/",
+        "branding": "chrome/is/locale/is/branding/",
+        "mozapps": "chrome/is/locale/is/mozapps/",
+        "passwordmgr": "chrome/is/locale/is/passwordmgr/",
+        "autoconfig": "chrome/is/locale/is/autoconfig/",
+        "global-platform": {
+          "linux": "chrome/is/locale/is/global-platform/unix/",
+          "win": "chrome/is/locale/is/global-platform/win/",
+          "macosx": "chrome/is/locale/is/global-platform/mac/",
+          "android": "chrome/is/locale/is/global-platform/unix/"
+        },
+        "necko": "chrome/is/locale/is/necko/",
+        "devtools": "chrome/is/locale/is/devtools/client/",
+        "communicator": "chrome/is/locale/is/communicator/",
+        "pippki": "chrome/is/locale/is/pippki/",
+        "messenger-mapi": "chrome/is/locale/is/messenger-mapi/"
+      },
+      "version": "20200827123709"
+    }
+  },
+  "name": "Icelandic (IS) Language Pack",
+  "sources": {
+    "browser": {
+      "base_path": "browser/"
+    }
+  },
+  "applications": {
+    "gecko": {
+      "strict_max_version": "78.*",
+      "strict_min_version": "78.0",
+      "id": "langpack-is@thunderbird.mozilla.org"
+    }
+  },
+  "description": "Language pack for Thunderbird for is",
+  "version": "78.0buildid20210901192859",
+  "manifest_version": 2,
+  "langpack_id": "is",
+  "author": "mozilla.org"
+}

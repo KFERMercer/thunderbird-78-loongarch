@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!-- -*- Mode: Java; tab-width: 2; indent-tabs-mode: nil; c-basic-offset: 2 -*-
+   - This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+
+<?xml-stylesheet href="chrome://global/skin/global.css"?>
+
+<!DOCTYPE window>
+
+<window type="child"
+        xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        xmlns:html="http://www.w3.org/1999/xhtml"
+        data-l10n-id="attachment-reminder-window"
+        onload="gAttachmentReminderOptionsDialog.init();"
+        style="width:38em;">
+  <dialog id="attachmentReminderOptionsDialog"
+          dlgbuttons="accept,cancel">
+    <script src="chrome://messenger/content/preferences/attachmentReminder.js"/>
+
+    <linkset>
+      <html:link rel="localization" href="branding/brand.ftl"/>
+      <html:link rel="localization" href="messenger/preferences/attachment-reminder.ftl"/>
+    </linkset>
+
+    <vbox>
+      <label control="keywordList" data-l10n-id="attachment-reminder-label"/>
+      <hbox>
+        <richlistbox id="keywordList" flex="1" height="250px"
+                     ondblclick="gAttachmentReminderOptionsDialog.editKeyword();"/>
+        <vbox>
+          <button data-l10n-id="keyword-new-button"
+                  oncommand="gAttachmentReminderOptionsDialog.addKeyword();"/>
+          <button data-l10n-id="keyword-edit-button"
+                  oncommand="gAttachmentReminderOptionsDialog.editKeyword();"/>
+          <button data-l10n-id="keyword-remove-button"
+                  oncommand="gAttachmentReminderOptionsDialog.removeKeyword();"/>
+        </vbox>
+      </hbox>
+    </vbox>
+  </dialog>
+</window>

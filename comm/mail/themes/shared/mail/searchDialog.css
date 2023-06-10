@@ -1,0 +1,112 @@
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+@import url("chrome://messenger/skin/messenger.css");
+@import url("chrome://messenger/skin/messageIcons.css");
+
+#searchTerms {
+  margin-top: 8px;
+}
+
+#searchTermListBox > #booleanAndGroup,
+#searchTermListBox > #searchTermBox,
+#searchTerms > vbox > hbox {
+  padding-left: 6px;
+  padding-right: 6px;
+}
+
+#searchTermBox {
+  padding-top: 2px;
+  padding-bottom: 2px;
+}
+
+#searchResults {
+  padding: 0 6px 6px;
+  text-shadow: none;
+}
+
+#searchResultListBox {
+  margin: 4px;
+  height: 100px;
+}
+
+.search-menulist[unavailable="true"] {
+  color: GrayText;
+}
+
+radio[value="and"] {
+  margin-inline-end: 18px;
+}
+
+/* ::::: box sizes ::::: */
+
+#searchTermTree {
+  min-height: 50px;
+}
+
+#searchTermListBox,
+#virtualFolderSearchTermListBox {
+  height: 100px;
+}
+
+/* ::::: thread decoration ::::: */
+
+treechildren::-moz-tree-cell-text(read) {
+  font-weight: normal;
+}
+
+treechildren::-moz-tree-cell-text(unread) {
+  font-weight: bold;
+}
+
+/* on a collapsed thread, if the top level message is read, but the thread has
+ * unread children, underline the text.  4.x mac did this, very slick
+ */
+treechildren::-moz-tree-cell-text(container, closed, hasUnread, read) {
+  text-decoration: underline;
+}
+
+#gray_horizontal_splitter {
+  min-height: 4px;
+  background-color: -moz-Dialog;
+  border-top: 1px solid ThreeDHighlight;
+  border-bottom: 1px solid ThreeDShadow;
+}
+
+/* ::::: theme support ::::: */
+
+:root:not([lwt-tree]) #searchTermBox:-moz-lwtheme,
+:root:not([lwt-tree]) #searchResults:-moz-lwtheme {
+  background-color: -moz-Dialog;
+  color: -moz-DialogText;
+}
+
+:root:not([lwt-tree]) #searchTermBox:-moz-lwtheme-brighttext,
+:root:not([lwt-tree]) #searchResults:-moz-lwtheme-brighttext {
+  --button-background: #d2d2d3;
+  --button-background-hover: #c2c2c3;
+  --button-background-active: #b2b2b3;
+  --box-text-color: #0c0c0d;
+  --box-background-color: #fff;
+  --box-border-color: #adadae;
+  --field-text-color: #181920;
+  --field-background-color: #fff;
+  --field-border-color: rgba(0, 0, 0, .3);
+  --field-border-hover-color: rgba(0, 0, 0, .4);
+  --highlight-color: Highlight;
+}
+
+:root[lwt-tree] #searchTermBox,
+:root[lwt-tree] #searchResults {
+  background-color: var(--lwt-accent-color-inactive, var(--lwt-accent-color));
+}
+
+:root:not([lwt-tree]) #searchTermList:focus > richlistitem[selected="true"] {
+  color: inherit;
+}
+
+:root[lwt-tree] #gray_horizontal_splitter {
+  background-color: var(--toolbar-bgcolor);
+  border-color: hsla(0, 0%, 50%, .3);
+}

@@ -1,0 +1,129 @@
+# vim: set filetype=python:
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
+# The Matrix SDK.
+EXTRA_JS_MODULES.matrix.matrix_sdk += [
+    'matrix-sdk/autodiscovery.js',
+    'matrix-sdk/base-apis.js',
+    'matrix-sdk/client.js',
+    'matrix-sdk/content-helpers.js',
+    'matrix-sdk/content-repo.js',
+    'matrix-sdk/errors.js',
+    'matrix-sdk/filter-component.js',
+    'matrix-sdk/filter.js',
+    'matrix-sdk/http-api.js',
+    'matrix-sdk/indexeddb-helpers.js',
+    'matrix-sdk/indexeddb-worker.js',
+    'matrix-sdk/interactive-auth.js',
+    'matrix-sdk/logger.js',
+    'matrix-sdk/matrix.js',
+    'matrix-sdk/pushprocessor.js',
+    'matrix-sdk/randomstring.js',
+    'matrix-sdk/realtime-callbacks.js',
+    'matrix-sdk/ReEmitter.js',
+    'matrix-sdk/scheduler.js',
+    'matrix-sdk/service-types.js',
+    'matrix-sdk/sync-accumulator.js',
+    'matrix-sdk/sync.js',
+    'matrix-sdk/timeline-window.js',
+    'matrix-sdk/utils.js',
+]
+
+EXTRA_JS_MODULES.matrix.matrix_sdk.crypto += [
+    'matrix-sdk/crypto/backup_password.js',
+    'matrix-sdk/crypto/deviceinfo.js',
+    'matrix-sdk/crypto/DeviceList.js',
+    'matrix-sdk/crypto/index.js',
+    'matrix-sdk/crypto/OlmDevice.js',
+    'matrix-sdk/crypto/olmlib.js',
+    'matrix-sdk/crypto/OutgoingRoomKeyRequestManager.js',
+    'matrix-sdk/crypto/recoverykey.js',
+    'matrix-sdk/crypto/RoomList.js',
+]
+
+EXTRA_JS_MODULES.matrix.matrix_sdk.crypto.algorithms += [
+    'matrix-sdk/crypto/algorithms/base.js',
+    'matrix-sdk/crypto/algorithms/index.js',
+    'matrix-sdk/crypto/algorithms/megolm.js',
+    'matrix-sdk/crypto/algorithms/olm.js',
+]
+
+EXTRA_JS_MODULES.matrix.matrix_sdk.crypto.store += [
+    'matrix-sdk/crypto/store/base.js',
+    'matrix-sdk/crypto/store/indexeddb-crypto-store-backend.js',
+    'matrix-sdk/crypto/store/indexeddb-crypto-store.js',
+    'matrix-sdk/crypto/store/localStorage-crypto-store.js',
+    'matrix-sdk/crypto/store/memory-crypto-store.js',
+]
+
+EXTRA_JS_MODULES.matrix.matrix_sdk.crypto.verification += [
+    'matrix-sdk/crypto/verification/Base.js',
+    'matrix-sdk/crypto/verification/Error.js',
+    'matrix-sdk/crypto/verification/QRCode.js',
+    'matrix-sdk/crypto/verification/SAS.js',
+]
+
+EXTRA_JS_MODULES.matrix.matrix_sdk.models += [
+    'matrix-sdk/models/event-context.js',
+    'matrix-sdk/models/event-timeline-set.js',
+    'matrix-sdk/models/event-timeline.js',
+    'matrix-sdk/models/event.js',
+    'matrix-sdk/models/group.js',
+    'matrix-sdk/models/relations.js',
+    'matrix-sdk/models/room-member.js',
+    'matrix-sdk/models/room-state.js',
+    'matrix-sdk/models/room-summary.js',
+    'matrix-sdk/models/room.js',
+    'matrix-sdk/models/search-result.js',
+    'matrix-sdk/models/user.js',
+]
+
+EXTRA_JS_MODULES.matrix.matrix_sdk.store += [
+    'matrix-sdk/store/indexeddb-local-backend.js',
+    'matrix-sdk/store/indexeddb-remote-backend.js',
+    'matrix-sdk/store/indexeddb-store-worker.js',
+    'matrix-sdk/store/indexeddb.js',
+    'matrix-sdk/store/memory.js',
+    'matrix-sdk/store/stub.js',
+]
+
+EXTRA_JS_MODULES.matrix.matrix_sdk.store.session += [
+    'matrix-sdk/store/session/webstorage.js',
+]
+
+EXTRA_JS_MODULES.matrix.matrix_sdk.webrtc += [
+    'matrix-sdk/webrtc/call.js',
+]
+
+# Dependencies of the Matrix SDK.
+
+# Single file dependencies (with good names) are just added to the top-level
+# matrix module.
+EXTRA_JS_MODULES.matrix += [
+    'another-json/another-json.js',
+    'bluebird/bluebird.js',
+    'events/events.js',
+]
+
+EXTRA_JS_MODULES.matrix.base_x += [
+    'base-x/index.js',
+]
+
+EXTRA_JS_MODULES.matrix.browser_request += [
+    'browser-request/index.js',
+]
+
+EXTRA_JS_MODULES.matrix.bs58 += [
+    'bs58/index.js',
+]
+
+EXTRA_JS_MODULES.matrix.content_type += [
+    'content-type/index.js',
+]
+
+EXTRA_JS_MODULES.matrix.unhomoglyph += [
+    'unhomoglyph/data.json',
+    'unhomoglyph/index.js',
+]

@@ -1,0 +1,19 @@
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+#palette-box {
+  margin: 0 4px 10px;
+}
+
+#titlebarSettings {
+  margin-inline-start: 4px;
+}
+
+#CustomizeToolbarWindow menulist {
+  background-image: none;
+}
+
+#CustomizeToolbarWindow menulist::part(label-box) {
+  background: none;
+}

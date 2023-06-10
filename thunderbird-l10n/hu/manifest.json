@@ -1,0 +1,57 @@
+{
+  "description": "Language pack for Thunderbird for hu",
+  "applications": {
+    "gecko": {
+      "id": "langpack-hu@thunderbird.mozilla.org",
+      "strict_min_version": "78.0",
+      "strict_max_version": "78.*"
+    }
+  },
+  "author": "FSF.hu (contributors: Tímár András)",
+  "version": "78.0buildid20210901192859",
+  "sources": {
+    "browser": {
+      "base_path": "browser/"
+    }
+  },
+  "languages": {
+    "hu": {
+      "version": "20200902124513",
+      "chrome_resources": {
+        "mozldap": "chrome/hu/locale/hu/mozldap/",
+        "devtools-startup": "chrome/hu/locale/hu/devtools/startup/",
+        "global-platform": {
+          "android": "chrome/hu/locale/hu/global-platform/unix/",
+          "macosx": "chrome/hu/locale/hu/global-platform/mac/",
+          "linux": "chrome/hu/locale/hu/global-platform/unix/",
+          "win": "chrome/hu/locale/hu/global-platform/win/"
+        },
+        "mozapps": "chrome/hu/locale/hu/mozapps/",
+        "communicator": "chrome/hu/locale/hu/communicator/",
+        "global": "chrome/hu/locale/hu/global/",
+        "necko": "chrome/hu/locale/hu/necko/",
+        "devtools-shared": "chrome/hu/locale/hu/devtools/shared/",
+        "pluginproblem": "chrome/hu/locale/hu/pluginproblem/",
+        "messenger-newsblog": "chrome/hu/locale/hu/messenger-newsblog/",
+        "autoconfig": "chrome/hu/locale/hu/autoconfig/",
+        "pippki": "chrome/hu/locale/hu/pippki/",
+        "places": "chrome/hu/locale/hu/places/",
+        "passwordmgr": "chrome/hu/locale/hu/passwordmgr/",
+        "messenger-mapi": "chrome/hu/locale/hu/messenger-mapi/",
+        "branding": "chrome/hu/locale/hu/branding/",
+        "calendar": "chrome/hu/locale/hu/calendar/",
+        "alerts": "chrome/hu/locale/hu/alerts/",
+        "messenger-region": "chrome/hu/locale/hu/messenger-region/",
+        "messenger": "chrome/hu/locale/hu/messenger/",
+        "pipnss": "chrome/hu/locale/hu/pipnss/",
+        "messenger-smime": "chrome/hu/locale/hu/messenger-smime/",
+        "chat": "chrome/hu/locale/hu/chat/",
+        "devtools": "chrome/hu/locale/hu/devtools/client/",
+        "lightning": "chrome/hu/locale/hu/lightning/"
+      }
+    }
+  },
+  "manifest_version": 2,
+  "name": "Magyar (HU) Language Pack",
+  "langpack_id": "hu"
+}

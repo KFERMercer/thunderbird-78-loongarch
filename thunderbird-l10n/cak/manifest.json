@@ -1,0 +1,57 @@
+{
+  "languages": {
+    "cak": {
+      "chrome_resources": {
+        "places": "chrome/cak/locale/cak/places/",
+        "necko": "chrome/cak/locale/cak/necko/",
+        "communicator": "chrome/cak/locale/cak/communicator/",
+        "devtools-startup": "chrome/cak/locale/cak/devtools/startup/",
+        "pipnss": "chrome/cak/locale/cak/pipnss/",
+        "lightning": "chrome/cak/locale/cak/lightning/",
+        "messenger": "chrome/cak/locale/cak/messenger/",
+        "alerts": "chrome/cak/locale/cak/alerts/",
+        "devtools": "chrome/cak/locale/cak/devtools/client/",
+        "pippki": "chrome/cak/locale/cak/pippki/",
+        "mozldap": "chrome/cak/locale/cak/mozldap/",
+        "messenger-smime": "chrome/cak/locale/cak/messenger-smime/",
+        "calendar": "chrome/cak/locale/cak/calendar/",
+        "branding": "chrome/cak/locale/cak/branding/",
+        "passwordmgr": "chrome/cak/locale/cak/passwordmgr/",
+        "messenger-region": "chrome/cak/locale/cak/messenger-region/",
+        "messenger-newsblog": "chrome/cak/locale/cak/messenger-newsblog/",
+        "mozapps": "chrome/cak/locale/cak/mozapps/",
+        "chat": "chrome/cak/locale/cak/chat/",
+        "autoconfig": "chrome/cak/locale/cak/autoconfig/",
+        "global": "chrome/cak/locale/cak/global/",
+        "messenger-mapi": "chrome/cak/locale/cak/messenger-mapi/",
+        "devtools-shared": "chrome/cak/locale/cak/devtools/shared/",
+        "global-platform": {
+          "win": "chrome/cak/locale/cak/global-platform/win/",
+          "linux": "chrome/cak/locale/cak/global-platform/unix/",
+          "android": "chrome/cak/locale/cak/global-platform/unix/",
+          "macosx": "chrome/cak/locale/cak/global-platform/mac/"
+        },
+        "pluginproblem": "chrome/cak/locale/cak/pluginproblem/"
+      },
+      "version": "20200905234402"
+    }
+  },
+  "version": "78.0buildid20210901192859",
+  "applications": {
+    "gecko": {
+      "strict_min_version": "78.0",
+      "strict_max_version": "78.*",
+      "id": "langpack-cak@thunderbird.mozilla.org"
+    }
+  },
+  "name": "Kaqchikel (Guatemala) Language Pack",
+  "description": "Language pack for Thunderbird for cak",
+  "sources": {
+    "browser": {
+      "base_path": "browser/"
+    }
+  },
+  "manifest_version": 2,
+  "author": "mozilla.org (contributors: Mozilla Kaq&#233;chikel &#40;Responsable: Juan Sián&#41;)",
+  "langpack_id": "cak"
+}

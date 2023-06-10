@@ -1,0 +1,121 @@
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+@import url("chrome://messenger/skin/shared/tabmail.css");
+
+/**
+ * Tabmail Tabs
+ */
+
+:root:not([tabsintitlebar]) > #navigation-toolbox:not(:-moz-lwtheme) {
+  -moz-appearance: menubar;
+}
+
+#tabs-toolbar {
+  -moz-appearance: none;
+  padding: 0;
+}
+
+#tabs-toolbar {
+  -moz-window-dragging: drag;
+}
+
+#tabs-toolbar:not(:-moz-lwtheme) {
+  -moz-appearance: menubar;
+  color: -moz-menubartext;
+}
+
+:root[tabsintitlebar][sizemode=normal] #mail-toolbar-menubar2[autohide=true] ~
+  #tabs-toolbar > #tabbar-toolbar {
+  margin-inline-start: 40px;
+}
+
+#tabpanelcontainer:-moz-lwtheme {
+  color: inherit;
+}
+
+tabpanels {
+  -moz-appearance: none;
+  background-color: transparent;
+}
+
+/**
+ * Tab
+ */
+
+.tabmail-tab > .tab-stack > .tab-content > .tab-label-container {
+  /* tabmail-tab focus ring */
+  border: 1px dotted transparent;
+  margin: -1px !important; /* let the border not consume any space, like outline */
+}
+
+.tabmail-tab[selected]:focus > .tab-stack > .tab-content > .tab-label-container {
+  border-color: -moz-DialogText;
+}
+
+@media (-moz-gtk-csd-reversed-placement: 0) {
+  #tabmail-arrowscrollbox[overflow="true"] > .tabmail-tab:first-child::before {
+    content: '';
+    display: -moz-box;
+    margin-inline-start: 0;
+  }
+}
+
+@media (-moz-gtk-csd-reversed-placement) {
+  .tabmail-tab:first-child::before {
+    content: '';
+    display: -moz-box;
+    margin-inline-start: 0;
+  }
+}
+
+/* Tabstrip close button */
+.tabs-closebutton {
+  margin-top: 1px;
+}
+
+/**
+ * Tab Scrollbox Arrow Buttons
+ */
+
+#tabmail-arrowscrollbox::part(scrollbutton-up),
+#tabmail-arrowscrollbox::part(scrollbutton-down) {
+  padding: 3px !important;
+  border-style: none !important;
+}
+
+#tabmail-arrowscrollbox:not([scrolledtostart=true])::part(scrollbutton-up):hover,
+#tabmail-arrowscrollbox:not([scrolledtoend=true])::part(scrollbutton-down):hover {
+  background: var(--toolbarbutton-active-background);
+}
+
+#tabmail-arrowscrollbox[scrolledtostart=true]::part(scrollbutton-up),
+#tabmail-arrowscrollbox[scrolledtoend=true]::part(scrollbutton-down) {
+  --toolbarbutton-icon-fill-opacity: .4;
+}
+
+/**
+ * All Tabs Menupopup
+ */
+
+.tabs-alltabs-button {
+  min-width: 24px;
+  padding-right: 1px;
+  padding-left: 1px;
+}
+
+.tabs-alltabs-button > .toolbarbutton-icon {
+  margin-inline-end: 0;
+}
+
+.alltabs-item > .menu-iconic-left {
+  visibility: visible !important;
+}
+
+/* Content Tabs */
+.contentTabAddress {
+  height: 32px;
+  padding-left: 10px;
+  padding-right: 10px;
+}

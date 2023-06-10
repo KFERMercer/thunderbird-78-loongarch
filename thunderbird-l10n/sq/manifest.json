@@ -1,0 +1,57 @@
+{
+  "author": "Besnik Bleta (contributors: Besnik Bleta)",
+  "description": "Language pack for Thunderbird for sq",
+  "applications": {
+    "gecko": {
+      "strict_max_version": "78.*",
+      "strict_min_version": "78.0",
+      "id": "langpack-sq@thunderbird.mozilla.org"
+    }
+  },
+  "name": "Shqip Language Pack",
+  "langpack_id": "sq",
+  "sources": {
+    "browser": {
+      "base_path": "browser/"
+    }
+  },
+  "languages": {
+    "sq": {
+      "chrome_resources": {
+        "devtools-shared": "chrome/sq/locale/sq/devtools/shared/",
+        "chat": "chrome/sq/locale/sq/chat/",
+        "mozldap": "chrome/sq/locale/sq/mozldap/",
+        "passwordmgr": "chrome/sq/locale/sq/passwordmgr/",
+        "devtools-startup": "chrome/sq/locale/sq/devtools/startup/",
+        "alerts": "chrome/sq/locale/sq/alerts/",
+        "necko": "chrome/sq/locale/sq/necko/",
+        "places": "chrome/sq/locale/sq/places/",
+        "devtools": "chrome/sq/locale/sq/devtools/client/",
+        "pippki": "chrome/sq/locale/sq/pippki/",
+        "messenger-newsblog": "chrome/sq/locale/sq/messenger-newsblog/",
+        "messenger": "chrome/sq/locale/sq/messenger/",
+        "global": "chrome/sq/locale/sq/global/",
+        "branding": "chrome/sq/locale/sq/branding/",
+        "messenger-region": "chrome/sq/locale/sq/messenger-region/",
+        "messenger-mapi": "chrome/sq/locale/sq/messenger-mapi/",
+        "lightning": "chrome/sq/locale/sq/lightning/",
+        "pipnss": "chrome/sq/locale/sq/pipnss/",
+        "pluginproblem": "chrome/sq/locale/sq/pluginproblem/",
+        "communicator": "chrome/sq/locale/sq/communicator/",
+        "global-platform": {
+          "android": "chrome/sq/locale/sq/global-platform/unix/",
+          "linux": "chrome/sq/locale/sq/global-platform/unix/",
+          "macosx": "chrome/sq/locale/sq/global-platform/mac/",
+          "win": "chrome/sq/locale/sq/global-platform/win/"
+        },
+        "messenger-smime": "chrome/sq/locale/sq/messenger-smime/",
+        "autoconfig": "chrome/sq/locale/sq/autoconfig/",
+        "mozapps": "chrome/sq/locale/sq/mozapps/",
+        "calendar": "chrome/sq/locale/sq/calendar/"
+      },
+      "version": "20200902055318"
+    }
+  },
+  "manifest_version": 2,
+  "version": "78.0buildid20210901192859"
+}

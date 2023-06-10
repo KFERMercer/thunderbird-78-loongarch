@@ -1,0 +1,155 @@
+/* -*- Mode: Java; tab-width: 2; indent-tabs-mode: nil; c-basic-offset: 2 -*- */
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+var EXPORTED_SYMBOLS = ["ActivityManager"];
+
+var { Log4Moz } = ChromeUtils.import("resource:///modules/gloda/Log4moz.jsm");
+
+function ActivityManager() {}
+
+ActivityManager.prototype = {
+  log: Log4Moz.getConfiguredLogger("ActivityManager"),
+  _listeners: [],
+  _processCount: 0,
+  _db: null,
+  _idCounter: 1,
+  _activities: new Map(),
+
+  get processCount() {
+    let count = 0;
+    for (let value of this._activities.values()) {
+      if (value instanceof Ci.nsIActivityProcess) {
+        count++;
+      }
+    }
+
+    return count;
+  },
+
+  getProcessesByContext(aContextType, aContextObj) {
+    let list = [];
+    for (let activity of this._activities.values()) {
+      if (
+        activity instanceof Ci.nsIActivityProcess &&
+        activity.contextType == aContextType &&
+        activity.contextObj == aContextObj
+      ) {
+        list.push(activity);
+      }
+    }
+    return list;
+  },
+
+  get db() {
+    return null;
+  },
+
+  get nextId() {
+    return this._idCounter++;
+  },
+
+  addActivity(aActivity) {
+    try {
+      this.log.info("adding Activity");
+      // get the next valid id for this activity
+      let id = this.nextId;
+      aActivity.id = id;
+
+      // add activity into the activities table
+      this._activities.set(id, aActivity);
+      // notify all the listeners
+      for (let value of this._listeners) {
+        try {
+          value.onAddedActivity(id, aActivity);
+        } catch (e) {
+          this.log.error("Exception calling onAddedActivity" + e);
+        }
+      }
+      return id;
+    } catch (e) {
+      // for some reason exceptions don't end up on the console if we don't
+      // explicitly log them.
+      this.log.error("Exception: " + e);
+      throw e;
+    }
+  },
+
+  removeActivity(aID) {
+    let activity = this.getActivity(aID);
+
+    // make sure that the activity is not in-progress state
+    if (
+      activity instanceof Ci.nsIActivityProcess &&
+      activity.state == Ci.nsIActivityProcess.STATE_INPROGRESS
+    ) {
+      throw Components.Exception("", Cr.NS_ERROR_FAILURE);
+    }
+
+    // remove the activity
+    this._activities.delete(aID);
+
+    // notify all the listeners
+    for (let value of this._listeners) {
+      try {
+        value.onRemovedActivity(aID);
+      } catch (e) {
+        // ignore the exception
+      }
+    }
+  },
+
+  cleanUp() {
+    // Get the list of aIDs.
+    this.log.info("cleanUp\n");
+    for (let [id, activity] of this._activities) {
+      if (activity instanceof Ci.nsIActivityProcess) {
+        // Note: The .state property will return undefined if you aren't in
+        //       this if-instanceof block.
+        let state = activity.state;
+        if (
+          state != Ci.nsIActivityProcess.STATE_INPROGRESS &&
+          state != Ci.nsIActivityProcess.STATE_PAUSED &&
+          state != Ci.nsIActivityProcess.STATE_WAITINGFORINPUT &&
+          state != Ci.nsIActivityProcess.STATE_WAITINGFORRETRY
+        ) {
+          this.removeActivity(id);
+        }
+      } else {
+        this.removeActivity(id);
+      }
+    }
+  },
+
+  getActivity(aID) {
+    if (!this._activities.has(aID)) {
+      throw Components.Exception("", Cr.NS_ERROR_NOT_AVAILABLE);
+    }
+    return this._activities.get(aID);
+  },
+
+  containsActivity(aID) {
+    return this._activities.has(aID);
+  },
+
+  getActivities() {
+    return [...this._activities.values()];
+  },
+
+  addListener(aListener) {
+    this.log.info("addListener\n");
+    this._listeners.push(aListener);
+  },
+
+  removeListener(aListener) {
+    this.log.info("removeListener\n");
+    for (let i = 0; i < this._listeners.length; i++) {
+      if (this._listeners[i] == aListener) {
+        this._listeners.splice(i, 1);
+      }
+    }
+  },
+
+  QueryInterface: ChromeUtils.generateQI([Ci.nsIActivityManager]),
+};

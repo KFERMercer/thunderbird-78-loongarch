@@ -1,0 +1,57 @@
+{
+  "author": "Aviary.pl (contributors: Aviary.pl, Piotr Komoda, Zbigniew Braniecki, Marek Wawoczny, Piotr Bartecki, Stefan Plewako)",
+  "sources": {
+    "browser": {
+      "base_path": "browser/"
+    }
+  },
+  "applications": {
+    "gecko": {
+      "strict_max_version": "78.*",
+      "strict_min_version": "78.0",
+      "id": "langpack-pl@thunderbird.mozilla.org"
+    }
+  },
+  "languages": {
+    "pl": {
+      "version": "20200906100717",
+      "chrome_resources": {
+        "necko": "chrome/pl/locale/pl/necko/",
+        "passwordmgr": "chrome/pl/locale/pl/passwordmgr/",
+        "mozapps": "chrome/pl/locale/pl/mozapps/",
+        "devtools-startup": "chrome/pl/locale/pl/devtools/startup/",
+        "devtools": "chrome/pl/locale/pl/devtools/client/",
+        "messenger-newsblog": "chrome/pl/locale/pl/messenger-newsblog/",
+        "communicator": "chrome/pl/locale/pl/communicator/",
+        "chat": "chrome/pl/locale/pl/chat/",
+        "global": "chrome/pl/locale/pl/global/",
+        "places": "chrome/pl/locale/pl/places/",
+        "autoconfig": "chrome/pl/locale/pl/autoconfig/",
+        "pluginproblem": "chrome/pl/locale/pl/pluginproblem/",
+        "lightning": "chrome/pl/locale/pl/lightning/",
+        "global-platform": {
+          "macosx": "chrome/pl/locale/pl/global-platform/mac/",
+          "linux": "chrome/pl/locale/pl/global-platform/unix/",
+          "win": "chrome/pl/locale/pl/global-platform/win/",
+          "android": "chrome/pl/locale/pl/global-platform/unix/"
+        },
+        "devtools-shared": "chrome/pl/locale/pl/devtools/shared/",
+        "messenger-mapi": "chrome/pl/locale/pl/messenger-mapi/",
+        "alerts": "chrome/pl/locale/pl/alerts/",
+        "pippki": "chrome/pl/locale/pl/pippki/",
+        "pipnss": "chrome/pl/locale/pl/pipnss/",
+        "messenger": "chrome/pl/locale/pl/messenger/",
+        "mozldap": "chrome/pl/locale/pl/mozldap/",
+        "messenger-smime": "chrome/pl/locale/pl/messenger-smime/",
+        "branding": "chrome/pl/locale/pl/branding/",
+        "messenger-region": "chrome/pl/locale/pl/messenger-region/",
+        "calendar": "chrome/pl/locale/pl/calendar/"
+      }
+    }
+  },
+  "manifest_version": 2,
+  "version": "78.0buildid20210901192859",
+  "langpack_id": "pl",
+  "name": "Polski Language Pack",
+  "description": "Language pack for Thunderbird for pl"
+}

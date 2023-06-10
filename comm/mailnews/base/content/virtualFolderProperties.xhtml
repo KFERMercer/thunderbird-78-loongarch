@@ -1,0 +1,119 @@
+<?xml version="1.0"?>
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/.
+   -->
+
+<?xml-stylesheet href="chrome://messenger/skin/searchDialog.css" type="text/css"?>
+<?xml-stylesheet href="chrome://messenger/skin/folderMenus.css" type="text/css"?>
+<?xml-stylesheet href="chrome://messenger/skin/input-fields.css" type="text/css"?>
+<?xml-stylesheet href="chrome://messenger/skin/themeableDialog.css" type="text/css"?>
+
+<!DOCTYPE window [
+  <!ENTITY % folderDTD SYSTEM "chrome://messenger/locale/virtualFolderProperties.dtd">
+  %folderDTD;
+  <!ENTITY % folderPropsDTD SYSTEM "chrome://messenger/locale/folderProps.dtd">
+  %folderPropsDTD;
+  <!ENTITY % searchTermDTD SYSTEM "chrome://messenger/locale/searchTermOverlay.dtd">
+  %searchTermDTD;
+]>
+
+<window xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        xmlns:html="http://www.w3.org/1999/xhtml"
+        title="&virtualFolderProperties.title;"
+        onload="onLoad();"
+        style="width: 50em; height: 28em;"
+        lightweightthemes="true"
+        windowtype="mailnews:virtualFolderProperties">
+<dialog id="virtualFolderPropertiesDialog"
+        buttons="accept,cancel"
+        newFolderAcceptButtonLabel="&newFolderButton.label;"
+        newFolderAcceptButtonAccessKey="&newFolderButton.accesskey;"
+        editFolderAcceptButtonLabel="&editFolderButton.label;"
+        editFolderAcceptButtonAccessKey="&editFolderButton.accesskey;">
+  <stringbundle id="bundle_search" src="chrome://messenger/locale/search.properties"/>
+  <stringbundle id="bundle_messenger" src="chrome://messenger/locale/messenger.properties"/>
+  <stringbundle id="bundle_folder" src="chrome://messenger/locale/folderWidgets.properties"/>
+
+  <script src="chrome://global/content/globalOverlay.js"/>
+  <script src="chrome://global/content/editMenuOverlay.js"/>
+  <script src="chrome://messenger/content/searchWidgets.js"/>
+  <script src="chrome://messenger/content/mailCommands.js"/>
+  <script src="chrome://messenger/content/commandglue.js"/>
+  <script src="chrome://messenger/content/virtualFolderProperties.js"/>
+  <script src="chrome://messenger/content/searchTerm.js"/>
+  <script src="chrome://messenger/content/dateFormat.js"/>
+  <script src="chrome://messenger/content/dialogShadowDom.js"/>
+
+  <hbox>
+    <vbox>
+      <hbox flex="1" align="center">
+        <label id="nameLabel" value="&name.label;" accesskey="&name.accesskey;"
+               control="name"/>
+      </hbox>
+      <hbox id="chooseFolderLocationLabel" flex="1" align="center">
+        <label value="&description.label;" accesskey="&description.accesskey;"
+               control="msgNewFolderPicker"/>
+      </hbox>
+      <hbox flex="1" align="center">
+        <label value="&folderSelectionCaption.label;"/>
+      </hbox>
+    </vbox>
+    <vbox flex="1">
+      <hbox class="input-container">
+        <html:input id="name"
+                    hidden="hidden"
+                    class="input-inline"
+                    aria-labelledby="nameLabel"
+                    oninput="doEnabling();"/>
+        <html:input id="existingName"
+                    readonly="readonly"
+                    hidden="hidden"
+                    class="input-inline"
+                    tabindex="0"/>
+        <hbox id="iconColorContainer" align="center" collapsed="true">
+          <label id="colorLabel" value="&folderProps.color.label;" control="color"
+                 accesskey="&folderProps.color.accesskey;"/>
+          <html:input id="color"
+                      type="color"
+                      value=""
+                      class="input-inline-color"
+                      onclick="inputColorClicked();"
+                      aria-labelledby="colorLabel"/>
+          <button id="resetColor"
+                  tooltiptext="&folderProps.reset.tooltip;"
+                  class="toolbarbutton-1 btn-flat btn-reset"
+                  oncommand="resetColor();"/>
+        </hbox>
+      </hbox>
+      <menulist id="msgNewFolderPicker" class="folderMenuItem" align="center"
+                displayformat="verbose">
+        <menupopup is="folder-menupopup" id="msgNewFolderPopup" class="menulist-menupopup"
+                   mode="newFolder" showFileHereLabel="true" oncommand="onFolderPick(event);"/>
+      </menulist>
+      <hbox align="center">
+        <label id="chosenFoldersCount"/>
+        <spacer flex="1"/>
+        <button id="folderListPicker" label="&chooseFoldersButton.label;"
+                accesskey="&chooseFoldersButton.accesskey;"
+                oncommand="chooseFoldersToSearch();"/>
+      </hbox>
+    </vbox>
+  </hbox>
+
+  <hbox flex="1">
+    <checkbox id="searchOnline" label="&searchOnline.label;"
+              accesskey="&searchOnline.accesskey;"/>
+  </hbox>
+
+  <separator class="thin"/>
+
+  <vbox flex="2">
+    <label value="&searchTermCaption.label;"/>
+    <hbox flex="1">
+      <vbox id="virtualFolderSearchTermListBox" flex="2">
+#include ../../search/content/searchTerm.inc.xhtml
+    </hbox>
+  </vbox>
+</dialog>
+</window>

@@ -1,0 +1,57 @@
+{
+  "sources": {
+    "browser": {
+      "base_path": "browser/"
+    }
+  },
+  "langpack_id": "kab",
+  "name": "Taqbaylit Language Pack",
+  "manifest_version": 2,
+  "description": "Language pack for Thunderbird for kab",
+  "author": "mozilla.org (contributors: Belkacem Mohammed)",
+  "applications": {
+    "gecko": {
+      "strict_min_version": "78.0",
+      "id": "langpack-kab@thunderbird.mozilla.org",
+      "strict_max_version": "78.*"
+    }
+  },
+  "version": "78.0buildid20210901192859",
+  "languages": {
+    "kab": {
+      "chrome_resources": {
+        "messenger-smime": "chrome/kab/locale/kab/messenger-smime/",
+        "places": "chrome/kab/locale/kab/places/",
+        "mozapps": "chrome/kab/locale/kab/mozapps/",
+        "messenger": "chrome/kab/locale/kab/messenger/",
+        "communicator": "chrome/kab/locale/kab/communicator/",
+        "devtools-startup": "chrome/kab/locale/kab/devtools/startup/",
+        "passwordmgr": "chrome/kab/locale/kab/passwordmgr/",
+        "devtools": "chrome/kab/locale/kab/devtools/client/",
+        "pluginproblem": "chrome/kab/locale/kab/pluginproblem/",
+        "mozldap": "chrome/kab/locale/kab/mozldap/",
+        "chat": "chrome/kab/locale/kab/chat/",
+        "necko": "chrome/kab/locale/kab/necko/",
+        "autoconfig": "chrome/kab/locale/kab/autoconfig/",
+        "global-platform": {
+          "android": "chrome/kab/locale/kab/global-platform/unix/",
+          "linux": "chrome/kab/locale/kab/global-platform/unix/",
+          "win": "chrome/kab/locale/kab/global-platform/win/",
+          "macosx": "chrome/kab/locale/kab/global-platform/mac/"
+        },
+        "messenger-region": "chrome/kab/locale/kab/messenger-region/",
+        "devtools-shared": "chrome/kab/locale/kab/devtools/shared/",
+        "messenger-mapi": "chrome/kab/locale/kab/messenger-mapi/",
+        "pipnss": "chrome/kab/locale/kab/pipnss/",
+        "messenger-newsblog": "chrome/kab/locale/kab/messenger-newsblog/",
+        "pippki": "chrome/kab/locale/kab/pippki/",
+        "branding": "chrome/kab/locale/kab/branding/",
+        "calendar": "chrome/kab/locale/kab/calendar/",
+        "lightning": "chrome/kab/locale/kab/lightning/",
+        "alerts": "chrome/kab/locale/kab/alerts/",
+        "global": "chrome/kab/locale/kab/global/"
+      },
+      "version": "20200906125311"
+    }
+  }
+}

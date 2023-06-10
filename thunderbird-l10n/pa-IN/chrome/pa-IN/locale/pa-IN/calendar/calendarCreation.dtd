@@ -1,0 +1,52 @@
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+
+<!ENTITY wizard.title             "ਨਵਾਂ ਕੈਲੰਡਰ ਬਣਾਓ" >
+<!ENTITY wizard.label             "ਨਵਾਂ ਕੈਲੰਡਰ ਬਣਾਓ" >
+<!ENTITY wizard.description       "ਆਪਣਾ ਕੈਲੰਡਰ ਲੱਭੋ" >
+
+<!ENTITY initialpage.description    "Your calendar can be stored on your computer or be stored on a server in order to access it remotely or share it with your friends or co-workers." >
+<!ENTITY initialpage.computer.label  "ਮੇਰੇ ਕੰਪਿਊਟਰ ਤੇ">
+<!ENTITY initialpage.network.label  "ਨੈਟਵਰਕ ਤੇ">
+
+<!ENTITY locationpage.description         "Provide info about what is needed to access your remote calendar" >
+<!ENTITY locationpage.login.description   "Optional: enter an username and password" >
+<!ENTITY locationpage.username.label      "Username:" >
+<!ENTITY locationpage.password.label      "Password:" >
+
+<!ENTITY custompage.shortdescription  "Customize your calendar" >
+<!ENTITY custompage.longdescription   "You can give your calendar a nickname and colorize the events from this calendar." >
+
+<!ENTITY finishpage.longdescription   "ਤੁਹਾਡਾ ਕੈਲੰਡਰ ਬਣਾਇਆ ਗਿਆ ਹੈ।" >
+
+<!-- Below are new strings for the revised new calendar dialog. The above strings should be
+    removed/renamed later on -->
+
+<!ENTITY sourcetabs.other.label  "ਹੋਰ">
+
+
+<!ENTITY buttons.find.label "ਕੈਲੰਡਰ ਲੱਭੋ">
+
+<!ENTITY buttons.back.label "ਪਿੱਛੇ">
+
+<!ENTITY buttons.subscribe.label "ਮੈਂਬਰ ਬਣੋ">
+
+
+
+
+<!ENTITY finishpage.shortdescription  "Calendar Created" >
+<!ENTITY buttons.create.label "Create Calendar">
+<!ENTITY buttons.create.accesskey "r">
+<!ENTITY buttons.find.accesskey "F">
+<!ENTITY buttons.back.accesskey "B">
+<!ENTITY buttons.subscribe.accesskey "S">
+<!ENTITY calendartype.label "Calendar Type:">
+<!ENTITY location.label "Location:">
+<!ENTITY location.placeholder "URL or host name of the calendar server">
+<!ENTITY network.nocredentials.label "This location doesn't require credentials">
+<!ENTITY network.loading.description "Please wait while your calendars are being discovered.">
+<!ENTITY network.notfound.description "Could not find calendars at this location. Please check your settings.">
+<!ENTITY network.authfail.description "The credentials you have entered were not accepted. Please check your settings.">
+<!ENTITY network.subscribe.single.description "Please select the calendars you would like to subscribe to.">
+<!ENTITY network.subscribe.multiple.description "Multiple calendar types are available for this location. Please select the calendar type, then mark the calendars you would like to subscribe to.">

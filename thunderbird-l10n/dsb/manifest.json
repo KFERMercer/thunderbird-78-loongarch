@@ -1,0 +1,57 @@
+{
+  "languages": {
+    "dsb": {
+      "version": "20200902141427",
+      "chrome_resources": {
+        "passwordmgr": "chrome/dsb/locale/dsb/passwordmgr/",
+        "devtools-startup": "chrome/dsb/locale/dsb/devtools/startup/",
+        "places": "chrome/dsb/locale/dsb/places/",
+        "communicator": "chrome/dsb/locale/dsb/communicator/",
+        "mozldap": "chrome/dsb/locale/dsb/mozldap/",
+        "pluginproblem": "chrome/dsb/locale/dsb/pluginproblem/",
+        "branding": "chrome/dsb/locale/dsb/branding/",
+        "messenger-newsblog": "chrome/dsb/locale/dsb/messenger-newsblog/",
+        "messenger-region": "chrome/dsb/locale/dsb/messenger-region/",
+        "mozapps": "chrome/dsb/locale/dsb/mozapps/",
+        "messenger-mapi": "chrome/dsb/locale/dsb/messenger-mapi/",
+        "global-platform": {
+          "macosx": "chrome/dsb/locale/dsb/global-platform/mac/",
+          "android": "chrome/dsb/locale/dsb/global-platform/unix/",
+          "win": "chrome/dsb/locale/dsb/global-platform/win/",
+          "linux": "chrome/dsb/locale/dsb/global-platform/unix/"
+        },
+        "lightning": "chrome/dsb/locale/dsb/lightning/",
+        "calendar": "chrome/dsb/locale/dsb/calendar/",
+        "messenger-smime": "chrome/dsb/locale/dsb/messenger-smime/",
+        "necko": "chrome/dsb/locale/dsb/necko/",
+        "pipnss": "chrome/dsb/locale/dsb/pipnss/",
+        "alerts": "chrome/dsb/locale/dsb/alerts/",
+        "autoconfig": "chrome/dsb/locale/dsb/autoconfig/",
+        "global": "chrome/dsb/locale/dsb/global/",
+        "devtools": "chrome/dsb/locale/dsb/devtools/client/",
+        "pippki": "chrome/dsb/locale/dsb/pippki/",
+        "devtools-shared": "chrome/dsb/locale/dsb/devtools/shared/",
+        "messenger": "chrome/dsb/locale/dsb/messenger/",
+        "chat": "chrome/dsb/locale/dsb/chat/"
+      }
+    }
+  },
+  "version": "78.0buildid20210901192859",
+  "sources": {
+    "browser": {
+      "base_path": "browser/"
+    }
+  },
+  "name": "Dolnoserbšćina Language Pack",
+  "description": "Language pack for Thunderbird for dsb",
+  "author": "Michael Wolf (contributors: Michael Wolf)",
+  "manifest_version": 2,
+  "langpack_id": "dsb",
+  "applications": {
+    "gecko": {
+      "strict_max_version": "78.*",
+      "strict_min_version": "78.0",
+      "id": "langpack-dsb@thunderbird.mozilla.org"
+    }
+  }
+}

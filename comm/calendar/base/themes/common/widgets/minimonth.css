@@ -1,0 +1,254 @@
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+calendar-minimonth {
+  --mmMainColor: WindowText;
+  --mmMainBackground: #fff;
+  --mmHighlightColor: HighlightText;
+  --mmHighlightBackground: Highlight;
+  --mmHighlightBorderColor: Highlight;
+  --mmBoxBackground: #f5f5f6;
+  --mmBoxBorderColor: #c0c0c0;
+  --mmDayColor: #2e4e73;
+  --mmDayBorderColor: #fff;
+  --mmDayOtherColor: #b2b2b2;
+  --mmDayWeekColor: #b2b2b2;
+  --mmDayOtherBackground: #f0f0f0;
+  --mmDayOtherBorderColor: #f0f0f0;
+  --mmDayTodayColor: #2e4e73;
+  --mmDayTodayBackground: #dfeaf4;
+  --mmDayTodayBorderColor: #67acd8;
+  --mmDaySelectedColor: #2e4e73;
+  --mmDaySelectedBackground: #fffabc;
+  --mmDaySelectedBorderColor: #d9c585;
+  --mmDaySelectedTodayBackground: #f2edb2;
+  --mmDaySelectedTodayBorderColor: #67acd8;
+}
+
+:root[lwt-tree] calendar-minimonth,
+:root[lwt-tree-brighttext] calendar-minimonth {
+  --mmMainColor: var(--sidebar-text-color, FieldText);
+  --mmMainBackground: var(--sidebar-background-color, Field);
+  --mmHighlightColor: var(--sidebar-highlight-text-color, HighlightText);
+  --mmHighlightBackground: var(--sidebar-highlight-background-color, Highlight);
+  --mmHighlightBorderColor: var(--sidebar-highlight-background-color, Highlight);
+  --mmBoxBackground: var(--sidebar-background-color, Field);
+  --mmBoxBorderColor: var(--sidebar-background-color, Field);
+  --mmDayTodayColor: var(--sidebar-highlight-text-color, HighlightText);
+  --mmDayTodayBackground: var(--sidebar-highlight-background-color, Highlight);
+  --mmDayTodayBorderColor: var(--sidebar-highlight-text-color, HighlightText);
+  --mmDayColor: var(--sidebar-text-color, FieldText);
+  --mmDayBorderColor: var(--sidebar-background-color, Field);
+  --mmDayOtherColor: var(--sidebar-text-color, FieldText);
+  --mmDayOtherBackground: rgba(0, 0, 0, 0.1);
+  --mmDayOtherBorderColor: Transparent;
+}
+
+:root[lwt-tree-brighttext] calendar-minimonth {
+  --mmBoxBorderColor: rgba(255, 255, 255, 0.5);
+  --mmDayOtherBackground: rgba(255, 255, 255, 0.2);
+  --mmDayTodayColor: var(--sidebar-highlight-text-color, #fff);
+  --mmDayTodayBackground: var(--sidebar-highlight-background-color, #5358a4);
+  --mmDayTodayBorderColor: #d9c585;
+  --mmDaySelectedColor: #fff;
+  --mmDaySelectedBackground: #8b8bbd;
+  --mmDaySelectedBorderColor: #d9c585;
+  --mmDaySelectedTodayBackground: var(--sidebar-highlight-background-color, #5358a4);
+  --mmDaySelectedTodayBorderColor: var(--sidebar-highlight-text-color, #9fa3d9);
+  --mmDayWeekColor: #888;
+}
+
+:root[systemcolors] calendar-minimonth {
+  --mmMainColor: -moz-DialogText;
+  --mmMainBackground: -moz-field;
+  --mmBoxBackground: -moz-Dialog;
+  --mmBoxBorderColor: ThreeDShadow;
+  --mmDayColor: WindowText;
+  --mmDayBorderColor: Window;
+  --mmDayOtherColor: GrayText;
+  --mmDayWeekColor: GrayText;
+  --mmDayOtherBackground: ButtonFace;
+  --mmDayOtherBorderColor: Transparent;
+  --mmDayTodayColor: -moz-DialogText;
+  --mmDayTodayBackground: -moz-field;
+  --mmDayTodayBorderColor: Highlight;
+  --mmDaySelectedColor: HighlightText;
+  --mmDaySelectedBackground: Highlight;
+  --mmDaySelectedBorderColor: ButtonFace;
+  --mmDaySelectedTodayBackground: Highlight;
+  --mmDaySelectedTodayBorderColor: ButtonFace;
+}
+
+calendar-minimonth {
+  background-color: var(--mmMainBackground);
+  border-width: 0;
+  color: var(--mmMainColor);
+  padding: 4px;
+  min-width: 175px;
+}
+
+calendar-minimonth:not([readonly="true"]) .minimonth-readonly-header,
+calendar-minimonth[readonly="true"] .minimonth-header {
+  display: none;
+}
+
+calendar-minimonth[readonly="true"] .minimonth-readonly-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.minimonth-month-box {
+  background-color: var(--mmBoxBackground);
+  border: 1px dotted var(--mmBoxBorderColor);
+  font-weight: bold;
+  text-align: center;
+  height: 22px;
+}
+
+.minimonth-month-name {
+  text-align: center;
+  font-weight: bold;
+  padding: 0px;
+  -moz-user-focus: normal;
+}
+
+.minimonth-year-name {
+  width: 5ch;
+  text-align: center;
+  font-weight: bold;
+  padding: 0px;
+  -moz-user-focus: normal;
+}
+
+.minimonth-nav-btns {
+  -moz-appearance: none;
+  padding: 4px;
+  list-style-image: url("chrome://calendar/skin/shared/widgets/nav-arrow.svg");
+  -moz-user-focus: normal;
+  -moz-context-properties: fill;
+  fill: currentColor;
+}
+
+.minimonth-nav-btns:active,
+.minimonth-nav-btns:focus,
+.minimonth-nav-btns:hover {
+  background-color: hsla(0,0%,0%,.1);
+}
+
+.minimonth-nav-btns > .toolbarbutton-text  {
+  display: none;
+}
+
+.minimonth-nav-btns[disabled] {
+  opacity: .3;
+}
+
+.minimonth-nav-btns:-moz-locale-dir(ltr)[dir="-1"],
+.minimonth-nav-btns:-moz-locale-dir(rtl)[dir="1"] {
+  transform: scaleX(-1);
+}
+
+.minimonth-nav-btns[dir="0"] {
+  list-style-image: url("chrome://calendar/skin/shared/widgets/nav-today.svg");
+}
+
+.minimonth-cal-box {
+  border-spacing: 0px;
+}
+
+.minimonth-cal-box th, .minimonth-cal-box td {
+  width: 12.5%; /* 100% / 8 columns */
+}
+
+.minimonth-cal-box th {
+  font-weight: normal;
+}
+
+.minimonth-row-header {
+  text-align: center;
+}
+
+.minimonth-day {
+  color: var(--mmDayColor);
+  text-align: center;
+  border: 1px solid var(--mmDayBorderColor);
+  background-color: var(--mmMainBackground);
+  min-height: 16px;
+}
+
+.minimonth-row-header-week {
+  color: var(--mmDayOtherColor);
+  text-align: center;
+}
+
+.minimonth-week {
+  color: var(--mmDayWeekColor);
+  text-align: center;
+  border: 1px solid var(--mmDayBorderColor);
+  background-color: var(--mmMainBackground);
+  min-height: 16px;
+}
+
+.minimonth-day[othermonth="true"] {
+  color: var(--mmDayOtherColor);
+  background-color: var(--mmDayOtherBackground);
+  border: 1px solid var(--mmDayOtherBorderColor);
+}
+
+.minimonth-day[today="true"] {
+  background-color: var(--mmDayTodayBackground);
+  border: 1px solid var(--mmDayTodayBorderColor);
+  color: var(--mmDayTodayColor);
+}
+
+.minimonth-day[selected="true"] {
+  background-color: var(--mmDaySelectedBackground);
+  color: var(--mmDaySelectedColor);
+  border: 1px solid var(--mmDaySelectedBorderColor);
+}
+
+#repeat-until-datepicker .minimonth-day[extra="true"],
+#repeat-until-date .minimonth-day[extra="true"] {
+  border: 1px solid var(--mmDayOtherColor);
+}
+
+#repeat-until-datepicker .minimonth-day:hover[extra="true"],
+#repeat-until-date .minimonth-day:hover[extra="true"] {
+  border: 1px solid var(--mmHighlightBorderColor);
+}
+
+.minimonth-day[selected="true"][today="true"] {
+  background-color: var(--mmDaySelectedTodayBackground);
+  border: 1px solid var(--mmDaySelectedTodayBorderColor);
+}
+
+.minimonth-day[busy] {
+  font-weight: bold;
+}
+
+.minimonth-day:hover[interactive] {
+  cursor: pointer;
+  border: 1px solid var(--mmHighlightBorderColor);
+}
+
+.minimonth-day:active[interactive] {
+  background-color: var(--mmHighlightBackground);
+  color: var(--mmHighlightColor);
+}
+
+.minimonth-list {
+  padding-inline-start: 1em;
+  padding-inline-end: 1em;
+}
+
+.minimonth-list[current="true"] {
+  font-weight: bold;
+}
+
+.minimonth-list:hover {
+  background-color: var(--mmHighlightBackground);
+  color: var(--mmHighlightColor);
+  cursor: pointer;
+}

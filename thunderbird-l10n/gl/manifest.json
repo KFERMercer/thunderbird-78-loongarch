@@ -1,0 +1,57 @@
+{
+  "name": "Galego (España) Language Pack",
+  "sources": {
+    "browser": {
+      "base_path": "browser/"
+    }
+  },
+  "manifest_version": 2,
+  "langpack_id": "gl",
+  "version": "78.0buildid20210901192859",
+  "applications": {
+    "gecko": {
+      "strict_max_version": "78.*",
+      "strict_min_version": "78.0",
+      "id": "langpack-gl@thunderbird.mozilla.org"
+    }
+  },
+  "languages": {
+    "gl": {
+      "version": "20200902053810",
+      "chrome_resources": {
+        "mozapps": "chrome/gl/locale/gl/mozapps/",
+        "autoconfig": "chrome/gl/locale/gl/autoconfig/",
+        "chat": "chrome/gl/locale/gl/chat/",
+        "calendar": "chrome/gl/locale/gl/calendar/",
+        "pippki": "chrome/gl/locale/gl/pippki/",
+        "global": "chrome/gl/locale/gl/global/",
+        "devtools-shared": "chrome/gl/locale/gl/devtools/shared/",
+        "necko": "chrome/gl/locale/gl/necko/",
+        "pipnss": "chrome/gl/locale/gl/pipnss/",
+        "mozldap": "chrome/gl/locale/gl/mozldap/",
+        "branding": "chrome/gl/locale/gl/branding/",
+        "messenger": "chrome/gl/locale/gl/messenger/",
+        "messenger-newsblog": "chrome/gl/locale/gl/messenger-newsblog/",
+        "messenger-region": "chrome/gl/locale/gl/messenger-region/",
+        "devtools": "chrome/gl/locale/gl/devtools/client/",
+        "alerts": "chrome/gl/locale/gl/alerts/",
+        "lightning": "chrome/gl/locale/gl/lightning/",
+        "pluginproblem": "chrome/gl/locale/gl/pluginproblem/",
+        "messenger-smime": "chrome/gl/locale/gl/messenger-smime/",
+        "communicator": "chrome/gl/locale/gl/communicator/",
+        "passwordmgr": "chrome/gl/locale/gl/passwordmgr/",
+        "places": "chrome/gl/locale/gl/places/",
+        "devtools-startup": "chrome/gl/locale/gl/devtools/startup/",
+        "global-platform": {
+          "linux": "chrome/gl/locale/gl/global-platform/unix/",
+          "win": "chrome/gl/locale/gl/global-platform/win/",
+          "android": "chrome/gl/locale/gl/global-platform/unix/",
+          "macosx": "chrome/gl/locale/gl/global-platform/mac/"
+        },
+        "messenger-mapi": "chrome/gl/locale/gl/messenger-mapi/"
+      }
+    }
+  },
+  "author": "mozilla.org (contributors: Grupo de tradución ao galego dos aplicativos de Mozilla (http://galician.mozdev.org/))",
+  "description": "Language pack for Thunderbird for gl"
+}

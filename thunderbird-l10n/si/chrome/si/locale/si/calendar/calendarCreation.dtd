@@ -1,0 +1,41 @@
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+
+<!ENTITY wizard.title             "නව දිනදර්ශනය නිර්මාණය" >
+<!ENTITY wizard.label             "නව දිනදර්ශනයක් නිර්මාණය කරන්න" >
+<!ENTITY wizard.description       "ඔබේ දිනදර්ශනය ස්ථානගත කරන්න" >
+
+<!ENTITY initialpage.description    "ඔබගේ දිනදර්ශනය ඔබේ පරිගණකය තුළ හෝ මිතුරන් සමඟ, කාර්යය මණ්ඩලය සමඟ බෙදාහදා ගත හැකි වනසේ හා දුරස්ථව ලබාගත හැකි වනසේ සේවාදායකයක තැන්පත් කළ හැක." >
+<!ENTITY initialpage.computer.label  "මගේ පරිගණකය මත">
+<!ENTITY initialpage.network.label  "ජාලය මත">
+
+<!ENTITY locationpage.description         "ඔබගේ දුරස්ථ දිනදර්ශනයට ප්‍රවේශ තොරතුරු සපයන්න" >
+<!ENTITY locationpage.login.description   "විකල්ප: පරිශීලක නමක් සහ රහස්පදයක් ඇතුළු කරන්න" >
+<!ENTITY locationpage.username.label      "පරිශීලක නාමය:" >
+<!ENTITY locationpage.password.label      "රහස්පදය:" >
+
+<!ENTITY custompage.shortdescription  "ඔබේ දිනදර්ශනය රිසිසේ සකසන්න" >
+<!ENTITY custompage.longdescription   "ඔබට දිනදර්ශනයට සුරතල් නමක් ලබාදීමට සහ දිනදර්ශනයේ සිදුවීම් වර්ණ ගැන්විය හැකිය." >
+
+<!ENTITY finishpage.shortdescription  "දිනදර්ශනය නිර්මාණය විය" >
+<!ENTITY finishpage.longdescription   "ඔබේ දිනදර්ශනය නිර්මාණය විය." >
+
+<!ENTITY sourcetabs.other.label  "Other">
+<!ENTITY buttons.create.label "Create Calendar">
+<!ENTITY buttons.create.accesskey "r">
+<!ENTITY buttons.find.label "Find Calendars">
+<!ENTITY buttons.find.accesskey "F">
+<!ENTITY buttons.back.label "Back">
+<!ENTITY buttons.back.accesskey "B">
+<!ENTITY buttons.subscribe.label "Subscribe">
+<!ENTITY buttons.subscribe.accesskey "S">
+<!ENTITY calendartype.label "Calendar Type:">
+<!ENTITY location.label "Location:">
+<!ENTITY location.placeholder "URL or host name of the calendar server">
+<!ENTITY network.nocredentials.label "This location doesn't require credentials">
+<!ENTITY network.loading.description "Please wait while your calendars are being discovered.">
+<!ENTITY network.notfound.description "Could not find calendars at this location. Please check your settings.">
+<!ENTITY network.authfail.description "The credentials you have entered were not accepted. Please check your settings.">
+<!ENTITY network.subscribe.single.description "Please select the calendars you would like to subscribe to.">
+<!ENTITY network.subscribe.multiple.description "Multiple calendar types are available for this location. Please select the calendar type, then mark the calendars you would like to subscribe to.">

@@ -1,0 +1,225 @@
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at http://mozilla.org/MPL/2.0/.
+---
+trust-domain: comm
+project-repo-param-prefix: comm_
+product-dir: comm/mail
+
+treeherder:
+    group-names:
+        # Images/Packages/Toolchain
+        'Deb8': 'Packages for Debian 8'
+        'Deb8-32': 'Packages for Debian 8 32-bits'
+        'Deb9': 'Packages for Debian 9'
+        'Deb10': 'Packages for Debian 10'
+        'Fetch': 'Fetch and store content'
+        'I': 'Docker Image Builds'
+        'TL': 'Toolchain builds for Linux 64-bits'
+        'TM': 'Toolchain builds for OSX'
+        'TMW': 'Toolchain builds for Windows MinGW'
+        'TW32': 'Toolchain builds for Windows 32-bits'
+        'TW64': 'Toolchain builds for Windows 64-bits'
+
+        # Release promotion
+        'BM': 'Beetmover'
+        'BMcs': 'Beetmover checksums,'
+        'BMcss': 'Beetmover checksums for source'
+        'BMR': 'Beetmover repackages'
+        'c-Up': 'Balrog submission of complete updates'
+        'cs': 'Checksum signing'
+        'css': 'Checksum signing for source'
+        'L10n': 'Localised Repacks'
+        'L10n-Rpk': 'Localized Repackaged Repacks'
+        'l10n-bump': 'L10n Bumper'
+        'ms': 'Complete MAR signing'
+        'MSI': 'Repack installers into MSIs'
+        'MSIs': 'Signing of Repacked installers of MSIs'
+        'p': 'Partial generation'
+        'ps': 'Partials signing'
+        'Rel': 'Release promotion'
+        'rs': 'Repackage signing'
+        'UV': 'Update verify'
+
+        # mozlint
+        'js': 'JavaScript checks'
+        'misc': 'Misc checks'
+        'pedantic': 'pedantic checks'
+        'py': 'Python checks'
+        'text': 'Check on texts'
+
+        # Tests
+        'X': 'Xpcshell tests'
+        'M': 'Mochitests'
+
+index:
+    products:
+        - thunderbird
+
+try:
+    ridealong-builds: {}
+
+release-promotion:
+    products:
+        - 'thunderbird'
+    flavors:
+        promote_thunderbird:
+            product: thunderbird
+            target-tasks-method: promote_desktop
+            partial-updates: true
+        push_thunderbird:
+            product: thunderbird
+            target-tasks-method: push_desktop
+            partial-updates: true
+        ship_thunderbird:
+            product: thunderbird
+            target-tasks-method: ship_desktop
+            version-bump: true
+            partial-updates: true
+
+merge-automation:
+    behaviors: {}
+
+scriptworker:
+    scope-prefix: 'project:comm:thunderbird:releng'
+
+partner-urls:
+    release-partner-repack: {}
+    release-eme-free-repack: {}
+
+task-priority:
+    by-project:
+        'comm-esr.*': 'very-high'
+        'comm-beta': 'high'
+        'comm-central': 'medium'
+        'default': 'low'
+
+taskgraph:
+    register: comm_taskgraph:register
+    decision-parameters: 'comm_taskgraph:get_decision_parameters'
+
+workers:
+    aliases:
+        b-linux.*:
+            provisioner: 'comm-{level}'
+            implementation: docker-worker
+            os: linux
+            worker-type: '{alias}'
+        b-win2012:
+            provisioner: 'comm-{level}'
+            implementation: generic-worker
+            os: windows
+            worker-type: '{alias}'
+        images:
+            provisioner: 'comm-{level}'
+            implementation: docker-worker
+            os: linux
+            worker-type: '{alias}'
+        balrog:
+            provisioner: scriptworker-k8s
+            implementation: balrog
+            os: scriptworker
+            worker-type:
+                by-release-level:
+                    production: comm-3-balrog
+                    staging: comm-1-balrog
+        bouncer:
+            provisioner: scriptworker-k8s
+            # Note that this implementation doesn't correspond with a
+            # payload_builder, there are several `bouncer-*` implementations.
+            implementation: bouncer
+            os: scriptworker
+            worker-type:
+                by-release-level:
+                    production: comm-3-bouncer
+                    staging: comm-1-bouncer
+        beetmover:
+            provisioner: scriptworker-k8s
+            implementation: beetmover
+            os: scriptworker
+            worker-type:
+                by-release-level:
+                    production: comm-3-beetmover
+                    staging: comm-1-beetmover
+        linux-depsigning:
+            provisioner: scriptworker-k8s
+            implementation: scriptworker-signing
+            os: linux
+            worker-type: comm-t-signing
+        linux-signing:
+            provisioner: scriptworker-k8s
+            implementation: scriptworker-signing
+            os: linux
+            worker-type:
+                by-release-level:
+                    production: comm-3-signing
+                    staging: comm-t-signing
+        mac-depsigning:
+            provisioner: scriptworker-prov-v1
+            implementation: scriptworker-signing
+            os: macosx
+            worker-type: tb-depsigning-mac-v1
+        mac-notarization-poller:
+            provisioner: scriptworker-prov-v1
+            implementation: notarization-poller
+            os: macosx
+            worker-type: tb-mac-notarization-poller
+        mac-signing:
+            provisioner: scriptworker-prov-v1
+            implementation: scriptworker-signing
+            os: macosx
+            worker-type:
+                by-release-level:
+                    production: tb-signing-mac-v1
+                    staging: tb-depsigning-mac-v1
+        tree:
+            provisioner: scriptworker-k8s
+            implementation: treescript
+            os: scriptworker
+            worker-type:
+                by-release-level:
+                    production: comm-3-tree
+                    staging: comm-1-tree
+        t-linux(-large|-xlarge|-xlarge-source):
+            provisioner: comm-t
+            implementation: docker-worker
+            os: linux
+            worker-type: '{alias}'
+        t-osx-1010:
+            provisioner: releng-hardware
+            implementation: generic-worker
+            os: macosx
+            worker-type: 'gecko-{alias}'
+        t-osx-1014:
+            provisioner: releng-hardware
+            implementation: generic-worker
+            os: macosx
+            worker-type: 'gecko-{alias}'
+        t-win.*:
+            provisioner: comm-t
+            implementation: generic-worker
+            os: windows
+            worker-type: '{alias}'
+        succeed:
+            provisioner: built-in
+            implementation: succeed
+            os: none
+            worker-type: succeed
+        misc:
+            provisioner: comm-t
+            implementation: docker-worker
+            os: linux
+            worker-type: misc
+
+mac-notarization:
+    mac-behavior:
+        by-project:
+            comm-(central|beta|esr.*): mac_notarize
+            default: mac_sign_and_pkg
+    mac-entitlements:
+        by-platform:
+            macosx64.*:
+                by-release-level:
+                    production: comm/build/macosx/hardenedruntime/production.entitlements.xml
+                    default: comm/build/macosx/hardenedruntime/developer.entitlements.xml
+            default: ''

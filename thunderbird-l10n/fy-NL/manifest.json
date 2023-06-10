@@ -1,0 +1,57 @@
+{
+  "sources": {
+    "browser": {
+      "base_path": "browser/"
+    }
+  },
+  "manifest_version": 2,
+  "author": "mozilla.org (contributors: Wim Benes, Hindrik Sijens)",
+  "description": "Language pack for Thunderbird for fy-NL",
+  "name": "Frysk (fy) Language Pack",
+  "languages": {
+    "fy-NL": {
+      "chrome_resources": {
+        "lightning": "chrome/fy-NL/locale/fy-NL/lightning/",
+        "mozapps": "chrome/fy-NL/locale/fy-NL/mozapps/",
+        "pipnss": "chrome/fy-NL/locale/fy-NL/pipnss/",
+        "messenger-newsblog": "chrome/fy-NL/locale/fy-NL/messenger-newsblog/",
+        "alerts": "chrome/fy-NL/locale/fy-NL/alerts/",
+        "branding": "chrome/fy-NL/locale/fy-NL/branding/",
+        "chat": "chrome/fy-NL/locale/fy-NL/chat/",
+        "necko": "chrome/fy-NL/locale/fy-NL/necko/",
+        "global": "chrome/fy-NL/locale/fy-NL/global/",
+        "global-platform": {
+          "macosx": "chrome/fy-NL/locale/fy-NL/global-platform/mac/",
+          "android": "chrome/fy-NL/locale/fy-NL/global-platform/unix/",
+          "linux": "chrome/fy-NL/locale/fy-NL/global-platform/unix/",
+          "win": "chrome/fy-NL/locale/fy-NL/global-platform/win/"
+        },
+        "messenger-smime": "chrome/fy-NL/locale/fy-NL/messenger-smime/",
+        "devtools-startup": "chrome/fy-NL/locale/fy-NL/devtools/startup/",
+        "messenger-mapi": "chrome/fy-NL/locale/fy-NL/messenger-mapi/",
+        "autoconfig": "chrome/fy-NL/locale/fy-NL/autoconfig/",
+        "communicator": "chrome/fy-NL/locale/fy-NL/communicator/",
+        "calendar": "chrome/fy-NL/locale/fy-NL/calendar/",
+        "devtools": "chrome/fy-NL/locale/fy-NL/devtools/client/",
+        "messenger": "chrome/fy-NL/locale/fy-NL/messenger/",
+        "passwordmgr": "chrome/fy-NL/locale/fy-NL/passwordmgr/",
+        "pippki": "chrome/fy-NL/locale/fy-NL/pippki/",
+        "places": "chrome/fy-NL/locale/fy-NL/places/",
+        "mozldap": "chrome/fy-NL/locale/fy-NL/mozldap/",
+        "pluginproblem": "chrome/fy-NL/locale/fy-NL/pluginproblem/",
+        "messenger-region": "chrome/fy-NL/locale/fy-NL/messenger-region/",
+        "devtools-shared": "chrome/fy-NL/locale/fy-NL/devtools/shared/"
+      },
+      "version": "20200902205352"
+    }
+  },
+  "version": "78.0buildid20210901192859",
+  "langpack_id": "fy-NL",
+  "applications": {
+    "gecko": {
+      "id": "langpack-fy-NL@thunderbird.mozilla.org",
+      "strict_min_version": "78.0",
+      "strict_max_version": "78.*"
+    }
+  }
+}

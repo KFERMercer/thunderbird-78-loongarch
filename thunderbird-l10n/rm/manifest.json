@@ -1,0 +1,57 @@
+{
+  "description": "Language pack for Thunderbird for rm",
+  "version": "78.0buildid20210901192859",
+  "name": "Rumantsch Language Pack",
+  "sources": {
+    "browser": {
+      "base_path": "browser/"
+    }
+  },
+  "langpack_id": "rm",
+  "manifest_version": 2,
+  "applications": {
+    "gecko": {
+      "strict_min_version": "78.0",
+      "strict_max_version": "78.*",
+      "id": "langpack-rm@thunderbird.mozilla.org"
+    }
+  },
+  "author": "mozilla.org (contributors: Joe Solon, Suzy Solon)",
+  "languages": {
+    "rm": {
+      "version": "20200906183413",
+      "chrome_resources": {
+        "mozapps": "chrome/rm/locale/rm/mozapps/",
+        "necko": "chrome/rm/locale/rm/necko/",
+        "mozldap": "chrome/rm/locale/rm/mozldap/",
+        "messenger-newsblog": "chrome/rm/locale/rm/messenger-newsblog/",
+        "global-platform": {
+          "win": "chrome/rm/locale/rm/global-platform/win/",
+          "macosx": "chrome/rm/locale/rm/global-platform/mac/",
+          "linux": "chrome/rm/locale/rm/global-platform/unix/",
+          "android": "chrome/rm/locale/rm/global-platform/unix/"
+        },
+        "pippki": "chrome/rm/locale/rm/pippki/",
+        "devtools-shared": "chrome/rm/locale/rm/devtools/shared/",
+        "communicator": "chrome/rm/locale/rm/communicator/",
+        "devtools-startup": "chrome/rm/locale/rm/devtools/startup/",
+        "pipnss": "chrome/rm/locale/rm/pipnss/",
+        "messenger-region": "chrome/rm/locale/rm/messenger-region/",
+        "messenger": "chrome/rm/locale/rm/messenger/",
+        "messenger-smime": "chrome/rm/locale/rm/messenger-smime/",
+        "lightning": "chrome/rm/locale/rm/lightning/",
+        "global": "chrome/rm/locale/rm/global/",
+        "alerts": "chrome/rm/locale/rm/alerts/",
+        "devtools": "chrome/rm/locale/rm/devtools/client/",
+        "branding": "chrome/rm/locale/rm/branding/",
+        "chat": "chrome/rm/locale/rm/chat/",
+        "autoconfig": "chrome/rm/locale/rm/autoconfig/",
+        "calendar": "chrome/rm/locale/rm/calendar/",
+        "pluginproblem": "chrome/rm/locale/rm/pluginproblem/",
+        "places": "chrome/rm/locale/rm/places/",
+        "messenger-mapi": "chrome/rm/locale/rm/messenger-mapi/",
+        "passwordmgr": "chrome/rm/locale/rm/passwordmgr/"
+      }
+    }
+  }
+}

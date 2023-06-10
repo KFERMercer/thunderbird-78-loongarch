@@ -1,0 +1,3 @@
+version=4
+opts=dversionmangle=s/^(\d\.[\d\.]+)\+dfsg$/$1/ \
+https://download-origin.cdn.mozilla.net/pub/thunderbird/releases/(\d{2}\.[\d\.]+)/source/thunderbird-([\d\.]+).source\.tar\.xz debian python3 -B debian/repack.py

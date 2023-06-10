@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+
+<?xml-stylesheet href="chrome://global/skin/global.css"?>
+
+<!DOCTYPE window>
+
+<window xmlns:html="http://www.w3.org/1999/xhtml"
+        xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        onload="gSystemIntegrationDialog.onLoad();"
+        data-l10n-id="system-integration-title">
+<dialog id="systemIntegrationDialog"
+        buttons="accept,cancel"
+        data-l10n-id="system-integration-dialog"
+        data-l10n-attrs="buttonlabelaccept, buttonlabelcancel, buttonlabelcancel2">
+
+  <script src="chrome://messenger/content/systemIntegrationDialog.js"/>
+
+  <linkset>
+    <html:link rel="localization" href="branding/brand.ftl"/>
+    <html:link rel="localization" href="messenger/preferences/system-integration.ftl"/>
+  </linkset>
+
+  <label control="defaultClientList" data-l10n-id="default-client-intro"/>
+  <vbox id="defaultClientList" role="group">
+    <checkbox id="checkMail"
+              data-l10n-id="checkbox-email-label"/>
+    <checkbox id="checkNews"
+              data-l10n-id="checkbox-newsgroups-label"/>
+    <checkbox id="checkRSS"
+              data-l10n-id="checkbox-feeds-label"/>
+  </vbox>
+
+  <separator class="groove"/>
+
+  <checkbox id="searchIntegration"
+            hidden="true"
+            data-l10n-id="system-search-integration-label"/>
+
+  <separator class="thin"/>
+
+  <checkbox id="checkOnStartup"
+            data-l10n-id="check-on-startup-label"/>
+
+</dialog>
+</window>

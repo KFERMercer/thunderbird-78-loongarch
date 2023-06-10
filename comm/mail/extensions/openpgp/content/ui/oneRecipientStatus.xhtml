@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+
+<?xml-stylesheet href="chrome://global/skin/global.css" type="text/css"?>
+<?xml-stylesheet href="chrome://messenger/skin/openpgp/openPgpComposeStatus.css" type="text/css"?>
+
+<window data-l10n-id="openpgp-one-recipient-status-title"
+        xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        xmlns:html="http://www.w3.org/1999/xhtml"
+        style="width: 50em; height: 22em"
+        persist="width height"
+        onload="onLoad();">
+<dialog id="oneRecipientStatus"
+        buttons="accept">
+  <script src="chrome://openpgp/content/ui/oneRecipientStatus.js"/>
+  <linkset>
+    <html:link rel="localization" href="messenger/openpgp/oneRecipientStatus.ftl"/>
+  </linkset>
+  <script><![CDATA[
+      function resizeColumns() {
+        let list = document.getElementById("infolist");
+        let cols = list.getElementsByTagName("treecol");
+        list.style.setProperty("--keyWidth", cols[0].getBoundingClientRect().width + "px");
+        list.style.setProperty("--statusWidth", cols[1].getBoundingClientRect().width + "px");
+        list.style.setProperty("--issuedWidth", cols[2].getBoundingClientRect().width + "px");
+        list.style.setProperty("--expireWidth", cols[3].getBoundingClientRect().width - 5 + "px");
+      }
+      addEventListener("load", resizeColumns, { once: true });
+      addEventListener("resize", resizeColumns);
+  ]]></script>
+
+  <description data-l10n-id="openpgp-one-recipient-status-instruction1"/>
+  <separator class="thin"/>
+  <description data-l10n-id="openpgp-one-recipient-status-instruction2"/>
+  <separator class="thin"/>
+  <label id="intro" control="infolist"/>
+
+  <richlistbox id="infolist"
+               class="theme-listbox"
+               flex="1"
+               onselect="onSelectionChange(event);">
+    <treecols>
+      <treecol flex="3" data-l10n-id="openpgp-one-recipient-status-key-id"/>
+      <treecol flex="4" data-l10n-id="openpgp-one-recipient-status-status"/>
+      <treecol flex="1" data-l10n-id="openpgp-one-recipient-status-created-date"/>
+      <treecol flex="1" data-l10n-id="openpgp-one-recipient-status-expires-date"/>
+    </treecols>
+  </richlistbox>
+  <hbox pack="start">
+    <button id="detailsButton" disabled="true"
+            data-l10n-id="openpgp-one-recipient-status-open-details"
+            oncommand="viewSelectedKey();"/>
+    <button id="discoverButton"
+            data-l10n-id="openpgp-one-recipient-status-discover"
+            oncommand="discoverKey();"/>
+  </hbox>
+</dialog>
+</window>

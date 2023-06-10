@@ -1,0 +1,57 @@
+{
+  "name": "Asturianu Language Pack",
+  "sources": {
+    "browser": {
+      "base_path": "browser/"
+    }
+  },
+  "version": "78.0buildid20210901192859",
+  "applications": {
+    "gecko": {
+      "strict_max_version": "78.*",
+      "id": "langpack-ast@thunderbird.mozilla.org",
+      "strict_min_version": "78.0"
+    }
+  },
+  "manifest_version": 2,
+  "langpack_id": "ast",
+  "description": "Language pack for Thunderbird for ast",
+  "languages": {
+    "ast": {
+      "version": "20200905183429",
+      "chrome_resources": {
+        "mozldap": "chrome/ast/locale/ast/mozldap/",
+        "necko": "chrome/ast/locale/ast/necko/",
+        "messenger-mapi": "chrome/ast/locale/ast/messenger-mapi/",
+        "pluginproblem": "chrome/ast/locale/ast/pluginproblem/",
+        "messenger-newsblog": "chrome/ast/locale/ast/messenger-newsblog/",
+        "places": "chrome/ast/locale/ast/places/",
+        "messenger-smime": "chrome/ast/locale/ast/messenger-smime/",
+        "autoconfig": "chrome/ast/locale/ast/autoconfig/",
+        "messenger-region": "chrome/ast/locale/ast/messenger-region/",
+        "pipnss": "chrome/ast/locale/ast/pipnss/",
+        "calendar": "chrome/ast/locale/ast/calendar/",
+        "branding": "chrome/ast/locale/ast/branding/",
+        "global": "chrome/ast/locale/ast/global/",
+        "messenger": "chrome/ast/locale/ast/messenger/",
+        "global-platform": {
+          "win": "chrome/ast/locale/ast/global-platform/win/",
+          "linux": "chrome/ast/locale/ast/global-platform/unix/",
+          "macosx": "chrome/ast/locale/ast/global-platform/mac/",
+          "android": "chrome/ast/locale/ast/global-platform/unix/"
+        },
+        "lightning": "chrome/ast/locale/ast/lightning/",
+        "pippki": "chrome/ast/locale/ast/pippki/",
+        "alerts": "chrome/ast/locale/ast/alerts/",
+        "passwordmgr": "chrome/ast/locale/ast/passwordmgr/",
+        "chat": "chrome/ast/locale/ast/chat/",
+        "devtools-shared": "chrome/ast/locale/ast/devtools/shared/",
+        "communicator": "chrome/ast/locale/ast/communicator/",
+        "devtools": "chrome/ast/locale/ast/devtools/client/",
+        "devtools-startup": "chrome/ast/locale/ast/devtools/startup/",
+        "mozapps": "chrome/ast/locale/ast/mozapps/"
+      }
+    }
+  },
+  "author": "softastur.org (contributors: Softastur)"
+}

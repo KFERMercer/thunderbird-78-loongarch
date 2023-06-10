@@ -1,0 +1,454 @@
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this file,
+ * You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+:root #today-pane-panel {
+  --agenda-divider-border-color: #c0c0c0;
+  --agenda-item-current-color: #000;
+  --agenda-item-current-background: #dfeaf4;
+  --agenda-item-selected-color: #000;
+  --agenda-item-selected-background: #fdf5a0;
+}
+
+:root[systemcolors] #today-pane-panel {
+  --agenda-divider-border-color: ThreeDLightShadow;
+  --agenda-item-current-color: ButtonText;
+  --agenda-item-current-background: ThreeDLightShadow;
+}
+
+:root[lwt-tree-brighttext] #today-pane-panel {
+  --agenda-divider-border-color: #c0c0c0;
+}
+
+:root[lwt-tree-brighttext] #today-pane-panel {
+  --toolbarbutton-hover-background: var(--lwt-toolbarbutton-hover-background, rgba(255, 255, 255, .25));
+  --toolbarbutton-hover-bordercolor: var(--lwt-toolbarbutton-hover-background, rgba(255, 255, 255, .5));
+  --toolbarbutton-active-background: var(--lwt-toolbarbutton-active-background, rgba(255, 255, 255, .4));
+  --toolbarbutton-active-bordercolor: var(--lwt-toolbarbutton-active-background, rgba(255, 255, 255, .7));
+  --toolbarbutton-active-boxshadow: 0 0 0 1px var(--lwt-toolbarbutton-active-background, rgba(255, 255, 255, .4)) inset;
+  --agenda-divider-border-color: rgba(255, 255, 255, .3);
+  --agenda-item-current-color: var(--sidebar-highlight-text-color, var(--sidebar-text-color));
+  --agenda-item-current-background: var(--sidebar-highlight-background-color, rgba(249, 249, 250, .1));
+}
+
+.today-subpane {
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  padding: 0;
+}
+
+#buttonspacer {
+  width: 5px;
+}
+
+#today-pane-panel {
+  background-color: -moz-Dialog;
+}
+
+#today-pane-panel:-moz-lwtheme {
+  background-color: transparent;
+}
+
+#today-pane-panel > * {
+  color: -moz-DialogText;
+}
+
+#today-pane-panel > .sidebar-header {
+  -moz-appearance: none;
+  background-color: var(--toolbar-bgcolor, -moz-Dialog);
+  background-image: var(--toolbar-bgimage, none);
+  border-bottom: 1px solid var(--chrome-content-separator-color, ThreeDShadow);
+}
+
+#today-pane-panel:-moz-lwtheme > .sidebar-header {
+  color: inherit;
+}
+
+.today-pane-cycler {
+  -moz-appearance: none;
+  border-radius: 2px;
+  padding-left: 5px;
+  padding-right: 5px;
+  -moz-context-properties: fill;
+  fill: currentColor;
+  list-style-image: url("chrome://calendar/skin/shared/view-cycler.svg");
+}
+
+.today-pane-cycler:hover {
+  background-color: hsla(0, 0%, 0%, 0.1);
+  color: inherit;
+}
+
+.today-pane-cycler:hover:active {
+  background-color: hsla(0, 0%, 0%, 0.2);
+}
+
+.today-pane-cycler:-moz-lwtheme-brighttext:hover,
+:root[lwt-tree-brighttext] .today-pane-cycler:hover {
+  background-color: hsla(0, 0%, 100%, 0.1);
+}
+
+.today-pane-cycler:-moz-lwtheme-brighttext:hover:active,
+:root[lwt-tree-brighttext] .today-pane-cycler:hover:active {
+  background-color: hsla(0, 0%, 100%, 0.2);
+}
+
+.today-pane-cycler[dir="prev"]:-moz-locale-dir(ltr) > .toolbarbutton-icon,
+.today-pane-cycler[dir="next"]:-moz-locale-dir(rtl) > .toolbarbutton-icon {
+  transform: scaleX(-1);
+}
+
+#today-pane-panel:-moz-lwtheme > vbox {
+  text-shadow: none;
+  background-color: -moz-Dialog;
+}
+
+:root[lwt-tree] #today-pane-panel > vbox {
+  background-color: var(--lwt-accent-color);
+  color: var(--sidebar-text-color);
+}
+
+:root[lwt-tree-brighttext] #today-pane-panel > vbox {
+  background-image: linear-gradient(rgba(255, 255, 255, 0.05),
+                                    rgba(255, 255, 255, 0.05));
+}
+
+:root[lwt-tree] #agenda-panel > modebox {
+  background-color: var(--sidebar-background-color);
+}
+
+:root[lwt-tree] .today-subpane {
+  border-bottom-color: var(--sidebar-border-color);
+}
+
+#today-minimonth-box {
+  background-color: -moz-field;
+}
+
+:root[lwt-tree] #today-minimonth-box {
+  background-color: var(--sidebar-background-color);
+}
+
+#weekdayNameContainer {
+  font-family: Trebuchet MS, Lucida Grande, Arial, Helvetica;
+  padding-top: 4px;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.monthlabel {
+  margin-inline-end: 0;
+}
+
+.dateValue {
+  font-family: Arial, Helvetica, Trebuchet MS, Lucida Grande, sans-serif;
+  margin-top: initial;
+  margin-bottom: initial;
+  font-size: 36px;
+  font-weight: bold;
+  width: 1em;
+  text-align: center;
+}
+
+#dragCenter-image-container {
+  pointer-events: none;
+}
+
+#dragCenter-image {
+  list-style-image: url("chrome://calendar/skin/shared/widgets/drag-center.svg");
+}
+
+.miniday-nav-buttons {
+  margin-top: 2px;
+  min-width: 19px;
+  -moz-user-focus: normal;
+  -moz-context-properties: fill, fill-opacity;
+  list-style-image: url("chrome://calendar/skin/shared/widgets/nav-arrow.svg");
+  fill: currentColor;
+  fill-opacity: var(--toolbarbutton-icon-fill-opacity);
+}
+
+.miniday-nav-buttons,
+#miniday-dropdown-button {
+  -moz-appearance: none;
+  -moz-user-focus: normal;
+  border: 1px solid transparent;
+  border-radius: var(--toolbarbutton-border-radius);
+}
+
+.miniday-nav-buttons:not([disabled="true"]):hover,
+#miniday-dropdown-button:not([disabled="true"]):hover {
+  background: var(--toolbarbutton-hover-background);
+  border-color: var(--toolbarbutton-hover-bordercolor);
+  box-shadow: var(--toolbarbutton-hover-boxshadow);
+  color: inherit;
+}
+
+.miniday-nav-buttons:not([disabled="true"]):hover:active,
+#miniday-dropdown-button:not([disabled="true"]):hover:active {
+  background: var(--toolbarbutton-active-background);
+  border-color: var(--toolbarbutton-active-bordercolor);
+  box-shadow: var(--toolbarbutton-active-boxshadow);
+  transition-duration: 10ms;
+}
+
+#previous-day-button:-moz-locale-dir(ltr),
+#next-day-button:-moz-locale-dir(rtl) {
+  transform: scaleX(-1);
+}
+
+#today-button {
+  list-style-image: url("chrome://calendar/skin/shared/widgets/nav-today.svg");
+}
+
+.miniday-nav-buttons[disabled] {
+  opacity: .3;
+}
+
+.miniday-nav-buttons > .toolbarbutton-icon {
+  margin: 1px;
+}
+
+#miniday-dropdown-button {
+  max-width: 18px;
+  margin: 2px;
+  -moz-user-focus: normal;
+}
+
+#miniday-dropdown-button > .toolbarbutton-icon,
+#miniday-dropdown-button > .toolbarbutton-text,
+.miniday-nav-buttons > .toolbarbutton-text {
+  display: none;
+}
+
+#miniday-dropdown-button > .toolbarbutton-menu-dropmarker {
+  padding-inline-start: 0;
+  list-style-image: url("chrome://messenger/skin/icons/toolbarbutton-arrow.svg");
+  -moz-context-properties: fill;
+  fill: currentColor;
+}
+
+#miniday-dropdown-button > .toolbarbutton-menu-dropmarker::part(icon) {
+  width: 9px;
+  height: 7px;
+}
+
+#agenda-toolbar {
+  border: none;
+  padding: 4px 1px;
+}
+
+#todaypane-new-event-button {
+  -moz-user-focus: normal;
+  list-style-image: url(chrome://calendar/skin/shared/icons/newevent.svg);
+  -moz-context-properties: fill, fill-opacity;
+  fill: currentColor;
+  fill-opacity: var(--toolbarbutton-icon-fill-opacity);
+}
+
+:root[lwt-tree] #todaypane-new-event-button {
+  -moz-appearance: none;
+  -moz-user-focus: normal;
+  border: 1px solid transparent;
+  border-radius: var(--toolbarbutton-border-radius);
+  margin: 2px 3px 1px;
+}
+
+:root[lwt-tree] #todaypane-new-event-button:not([disabled="true"]):hover {
+  background: var(--toolbarbutton-hover-background);
+  border-color: var(--toolbarbutton-hover-bordercolor);
+  box-shadow: var(--toolbarbutton-hover-boxshadow);
+  color: inherit;
+}
+
+:root[lwt-tree] #todaypane-new-event-button:not([disabled="true"]):hover:active {
+  background: var(--toolbarbutton-active-background);
+  border-color: var(--toolbarbutton-active-bordercolor);
+  box-shadow: var(--toolbarbutton-active-boxshadow);
+  transition-duration: 10ms;
+}
+
+#todaypane-new-event-button > .toolbarbutton-text {
+ padding-inline-start: 5px;
+}
+
+#today-pane-splitter {
+  border-bottom: 1px solid var(--splitter-color);
+  /* splitter grip area */
+  height: 5px;
+  /* make only the splitter border visible */
+  margin-top: -5px;
+  /* because of the negative margin needed to make the splitter visible */
+  position: relative;
+  z-index: 10;
+}
+
+#show-completed-checkbox-box {
+  padding-top: 3px;
+}
+
+#show-completed-checkbox > .checkbox-check {
+  -moz-appearance: none;
+  width: 14px;
+  height: 14px;
+  list-style-image: url("chrome://messenger/skin/icons/checkbox.svg");
+  -moz-context-properties: fill, fill-opacity, stroke, stroke-opacity;
+  fill: currentColor;
+  stroke: currentColor;
+  fill-opacity: 0;
+  stroke-opacity: 0;
+}
+
+#show-completed-checkbox[checked="true"] > .checkbox-check {
+  fill-opacity: 1;
+}
+
+#show-completed-checkbox:hover > .checkbox-check {
+  fill: Highlight;
+  stroke: Highlight;
+}
+
+#agenda-listbox {
+  -moz-appearance: none;
+  -moz-user-focus: normal;
+  margin: 0;
+  border-top: 1px solid ThreeDShadow;
+}
+
+:root[lwt-tree] #agenda-listbox {
+  border-top-color: var(--sidebar-border-color);
+  background-color: var(--sidebar-background-color);
+  color: var(--sidebar-text-color);
+  scrollbar-color: rgba(204,204,204,.5) rgba(230,230,235,.5);
+}
+
+:root[lwt-tree-brighttext] #agenda-listbox {
+  scrollbar-color: rgba(249,249,250,.4) rgba(20,20,25,.3);
+}
+
+richlistitem[is="agenda-header-richlistitem"]:not([hidden="true"]) {
+  -moz-user-focus: normal;
+  border-bottom: 1px dotted var(--agenda-divider-border-color);
+  display: block;
+}
+
+richlistitem[is="agenda-richlistitem"],
+richlistitem[is="agenda-allday-richlistitem"] {
+  -moz-user-focus: normal;
+  border-bottom: 1px dotted var(--agenda-divider-border-color);
+}
+
+#agenda-listbox > richlistitem[selected="true"] {
+  background-color: transparent;
+  color: inherit;
+}
+
+.wrap {
+  overflow: visible;
+}
+
+.agenda-container-box {
+  border-radius: 2px;
+  margin-right: 4px;
+  margin-left: 4px;
+  padding: 2px 4px;
+}
+
+.agenda-allday-container-box {
+  border-radius: 2px;
+  margin-right: 4px;
+  margin-left: 4px;
+}
+
+.agenda-container-box[selected="true"],
+.agenda-container-box[selected="true"][current="true"] {
+  background-color: var(--agenda-item-selected-background);
+  color: var(--agenda-item-selected-color);
+}
+
+.agenda-container-box[selected="true"][disabled="true"] {
+  opacity: 0.5;
+}
+
+.agenda-container-box[current="true"],
+.agenda-container-box[selected="true"][current="true"][disabled="true"] {
+  background-color: var(--agenda-item-current-background);
+  color: var(--agenda-item-current-color);
+}
+
+.agenda-allday-container-box .calendar-color-box {
+  border-color: rgba(0, 0, 0, 0.5);
+  box-shadow: inset -1px -1px 0 rgba(255, 255, 255, 0.7),
+              inset 1px 1px 0 rgba(255, 255, 255, 0.7);
+}
+
+.agenda-allday-container-box[selected="true"] .calendar-color-box,
+.agenda-allday-container-box[selected="true"][current="true"] .calendar-color-box {
+  --item-backcolor: var(--agenda-item-selected-background);
+  --item-forecolor: var(--agenda-item-selected-color);
+}
+
+.agenda-allday-container-box[selected="true"][disabled="true"] .calendar-color-box {
+  opacity: 0.5;
+}
+
+.agenda-allday-container-box[current="true"] .calendar-color-box,
+.agenda-allday-container-box[selected="true"][current="true"][disabled="true"] .calendar-color-box {
+  --item-backcolor: var(--agenda-item-current-background);
+  --item-forecolor: var(--agenda-item-current-color);
+}
+
+.agenda-allday-container-box .item-classification-box {
+  display: none;
+}
+
+.agenda-allday-container-box calendar-month-day-box-item {
+  margin: 0;
+  padding: 0;
+}
+
+.agenda-event-title {
+  margin-top: 0;
+}
+
+.agenda-event-start {
+  margin-bottom: 0;
+}
+
+.agenda-new-date {
+  width: 15px;
+  height: 15px;
+  border: 1px solid grey;
+  cursor: pointer;
+}
+
+.agenda-calendar-image {
+  margin-top: 0.35em;
+  margin-inline-start: 4px;
+  border-radius: 5px;
+  width: 10px;
+  height: 10px;
+}
+
+.agenda-multiDayEvent-image:not([type=""]) {
+  margin-top: 0.35em;
+  margin-inline-start: 3px;
+  -moz-context-properties: fill;
+  fill: currentColor;
+}
+
+.agenda-allday-container-box .agenda-multiDayEvent-image {
+  margin-top: 0.6em;
+}
+
+.agenda-multiDayEvent-image[type="start"] {
+  list-style-image: url("chrome://calendar/skin/shared/event-start.svg");
+}
+
+.agenda-multiDayEvent-image[type="continue"] {
+  list-style-image: url("chrome://calendar/skin/shared/event-continue.svg");
+}
+
+.agenda-multiDayEvent-image[type="end"] {
+  list-style-image: url("chrome://calendar/skin/shared/event-end.svg");
+}

@@ -1,0 +1,431 @@
+# Lines that are commented out are files that are needed later while building.
+# Don't remove those files!
+browser/app/profile/firefox.js
+browser/base/content/test/general/browser_bug477014.js
+browser/base/content/test/general/browser_contentAreaClick.js
+browser/base/content/test/general/browser_tabkeynavigation.js
+# browser/base/content/test/urlbar/browser_action_searchengine_alias.js
+browser/components/enterprisepolicies/tests/browser/browser_policy_block_set_desktop_background.js
+browser/components/enterprisepolicies/tests/browser/browser_policy_bookmarks.js
+browser/components/extensions/test/browser/browser_ext_contextMenus_icons.js
+# browser/components/extensions/test/browser/browser_ext_themes_icons.js
+browser/components/migration/tests/unit/test_IE7_passwords.js
+browser/components/translation/cld2/cld-worker.js
+browser/components/translation/test/unit/test_cld2.js
+browser/extensions/formautofill/addressmetadata/*.js
+browser/extensions/formautofill/content/*.js
+browser/extensions/pdfjs/content/build/*.js
+browser/extensions/pdfjs/content/web/*.js
+build/pgo/blueprint/valid.png
+build/pgo/js-input/sunspider/string-tagcloud.html
+build/pgo/js-input/sunspider/string-unpack-code.html
+build/pymake/tests/pathdir/pathtest.exe
+# comm/editor/ui/texzilla/content/TeXZilla.js
+# comm/im/themes/messages/bubbles/Footer.html
+# comm/mail/app/profile/all-thunderbird.js
+# comm/mail/components/compose/content/cloudAttachmentLinkManager.js
+# comm/mail/components/im/messages/bubbles/Footer.html
+# comm/mail/test/resources/mozmill/docs/_build/html/_static/jquery.js
+# comm/mail/test/resources/mozmill/mozmill/extension/content/editor/bespin/BespinEmbedded.js
+# comm/mail/test/resources/mozmill/mozmill/extension/content/editor/bespin/BespinMain.js
+# comm/mail/test/resources/mozmill/mozmill/extension/content/editor/bespin/BespinWorker.js
+comm/mailnews/addrbook/test/unit/test_nsIAbCard.js
+comm/mailnews/base/test/unit/test_compactColumnSave.js
+comm/other-licenses/7zstub
+comm/third_party/rnp/src/tests/*
+configure
+# devtools/client/debugger/new/debugger.js
+# devtools/client/debugger/new/parser-worker.js
+# devtools/client/debugger/new/pretty-print-worker.js
+# devtools/client/debugger/new/search-worker.js
+# devtools/client/debugger/new/test/mochitest/examples/sourcemaps-reload/v1.bundle.js
+# devtools/client/debugger/new/test/mochitest/examples/sourcemaps-reload/v2.bundle.js
+# devtools/client/debugger/new/test/mochitest/examples/sourcemaps3/bundle.js
+# devtools/client/inspector/markup/test/browser_markup_image_tooltip_mutations.js
+devtools/client/inspector/markup/test/lib_react_dom_15.4.1.js
+devtools/client/inspector/markup/test/lib_react_with_addons_15.4.1.js
+# devtools/client/inspector/shared/test/browser_styleinspector_tooltip-background-image.js
+# devtools/client/inspector/shared/test/browser_styleinspector_tooltip-multiple-background-images.js
+# devtools/client/netmonitor/test/head.js
+# devtools/client/shared/demangle.js
+# devtools/client/shared/source-map/assets/
+# devtools/client/shared/source-map/index.js
+# devtools/client/shared/source-map/worker.js
+# devtools/client/shared/test
+# devtools/client/shared/vendor/WasmParser.js
+# devtools/client/shared/vendor/dagre-d3.js
+# devtools/client/shared/vendor/jszip.js
+devtools/client/shared/vendor/react-dom-dev.js
+devtools/client/shared/vendor/react-dom-server-dev.js
+# devtools/client/shared/vendor/react-dom-server.js
+# devtools/client/shared/vendor/react-dom.js
+# devtools/client/shared/vendor/react-prop-types-dev.js
+# devtools/client/shared/vendor/react-prop-types.js
+# devtools/client/shared/vendor/react-redux.js
+# devtools/client/shared/vendor/react-test-renderer-shallow.js
+# devtools/client/shared/vendor/redux.js
+# devtools/client/sourceeditor/codemirror/codemirror.bundle.js
+# devtools/client/sourceeditor/codemirror/lib/codemirror.js
+# devtools/client/sourceeditor/tern/ecma5.js
+# devtools/server/actors/utils/automation-timeline.js
+# devtools/server/tests/unit/babel_and_browserify_script_with_source_map.js
+# devtools/server/tests/unit/test_sourcemaps-09.js
+# devtools/shared/acorn/acorn.js
+# devtools/shared/acorn/acorn_loose.js
+# devtools/shared/acorn/walk.js
+# devtools/shared/sourcemap/tests/unit/test_source_node.js
+dom/base/crashtests/561981-1-iframe.xhtml
+dom/base/crashtests/827190.html
+dom/base/crashtests/849727.html
+dom/base/crashtests/xhr_html_nullresponse.html
+dom/base/test/reftest/test_bug920877.html
+dom/base/test/test_bug650776.html
+dom/base/test/test_data_uri.html
+# dom/canvas/test/crash/test_createImageBitmap-video.html
+# dom/canvas/test/test_canvas.html
+dom/canvas/test/webgl-conf/checkout/conformance2/glsl3/attrib-location-length-limits.html
+dom/canvas/test/webgl-conf/checkout/conformance2/glsl3/shader-with-1024-character-define.html
+dom/canvas/test/webgl-conf/checkout/conformance2/glsl3/shader-with-1024-character-identifier.frag.html
+dom/canvas/test/webgl-conf/checkout/conformance2/glsl3/shader-with-1025-character-define.html
+dom/canvas/test/webgl-conf/checkout/conformance2/glsl3/shader-with-1025-character-identifier.frag.html
+dom/canvas/test/webgl-conf/checkout/conformance2/glsl3/uniform-location-length-limits.html
+dom/canvas/test/webgl-conf/checkout/conformance/extensions/webgl-compressed-texture-s3tc.html
+dom/canvas/test/webgl-conf/checkout/conformance/glsl/misc/glsl-long-variable-names.html
+dom/canvas/test/webgl-conf/checkout/deqp/deqp-deps.js
+dom/canvas/test/webgl-conf/checkout/deqp/framework/referencerenderer/rrFragmentOperations.js
+dom/canvas/test/webgl-conf/checkout/deqp/functional/gles3/es3fDefaultVertexAttributeTests.js
+# dom/encoding/test/test_BOMEncoding.js
+# dom/encoding/test/test_TextDecoder.js
+# dom/encoding/test/unit/test_big5.js
+# dom/encoding/test/unit/test_euc-jp.js
+# dom/encoding/test/unit/test_euc-kr.js
+# dom/encoding/test/unit/test_gbk.js
+# dom/encoding/test/unit/test_iso-2022-jp.js
+# dom/encoding/test/unit/test_misc.js
+# dom/encoding/test/unit/test_shift_jis.js
+dom/events/test/pointerevents/pointerevent_support.js
+dom/html/reftests/toblob-todataurl/sample.js
+dom/html/test/bug445004-outer-write.html
+# dom/html/test/test_bug582412-2.html
+# dom/html/test/test_iframe_sandbox_general.html
+# dom/imptests/html/js/builtins/Math.maxmin.js
+# dom/indexedDB/test/test_filehandle_write_read_data.html
+# dom/indexedDB/test/unit/test_filehandle_append_read_data.js
+# dom/indexedDB/test/unit/test_filehandle_append_read_data.js
+# dom/indexedDB/test/unit/test_snappyUpgrade.js
+# dom/json/test/unit/test_decode_long_input.js
+# dom/media/test/test_decoder_disable.html
+dom/media/tests/crashtests/1367930_1.html
+dom/media/tests/crashtests/1367930_2.html
+dom/media/tests/crashtests/855796.html
+dom/media/tests/crashtests/863929.html
+# dom/push/test/xpcshell/test_crypto.js
+dom/security/test/general/test_allow_opening_data_pdf.html
+dom/tests/mochitest/localstorage/frameQuota.html
+dom/tests/mochitest/localstorage/frameQuotaSessionOnly.html
+editor/libeditor/tests/browserscope/lib/richtext/richtext/js/range.js
+# editor/libeditor/tests/test_bug520189.html
+# editor/libeditor/tests/test_inline_style_cache.html
+# image/test/reftest/pngsuite-transparency
+image/test/reftest/reftest.list /pngsuite-transparency/d
+# image/test/unit/test_async_notification_animated.js
+# image/test/unit/test_moz_icon_uri.js
+intl/uconv/tests/test_long_doc.html
+intl/uconv/tests/unit
+js/src/configure
+js/src/devtools/rootAnalysis/annotations.js
+js/src/jit-test/lib/bullet.js
+js/src/jit-test/lib/mandelbrot-results.js
+js/src/jit-test/tests
+js/src/octane/box2d.js
+js/src/octane/pdfjs.js
+js/src/octane/regexp.js
+js/src/octane/typescript-input.js
+js/src/old-configure
+js/src/tests/non262/jit/regress-452498-01.js
+js/src/tests/non262/RegExp/regress-209067.js
+js/src/tests/non262/RegExp/regress-307456.js
+js/src/tests/non262/regress/regress-243174.js
+js/src/tests/non262/regress/regress-274888.js
+js/src/tests/non262/regress/regress-280769.js
+js/src/tests/non262/regress/regress-311629.js
+js/src/tests/test262/built-ins/Array/prototype/reverse/S15.4.4.8_A2_T1.js
+js/src/tests/test262/built-ins/Array/prototype/reverse/S15.4.4.8_A2_T2.js
+js/src/tests/test262/built-ins/Array/prototype/reverse/S15.4.4.8_A2_T3.js
+js/src/tests/test262/built-ins/encodeURIComponent/S15.1.3.4_A4_T2.js
+js/src/tests/test262/built-ins/RegExp/prototype/exec/S15.10.6.2_A4_T12.js
+js/src/tests/test262/built-ins/String/prototype/charAt/S15.5.4.4_A1_T1.js
+js/src/tests/test262/built-ins/String/prototype/charAt/S15.5.4.4_A1_T2.js
+js/src/tests/test262/built-ins/String/prototype/charCodeAt/S15.5.4.5_A1_T1.js
+js/src/tests/test262/built-ins/String/prototype/concat/S15.5.4.6_A1_T10.js
+js/src/tests/test262/built-ins/String/prototype/constructor/S15.5.4.1_A1_T2.js
+js/src/tests/test262/built-ins/String/prototype/split/S15.5.4.14_A1_T13.js
+js/src/tests/test262/built-ins/String/prototype/split/S15.5.4.14_A2_T7.js
+js/src/tests/test262/built-ins/String/S15.5.5.1_A5.js
+js/src/tests/test262/language/expressions/delete/S8.12.7_A3.js
+js/src/tests/test262/language/expressions/exponentiation/bigint-arithmetic.js
+js/src/tests/test262/language/types/string/S8.4_A6.1.js
+js/src/tests/test262/language/types/string/S8.4_A6.2.js
+layout/base/crashtests/378325-1.html
+# layout/base/tests/test_scroll_snapping.html
+layout/docs
+layout/generic/crashtests/simple_blank.swf
+layout/generic/crashtests/text-overflow-form-elements.html
+layout/mathml/tests/stretchy-and-large-operators.js
+layout/reftests/bugs/256180-6.html
+layout/reftests/bugs/424465-1.html
+layout/reftests/font-loading-api/src-list-data-1.html
+layout/reftests/svg/nesting-invalid-01.js
+layout/style/crashtests/404470-1.html
+layout/style/test/test_shorthand_property_getters.html
+layout/tools/reftest/reftest-analyzer-structured.xhtml
+layout/tools/reftest/reftest-analyzer.xhtml
+mobile/android/components/extensions/test/mochitest/head.js
+# modules/libpref/init/all.js
+modules/freetype2/docs
+netwerk/protocol/ftp/doc/rfc959.txt
+netwerk/test/crashtests/785753-1.html
+netwerk/test/unit/data/signed_win.exe
+netwerk/test/unit/test_readline.js
+obj-x86_64-pc-linux-gnu/*
+old-configure
+other-licenses/7zstub/*
+# other-licenses/7zstub/firefox/7zSD.sfx
+other-licenses/nsis/Contrib/ApplicationID/ApplicationID.rc
+other-licenses/nsis/Contrib/ApplicationID/resource.h
+other-licenses/nsis/Contrib/ServicesHelper/resource.h
+other-licenses/nsis/Contrib/ServicesHelper/ServicesHelper.rc
+other-licenses/nsis/nsisui.exe
+other-licenses/nsis/Plugins
+parser/xml/test
+# services/common/kinto-http-client.js
+# services/common/kinto-offline-client.js
+# testing/marionette/atom.js
+# testing/marionette/harness/marionette_harness/runner/mixins/browsermob-proxy-py/docs/_build/html/_static/jquery.js
+# testing/marionette/harness/marionette_harness/runner/mixins/browsermob-proxy-py/docs/_build/html/_static/underscore.js
+testing/mochitest/browser-test.js
+testing/modules/ajv-4.1.1.js
+testing/modules/sinon-7.2.7.js
+testing/talos/talos/scripts/jszip.min.js
+testing/talos/talos/startup_test/sessionrestore/profile-manywindows/sessionstore.js
+testing/talos/talos/startup_test/sessionrestore/profile/sessionstore.js
+testing/talos/talos/tests/devtools/addon/content/pages/custom/debugger/static/js/main.js
+testing/talos/talos/tests/dromaeo/lib/ext-base.js
+testing/talos/talos/tests/dromaeo/lib/ext-core.js
+testing/talos/talos/tests/dromaeo/tests/sunspider-string-tagcloud.html
+testing/talos/talos/tests/dromaeo/tests/sunspider-string-unpack-code.html
+testing/talos/talos/tests/dromaeo/webrunner.js
+testing/talos/talos/tests/v8_7/regexp.js
+testing/web-platform/tests/acid/acid3/test.html
+testing/web-platform/tests/common/performance-timeline-utils.js
+testing/web-platform/tests/conformance-checkers/html/elements/table/integrity/Naser_al-Din_Shah_Qajar-novalid.html
+testing/web-platform/tests/css/CSS2/text/text-transform-bicameral-001.xht
+testing/web-platform/tests/css/CSS2/text/text-transform-bicameral-002.xht
+testing/web-platform/tests/css/CSS2/text/text-transform-bicameral-003.xht
+testing/web-platform/tests/css/CSS2/text/text-transform-bicameral-004.xht
+testing/web-platform/tests/css/CSS2/text/text-transform-bicameral-005.xht
+testing/web-platform/tests/css/CSS2/text/text-transform-bicameral-006.xht
+testing/web-platform/tests/css/CSS2/text/text-transform-bicameral-007.xht
+testing/web-platform/tests/css/CSS2/text/text-transform-bicameral-008.xht
+testing/web-platform/tests/css/CSS2/text/text-transform-bicameral-009.xht
+testing/web-platform/tests/css/CSS2/text/text-transform-bicameral-010.xht
+testing/web-platform/tests/css/CSS2/text/text-transform-bicameral-011.xht
+testing/web-platform/tests/css/CSS2/text/text-transform-bicameral-012.xht
+testing/web-platform/tests/css/CSS2/text/text-transform-bicameral-013.xht
+testing/web-platform/tests/css/CSS2/text/text-transform-bicameral-014.xht
+testing/web-platform/tests/css/CSS2/text/text-transform-bicameral-015.xht
+testing/web-platform/tests/css/CSS2/text/text-transform-bicameral-016.xht
+testing/web-platform/tests/css/CSS2/text/text-transform-bicameral-017.xht
+testing/web-platform/tests/css/CSS2/text/text-transform-bicameral-018.xht
+testing/web-platform/tests/css/CSS2/text/text-transform-bicameral-019.xht
+testing/web-platform/tests/css/CSS2/text/text-transform-bicameral-020.xht
+testing/web-platform/tests/css/CSS2/text/text-transform-bicameral-021.xht
+testing/web-platform/tests/css/CSS2/text/text-transform-bicameral-022.xht
+testing/web-platform/tests/editing/data/indent.js
+testing/web-platform/tests/encoding/legacy-mb-japanese/euc-jp/jis0208_index.js
+testing/web-platform/tests/encoding/legacy-mb-japanese/euc-jp/jis0212_index.js
+testing/web-platform/tests/encoding/legacy-mb-japanese/iso-2022-jp/jis0208_index.js
+testing/web-platform/tests/encoding/legacy-mb-japanese/shift_jis/jis0208_index.js
+testing/web-platform/tests/encoding/legacy-mb-korean/euc-kr/euckr_index.js
+testing/web-platform/tests/encoding/legacy-mb-tchinese/big5/big5_index.js
+testing/web-platform/tests/encoding/single-byte-decoder.html
+testing/web-platform/tests/encrypted-media/content/content-metadata.js
+testing/web-platform/tests/encrypted-media/util/drm-messagehandler.js
+testing/web-platform/tests/html/editing/dnd/datastore/001.xhtml
+testing/web-platform/tests/html/editing/dnd/datastore/002.xhtml
+testing/web-platform/tests/html/editing/dnd/datastore/003.xhtml
+testing/web-platform/tests/html/editing/dnd/datastore/004.xhtml
+testing/web-platform/tests/html/editing/dnd/datastore/005.xhtml
+testing/web-platform/tests/html/editing/dnd/datastore/006.xhtml
+testing/web-platform/tests/html/editing/dnd/datastore/007.xhtml
+testing/web-platform/tests/html/editing/dnd/datastore/008.xhtml
+testing/web-platform/tests/html/editing/dnd/datastore/009-1.xhtml
+testing/web-platform/tests/html/editing/dnd/datastore/009.xhtml
+testing/web-platform/tests/html/editing/dnd/datastore/010.xhtml
+testing/web-platform/tests/html/editing/dnd/datastore/011.xhtml
+testing/web-platform/tests/html/editing/dnd/datastore/012.xhtml
+testing/web-platform/tests/html/editing/dnd/datastore/013-1.xhtml
+testing/web-platform/tests/html/editing/dnd/datastore/014-1.xhtml
+testing/web-platform/tests/html/editing/dnd/datastore/016.xhtml
+testing/web-platform/tests/html/editing/dnd/datastore/017.xhtml
+testing/web-platform/tests/html/editing/dnd/datastore/018.xhtml
+testing/web-platform/tests/html/editing/dnd/datastore/019.xhtml
+testing/web-platform/tests/html/editing/dnd/datastore/020.xhtml
+testing/web-platform/tests/html/editing/dnd/datastore/021.xhtml
+testing/web-platform/tests/html/editing/dnd/datastore/022.xhtml
+testing/web-platform/tests/html/editing/dnd/datastore/023.xhtml
+testing/web-platform/tests/html/editing/dnd/datastore/024.xhtml
+testing/web-platform/tests/html/editing/dnd/datastore/025.xhtml
+testing/web-platform/tests/html/editing/dnd/datastore/026.xhtml
+testing/web-platform/tests/html/editing/dnd/datastore/027.xhtml
+testing/web-platform/tests/html/editing/dnd/datastore/028.xhtml
+testing/web-platform/tests/html/editing/dnd/datastore/029.xhtml
+testing/web-platform/tests/html/editing/dnd/datastore/030.xhtml
+testing/web-platform/tests/html/editing/dnd/datastore/031.xhtml
+testing/web-platform/tests/html/editing/dnd/datastore/032.xhtml
+testing/web-platform/tests/html/editing/dnd/datastore/033.xhtml
+testing/web-platform/tests/html/editing/dnd/datastore/034.xhtml
+testing/web-platform/tests/html/editing/dnd/datastore/035.xhtml
+testing/web-platform/tests/html/editing/dnd/datastore/036.xhtml
+testing/web-platform/tests/html/editing/dnd/datastore/037.xhtml
+testing/web-platform/tests/html/editing/dnd/datastore/038.xhtml
+testing/web-platform/tests/html/editing/dnd/datastore/039.xhtml
+testing/web-platform/tests/html/editing/dnd/datastore/040.xhtml
+testing/web-platform/tests/html/editing/dnd/datastore/041.xhtml
+testing/web-platform/tests/html/editing/dnd/datastore/042.xhtml
+testing/web-platform/tests/html/editing/dnd/datastore/043.xhtml
+testing/web-platform/tests/html/editing/dnd/datastore/044.xhtml
+testing/web-platform/tests/html/editing/dnd/datastore/045.xhtml
+testing/web-platform/tests/html/editing/dnd/datastore/046.xhtml
+testing/web-platform/tests/html/editing/dnd/datastore/047.xhtml
+testing/web-platform/tests/html/editing/dnd/datastore/048.xhtml
+testing/web-platform/tests/html/editing/dnd/datastore/049.xhtml
+testing/web-platform/tests/html/editing/dnd/datastore/050.xhtml
+testing/web-platform/tests/html/editing/dnd/datastore/051.xhtml
+testing/web-platform/tests/html/editing/dnd/datastore/052.xhtml
+testing/web-platform/tests/html/editing/dnd/datastore/056.xhtml
+testing/web-platform/tests/html/editing/dnd/datastore/057.xhtml
+testing/web-platform/tests/html/editing/dnd/datastore/helper-drop-box-here.xhtml
+testing/web-platform/tests/html/semantics/embedded-content/the-iframe-element/iframe_javascript_url_01.htm
+testing/web-platform/tests/html/semantics/embedded-content/the-iframe-element/support/iframe-trying-to-navigate-its-child.html
+testing/web-platform/tests/html/semantics/forms/the-form-element/form-autocomplete.html
+testing/web-platform/tests/html/semantics/scripting-1/the-script-element/execution-timing/075.html
+testing/web-platform/tests/html/semantics/scripting-1/the-script-element/execution-timing/094.html
+testing/web-platform/tests/html/semantics/scripting-1/the-script-element/execution-timing/101.html
+testing/web-platform/tests/html/semantics/scripting-1/the-script-element/execution-timing/102.html
+testing/web-platform/tests/html/syntax/parsing/html5lib_adoption01.html
+testing/web-platform/tests/html/syntax/parsing/html5lib_adoption02.html
+testing/web-platform/tests/html/syntax/parsing/html5lib_comments01.html
+testing/web-platform/tests/html/syntax/parsing/html5lib_doctype01.html
+testing/web-platform/tests/html/syntax/parsing/html5lib_domjs-unsafe.html
+testing/web-platform/tests/html/syntax/parsing/html5lib_entities01.html
+testing/web-platform/tests/html/syntax/parsing/html5lib_entities02.html
+testing/web-platform/tests/html/syntax/parsing/html5lib_html5test-com.html
+testing/web-platform/tests/html/syntax/parsing/html5lib_inbody01.html
+testing/web-platform/tests/html/syntax/parsing/html5lib_innerHTML_foreign-fragment.html
+testing/web-platform/tests/html/syntax/parsing/html5lib_innerHTML_math.html
+testing/web-platform/tests/html/syntax/parsing/html5lib_innerHTML_tests4.html
+testing/web-platform/tests/html/syntax/parsing/html5lib_innerHTML_tests6.html
+testing/web-platform/tests/html/syntax/parsing/html5lib_innerHTML_tests_innerHTML_1.html
+testing/web-platform/tests/html/syntax/parsing/html5lib_innerHTML_webkit02.html
+testing/web-platform/tests/html/syntax/parsing/html5lib_isindex.html
+testing/web-platform/tests/html/syntax/parsing/html5lib_main-element.html
+testing/web-platform/tests/html/syntax/parsing/html5lib_menuitem-element.html
+testing/web-platform/tests/html/syntax/parsing/html5lib_namespace-sensitivity.html
+testing/web-platform/tests/html/syntax/parsing/html5lib_pending-spec-changes.html
+testing/web-platform/tests/html/syntax/parsing/html5lib_plain-text-unsafe.html
+testing/web-platform/tests/html/syntax/parsing/html5lib_ruby.html
+testing/web-platform/tests/html/syntax/parsing/html5lib_scriptdata01.html
+testing/web-platform/tests/html/syntax/parsing/html5lib_scripted_adoption01.html
+testing/web-platform/tests/html/syntax/parsing/html5lib_scripted_ark.html
+testing/web-platform/tests/html/syntax/parsing/html5lib_scripted_webkit01.html
+testing/web-platform/tests/html/syntax/parsing/html5lib_tables01.html
+testing/web-platform/tests/html/syntax/parsing/html5lib_template.html
+testing/web-platform/tests/html/syntax/parsing/html5lib_tests10.html
+testing/web-platform/tests/html/syntax/parsing/html5lib_tests11.html
+testing/web-platform/tests/html/syntax/parsing/html5lib_tests12.html
+testing/web-platform/tests/html/syntax/parsing/html5lib_tests14.html
+testing/web-platform/tests/html/syntax/parsing/html5lib_tests15.html
+testing/web-platform/tests/html/syntax/parsing/html5lib_tests16.html
+testing/web-platform/tests/html/syntax/parsing/html5lib_tests17.html
+testing/web-platform/tests/html/syntax/parsing/html5lib_tests18.html
+testing/web-platform/tests/html/syntax/parsing/html5lib_tests19.html
+testing/web-platform/tests/html/syntax/parsing/html5lib_tests1.html
+testing/web-platform/tests/html/syntax/parsing/html5lib_tests20.html
+testing/web-platform/tests/html/syntax/parsing/html5lib_tests21.html
+testing/web-platform/tests/html/syntax/parsing/html5lib_tests22.html
+testing/web-platform/tests/html/syntax/parsing/html5lib_tests23.html
+testing/web-platform/tests/html/syntax/parsing/html5lib_tests24.html
+testing/web-platform/tests/html/syntax/parsing/html5lib_tests25.html
+testing/web-platform/tests/html/syntax/parsing/html5lib_tests26.html
+testing/web-platform/tests/html/syntax/parsing/html5lib_tests2.html
+testing/web-platform/tests/html/syntax/parsing/html5lib_tests3.html
+testing/web-platform/tests/html/syntax/parsing/html5lib_tests5.html
+testing/web-platform/tests/html/syntax/parsing/html5lib_tests6.html
+testing/web-platform/tests/html/syntax/parsing/html5lib_tests7.html
+testing/web-platform/tests/html/syntax/parsing/html5lib_tests8.html
+testing/web-platform/tests/html/syntax/parsing/html5lib_tests9.html
+testing/web-platform/tests/html/syntax/parsing/html5lib_tricky01.html
+testing/web-platform/tests/html/syntax/parsing/html5lib_webkit01.html
+testing/web-platform/tests/html/syntax/parsing/html5lib_webkit02.html
+testing/web-platform/tests/IndexedDB/keypath_maxsize.htm
+testing/web-platform/tests/navigation-timing/resources/webperftestharness.js
+testing/web-platform/tests/pointerevents/pointerevent_support.js
+testing/web-platform/tests/resource-timing/resources/webperftestharness.js
+testing/web-platform/tests/resource-timing/resource_TAO_match_origin.htm
+testing/web-platform/tests/resource-timing/resource_TAO_multi.htm
+testing/web-platform/tests/resource-timing/resource_TAO_origin_uppercase.htm
+testing/web-platform/tests/user-timing/resources/webperftestharness.js
+testing/web-platform/tests/WebCryptoAPI/derive_bits_keys/ecdh_bits.js
+testing/web-platform/tests/WebCryptoAPI/derive_bits_keys/ecdh_keys.js
+testing/web-platform/tests/WebCryptoAPI/encrypt_decrypt/aes_ctr_vectors.js
+testing/web-platform/tests/WebCryptoAPI/encrypt_decrypt/rsa_vectors.js
+testing/web-platform/tests/WebCryptoAPI/import_export/ec_importKey.js
+testing/web-platform/tests/WebCryptoAPI/import_export/rsa_importKey.js
+testing/web-platform/tests/WebCryptoAPI/sign_verify/ecdsa_vectors.js
+testing/web-platform/tests/WebCryptoAPI/sign_verify/hmac_vectors.js
+testing/web-platform/tests/WebCryptoAPI/sign_verify/rsa_pkcs_vectors.js
+testing/web-platform/tests/WebCryptoAPI/sign_verify/rsa_pss_vectors.js
+testing/web-platform/tests/workers/constructors/Worker/unexpected-self-properties.worker.js
+testing/xpcshell/moz-http2/moz-http2.js
+testing/xpcshell/node-http2/test/compressor.js
+third_party/python/coverage/coverage/htmlfiles/*.js
+third_party/python/mock-1.0.0/html/_static/*.js
+third_party/python/pipenv/pipenv/patched/notpip/_vendor/distlib/*.exe
+third_party/python/pipenv/pipenv/vendor/pip9/_vendor/distlib/*.exe
+third_party/python/psutil/build/*
+third_party/python/psutil-cp27-none-win_amd64/psutil/_psutil_windows.pyd
+third_party/python/virtualenv/__virtualenv__/distlib-0.3.1-py2.py3-none-any/distlib/*.exe
+# third_party/rust/libloading
+third_party/rust/libz-sys/src/zlib/contrib/dotzlib/DotZLib.chm
+third_party/rust/pkcs11/NOTICE
+third_party/webkit/PerformanceTests/ARES-6/*
+third_party/webkit/PerformanceTests/MotionMark/resources/debug-runner/d3.min.js
+third_party/webkit/PerformanceTests/Speedometer/resources/todomvc
+third_party/webkit/PerformanceTests/wasm-godot/godot.wasm
+toolkit/components/maintenanceservice/maintenanceservice.rc
+toolkit/components/maintenanceservice/resource.h
+toolkit/components/mediasniffer/test/unit/data/*.exe
+toolkit/components/normandy/vendor/*.js
+# toolkit/components/passwordmgr/test/unit/test_OSCrypto_win.js
+toolkit/components/places/tests/favicons/test_moz-anno_favicon_mime_type.js
+toolkit/components/places/tests/unit/test_bookmarks_html.js
+toolkit/components/places/tests/unit/test_bookmarks_json.js
+# toolkit/components/prompts/test/test_bug619644.html
+toolkit/components/reputationservice/test/unit/data/*.exe
+# toolkit/components/search/tests/xpcshell/test_json_cache.js
+# toolkit/components/telemetry/tests/marionette
+toolkit/components/telemetry/tests/unit/*.dll
+toolkit/components/url-classifier/tests/unit/test_hashcompleter_v4.js
+toolkit/content/tests/browser/browser_default_image_filename.js
+toolkit/crashreporter/client/crashreporter.rc
+toolkit/crashreporter/client/resource.h
+toolkit/crashreporter/google-breakpad/src/tools/solaris/dump_syms/testdata/dump_syms_regtest.o
+toolkit/crashreporter/google-breakpad/src/tools/windows/binaries
+toolkit/crashreporter/test/unit/*.exe
+toolkit/mozapps/update/tests/data/*.exe
+toolkit/mozapps/update/updater/macbuild/Contents/PkgInfo
+toolkit/mozapps/update/updater/macbuild/Contents/Resources/English.lproj/MainMenu.nib/keyedobjects.nib
+toolkit/mozapps/update/updater/resource.h
+toolkit/mozapps/update/updater/updater.rc
+# widget/windows/*

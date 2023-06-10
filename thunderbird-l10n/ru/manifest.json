@@ -1,0 +1,57 @@
+{
+  "applications": {
+    "gecko": {
+      "strict_min_version": "78.0",
+      "strict_max_version": "78.*",
+      "id": "langpack-ru@thunderbird.mozilla.org"
+    }
+  },
+  "langpack_id": "ru",
+  "name": "Russian (RU) Language Pack",
+  "sources": {
+    "browser": {
+      "base_path": "browser/"
+    }
+  },
+  "description": "Language pack for Thunderbird for ru",
+  "author": "Mozilla Russia (contributors: Александр Словесник)",
+  "version": "78.0buildid20210901192859",
+  "manifest_version": 2,
+  "languages": {
+    "ru": {
+      "chrome_resources": {
+        "mozapps": "chrome/ru/locale/ru/mozapps/",
+        "passwordmgr": "chrome/ru/locale/ru/passwordmgr/",
+        "calendar": "chrome/ru/locale/ru/calendar/",
+        "necko": "chrome/ru/locale/ru/necko/",
+        "communicator": "chrome/ru/locale/ru/communicator/",
+        "devtools-startup": "chrome/ru/locale/ru/devtools/startup/",
+        "messenger-region": "chrome/ru/locale/ru/messenger-region/",
+        "mozldap": "chrome/ru/locale/ru/mozldap/",
+        "alerts": "chrome/ru/locale/ru/alerts/",
+        "devtools": "chrome/ru/locale/ru/devtools/client/",
+        "messenger": "chrome/ru/locale/ru/messenger/",
+        "devtools-shared": "chrome/ru/locale/ru/devtools/shared/",
+        "autoconfig": "chrome/ru/locale/ru/autoconfig/",
+        "pluginproblem": "chrome/ru/locale/ru/pluginproblem/",
+        "global-platform": {
+          "win": "chrome/ru/locale/ru/global-platform/win/",
+          "macosx": "chrome/ru/locale/ru/global-platform/mac/",
+          "android": "chrome/ru/locale/ru/global-platform/unix/",
+          "linux": "chrome/ru/locale/ru/global-platform/unix/"
+        },
+        "messenger-newsblog": "chrome/ru/locale/ru/messenger-newsblog/",
+        "messenger-smime": "chrome/ru/locale/ru/messenger-smime/",
+        "lightning": "chrome/ru/locale/ru/lightning/",
+        "branding": "chrome/ru/locale/ru/branding/",
+        "chat": "chrome/ru/locale/ru/chat/",
+        "global": "chrome/ru/locale/ru/global/",
+        "pippki": "chrome/ru/locale/ru/pippki/",
+        "pipnss": "chrome/ru/locale/ru/pipnss/",
+        "messenger-mapi": "chrome/ru/locale/ru/messenger-mapi/",
+        "places": "chrome/ru/locale/ru/places/"
+      },
+      "version": "20200905163550"
+    }
+  }
+}

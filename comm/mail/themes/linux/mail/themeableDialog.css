@@ -1,0 +1,85 @@
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+@import url("chrome://messenger/skin/shared/themeableDialog.css");
+
+@namespace html url("http://www.w3.org/1999/xhtml");
+
+:root {
+  --button-border-radius: 2px;
+}
+
+button > .button-box {
+  -moz-appearance: none;
+  padding-block: 4px;
+}
+
+#resetColor > .button-box {
+  padding-block: 0;
+}
+
+.button-menu-dropmarker {
+  -moz-appearance: none;
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  list-style-image: url("chrome://global/skin/icons/arrow-dropdown-12.svg");
+  -moz-context-properties: fill;
+  fill: currentColor;
+}
+
+menulist::part(dropmarker) {
+  display: -moz-box;
+}
+
+html|input {
+  padding: 4px;
+}
+
+html|input[type="number"]::-moz-number-spin-box {
+  margin-inline-end: -3px;
+}
+
+html|input[type="number"]::-moz-number-spin-up,
+html|input[type="number"]::-moz-number-spin-down {
+  width: 16px;
+  min-height: 0.7em;
+}
+
+menulist[is="menulist-editable"][editable="true"] {
+  -moz-appearance: none;
+  margin-inline-end: 4px;
+  padding: 0;
+}
+
+menulist[is="menulist-editable"][editable="true"]::part(text-input) {
+  padding: 4px;
+}
+
+menulist[is="menulist-editable"][editable="true"]::part(dropmarker) {
+  width: initial;
+  min-width: 0;
+  margin-block: 0;
+  margin-inline-end: 3px;
+}
+
+menulist menupopup menu,
+menulist menupopup menuitem,
+button menupopup menu,
+button menupopup menuitem {
+  padding: 5px;
+}
+
+.menu-right {
+  height: 1em;
+  margin-inline-end: 3px;
+}
+
+.menu-right:-moz-locale-dir(ltr) {
+  transform: scaleX(-1);
+}
+
+tab + tab {
+  margin-inline-start: 0;
+}

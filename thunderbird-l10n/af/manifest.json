@@ -1,0 +1,57 @@
+{
+  "langpack_id": "af",
+  "manifest_version": 2,
+  "description": "Language pack for Thunderbird for af",
+  "author": "Translate.org.za (contributors: Translate.org.za, Dwayne Bailey, Samuel Murray, Friedel Wolff)",
+  "applications": {
+    "gecko": {
+      "strict_max_version": "78.*",
+      "strict_min_version": "78.0",
+      "id": "langpack-af@thunderbird.mozilla.org"
+    }
+  },
+  "sources": {
+    "browser": {
+      "base_path": "browser/"
+    }
+  },
+  "version": "78.0buildid20210901192859",
+  "languages": {
+    "af": {
+      "version": "20200821084501",
+      "chrome_resources": {
+        "global-platform": {
+          "win": "chrome/af/locale/af/global-platform/win/",
+          "linux": "chrome/af/locale/af/global-platform/unix/",
+          "android": "chrome/af/locale/af/global-platform/unix/",
+          "macosx": "chrome/af/locale/af/global-platform/mac/"
+        },
+        "pluginproblem": "chrome/af/locale/af/pluginproblem/",
+        "communicator": "chrome/af/locale/af/communicator/",
+        "devtools-startup": "chrome/af/locale/af/devtools/startup/",
+        "messenger-region": "chrome/af/locale/af/messenger-region/",
+        "devtools": "chrome/af/locale/af/devtools/client/",
+        "messenger-mapi": "chrome/af/locale/af/messenger-mapi/",
+        "messenger-newsblog": "chrome/af/locale/af/messenger-newsblog/",
+        "alerts": "chrome/af/locale/af/alerts/",
+        "passwordmgr": "chrome/af/locale/af/passwordmgr/",
+        "mozapps": "chrome/af/locale/af/mozapps/",
+        "branding": "chrome/af/locale/af/branding/",
+        "pipnss": "chrome/af/locale/af/pipnss/",
+        "calendar": "chrome/af/locale/af/calendar/",
+        "necko": "chrome/af/locale/af/necko/",
+        "places": "chrome/af/locale/af/places/",
+        "messenger": "chrome/af/locale/af/messenger/",
+        "lightning": "chrome/af/locale/af/lightning/",
+        "chat": "chrome/af/locale/af/chat/",
+        "autoconfig": "chrome/af/locale/af/autoconfig/",
+        "global": "chrome/af/locale/af/global/",
+        "messenger-smime": "chrome/af/locale/af/messenger-smime/",
+        "mozldap": "chrome/af/locale/af/mozldap/",
+        "pippki": "chrome/af/locale/af/pippki/",
+        "devtools-shared": "chrome/af/locale/af/devtools/shared/"
+      }
+    }
+  },
+  "name": "Afrikaans Language Pack"
+}

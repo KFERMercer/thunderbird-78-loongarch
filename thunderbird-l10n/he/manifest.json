@@ -1,0 +1,57 @@
+{
+  "description": "Language pack for Thunderbird for he",
+  "langpack_id": "he",
+  "sources": {
+    "browser": {
+      "base_path": "browser/"
+    }
+  },
+  "applications": {
+    "gecko": {
+      "id": "langpack-he@thunderbird.mozilla.org",
+      "strict_max_version": "78.*",
+      "strict_min_version": "78.0"
+    }
+  },
+  "name": "Hebrew (IL) Language Pack",
+  "version": "78.0buildid20210901192859",
+  "author": "mozilla.org (contributors: Reuven Gonen, Tsahi Asher, Tomer Cohen)",
+  "manifest_version": 2,
+  "languages": {
+    "he": {
+      "version": "20200902192405",
+      "chrome_resources": {
+        "mozldap": "chrome/he/locale/he/mozldap/",
+        "communicator": "chrome/he/locale/he/communicator/",
+        "devtools": "chrome/he/locale/he/devtools/client/",
+        "calendar": "chrome/he/locale/he/calendar/",
+        "global-platform": {
+          "macosx": "chrome/he/locale/he/global-platform/mac/",
+          "win": "chrome/he/locale/he/global-platform/win/",
+          "linux": "chrome/he/locale/he/global-platform/unix/",
+          "android": "chrome/he/locale/he/global-platform/unix/"
+        },
+        "messenger-region": "chrome/he/locale/he/messenger-region/",
+        "places": "chrome/he/locale/he/places/",
+        "pipnss": "chrome/he/locale/he/pipnss/",
+        "messenger-newsblog": "chrome/he/locale/he/messenger-newsblog/",
+        "global": "chrome/he/locale/he/global/",
+        "chat": "chrome/he/locale/he/chat/",
+        "branding": "chrome/he/locale/he/branding/",
+        "alerts": "chrome/he/locale/he/alerts/",
+        "messenger-smime": "chrome/he/locale/he/messenger-smime/",
+        "mozapps": "chrome/he/locale/he/mozapps/",
+        "devtools-shared": "chrome/he/locale/he/devtools/shared/",
+        "messenger-mapi": "chrome/he/locale/he/messenger-mapi/",
+        "lightning": "chrome/he/locale/he/lightning/",
+        "necko": "chrome/he/locale/he/necko/",
+        "messenger": "chrome/he/locale/he/messenger/",
+        "pippki": "chrome/he/locale/he/pippki/",
+        "passwordmgr": "chrome/he/locale/he/passwordmgr/",
+        "devtools-startup": "chrome/he/locale/he/devtools/startup/",
+        "autoconfig": "chrome/he/locale/he/autoconfig/",
+        "pluginproblem": "chrome/he/locale/he/pluginproblem/"
+      }
+    }
+  }
+}

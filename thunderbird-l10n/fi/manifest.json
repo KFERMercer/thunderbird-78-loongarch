@@ -1,0 +1,57 @@
+{
+  "applications": {
+    "gecko": {
+      "strict_min_version": "78.0",
+      "id": "langpack-fi@thunderbird.mozilla.org",
+      "strict_max_version": "78.*"
+    }
+  },
+  "sources": {
+    "browser": {
+      "base_path": "browser/"
+    }
+  },
+  "description": "Language pack for Thunderbird for fi",
+  "author": "mozilla org suomennosprojekti: (contributors: Lasse Liehu, Jarmo Juslin, Ville Pohjanheimo)",
+  "version": "78.0buildid20210901192859",
+  "langpack_id": "fi",
+  "manifest_version": 2,
+  "languages": {
+    "fi": {
+      "version": "20200906075218",
+      "chrome_resources": {
+        "messenger": "chrome/fi/locale/fi/messenger/",
+        "pippki": "chrome/fi/locale/fi/pippki/",
+        "global-platform": {
+          "macosx": "chrome/fi/locale/fi/global-platform/mac/",
+          "linux": "chrome/fi/locale/fi/global-platform/unix/",
+          "win": "chrome/fi/locale/fi/global-platform/win/",
+          "android": "chrome/fi/locale/fi/global-platform/unix/"
+        },
+        "passwordmgr": "chrome/fi/locale/fi/passwordmgr/",
+        "messenger-newsblog": "chrome/fi/locale/fi/messenger-newsblog/",
+        "devtools": "chrome/fi/locale/fi/devtools/client/",
+        "devtools-shared": "chrome/fi/locale/fi/devtools/shared/",
+        "mozapps": "chrome/fi/locale/fi/mozapps/",
+        "chat": "chrome/fi/locale/fi/chat/",
+        "devtools-startup": "chrome/fi/locale/fi/devtools/startup/",
+        "branding": "chrome/fi/locale/fi/branding/",
+        "places": "chrome/fi/locale/fi/places/",
+        "messenger-region": "chrome/fi/locale/fi/messenger-region/",
+        "lightning": "chrome/fi/locale/fi/lightning/",
+        "necko": "chrome/fi/locale/fi/necko/",
+        "calendar": "chrome/fi/locale/fi/calendar/",
+        "communicator": "chrome/fi/locale/fi/communicator/",
+        "alerts": "chrome/fi/locale/fi/alerts/",
+        "autoconfig": "chrome/fi/locale/fi/autoconfig/",
+        "messenger-mapi": "chrome/fi/locale/fi/messenger-mapi/",
+        "mozldap": "chrome/fi/locale/fi/mozldap/",
+        "pluginproblem": "chrome/fi/locale/fi/pluginproblem/",
+        "pipnss": "chrome/fi/locale/fi/pipnss/",
+        "global": "chrome/fi/locale/fi/global/",
+        "messenger-smime": "chrome/fi/locale/fi/messenger-smime/"
+      }
+    }
+  },
+  "name": "Finnish Language Pack"
+}

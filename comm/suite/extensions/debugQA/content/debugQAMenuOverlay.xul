@@ -1,0 +1,220 @@
+<?xml version="1.0"?>
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+
+<overlay id="debugQAMenuOverlay"
+         xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+<script type="application/javascript"
+        src="chrome://debugQA/content/debugQAMenuOverlay.js"/>
+
+  <!-- Menu -->
+  <menubar id="main-menubar">
+    <!-- Menu for testing. -->
+    <menu id="debugMenu" accesskey="U" label="Debug" insertbefore="menu_Help">
+      <menupopup id="menu_Debug_Popup">
+        <menu label="Verification">
+          <menupopup>
+            <menu label="Images and Media">
+              <menupopup>
+                <menuitem label="GIF Images"
+                          oncommand="openQAUrl('https://www-archive.mozilla.org/quality/browser/debugtc/bft_browser_imagemap.html');"/>
+                <menuitem label="PNG Images"
+                          oncommand="openQAUrl('http://www.libpng.org/pub/png/png-MagnoliaAlpha.html');"/>
+              </menupopup>
+            </menu>
+            <menu label="General Page Rendering">
+              <menupopup>
+                <menuitem label="Larger page"
+                          oncommand="openQAUrl('https://www-archive.mozilla.org/quality/browser/debugtc/bft_browser_html_mix3.html');"/>
+                <menuitem label="Smaller page"
+                          oncommand="openQAUrl('https://www-archive.mozilla.org/quality/browser/debugtc/bft_browser_link.html');"/>
+              </menupopup>
+            </menu>
+            <menu label="Safe Browsing">
+              <menupopup>
+                <menuitem label="How does built-in Phishing and Malware Protection work?"
+                          oncommand="openQAUrl('https://support.mozilla.org/kb/how-does-phishing-and-malware-protection-work');"/>
+                <menuitem label="Deceptive Site!"
+                          oncommand="openQAUrl('https://itisatrap.org/firefox/its-a-trap.html');"/>
+                <menuitem label="Reported Attack Page!"
+                          oncommand="openQAUrl('https://itisatrap.org/firefox/its-an-attack.html');"/>
+                <menuitem label="Reported Unwanted Software Page!"
+                          oncommand="openQAUrl('https://itisatrap.org/firefox/unwanted.html');"/>
+                <menuitem label="Potentially Harmful Site!"
+                          oncommand="openQAUrl('https://itisatrap.org/firefox/harmful.html');"/>
+              </menupopup>
+            </menu>
+            <menu label="Permissions/Security">
+              <menupopup>
+                <menuitem label="Popup Killing"
+                          oncommand="openQAUrl('http://www.popuptest.com/');"/>
+                <menuitem label="SSL Server Test"
+                          oncommand="openQAUrl('https://www.ssllabs.com/ssltest/');"/>
+                <menuitem label="SSL/TLS Client Capabilities"
+                          oncommand="openQAUrl('https://www.ssllabs.com/ssltest/viewMyClient.html');"/>
+                <menuitem label="SSL Client Testing"
+                          oncommand="openQAUrl('https://badssl.com/');"/>
+              </menupopup>
+            </menu>
+            <menu label="Popular Sites">
+              <menupopup>
+              <menuitem label="SeaMonkey"
+                        oncommand="openQAUrl('https://www.seamonkey-project.org');"/>
+              <menuitem label="Thunderbird"
+                        oncommand="openQAUrl('https://www.thunderbird.net');"/>
+              <menuitem label="Youtube"
+                        oncommand="openQAUrl('https://www.youtube.com');"/>
+              <menuitem label="Yahoo"
+                        oncommand="openQAUrl('https://www.yahoo.com');"/>
+              <menuitem label="The Register"
+                        oncommand="openQAUrl('https://www.theregister.co.uk');"/>
+              <menuitem label="reddit"
+                        oncommand="openQAUrl('https://www.reddit.com');"/>
+              <menuitem label="Hotwired"
+                        oncommand="openQAUrl('https://www.wired.com');"/>
+              <menuitem label="CNN"
+                        oncommand="openQAUrl('https://www.cnn.com');"/>
+              <menuitem label="USA Today"
+                        oncommand="openQAUrl('https://www.usatoday.com');"/>
+              <menuitem label="Disney"
+                        oncommand="openQAUrl('https://www.disney.com');"/>
+              <menuitem label="Microsoft"
+                        oncommand="openQAUrl('https://www.microsoft.com');"/>
+              <menuitem label="Warner Bros."
+                        oncommand="openQAUrl('https://www.warnerbros.com');"/>
+              </menupopup>
+            </menu>
+          </menupopup>
+        </menu>
+
+        <menu label="Viewer Demos">
+          <menupopup>
+            <menuitem label="#0 Basic Styles"
+                      oncommand="openQAUrl('https://www-archive.mozilla.org/newlayout/samples/test0.html');"/>
+            <menuitem label="#1 CSS Styles"
+                      oncommand="openQAUrl('https://www-archive.mozilla.org/newlayout/samples/test1.html');"/>
+            <menuitem label="#2 Images"
+                      oncommand="openQAUrl('https://www-archive.mozilla.org/newlayout/samples/test2.html');"/>
+            <menuitem label="#3 Basic Tables"
+                      oncommand="openQAUrl('https://www-archive.mozilla.org/newlayout/samples/test3.html');"/>
+            <menuitem label="#4 Simple Tables"
+                      oncommand="openQAUrl('https://www-archive.mozilla.org/newlayout/samples/test4.html');"/>
+            <menuitem label="#5 More Styles"
+                      oncommand="openQAUrl('https://www-archive.mozilla.org/newlayout/samples/test5.html');"/>
+            <menuitem label="#6 Deeply Nested Tables"
+                      oncommand="openQAUrl('https://www-archive.mozilla.org/newlayout/samples/test6.html');"/>
+            <menuitem label="#7 Scaled Anim Image"
+                      oncommand="openQAUrl('https://www-archive.mozilla.org/newlayout/samples/test7.html');"/>
+            <menuitem label="#8 Form"
+                      oncommand="openQAUrl('https://www-archive.mozilla.org/newlayout/samples/test8.html');"/>
+            <menuitem label="#9 Frames"
+                      oncommand="openQAUrl('https://www-archive.mozilla.org/newlayout/samples/test9.html');"/>
+            <menuitem label="#10 Anim Images"
+                      oncommand="openQAUrl('https://www-archive.mozilla.org/newlayout/samples/test10.html');"/>
+            <menuitem label="#11 Fixed Positioning"
+                      oncommand="openQAUrl('https://www-archive.mozilla.org/newlayout/samples/test11.html');"/>
+            <menuitem label="#12 More Fixed Pos"
+                      oncommand="openQAUrl('https://www-archive.mozilla.org/newlayout/samples/test12.html');"/>
+            <menuitem label="#13 DHTML"
+                      oncommand="openQAUrl('https://www-archive.mozilla.org/newlayout/samples/test13.html');"/>
+            <menuitem label="#14 XML Sorting"
+                      oncommand="openQAUrl('https://www-archive.mozilla.org/newlayout/samples/test14.html');"/>
+            <menuitem label="#15 XML IRS"
+                      oncommand="openQAUrl('https://www-archive.mozilla.org/newlayout/samples/test15.html');"/>
+            <menuitem label="#16 Gfx Widgets"
+                      oncommand="openQAUrl('https://www-archive.mozilla.org/newlayout/samples/test16.html');"/>
+          </menupopup>
+        </menu>
+
+        <!-- XBL Test Suite all broken -->
+        <menu label="XBL Test Suite" hidden="true" disabled="true">
+          <menupopup>
+            <menuitem label="#0 Remote XBL"
+                      oncommand="openQAUrl('https://www-archive.mozilla.org/projects/xbl/test0/test.xul');"/>
+            <menuitem label="#1 Technicolor DIV"
+                      oncommand="openQAUrl('https://www-archive.mozilla.org/projects/xbl/test1/test.html');"/>
+            <menuitem label="#2 Rollover Madness"
+                      oncommand="openQAUrl('https://www-archive.mozilla.org/projects/xbl/test2/test.html');"/>
+            <menuitem label="#3 Popups in HTML"
+                      oncommand="openQAUrl('https://www-archive.mozilla.org/projects/xbl/test3/test.html');"/>
+            <menuitem label="#4 Partition Magic"
+                      oncommand="openQAUrl('https://www-archive.mozilla.org/projects/xbl/test4/test.html');"/>
+            <menuitem label="#5 Sticky Notes"
+                      oncommand="openQAUrl('https://www-archive.mozilla.org/projects/xbl/test5/test.html');"/>
+          </menupopup>
+        </menu>
+
+        <menu label="Internal Pages">
+          <menupopup>
+            <menuitem label="Support Page"
+                      oncommand="goAbout('support');"/>
+            <menuitem label="Networking Status"
+                      oncommand="goAbout('networking');"/>
+            <menuitem label="Performance Status"
+                      oncommand="goAbout('performance');"/>
+            <menuitem label="Memory Status"
+                      oncommand="goAbout('memory');"/>
+          </menupopup>
+        </menu>
+
+        <menuseparator/>
+
+        <menuitem label="Composer (with test page)"
+                  oncommand="window.openDialog('chrome://editor/content/','_blank','chrome,all,dialog=no','chrome://debugqa/content/EditorInitPage.html')"/>
+        <menuitem label="Flush Memory"
+                  oncommand="Cc['@mozilla.org/xpcom/memory-service;1'].getService(Ci.nsIMemory).heapMinimize(true);"/>
+        <menuitem label="Show Build Configuration"
+                  oncommand="goAbout('buildconfig');"/>
+
+      </menupopup>
+    </menu>
+
+    <menu id="qaMenu" accesskey="Q" label="QA" insertbefore="menu_Help">
+      <menupopup id="qaMenuPopup">
+        <menuitem label="Getting Involved"
+                  oncommand="openQAUrl('https://www.seamonkey-project.org/start/');"/>
+        <menuitem label="SeaMonkey QA"
+                  oncommand="openQAUrl('https://wiki.mozilla.org/SeaMonkey:QA');"/>
+
+        <menuseparator/>
+
+        <menuitem label="Frequently Reported Bugs"
+                  oncommand="openQAUrl('https://bugzilla.mozilla.org/duplicates.cgi');"/>
+        <menuitem label="Bug Writing Guidelines"
+                  oncommand="openQAUrl('https://developer.mozilla.org/docs/Mozilla/QA/Bug_writing_guidelines');"/>
+        <menuitem label="File a Bug"
+                  oncommand="openQAUrl('https://bugzilla.mozilla.org/enter_bug.cgi?format=guided#h=dupes|SeaMonkey');"/>
+
+        <menuseparator/>
+
+        <menuitem label="Bugs Filed Today"
+                  oncommand="openQAUrl('https://bugzilla.mozilla.org/buglist.cgi?product=Core&amp;product=MailNews+Core&amp;product=SeaMonkey&amp;chfieldfrom=0d&amp;chfieldto=Now&amp;chfield=%5BBug+creation%5D');"/>
+        <menuitem label="Recent comm-central Checkins"
+                  oncommand="openQAUrl('https://hg.mozilla.org/comm-central/pushloghtml?startdate=24+hours+ago&amp;enddate=now');"/>
+        <menuitem label="Recent mozilla-central Checkins"
+                  oncommand="openQAUrl('https://hg.mozilla.org/mozilla-central/pushloghtml?startdate=24+hours+ago&amp;enddate=now');"/>
+        <menuitem label="Recent comm-esr68 Checkins"
+                  oncommand="openQAUrl('https://hg.mozilla.org/releases/comm-esr68/pushloghtml?startdate=96+hours+ago&amp;enddate=now');"/>
+        <menuitem label="Recent mozilla-esr68 Checkins"
+                  oncommand="openQAUrl('https://hg.mozilla.org/releases/mozilla-esr68/pushloghtml?startdate=96+hours+ago&amp;enddate=now');"/>
+        <menuitem label="Recent gitlab 2.53 comm Activity"
+                  oncommand="openQAUrl('https://gitlab.com/seamonkey-project/seamonkey-2.53-comm/activity');"/>
+        <menuitem label="Recent gitlab 2.53 mozilla Activity"
+                  oncommand="openQAUrl('https://gitlab.com/seamonkey-project/seamonkey-2.53-mozilla/activity');"/>
+        <menuitem label="Recent gitlab 2.53 l10n Activity"
+                  oncommand="openQAUrl('https://gitlab.com/seamonkey-project/seamonkey-2.53-l10n/activity');"/>
+       <menuitem label="Tree Status"
+                  oncommand="openQAUrl('https://treestatus.mozilla-releng.net/static/ui/treestatus/');"/>
+
+        <menuseparator/>
+
+        <menuitem label="Latest Builds"
+                  oncommand="openQAUrl('https://archive.mozilla.org/pub/seamonkey/nightly/latest-comm-central-trunk/');"/>
+      </menupopup>
+    </menu>
+  </menubar>
+
+</overlay>

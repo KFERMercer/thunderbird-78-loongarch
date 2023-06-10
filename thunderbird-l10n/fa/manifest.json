@@ -1,0 +1,57 @@
+{
+  "manifest_version": 2,
+  "name": "فارسی (ایران) Language Pack",
+  "applications": {
+    "gecko": {
+      "id": "langpack-fa@thunderbird.mozilla.org",
+      "strict_min_version": "78.0",
+      "strict_max_version": "78.*"
+    }
+  },
+  "languages": {
+    "fa": {
+      "chrome_resources": {
+        "places": "chrome/fa/locale/fa/places/",
+        "communicator": "chrome/fa/locale/fa/communicator/",
+        "autoconfig": "chrome/fa/locale/fa/autoconfig/",
+        "passwordmgr": "chrome/fa/locale/fa/passwordmgr/",
+        "lightning": "chrome/fa/locale/fa/lightning/",
+        "mozapps": "chrome/fa/locale/fa/mozapps/",
+        "messenger-region": "chrome/fa/locale/fa/messenger-region/",
+        "mozldap": "chrome/fa/locale/fa/mozldap/",
+        "pipnss": "chrome/fa/locale/fa/pipnss/",
+        "devtools-startup": "chrome/fa/locale/fa/devtools/startup/",
+        "pluginproblem": "chrome/fa/locale/fa/pluginproblem/",
+        "calendar": "chrome/fa/locale/fa/calendar/",
+        "global": "chrome/fa/locale/fa/global/",
+        "branding": "chrome/fa/locale/fa/branding/",
+        "alerts": "chrome/fa/locale/fa/alerts/",
+        "devtools": "chrome/fa/locale/fa/devtools/client/",
+        "devtools-shared": "chrome/fa/locale/fa/devtools/shared/",
+        "messenger-newsblog": "chrome/fa/locale/fa/messenger-newsblog/",
+        "messenger-mapi": "chrome/fa/locale/fa/messenger-mapi/",
+        "necko": "chrome/fa/locale/fa/necko/",
+        "global-platform": {
+          "macosx": "chrome/fa/locale/fa/global-platform/mac/",
+          "linux": "chrome/fa/locale/fa/global-platform/unix/",
+          "android": "chrome/fa/locale/fa/global-platform/unix/",
+          "win": "chrome/fa/locale/fa/global-platform/win/"
+        },
+        "chat": "chrome/fa/locale/fa/chat/",
+        "messenger": "chrome/fa/locale/fa/messenger/",
+        "messenger-smime": "chrome/fa/locale/fa/messenger-smime/",
+        "pippki": "chrome/fa/locale/fa/pippki/"
+      },
+      "version": "20200625121757"
+    }
+  },
+  "version": "78.0buildid20210901192859",
+  "author": "mozilla.org (contributors: احسان اخگری)",
+  "description": "Language pack for Thunderbird for fa",
+  "sources": {
+    "browser": {
+      "base_path": "browser/"
+    }
+  },
+  "langpack_id": "fa"
+}
