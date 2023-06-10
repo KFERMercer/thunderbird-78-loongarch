@@ -61,7 +61,7 @@ X-Debian-Homepage: http://wiki.debian.org/Thunderbird
 Standards-Version: 4.5.1
 
 Package: thunderbird
-Architecture: amd64 arm64 armhf i386 mips64el ppc64el s390x ppc64
+Architecture: amd64 arm64 armhf i386 mips64el ppc64el s390x ppc64 loongarch64
 Depends:
  debianutils (>= 1.16),
  fontconfig,
