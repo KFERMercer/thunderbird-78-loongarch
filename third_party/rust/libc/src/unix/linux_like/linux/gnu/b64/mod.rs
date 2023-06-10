@@ -69,9 +69,6 @@ cfg_if! {
     } else if #[cfg(any(target_arch = "sparc64"))] {
         mod sparc64;
         pub use self::sparc64::*;
-    } else if #[cfg(any(target_arch = "loongarch64"))] {
-        mod loongarch64;
-        pub use self::loongarch64::*;
     } else if #[cfg(any(target_arch = "mips64"))] {
         mod mips64;
         pub use self::mips64::*;
