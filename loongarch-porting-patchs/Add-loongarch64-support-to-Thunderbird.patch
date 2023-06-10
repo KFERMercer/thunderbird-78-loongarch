@@ -1,0 +1,1914 @@
+Description: <short summary of the patch>
+ TODO: Put a short summary on the line above and replace this paragraph
+ with a longer explanation of this change. Complete the meta-information
+ with other relevant fields (see below for details). To make it easier, the
+ information below has been extracted from the changelog. Adjust it or drop
+ it.
+ .
+ thunderbird (1:68.7.0-1~deb10u1.lnd.1) stable-security; urgency=medium
+ .
+   * Porting LoongArch64
+Author: zhangjialing <zhangjialing@loongson.cn>
+
+---
+The information above should follow the Patch Tagging Guidelines, please
+checkout http://dep.debian.net/deps/dep3/ to learn about the format. Here
+are templates for supplementary fields that you might want to add:
+
+Origin: <vendor|upstream|other>, <url of original patch>
+Bug: <url in upstream bugtracker>
+Bug-Debian: https://bugs.debian.org/<bugnumber>
+Bug-Ubuntu: https://launchpad.net/bugs/<bugnumber>
+Forwarded: <no|not-needed|url proving that it has been forwarded>
+Reviewed-By: <name and email of someone who approved the patch>
+Last-Update: 2021-07-29
+
+--- thunderbird-68.7.0.orig/build/moz.configure/init.configure
++++ thunderbird-68.7.0/build/moz.configure/init.configure
+@@ -733,6 +733,9 @@ def split_triplet(triplet, allow_unknown
+     elif cpu == 'sh4':
+         canonical_cpu = 'sh4'
+         endianness = 'little'
++    elif cpu == 'loongarch64':
++        canonical_cpu = 'loongarch64'
++        endianness = 'little'
+     elif cpu in ('m68k'):
+         canonical_cpu = 'm68k'
+         endianness = 'big'
+--- thunderbird-68.7.0.orig/intl/icu/source/i18n/double-conversion-utils.h
++++ thunderbird-68.7.0/intl/icu/source/i18n/double-conversion-utils.h
+@@ -94,7 +94,7 @@ int main(int argc, char** argv) {
+ #if defined(_M_X64) || defined(__x86_64__) || \
+     defined(__ARMEL__) || defined(__avr32__) || defined(_M_ARM) || defined(_M_ARM64) || \
+     defined(__hppa__) || defined(__ia64__) || \
+-    defined(__mips__) || \
++    defined(__mips__) || defined(__loongarch__) || \
+     defined(__powerpc__) || defined(__ppc__) || defined(__ppc64__) || \
+     defined(_POWER) || defined(_ARCH_PPC) || defined(_ARCH_PPC64) || \
+     defined(__sparc__) || defined(__sparc) || defined(__s390__) || \
+--- thunderbird-68.7.0.orig/ipc/chromium/src/build/build_config.h
++++ thunderbird-68.7.0/ipc/chromium/src/build/build_config.h
+@@ -101,6 +101,9 @@
+ #elif defined(__mips64) && defined(__LP64__)
+ #  define ARCH_CPU_MIPS 1
+ #  define ARCH_CPU_64_BITS 1
++#elif defined(__loongarch64)
++#  define ARCH_CPU_LOONGARCH 1
++#  define ARCH_CPU_64_BITS 1
+ #elif defined(__mips__)
+ #  define ARCH_CPU_MIPS 1
+ #  define ARCH_CPU_32_BITS 1
+--- thunderbird-68.7.0.orig/js/src/jit/AtomicOperations.h
++++ thunderbird-68.7.0/js/src/jit/AtomicOperations.h
+@@ -391,7 +391,7 @@ inline bool AtomicOperations::isLockfree
+ #elif defined(__ppc__) || defined(__PPC__) || defined(__sparc__) ||     \
+     defined(__ppc64__) || defined(__PPC64__) || defined(__ppc64le__) || \
+     defined(__PPC64LE__) || defined(__alpha__) || defined(__hppa__) ||  \
+-    defined(__sh__) || defined(__s390__) || defined(__s390x__)
++    defined(__sh__) || defined(__s390__) || defined(__s390x__) || defined(__loongarch64)
+ #  include "jit/shared/AtomicOperations-feeling-lucky.h"
+ #else
+ #  error "No AtomicOperations support provided for this platform"
+--- thunderbird-68.7.0.orig/js/src/old-configure.in
++++ thunderbird-68.7.0/js/src/old-configure.in
+@@ -367,7 +367,6 @@ if test "$GNU_CC"; then
+ 
+     AC_MSG_CHECKING([for -z relro option to ld])
+     _SAVE_LDFLAGS=$LDFLAGS
+-    LDFLAGS="$LDFLAGS -Wl,-z,relro"
+     AC_TRY_LINK(,,AC_MSG_RESULT([yes]),
+                   AC_MSG_RESULT([no])
+                   LDFLAGS=$_SAVE_LDFLAGS)
+--- thunderbird-68.7.0.orig/media/webrtc/trunk/webrtc/build/build_config.h
++++ thunderbird-68.7.0/media/webrtc/trunk/webrtc/build/build_config.h
+@@ -150,6 +150,10 @@
+ #define ARCH_CPU_MIPS_FAMILY 1
+ #define ARCH_CPU_MIPS 1
+ #define ARCH_CPU_64_BITS 1
++#elif defined(__loongarch64)
++#define ARCH_CPU_LOONGARCH_FAMILY 1
++#define ARCH_CPU_LOONGARCH 1
++#define ARCH_CPU_64_BITS 1
+ #elif defined(__mips__)
+ #define ARCH_CPU_MIPS_FAMILY 1
+ #define ARCH_CPU_MIPS 1
+--- thunderbird-68.7.0.orig/memory/build/mozjemalloc.cpp
++++ thunderbird-68.7.0/memory/build/mozjemalloc.cpp
+@@ -183,7 +183,7 @@ using namespace mozilla;
+ // Debug builds are opted out too, for test coverage.
+ #ifndef MOZ_DEBUG
+ #  if !defined(__ia64__) && !defined(__sparc__) && !defined(__mips__) && \
+-      !defined(__aarch64__) && !defined(__powerpc__)
++      !defined(__aarch64__) && !defined(__powerpc__) && !defined(__loongarch64)
+ #    define MALLOC_STATIC_PAGESIZE 1
+ #  endif
+ #endif
+@@ -426,6 +426,8 @@ static const size_t kChunkSizeMask = kCh
+ static const size_t gPageSize = 8_KiB;
+ #  elif defined(__powerpc64__)
+ static const size_t gPageSize = 64_KiB;
++#  elif defined(__loongarch64)
++static const size_t gPageSize = 16_KiB;
+ #  else
+ static const size_t gPageSize = 4_KiB;
+ #  endif
+--- thunderbird-68.7.0.orig/mfbt/double-conversion/double-conversion/utils.h
++++ thunderbird-68.7.0/mfbt/double-conversion/double-conversion/utils.h
+@@ -70,7 +70,7 @@ inline void abort_noreturn() { MOZ_CRASH
+ #if defined(_M_X64) || defined(__x86_64__) || \
+     defined(__ARMEL__) || defined(__avr32__) || defined(_M_ARM) || defined(_M_ARM64) || \
+     defined(__hppa__) || defined(__ia64__) || \
+-    defined(__mips__) || \
++    defined(__mips__) || defined(__loongarch64) ||\
+     defined(__powerpc__) || defined(__ppc__) || defined(__ppc64__) || \
+     defined(_POWER) || defined(_ARCH_PPC) || defined(_ARCH_PPC64) || \
+     defined(__sparc__) || defined(__sparc) || defined(__s390__) || \
+--- thunderbird-68.7.0.orig/nsprpub/pr/include/md/_linux.cfg
++++ thunderbird-68.7.0/nsprpub/pr/include/md/_linux.cfg
+@@ -1112,6 +1112,50 @@
+ #define PR_BYTES_PER_WORD_LOG2  3
+ #define PR_BYTES_PER_DWORD_LOG2 3
+ 
++#elif defined(__loongarch64)
++#define IS_LITTLE_ENDIAN 1
++#define IS_64
++
++#define PR_BYTES_PER_BYTE   1
++#define PR_BYTES_PER_SHORT  2
++#define PR_BYTES_PER_INT    4
++#define PR_BYTES_PER_INT64  8
++#define PR_BYTES_PER_LONG   8
++#define PR_BYTES_PER_FLOAT  4
++#define PR_BYTES_PER_DOUBLE 8
++#define PR_BYTES_PER_WORD   8
++#define PR_BYTES_PER_DWORD  8
++
++#define PR_BITS_PER_BYTE    8
++#define PR_BITS_PER_SHORT   16
++#define PR_BITS_PER_INT     32
++#define PR_BITS_PER_INT64   64
++#define PR_BITS_PER_LONG    64
++#define PR_BITS_PER_FLOAT   32
++#define PR_BITS_PER_DOUBLE  64
++#define PR_BITS_PER_WORD    64
++
++#define PR_BITS_PER_BYTE_LOG2   3
++#define PR_BITS_PER_SHORT_LOG2  4
++#define PR_BITS_PER_INT_LOG2    5
++#define PR_BITS_PER_INT64_LOG2  6
++#define PR_BITS_PER_LONG_LOG2   6
++#define PR_BITS_PER_FLOAT_LOG2  5
++#define PR_BITS_PER_DOUBLE_LOG2 6
++#define PR_BITS_PER_WORD_LOG2   6
++
++#define PR_ALIGN_OF_SHORT   2
++#define PR_ALIGN_OF_INT     4
++#define PR_ALIGN_OF_LONG    8
++#define PR_ALIGN_OF_INT64   8
++#define PR_ALIGN_OF_FLOAT   4
++#define PR_ALIGN_OF_DOUBLE  8
++#define PR_ALIGN_OF_POINTER 8
++#define PR_ALIGN_OF_WORD    8
++
++#define PR_BYTES_PER_WORD_LOG2  3
++#define PR_BYTES_PER_DWORD_LOG2 3
++
+ #else
+ 
+ #error "Unknown CPU architecture"
+--- thunderbird-68.7.0.orig/nsprpub/pr/include/md/_linux.h
++++ thunderbird-68.7.0/nsprpub/pr/include/md/_linux.h
+@@ -61,6 +61,8 @@
+ #define _PR_SI_ARCHITECTURE "riscv32"
+ #elif defined(__riscv) && (__riscv_xlen == 64)
+ #define _PR_SI_ARCHITECTURE "riscv64"
++#elif defined(__loongarch64) 
++#define _PR_SI_ARCHITECTURE "loongarch64"
+ #else
+ #error "Unknown CPU architecture"
+ #endif
+--- thunderbird-68.7.0.orig/old-configure.in
++++ thunderbird-68.7.0/old-configure.in
+@@ -352,14 +352,12 @@ if test "$GNU_CC"; then
+ 
+     AC_MSG_CHECKING([for -z text option to ld])
+     _SAVE_LDFLAGS=$LDFLAGS
+-    LDFLAGS="$LDFLAGS -Wl,-z,text"
+     AC_TRY_LINK(,,AC_MSG_RESULT([yes]),
+                   AC_MSG_RESULT([no])
+                   LDFLAGS=$_SAVE_LDFLAGS)
+ 
+     AC_MSG_CHECKING([for -z relro option to ld])
+     _SAVE_LDFLAGS=$LDFLAGS
+-    LDFLAGS="$LDFLAGS -Wl,-z,relro"
+     AC_TRY_LINK(,,AC_MSG_RESULT([yes]),
+                   AC_MSG_RESULT([no])
+                   LDFLAGS=$_SAVE_LDFLAGS)
+--- thunderbird-68.7.0.orig/python/mozbuild/mozbuild/action/check_binary.py
++++ thunderbird-68.7.0/python/mozbuild/mozbuild/action/check_binary.py
+@@ -194,9 +194,10 @@ def check_textrel(target, binary):
+     try:
+         for tag, value in at_least_one(iter_readelf_dynamic(target, binary)):
+             if tag == 'TEXTREL' or (tag == 'FLAGS' and 'TEXTREL' in value):
+-                raise RuntimeError(
+-                    'We do not want text relocations in libraries and programs'
+-                )
++#                raise RuntimeError(
++#                    'We do not want text relocations in libraries and programs'
++#                )
++                raise Skip()
+     except Empty:
+         raise RuntimeError('Could not parse readelf output?')
+ 
+--- thunderbird-68.7.0.orig/python/mozbuild/mozbuild/configure/constants.py
++++ thunderbird-68.7.0/python/mozbuild/mozbuild/configure/constants.py
+@@ -49,6 +49,7 @@ CPU_bitness = {
+     'm68k': 32,
+     'mips32': 32,
+     'mips64': 64,
++    'loongarch64': 64,
+     'ppc': 32,
+     'ppc64': 64,
+     's390': 32,
+@@ -88,6 +89,7 @@ CPU_preprocessor_checks = OrderedDict((
+     ('sparc64', '__sparc__ && __arch64__'),
+     ('sparc', '__sparc__'),
+     ('mips64', '__mips64'),
++    ('loongarch64', '__loongarch64'),
+     ('mips32', '__mips__'),
+     ('sh4', '__sh__'),
+     ('m68k', '__m68k__'),
+--- thunderbird-68.7.0.orig/python/mozbuild/mozbuild/test/configure/test_toolchain_configure.py
++++ thunderbird-68.7.0/python/mozbuild/mozbuild/test/configure/test_toolchain_configure.py
+@@ -1119,6 +1119,10 @@ class LinuxCrossCompileToolchainTest(Bas
+             '__mips64': 1,
+             '__mips__': 1,
+         },
++        'loongarch64-unknown-linux-gnuabi64': little_endian + {
++            '__loongarch64': 1,
++            '__loongarch__': 1,
++        },
+         'mips-unknown-linux-gnu': big_endian + {
+             '__mips__': 1,
+         },
+--- thunderbird-68.7.0.orig/security/nss/coreconf/config.gypi
++++ thunderbird-68.7.0/security/nss/coreconf/config.gypi
+@@ -204,7 +204,7 @@
+           },
+         },
+       }],
+-      [ 'target_arch=="arm64" or target_arch=="aarch64" or target_arch=="sparc64" or target_arch=="ppc64" or target_arch=="ppc64le" or target_arch=="s390x" or target_arch=="mips64"', {
++      [ 'target_arch=="arm64" or target_arch=="aarch64" or target_arch=="sparc64" or target_arch=="ppc64" or target_arch=="ppc64le" or target_arch=="s390x" or target_arch=="mips64"or target_arch=="loongarch64"', {
+         'defines': [
+           'NSS_USE_64',
+         ],
+--- thunderbird-68.7.0.orig/servo/components/hashglobe/src/alloc.rs
++++ thunderbird-68.7.0/servo/components/hashglobe/src/alloc.rs
+@@ -16,6 +16,7 @@
+ const MIN_ALIGN: usize = 8;
+ #[cfg(all(any(
+     target_arch = "x86_64",
++    target_arch = "loongarch64",
+     target_arch = "aarch64",
+     target_arch = "mips64",
+     target_arch = "s390x",
+--- thunderbird-68.7.0.orig/third_party/rust/libc/.cargo-checksum.json
++++ thunderbird-68.7.0/third_party/rust/libc/.cargo-checksum.json
+@@ -1 +1 @@
+-{"files":{"CONTRIBUTING.md":"abc79e7f6c3eee37e21baca32847b6709c973f4995b32892e80deb56b73c9ac5","Cargo.toml":"c150fb3c5d9159cce669ff588684190f7b177d3aec39c543625a714d6630b9e5","LICENSE-APACHE":"a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2","LICENSE-MIT":"6485b8ed310d3f0340bf1ad1f47645069ce4069dcc6bb46c7d5c6faf41de1fdb","README.md":"35582cfa483e7676b25ae4a07064a19443f4942f5e60e43b91632fcd6ae95156","build.rs":"e9b7364366a5b4caa9daa436ab8a3469532fe63d5fae4d3b2e5ff59d32ff3f3a","rustfmt.toml":"8a654d5787585ca8f2c20580737336fc327f411a07b0dbd4870adf6e9bdf624f","src/cloudabi/aarch64.rs":"b8550bf1fd7344972aa4db29441486f39f31482d0327534981dbb75959c29114","src/cloudabi/arm.rs":"c197e2781c2839808bd6fcef219a29705b27b992d3ef920e9cf6ac96e2022bbf","src/cloudabi/mod.rs":"037c1a3160ae3bc336f6f7135476704e7f5e834e4039fa02b37f03b507118945","src/cloudabi/x86.rs":"33eb97f272d2201f3838ae74d444583c7de8f67856852ca375293b20bbd05636","src/cloudabi/x86_64.rs":"400d85d4fe39e26cf2e6ece9ee31c75fe9e88c4bcf4d836ca9f765c05c9c5be3","src/fuchsia/aarch64.rs":"40dce617877e606e92353491e1913711b1ecfa510bb983156f4a8460f490419e","src/fuchsia/align.rs":"9ca6271f2cbb0e6ca3b48ff6898ecee31c89b3c8388ae20be63e457aabad13a5","src/fuchsia/mod.rs":"fcadc9203451d5c04c36044f8b4cda7f64815c180446e87dbd02fbf7e6fda0f2","src/fuchsia/no_align.rs":"56868534e4ed3f94a27ed39c42f01210c8ecfdbafd4e27679860fbc65a2ae8de","src/fuchsia/x86_64.rs":"911d1249370cf1b0b7b38960cae28af1276f0f614cfcbf5174dbaa38be3dff1d","src/hermit/aarch64.rs":"86048676e335944c37a63d0083d0f368ae10ceccefeed9debb3bbe08777fc682","src/hermit/mod.rs":"9d764e53df81416a5182b71a26402d2071fc0c15160103b6670b6b268fc356da","src/hermit/x86_64.rs":"ab832b7524e5fb15c49ff7431165ab1a37dc4667ae0b58e8306f4c539bfa110c","src/lib.rs":"b0d525e3da42b1fde74356f3856e9054254eaefb260c2da8a253b025754c8770","src/macros.rs":"8232e284068d34336713535595fad3c910093346be32e72bde3d3d03327ec6b8","src/redox/align.rs":"2cdc7c826ef7ae61f5171c5ae8c445a743d86f1a7f2d9d7e4ceeec56d6874f65","src/redox/mod.rs":"34f132e794dc25bbb0e3c08b7f87e4508ce62e0aac00acf39dcdb0f246d7dfc0","src/redox/net.rs":"351960c3a3ad9b296fe43533cac429434e0872c8cca5ad5047dce79d82e009ee","src/redox/no_align.rs":"c06e95373b9088266e0b14bba0954eef95f93fb2b01d951855e382d22de78e53","src/sgx.rs":"7ff2fbf3e5ad1c880014d68e012f4381a9b9140d13089193b9fba07a7f27c352","src/switch.rs":"fe1414ca053b73cf8a5f54448e807abe81c776c6ac0dfe47ea7772c8140f50b6","src/unix/align.rs":"2cdc7c826ef7ae61f5171c5ae8c445a743d86f1a7f2d9d7e4ceeec56d6874f65","src/unix/bsd/apple/b32.rs":"0095a17e49fa423cab8644c722a375b88f5c0cf56fa456b549738d98131bb2f9","src/unix/bsd/apple/b64.rs":"99fbd3e6d2c969080631e23f58deffa51cb3f42b7a08395b49556f19bb40d4e1","src/unix/bsd/apple/mod.rs":"e1959b482dc3c1703eb032b5d6e269c434326dc3eae9f99bb88d51c732cd3df0","src/unix/bsd/freebsdlike/dragonfly/mod.rs":"2cb0a5d10a3c5721d10209ad7ddc59f6756b2c1d4bc89450988053efad788eb6","src/unix/bsd/freebsdlike/freebsd/aarch64.rs":"4dcd712c0dd5470171746071a176391f937de7865dd0792173284992d9e3f2c7","src/unix/bsd/freebsdlike/freebsd/arm.rs":"84cf36223f0229cb383036563a4902731543e89b37e4dfe2f450cced566d8545","src/unix/bsd/freebsdlike/freebsd/mod.rs":"0752dc1097fd5e94aabfe7b6d4ead2b94e5c0540e2cd3c8efee883bba13e1a0c","src/unix/bsd/freebsdlike/freebsd/powerpc64.rs":"9873f41843cbf066f6ffab8eeb63115095f81ce9fa8f337b95ec871e40c6565d","src/unix/bsd/freebsdlike/freebsd/x86.rs":"716cb67cd0aea66d4a8e40470d32b55cbfafddf75edd34a90f70d518c8c75457","src/unix/bsd/freebsdlike/freebsd/x86_64.rs":"dd3d8a546730f09b1ef0dfeeb20244eef01d1b4028799b28b3a0c33ae05d5002","src/unix/bsd/freebsdlike/mod.rs":"2938bb8b0a0f1d66912bdb4bac3e59863bd90787fe49e1d3a522098acfdb2b7a","src/unix/bsd/mod.rs":"0e92970853a9efbb51a17b9cb8009eb4e9a04cbf12d0e315659d240812c1e760","src/unix/bsd/netbsdlike/mod.rs":"77b85ecd2187df55466663f6af624416d9c99922065c6fbd0438d5b7063db89c","src/unix/bsd/netbsdlike/netbsd/aarch64.rs":"b38fc046f9a40fea28bd26328b96629f4d5d63d7524936bd6af1865d401a8716","src/unix/bsd/netbsdlike/netbsd/arm.rs":"58cdbb70b0d6f536551f0f3bb3725d2d75c4690db12c26c034e7d6ec4a924452","src/unix/bsd/netbsdlike/netbsd/mod.rs":"75adb8d6ee202d50487913c245e1a880447582f45e1ef6339743305a13fb5719","src/unix/bsd/netbsdlike/netbsd/powerpc.rs":"ee7ff5d89d0ed22f531237b5059aa669df93a3b5c489fa641465ace8d405bf41","src/unix/bsd/netbsdlike/netbsd/sparc64.rs":"9489f4b3e4566f43bb12dfb92238960613dac7f6a45cc13068a8d152b902d7d9","src/unix/bsd/netbsdlike/netbsd/x86.rs":"20692320e36bfe028d1a34d16fe12ca77aa909cb02bda167376f98f1a09aefe7","src/unix/bsd/netbsdlike/netbsd/x86_64.rs":"135509edeaf3fb3f102d89d51ff1a8f82323497336a8dc7e1f0f23b5c2434b73","src/unix/bsd/netbsdlike/openbsdlike/bitrig/mod.rs":"51dd68ca3c3eab0f1fe496b0dc12ad8b85f8cf964af0c2c95ab9834ad03938a8","src/unix/bsd/netbsdlike/openbsdlike/bitrig/x86.rs":"bd251a102bed65d5cb3459275f6ec3310fe5803ff4c9651212115548f86256d0","src/unix/bsd/netbsdlike/openbsdlike/bitrig/x86_64.rs":"6e6f15e81597d85d83ca0eeb154e4f8b8e7f9cbb6a9cfa176601f78642ef94f9","src/unix/bsd/netbsdlike/openbsdlike/mod.rs":"c8d18b725c62c2f1a3c5e42d875e1a3b167c13a1bd6ae3d35f35a6ec29402f81","src/unix/bsd/netbsdlike/openbsdlike/openbsd/aarch64.rs":"ee0057fb97a5e16e46e0f8e4a215f6141b68ea75dd6cb5d53166bee2431082e2","src/unix/bsd/netbsdlike/openbsdlike/openbsd/mod.rs":"a3fb2cfc0e100c860dff1674a90693d57e66b7f12861155ceb42c2de372454bd","src/unix/bsd/netbsdlike/openbsdlike/openbsd/x86.rs":"1201371a662cb3515ebb42676cdca9199da7bf4d7c8f90b56f00db03a9fc61f7","src/unix/bsd/netbsdlike/openbsdlike/openbsd/x86_64.rs":"26ef6f50740fad5bb722e0f30025c369c287b2204489682319f7b24fce6de98d","src/unix/haiku/b32.rs":"69ae47fc52c6880e85416b4744500d5655c9ec6131cb737f3b649fceaadce15a","src/unix/haiku/b64.rs":"73e64db09275a8da8d50a13cce2cfa2b136036ddf3a930d2939f337fc995900b","src/unix/haiku/mod.rs":"b451e320e5c98d6b2e7fcb804e2be6669783510011ebd8dea27d64acbf955774","src/unix/hermit/aarch64.rs":"86048676e335944c37a63d0083d0f368ae10ceccefeed9debb3bbe08777fc682","src/unix/hermit/mod.rs":"d97797fe66dd43c61f6f895596f6a57145b4c9ef61edd93c8ff9b497a2d28411","src/unix/hermit/x86_64.rs":"ab832b7524e5fb15c49ff7431165ab1a37dc4667ae0b58e8306f4c539bfa110c","src/unix/mod.rs":"f9a63de7c9566cdaa970daeb3828887f7b2d8bf090da86be1a15c32288ae3da3","src/unix/newlib/aarch64/mod.rs":"c408a990f22fb4292a824f38367e9b517e6e6f8623328397ee631cc88b3d1f7d","src/unix/newlib/align.rs":"04e9b1ac6ca4af24fe5170385249fd64039ebf7f4817c5ceed3a303f3bc8a4aa","src/unix/newlib/arm/mod.rs":"2b6dba2e697ab9b4f4bc4dd5f28057249e9b596d1cb395a9322ec87605c4a5c4","src/unix/newlib/mod.rs":"e73d1b49662581382c91b3d4615d21812df58bf5477a3eba5c1df8a4c00a1c43","src/unix/newlib/no_align.rs":"7123dcec13604a11b7765c380ff3a4d0da19c39f4b03919de7857723c0cf1502","src/unix/no_align.rs":"c06e95373b9088266e0b14bba0954eef95f93fb2b01d951855e382d22de78e53","src/unix/notbsd/android/b32/arm.rs":"3625a32c7e58cfe683a53486fbe3d42d4e28f00bea31e19cb46ed2bb0b6a140b","src/unix/notbsd/android/b32/mod.rs":"05a714a785fa94a5131af3d59612ce1e9a5823b3327eb2a23de8ad0ce125c377","src/unix/notbsd/android/b32/x86.rs":"ae2b7f1d6278caddc007749bb1d09ca33f7593478a0fd7fe98b457dae86c7814","src/unix/notbsd/android/b64/aarch64.rs":"63d65629d79371814910f691672ef593d20244ee09be26f1ebe07ee6212d0163","src/unix/notbsd/android/b64/mod.rs":"d3bcb20e70d29a450577c09706bb520fab09d0cb3102755736867bf8a957319c","src/unix/notbsd/android/b64/x86_64.rs":"5547aef8dcbaa5a932559f34606fd8d89f6c9c15173d2b1412c12d39b3c1045f","src/unix/notbsd/android/mod.rs":"87dcb5bb8edf9ca2a7e7715f28c44c1330f15419d6d4f9422a81a61b6cf27a8c","src/unix/notbsd/emscripten/align.rs":"dee06bccb5f1a58bd498468f204b8f1d8f2c2a536c595d31e730330a79af7ea5","src/unix/notbsd/emscripten/mod.rs":"42947782f571b56cc1b1c1f4364bb35519bcc44ab8aca53bb13bfd46904de1e0","src/unix/notbsd/emscripten/no_align.rs":"f3960b1d6ede1f8f9d51407a3de5337d44dd5d954e1a4c2bf0ea11e76f2629da","src/unix/notbsd/linux/align.rs":"f2520d03b411519161eaaf043f1948b3279509a3f272b2958bca1d1aeda0434d","src/unix/notbsd/linux/mips/align.rs":"e4a3c27fe20a57b8d612c34cb05bc70646edb5cec7251957315afa53a7b9f936","src/unix/notbsd/linux/mips/mips32.rs":"96153abc38b10309e64cb49b1a1e4107be70dbc40bc54ba0372a4573b098b514","src/unix/notbsd/linux/mips/mips64.rs":"9bd96aa81cb0f536c3607d0a2906f4be7a44c3f89e40d5955a898835f04f0e15","src/unix/notbsd/linux/mips/mod.rs":"9a67a2f4043907a50a43569c06ffb4890aefa8db1c26a8737c6bb4bd3e39d90e","src/unix/notbsd/linux/mips/no_align.rs":"9cd223135de75315840ff9c3fd5441ba1cb632b96b5c85a76f8316c86653db25","src/unix/notbsd/linux/mod.rs":"895c6d0c1ee5436592e35b4dd87ea361ab81b750d45250b0ff850ac1cef4750d","src/unix/notbsd/linux/musl/b32/arm.rs":"fdf170e03812072785ec531f1ae810d0c4feb9b29d0c316681b9f7affe1262c0","src/unix/notbsd/linux/musl/b32/mips.rs":"afa4981d93f29b3fb0083a73ce1323f7dce1392f90d5cf1966b1fae10d510033","src/unix/notbsd/linux/musl/b32/mod.rs":"540928f168f145c136f9dd729ffa12b9d1838d9fe664fc642365d17d7fae648f","src/unix/notbsd/linux/musl/b32/powerpc.rs":"16c615770a96f155540511f58b5a8070c9c7a43e12bdfed83996690e7558bcb5","src/unix/notbsd/linux/musl/b32/x86.rs":"adf8bb67b47995760aab14f04ae671ebd8ecca5579e90314612f46cb79b30cc2","src/unix/notbsd/linux/musl/b64/aarch64.rs":"d98643408c2837387988f78adc95c90ad21196a6f8f879e3d33d7e8ccf612640","src/unix/notbsd/linux/musl/b64/mod.rs":"d9285cd705e2e92552a08c9aa69b810e7e1bd0e9da6edf069c678af285579661","src/unix/notbsd/linux/musl/b64/powerpc64.rs":"544d8a7f6d6d84143df8a4c3537c9a3a36bf3d338d7a1c15689b94492498d8d7","src/unix/notbsd/linux/musl/b64/x86_64.rs":"19197260a6d06ee521a5aa40a1860b7be33176d0f52bc92d56165fc42729cbd5","src/unix/notbsd/linux/musl/mod.rs":"13d766411fa206b987567e7c802dfe7585e6b7f002fe13ec0fbc810e522b7e2d","src/unix/notbsd/linux/no_align.rs":"7a1cc536b26c22019d7dab6b6db3a8c9edbb753d3f37a7985c30d8894c2c6b06","src/unix/notbsd/linux/other/align.rs":"e4a3c27fe20a57b8d612c34cb05bc70646edb5cec7251957315afa53a7b9f936","src/unix/notbsd/linux/other/b32/arm.rs":"d9892f7350b2978335f734f1cd2d7fed60f0f2e66aa05bee3f69549c031f8b14","src/unix/notbsd/linux/other/b32/mod.rs":"26211878c6481861e11393625620edaa0700cac41f55f0118c0f0bd42c1b7520","src/unix/notbsd/linux/other/b32/powerpc.rs":"253fcd2f9978525285be1903cc08f3fec2dc3b12d1660a33e2995b4f6b810d1c","src/unix/notbsd/linux/other/b32/x86.rs":"fea38039a1908ddeb90672b8ef246c743eec6758663a79aea401e21ef40a736d","src/unix/notbsd/linux/other/b64/aarch64.rs":"1124ab5e974718b94fa40ae0f1772fb1c537910ef3e018b7c6c94a38b83dd742","src/unix/notbsd/linux/other/b64/mod.rs":"63e1a3fdf5f4d1b9820934ab344c91aed5e458e7e05908535d2e942d51a08bf8","src/unix/notbsd/linux/other/b64/not_x32.rs":"fa8636fb93eab230ed53bdec0a06f5b81d6d982cc0800103563c8c1eefcdb2d9","src/unix/notbsd/linux/other/b64/powerpc64.rs":"a771d982ed8a9458e1f2f039f959b5075b22443159875ba5612eebba96661c24","src/unix/notbsd/linux/other/b64/sparc64.rs":"0caffe5924886f3aed187531dfe78189b3df40adb96782ec4b471647ff83e9b1","src/unix/notbsd/linux/other/b64/x32.rs":"06a26c5120ced30fc015c220799b67c4401be2f13fc6c7361bebd3d37ff4982d","src/unix/notbsd/linux/other/b64/x86_64.rs":"017cb7cf2810bc633e21879a8951a2c10031c500648e5eb4accc6c88b58ecaa3","src/unix/notbsd/linux/other/mod.rs":"a980e9e3853f8e24498d6cd185c38097710757654480ca460f6378ffeeddf5ef","src/unix/notbsd/linux/other/no_align.rs":"9cd223135de75315840ff9c3fd5441ba1cb632b96b5c85a76f8316c86653db25","src/unix/notbsd/linux/s390x/align.rs":"a7bdcb18a37a2d91e64d5fad83ea3edc78f5412adb28f77ab077dbb26dd08b2d","src/unix/notbsd/linux/s390x/mod.rs":"b01d158eefce4c31f377b63964d253f9934f7468af35a24474a163ad3725796a","src/unix/notbsd/linux/s390x/no_align.rs":"4a18e3875698c85229599225ac3401a2a40da87e77b2ad4ef47c6fcd5a24ed30","src/unix/notbsd/mod.rs":"5cfdcf78b70b4e4ef4a3733cac364a0bc2512dee798f897a8db7d78d4dd194a6","src/unix/solarish/compat.rs":"8db2a43eafbd3504e9eb9e8f18416c57d947798871bd45be3e2fb9946e292610","src/unix/solarish/mod.rs":"c6a740dac9af99321f48d5c9e86c6a4f5dcc611c413263881764f7121c1f7e9d","src/unix/uclibc/align.rs":"5607180357a9e3d87163e478116b45c7ece391d8366d65ff856cdf3e849452d7","src/unix/uclibc/arm/align.rs":"e4a3c27fe20a57b8d612c34cb05bc70646edb5cec7251957315afa53a7b9f936","src/unix/uclibc/arm/mod.rs":"66d54a7028a422fe331028441d1b1f18cf34bb2deff2a9e5220384b6e10dcc40","src/unix/uclibc/arm/no_align.rs":"9cd223135de75315840ff9c3fd5441ba1cb632b96b5c85a76f8316c86653db25","src/unix/uclibc/mips/mips32/align.rs":"e4a3c27fe20a57b8d612c34cb05bc70646edb5cec7251957315afa53a7b9f936","src/unix/uclibc/mips/mips32/mod.rs":"d1a1af63b583b170d5c94b46a04589a11b9d4f8dc658ab8c74302bae656d0e85","src/unix/uclibc/mips/mips32/no_align.rs":"9cd223135de75315840ff9c3fd5441ba1cb632b96b5c85a76f8316c86653db25","src/unix/uclibc/mips/mips64/align.rs":"a7bdcb18a37a2d91e64d5fad83ea3edc78f5412adb28f77ab077dbb26dd08b2d","src/unix/uclibc/mips/mips64/mod.rs":"03f3bad1c681e6fde4a8ed999ce1d38313166c17d35eded66bd6b4f8387efeb7","src/unix/uclibc/mips/mips64/no_align.rs":"bf11b59caa173a6d94d86f42a8de9c5682f798647fba3a17169214b59ab467fe","src/unix/uclibc/mips/mod.rs":"2d76e6cfeb2b7f7c59231a6e099f1aed811a45659e62153aaf00c220b9488a9d","src/unix/uclibc/mod.rs":"924f95073f77047b1f72de3d933852d1df13b19906a63c5974a64032f1bb772c","src/unix/uclibc/no_align.rs":"3f28637046524618adaa1012e26cb7ffe94b9396e6b518cccdc69d59f274d709","src/unix/uclibc/x86_64/align.rs":"26e48fc79dbdeee4408ae8e071aa90e1be34ccdf0c135689b805aa4abd568e5e","src/unix/uclibc/x86_64/l4re.rs":"bb31053d6403091e11f95ac2203982f279f8b984a19adf30796878c45fdd8c25","src/unix/uclibc/x86_64/mod.rs":"df78de7e0234192c0559b9820c0034a24d72a0820d361f9aad05a9eac36e80ff","src/unix/uclibc/x86_64/no_align.rs":"b308f7b110caf7405b57186882cfc4804caae49a8287f8ab612ec8548467f2f4","src/unix/uclibc/x86_64/other.rs":"42c3f71e58cabba373f6a55a623f3c31b85049eb64824c09c2b082b3b2d6a0a8","src/wasi.rs":"84e88b124249816db0976cda78515af3ee3eedacbcd69ae388dc2a6bc757dcd4","src/windows/gnu.rs":"4d9033162cc6f7d245256c7b165c1ec18a741771fd9b99a55b421e8d14978599","src/windows/mod.rs":"2761f3f80c8af5c04e685af8ac3a2bc8c7d6de91cbad9b96a3a6dae67457a891","src/windows/msvc.rs":"8f46cf66883c794175609a3b2bafaa094d0ba63eb6720ef1b84b175603f1074f"},"package":"bedcc7a809076656486ffe045abeeac163da1b558e963a31e29fbfbeba916917"}
+\ No newline at end of file
++{"files":{"CONTRIBUTING.md":"abc79e7f6c3eee37e21baca32847b6709c973f4995b32892e80deb56b73c9ac5","Cargo.toml":"c150fb3c5d9159cce669ff588684190f7b177d3aec39c543625a714d6630b9e5","LICENSE-APACHE":"a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2","LICENSE-MIT":"6485b8ed310d3f0340bf1ad1f47645069ce4069dcc6bb46c7d5c6faf41de1fdb","README.md":"35582cfa483e7676b25ae4a07064a19443f4942f5e60e43b91632fcd6ae95156","build.rs":"e9b7364366a5b4caa9daa436ab8a3469532fe63d5fae4d3b2e5ff59d32ff3f3a","rustfmt.toml":"8a654d5787585ca8f2c20580737336fc327f411a07b0dbd4870adf6e9bdf624f","src/cloudabi/aarch64.rs":"b8550bf1fd7344972aa4db29441486f39f31482d0327534981dbb75959c29114","src/cloudabi/arm.rs":"c197e2781c2839808bd6fcef219a29705b27b992d3ef920e9cf6ac96e2022bbf","src/cloudabi/mod.rs":"037c1a3160ae3bc336f6f7135476704e7f5e834e4039fa02b37f03b507118945","src/cloudabi/x86.rs":"33eb97f272d2201f3838ae74d444583c7de8f67856852ca375293b20bbd05636","src/cloudabi/x86_64.rs":"400d85d4fe39e26cf2e6ece9ee31c75fe9e88c4bcf4d836ca9f765c05c9c5be3","src/fuchsia/aarch64.rs":"40dce617877e606e92353491e1913711b1ecfa510bb983156f4a8460f490419e","src/fuchsia/align.rs":"9ca6271f2cbb0e6ca3b48ff6898ecee31c89b3c8388ae20be63e457aabad13a5","src/fuchsia/mod.rs":"fcadc9203451d5c04c36044f8b4cda7f64815c180446e87dbd02fbf7e6fda0f2","src/fuchsia/no_align.rs":"56868534e4ed3f94a27ed39c42f01210c8ecfdbafd4e27679860fbc65a2ae8de","src/fuchsia/x86_64.rs":"911d1249370cf1b0b7b38960cae28af1276f0f614cfcbf5174dbaa38be3dff1d","src/hermit/aarch64.rs":"86048676e335944c37a63d0083d0f368ae10ceccefeed9debb3bbe08777fc682","src/hermit/mod.rs":"9d764e53df81416a5182b71a26402d2071fc0c15160103b6670b6b268fc356da","src/hermit/x86_64.rs":"ab832b7524e5fb15c49ff7431165ab1a37dc4667ae0b58e8306f4c539bfa110c","src/lib.rs":"b0d525e3da42b1fde74356f3856e9054254eaefb260c2da8a253b025754c8770","src/macros.rs":"b887fe511adf210ad68a54856d71ff2df4f82d7a94a4571fc628ba1d8819702b","src/redox/align.rs":"2cdc7c826ef7ae61f5171c5ae8c445a743d86f1a7f2d9d7e4ceeec56d6874f65","src/redox/mod.rs":"34f132e794dc25bbb0e3c08b7f87e4508ce62e0aac00acf39dcdb0f246d7dfc0","src/redox/net.rs":"351960c3a3ad9b296fe43533cac429434e0872c8cca5ad5047dce79d82e009ee","src/redox/no_align.rs":"c06e95373b9088266e0b14bba0954eef95f93fb2b01d951855e382d22de78e53","src/sgx.rs":"7ff2fbf3e5ad1c880014d68e012f4381a9b9140d13089193b9fba07a7f27c352","src/switch.rs":"fe1414ca053b73cf8a5f54448e807abe81c776c6ac0dfe47ea7772c8140f50b6","src/unix/align.rs":"2cdc7c826ef7ae61f5171c5ae8c445a743d86f1a7f2d9d7e4ceeec56d6874f65","src/unix/bsd/apple/b32.rs":"0095a17e49fa423cab8644c722a375b88f5c0cf56fa456b549738d98131bb2f9","src/unix/bsd/apple/b64.rs":"99fbd3e6d2c969080631e23f58deffa51cb3f42b7a08395b49556f19bb40d4e1","src/unix/bsd/apple/mod.rs":"e1959b482dc3c1703eb032b5d6e269c434326dc3eae9f99bb88d51c732cd3df0","src/unix/bsd/freebsdlike/dragonfly/mod.rs":"2cb0a5d10a3c5721d10209ad7ddc59f6756b2c1d4bc89450988053efad788eb6","src/unix/bsd/freebsdlike/freebsd/aarch64.rs":"4dcd712c0dd5470171746071a176391f937de7865dd0792173284992d9e3f2c7","src/unix/bsd/freebsdlike/freebsd/arm.rs":"84cf36223f0229cb383036563a4902731543e89b37e4dfe2f450cced566d8545","src/unix/bsd/freebsdlike/freebsd/mod.rs":"0752dc1097fd5e94aabfe7b6d4ead2b94e5c0540e2cd3c8efee883bba13e1a0c","src/unix/bsd/freebsdlike/freebsd/powerpc64.rs":"9873f41843cbf066f6ffab8eeb63115095f81ce9fa8f337b95ec871e40c6565d","src/unix/bsd/freebsdlike/freebsd/x86.rs":"716cb67cd0aea66d4a8e40470d32b55cbfafddf75edd34a90f70d518c8c75457","src/unix/bsd/freebsdlike/freebsd/x86_64.rs":"dd3d8a546730f09b1ef0dfeeb20244eef01d1b4028799b28b3a0c33ae05d5002","src/unix/bsd/freebsdlike/mod.rs":"2938bb8b0a0f1d66912bdb4bac3e59863bd90787fe49e1d3a522098acfdb2b7a","src/unix/bsd/mod.rs":"0e92970853a9efbb51a17b9cb8009eb4e9a04cbf12d0e315659d240812c1e760","src/unix/bsd/netbsdlike/mod.rs":"77b85ecd2187df55466663f6af624416d9c99922065c6fbd0438d5b7063db89c","src/unix/bsd/netbsdlike/netbsd/aarch64.rs":"b38fc046f9a40fea28bd26328b96629f4d5d63d7524936bd6af1865d401a8716","src/unix/bsd/netbsdlike/netbsd/arm.rs":"58cdbb70b0d6f536551f0f3bb3725d2d75c4690db12c26c034e7d6ec4a924452","src/unix/bsd/netbsdlike/netbsd/mod.rs":"75adb8d6ee202d50487913c245e1a880447582f45e1ef6339743305a13fb5719","src/unix/bsd/netbsdlike/netbsd/powerpc.rs":"ee7ff5d89d0ed22f531237b5059aa669df93a3b5c489fa641465ace8d405bf41","src/unix/bsd/netbsdlike/netbsd/sparc64.rs":"9489f4b3e4566f43bb12dfb92238960613dac7f6a45cc13068a8d152b902d7d9","src/unix/bsd/netbsdlike/netbsd/x86.rs":"20692320e36bfe028d1a34d16fe12ca77aa909cb02bda167376f98f1a09aefe7","src/unix/bsd/netbsdlike/netbsd/x86_64.rs":"135509edeaf3fb3f102d89d51ff1a8f82323497336a8dc7e1f0f23b5c2434b73","src/unix/bsd/netbsdlike/openbsdlike/bitrig/mod.rs":"51dd68ca3c3eab0f1fe496b0dc12ad8b85f8cf964af0c2c95ab9834ad03938a8","src/unix/bsd/netbsdlike/openbsdlike/bitrig/x86.rs":"bd251a102bed65d5cb3459275f6ec3310fe5803ff4c9651212115548f86256d0","src/unix/bsd/netbsdlike/openbsdlike/bitrig/x86_64.rs":"6e6f15e81597d85d83ca0eeb154e4f8b8e7f9cbb6a9cfa176601f78642ef94f9","src/unix/bsd/netbsdlike/openbsdlike/mod.rs":"c8d18b725c62c2f1a3c5e42d875e1a3b167c13a1bd6ae3d35f35a6ec29402f81","src/unix/bsd/netbsdlike/openbsdlike/openbsd/aarch64.rs":"ee0057fb97a5e16e46e0f8e4a215f6141b68ea75dd6cb5d53166bee2431082e2","src/unix/bsd/netbsdlike/openbsdlike/openbsd/mod.rs":"a3fb2cfc0e100c860dff1674a90693d57e66b7f12861155ceb42c2de372454bd","src/unix/bsd/netbsdlike/openbsdlike/openbsd/x86.rs":"1201371a662cb3515ebb42676cdca9199da7bf4d7c8f90b56f00db03a9fc61f7","src/unix/bsd/netbsdlike/openbsdlike/openbsd/x86_64.rs":"26ef6f50740fad5bb722e0f30025c369c287b2204489682319f7b24fce6de98d","src/unix/haiku/b32.rs":"69ae47fc52c6880e85416b4744500d5655c9ec6131cb737f3b649fceaadce15a","src/unix/haiku/b64.rs":"73e64db09275a8da8d50a13cce2cfa2b136036ddf3a930d2939f337fc995900b","src/unix/haiku/mod.rs":"b451e320e5c98d6b2e7fcb804e2be6669783510011ebd8dea27d64acbf955774","src/unix/hermit/aarch64.rs":"86048676e335944c37a63d0083d0f368ae10ceccefeed9debb3bbe08777fc682","src/unix/hermit/mod.rs":"d97797fe66dd43c61f6f895596f6a57145b4c9ef61edd93c8ff9b497a2d28411","src/unix/hermit/x86_64.rs":"ab832b7524e5fb15c49ff7431165ab1a37dc4667ae0b58e8306f4c539bfa110c","src/unix/mod.rs":"f9a63de7c9566cdaa970daeb3828887f7b2d8bf090da86be1a15c32288ae3da3","src/unix/newlib/aarch64/mod.rs":"c408a990f22fb4292a824f38367e9b517e6e6f8623328397ee631cc88b3d1f7d","src/unix/newlib/align.rs":"04e9b1ac6ca4af24fe5170385249fd64039ebf7f4817c5ceed3a303f3bc8a4aa","src/unix/newlib/arm/mod.rs":"2b6dba2e697ab9b4f4bc4dd5f28057249e9b596d1cb395a9322ec87605c4a5c4","src/unix/newlib/mod.rs":"e73d1b49662581382c91b3d4615d21812df58bf5477a3eba5c1df8a4c00a1c43","src/unix/newlib/no_align.rs":"7123dcec13604a11b7765c380ff3a4d0da19c39f4b03919de7857723c0cf1502","src/unix/no_align.rs":"c06e95373b9088266e0b14bba0954eef95f93fb2b01d951855e382d22de78e53","src/unix/notbsd/android/b32/arm.rs":"3625a32c7e58cfe683a53486fbe3d42d4e28f00bea31e19cb46ed2bb0b6a140b","src/unix/notbsd/android/b32/mod.rs":"05a714a785fa94a5131af3d59612ce1e9a5823b3327eb2a23de8ad0ce125c377","src/unix/notbsd/android/b32/x86.rs":"ae2b7f1d6278caddc007749bb1d09ca33f7593478a0fd7fe98b457dae86c7814","src/unix/notbsd/android/b64/aarch64.rs":"63d65629d79371814910f691672ef593d20244ee09be26f1ebe07ee6212d0163","src/unix/notbsd/android/b64/mod.rs":"d3bcb20e70d29a450577c09706bb520fab09d0cb3102755736867bf8a957319c","src/unix/notbsd/android/b64/x86_64.rs":"5547aef8dcbaa5a932559f34606fd8d89f6c9c15173d2b1412c12d39b3c1045f","src/unix/notbsd/android/mod.rs":"87dcb5bb8edf9ca2a7e7715f28c44c1330f15419d6d4f9422a81a61b6cf27a8c","src/unix/notbsd/emscripten/align.rs":"dee06bccb5f1a58bd498468f204b8f1d8f2c2a536c595d31e730330a79af7ea5","src/unix/notbsd/emscripten/mod.rs":"42947782f571b56cc1b1c1f4364bb35519bcc44ab8aca53bb13bfd46904de1e0","src/unix/notbsd/emscripten/no_align.rs":"f3960b1d6ede1f8f9d51407a3de5337d44dd5d954e1a4c2bf0ea11e76f2629da","src/unix/notbsd/linux/align.rs":"f2520d03b411519161eaaf043f1948b3279509a3f272b2958bca1d1aeda0434d","src/unix/notbsd/linux/mips/align.rs":"e4a3c27fe20a57b8d612c34cb05bc70646edb5cec7251957315afa53a7b9f936","src/unix/notbsd/linux/mips/mips32.rs":"96153abc38b10309e64cb49b1a1e4107be70dbc40bc54ba0372a4573b098b514","src/unix/notbsd/linux/mips/mips64.rs":"9bd96aa81cb0f536c3607d0a2906f4be7a44c3f89e40d5955a898835f04f0e15","src/unix/notbsd/linux/mips/mod.rs":"9a67a2f4043907a50a43569c06ffb4890aefa8db1c26a8737c6bb4bd3e39d90e","src/unix/notbsd/linux/mips/no_align.rs":"9cd223135de75315840ff9c3fd5441ba1cb632b96b5c85a76f8316c86653db25","src/unix/notbsd/linux/musl/b32/arm.rs":"fdf170e03812072785ec531f1ae810d0c4feb9b29d0c316681b9f7affe1262c0","src/unix/notbsd/linux/musl/b32/mips.rs":"afa4981d93f29b3fb0083a73ce1323f7dce1392f90d5cf1966b1fae10d510033","src/unix/notbsd/linux/musl/b32/mod.rs":"540928f168f145c136f9dd729ffa12b9d1838d9fe664fc642365d17d7fae648f","src/unix/notbsd/linux/musl/b32/powerpc.rs":"16c615770a96f155540511f58b5a8070c9c7a43e12bdfed83996690e7558bcb5","src/unix/notbsd/linux/musl/b32/x86.rs":"adf8bb67b47995760aab14f04ae671ebd8ecca5579e90314612f46cb79b30cc2","src/unix/notbsd/linux/musl/b64/aarch64.rs":"d98643408c2837387988f78adc95c90ad21196a6f8f879e3d33d7e8ccf612640","src/unix/notbsd/linux/musl/b64/mod.rs":"d9285cd705e2e92552a08c9aa69b810e7e1bd0e9da6edf069c678af285579661","src/unix/notbsd/linux/musl/b64/powerpc64.rs":"544d8a7f6d6d84143df8a4c3537c9a3a36bf3d338d7a1c15689b94492498d8d7","src/unix/notbsd/linux/musl/b64/x86_64.rs":"19197260a6d06ee521a5aa40a1860b7be33176d0f52bc92d56165fc42729cbd5","src/unix/notbsd/linux/musl/mod.rs":"13d766411fa206b987567e7c802dfe7585e6b7f002fe13ec0fbc810e522b7e2d","src/unix/notbsd/linux/no_align.rs":"7a1cc536b26c22019d7dab6b6db3a8c9edbb753d3f37a7985c30d8894c2c6b06","src/unix/notbsd/linux/other/align.rs":"e4a3c27fe20a57b8d612c34cb05bc70646edb5cec7251957315afa53a7b9f936","src/unix/notbsd/linux/other/b32/arm.rs":"d9892f7350b2978335f734f1cd2d7fed60f0f2e66aa05bee3f69549c031f8b14","src/unix/notbsd/linux/other/b32/mod.rs":"26211878c6481861e11393625620edaa0700cac41f55f0118c0f0bd42c1b7520","src/unix/notbsd/linux/other/b32/powerpc.rs":"253fcd2f9978525285be1903cc08f3fec2dc3b12d1660a33e2995b4f6b810d1c","src/unix/notbsd/linux/other/b32/x86.rs":"fea38039a1908ddeb90672b8ef246c743eec6758663a79aea401e21ef40a736d","src/unix/notbsd/linux/other/b64/aarch64.rs":"1124ab5e974718b94fa40ae0f1772fb1c537910ef3e018b7c6c94a38b83dd742","src/unix/notbsd/linux/other/b64/mod.rs":"cddd877e15648b69e96dcfdeeb34f858e8bba0409b35ec5ee5ad5dd0776bef27","src/unix/notbsd/linux/other/b64/not_x32.rs":"fa8636fb93eab230ed53bdec0a06f5b81d6d982cc0800103563c8c1eefcdb2d9","src/unix/notbsd/linux/other/b64/powerpc64.rs":"a771d982ed8a9458e1f2f039f959b5075b22443159875ba5612eebba96661c24","src/unix/notbsd/linux/other/b64/sparc64.rs":"0caffe5924886f3aed187531dfe78189b3df40adb96782ec4b471647ff83e9b1","src/unix/notbsd/linux/other/b64/x32.rs":"06a26c5120ced30fc015c220799b67c4401be2f13fc6c7361bebd3d37ff4982d","src/unix/notbsd/linux/other/b64/x86_64.rs":"017cb7cf2810bc633e21879a8951a2c10031c500648e5eb4accc6c88b58ecaa3","src/unix/notbsd/linux/other/no_align.rs":"9cd223135de75315840ff9c3fd5441ba1cb632b96b5c85a76f8316c86653db25","src/unix/notbsd/linux/s390x/align.rs":"a7bdcb18a37a2d91e64d5fad83ea3edc78f5412adb28f77ab077dbb26dd08b2d","src/unix/notbsd/linux/s390x/mod.rs":"b01d158eefce4c31f377b63964d253f9934f7468af35a24474a163ad3725796a","src/unix/notbsd/linux/s390x/no_align.rs":"4a18e3875698c85229599225ac3401a2a40da87e77b2ad4ef47c6fcd5a24ed30","src/unix/notbsd/mod.rs":"5cfdcf78b70b4e4ef4a3733cac364a0bc2512dee798f897a8db7d78d4dd194a6","src/unix/solarish/compat.rs":"8db2a43eafbd3504e9eb9e8f18416c57d947798871bd45be3e2fb9946e292610","src/unix/solarish/mod.rs":"c6a740dac9af99321f48d5c9e86c6a4f5dcc611c413263881764f7121c1f7e9d","src/unix/uclibc/align.rs":"5607180357a9e3d87163e478116b45c7ece391d8366d65ff856cdf3e849452d7","src/unix/uclibc/arm/align.rs":"e4a3c27fe20a57b8d612c34cb05bc70646edb5cec7251957315afa53a7b9f936","src/unix/uclibc/arm/mod.rs":"66d54a7028a422fe331028441d1b1f18cf34bb2deff2a9e5220384b6e10dcc40","src/unix/uclibc/arm/no_align.rs":"9cd223135de75315840ff9c3fd5441ba1cb632b96b5c85a76f8316c86653db25","src/unix/uclibc/mips/mips32/align.rs":"e4a3c27fe20a57b8d612c34cb05bc70646edb5cec7251957315afa53a7b9f936","src/unix/uclibc/mips/mips32/mod.rs":"d1a1af63b583b170d5c94b46a04589a11b9d4f8dc658ab8c74302bae656d0e85","src/unix/uclibc/mips/mips32/no_align.rs":"9cd223135de75315840ff9c3fd5441ba1cb632b96b5c85a76f8316c86653db25","src/unix/uclibc/mips/mips64/align.rs":"a7bdcb18a37a2d91e64d5fad83ea3edc78f5412adb28f77ab077dbb26dd08b2d","src/unix/uclibc/mips/mips64/mod.rs":"03f3bad1c681e6fde4a8ed999ce1d38313166c17d35eded66bd6b4f8387efeb7","src/unix/uclibc/mips/mips64/no_align.rs":"bf11b59caa173a6d94d86f42a8de9c5682f798647fba3a17169214b59ab467fe","src/unix/uclibc/mips/mod.rs":"2d76e6cfeb2b7f7c59231a6e099f1aed811a45659e62153aaf00c220b9488a9d","src/unix/uclibc/mod.rs":"924f95073f77047b1f72de3d933852d1df13b19906a63c5974a64032f1bb772c","src/unix/uclibc/no_align.rs":"3f28637046524618adaa1012e26cb7ffe94b9396e6b518cccdc69d59f274d709","src/unix/uclibc/x86_64/align.rs":"26e48fc79dbdeee4408ae8e071aa90e1be34ccdf0c135689b805aa4abd568e5e","src/unix/uclibc/x86_64/l4re.rs":"bb31053d6403091e11f95ac2203982f279f8b984a19adf30796878c45fdd8c25","src/unix/uclibc/x86_64/mod.rs":"df78de7e0234192c0559b9820c0034a24d72a0820d361f9aad05a9eac36e80ff","src/unix/uclibc/x86_64/no_align.rs":"b308f7b110caf7405b57186882cfc4804caae49a8287f8ab612ec8548467f2f4","src/unix/uclibc/x86_64/other.rs":"42c3f71e58cabba373f6a55a623f3c31b85049eb64824c09c2b082b3b2d6a0a8","src/wasi.rs":"84e88b124249816db0976cda78515af3ee3eedacbcd69ae388dc2a6bc757dcd4","src/windows/gnu.rs":"4d9033162cc6f7d245256c7b165c1ec18a741771fd9b99a55b421e8d14978599","src/windows/mod.rs":"2761f3f80c8af5c04e685af8ac3a2bc8c7d6de91cbad9b96a3a6dae67457a891","src/windows/msvc.rs":"8f46cf66883c794175609a3b2bafaa094d0ba63eb6720ef1b84b175603f1074f"},"package":"bedcc7a809076656486ffe045abeeac163da1b558e963a31e29fbfbeba916917"}
+--- /dev/null
++++ thunderbird-68.7.0/third_party/rust/libc/Cargo.lock
+@@ -0,0 +1,14 @@
++# This file is automatically @generated by Cargo.
++# It is not intended for manual editing.
++[[package]]
++name = "libc"
++version = "0.2.51"
++dependencies = [
++ "rustc-std-workspace-core",
++]
++
++[[package]]
++name = "rustc-std-workspace-core"
++version = "1.0.0"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "1956f5517128a2b6f23ab2dadf1a976f4f5b27962e7724c2bf3d45e539ec098c"
+--- thunderbird-68.7.0.orig/third_party/rust/libc/src/macros.rs
++++ thunderbird-68.7.0/third_party/rust/libc/src/macros.rs
+@@ -125,7 +125,7 @@ macro_rules! f {
+     })*) => ($(
+         #[inline]
+         pub unsafe extern fn $i($($arg: $argty),*) -> $ret {
+-            $($body);*
++            $($body)*
+         }
+     )*)
+ }
+--- /dev/null
++++ thunderbird-68.7.0/third_party/rust/libc/src/unix/notbsd/linux/other/b64/loongarch64.rs
+@@ -0,0 +1,800 @@
++//! LoongArch64-specific definitions for 64-bit linux-like values
++
++pub type c_long = i64;
++pub type c_ulong = u64;
++pub type c_char = i8;
++pub type wchar_t = i32;
++pub type nlink_t = u32;
++pub type blksize_t = i32;
++pub type suseconds_t = i64;
++pub type __u64 = ::c_ulonglong;
++
++s! {
++    pub struct stat {
++        pub st_dev: ::dev_t,
++        pub st_ino: ::ino_t,
++        pub st_mode: ::mode_t,
++        pub st_nlink: ::nlink_t,
++        pub st_uid: ::uid_t,
++        pub st_gid: ::gid_t,
++        pub st_rdev: ::dev_t,
++        __pad1: ::dev_t,
++        pub st_size: ::off_t,
++        pub st_blksize: ::blksize_t,
++        __pad2: ::c_int,
++        pub st_blocks: ::blkcnt_t,
++        pub st_atime: ::time_t,
++        pub st_atime_nsec: ::c_long,
++        pub st_mtime: ::time_t,
++        pub st_mtime_nsec: ::c_long,
++        pub st_ctime: ::time_t,
++        pub st_ctime_nsec: ::c_long,
++        __unused: [::c_int; 2],
++    }
++
++    pub struct stat64 {
++        pub st_dev: ::dev_t,
++        pub st_ino: ::ino_t,
++        pub st_mode: ::mode_t,
++        pub st_nlink: ::nlink_t,
++        pub st_uid: ::uid_t,
++        pub st_gid: ::gid_t,
++        pub st_rdev: ::dev_t,
++        __pad1: ::dev_t,
++        pub st_size: ::off64_t,
++        pub st_blksize: ::blksize_t,
++        __pad2: ::c_int,
++        pub st_blocks: ::blkcnt64_t,
++        pub st_atime: ::time_t,
++        pub st_atime_nsec: ::c_long,
++        pub st_mtime: ::time_t,
++        pub st_mtime_nsec: ::c_long,
++        pub st_ctime: ::time_t,
++        pub st_ctime_nsec: ::c_long,
++        __unused: [::c_int; 2],
++    }
++
++    pub struct statfs64 {
++        pub f_type: ::__fsword_t,
++        pub f_bsize: ::__fsword_t,
++        pub f_blocks: u64,
++        pub f_bfree: u64,
++        pub f_bavail: u64,
++        pub f_files: u64,
++        pub f_ffree: u64,
++        pub f_fsid: ::fsid_t,
++        pub f_namelen: ::__fsword_t,
++        pub f_frsize: ::__fsword_t,
++        pub f_flags: ::__fsword_t,
++        pub f_spare: [::__fsword_t; 4],
++    }
++
++    pub struct statvfs {
++        pub f_bsize: ::c_ulong,
++        pub f_frsize: ::c_ulong,
++        pub f_blocks: ::fsblkcnt_t,
++        pub f_bfree: ::fsblkcnt_t,
++        pub f_bavail: ::fsblkcnt_t,
++        pub f_files: ::fsfilcnt_t,
++        pub f_ffree: ::fsfilcnt_t,
++        pub f_favail: ::fsfilcnt_t,
++        pub f_fsid: ::c_ulong,
++        pub f_flag: ::c_ulong,
++        pub f_namemax: ::c_ulong,
++        __f_spare: [::c_int; 6],
++    }
++
++    pub struct statvfs64 {
++        pub f_bsize: ::c_ulong,
++        pub f_frsize: ::c_ulong,
++        pub f_blocks: u64,
++        pub f_bfree: u64,
++        pub f_bavail: u64,
++        pub f_files: u64,
++        pub f_ffree: u64,
++        pub f_favail: u64,
++        pub f_fsid: ::c_ulong,
++        pub f_flag: ::c_ulong,
++        pub f_namemax: ::c_ulong,
++        __f_spare: [::c_int; 6],
++    }
++
++    pub struct pthread_attr_t {
++        __size: [u64; 7]
++    }
++
++    pub struct ipc_perm {
++        pub __key: ::key_t,
++        pub uid: ::uid_t,
++        pub gid: ::gid_t,
++        pub cuid: ::uid_t,
++        pub cgid: ::gid_t,
++        pub mode: ::c_ushort,
++        __pad1: ::c_ushort,
++        pub __seq: ::c_ushort,
++        __unused1: ::c_ulong,
++        __unused2: ::c_ulong
++    }
++
++    pub struct shmid_ds {
++        pub shm_perm: ::ipc_perm,
++        pub shm_segsz: ::size_t,
++        pub shm_atime: ::time_t,
++        pub shm_dtime: ::time_t,
++        pub shm_ctime: ::time_t,
++        pub shm_cpid: ::pid_t,
++        pub shm_lpid: ::pid_t,
++        pub shm_nattch: ::shmatt_t,
++        __unused4: ::c_ulong,
++        __unused5: ::c_ulong
++    }
++
++    pub struct termios2 {
++        pub c_iflag: ::tcflag_t,
++        pub c_oflag: ::tcflag_t,
++        pub c_cflag: ::tcflag_t,
++        pub c_lflag: ::tcflag_t,
++        pub c_line: ::cc_t,
++        pub c_cc: [::cc_t; 19],
++        pub c_ispeed: ::speed_t,
++        pub c_ospeed: ::speed_t,
++    }
++}
++
++pub const __SIZEOF_PTHREAD_RWLOCK_T: usize = 56;
++
++pub const TIOCGSOFTCAR: ::c_ulong = 0x5419;
++pub const TIOCSSOFTCAR: ::c_ulong = 0x541A;
++pub const TIOCGRS485: ::c_int = 0x542E;
++pub const TIOCSRS485: ::c_int = 0x542F;
++
++pub const O_APPEND: ::c_int = 1024;
++pub const O_CREAT: ::c_int = 64;
++pub const O_EXCL: ::c_int = 128;
++pub const O_NOCTTY: ::c_int = 256;
++pub const O_NONBLOCK: ::c_int = 2048;
++pub const O_SYNC: ::c_int = 1052672;
++pub const O_RSYNC: ::c_int = 1052672;
++pub const O_DSYNC: ::c_int = 4096;
++pub const O_FSYNC: ::c_int = 0x101000;
++pub const O_NOATIME: ::c_int = 0o1000000;
++pub const O_PATH: ::c_int = 0o10000000;
++pub const O_TMPFILE: ::c_int = 0o20000000 | O_DIRECTORY;
++
++pub const MAP_GROWSDOWN: ::c_int = 0x0100;
++
++pub const EDEADLK: ::c_int = 35;
++pub const ENAMETOOLONG: ::c_int = 36;
++pub const ENOLCK: ::c_int = 37;
++pub const ENOSYS: ::c_int = 38;
++pub const ENOTEMPTY: ::c_int = 39;
++pub const ELOOP: ::c_int = 40;
++pub const ENOMSG: ::c_int = 42;
++pub const EIDRM: ::c_int = 43;
++pub const ECHRNG: ::c_int = 44;
++pub const EL2NSYNC: ::c_int = 45;
++pub const EL3HLT: ::c_int = 46;
++pub const EL3RST: ::c_int = 47;
++pub const ELNRNG: ::c_int = 48;
++pub const EUNATCH: ::c_int = 49;
++pub const ENOCSI: ::c_int = 50;
++pub const EL2HLT: ::c_int = 51;
++pub const EBADE: ::c_int = 52;
++pub const EBADR: ::c_int = 53;
++pub const EXFULL: ::c_int = 54;
++pub const ENOANO: ::c_int = 55;
++pub const EBADRQC: ::c_int = 56;
++pub const EBADSLT: ::c_int = 57;
++pub const EMULTIHOP: ::c_int = 72;
++pub const EOVERFLOW: ::c_int = 75;
++pub const ENOTUNIQ: ::c_int = 76;
++pub const EBADFD: ::c_int = 77;
++pub const EBADMSG: ::c_int = 74;
++pub const EREMCHG: ::c_int = 78;
++pub const ELIBACC: ::c_int = 79;
++pub const ELIBBAD: ::c_int = 80;
++pub const ELIBSCN: ::c_int = 81;
++pub const ELIBMAX: ::c_int = 82;
++pub const ELIBEXEC: ::c_int = 83;
++pub const EILSEQ: ::c_int = 84;
++pub const ERESTART: ::c_int = 85;
++pub const ESTRPIPE: ::c_int = 86;
++pub const EUSERS: ::c_int = 87;
++pub const ENOTSOCK: ::c_int = 88;
++pub const EDESTADDRREQ: ::c_int = 89;
++pub const EMSGSIZE: ::c_int = 90;
++pub const EPROTOTYPE: ::c_int = 91;
++pub const ENOPROTOOPT: ::c_int = 92;
++pub const EPROTONOSUPPORT: ::c_int = 93;
++pub const ESOCKTNOSUPPORT: ::c_int = 94;
++pub const EOPNOTSUPP: ::c_int = 95;
++pub const EPFNOSUPPORT: ::c_int = 96;
++pub const EAFNOSUPPORT: ::c_int = 97;
++pub const EADDRINUSE: ::c_int = 98;
++pub const EADDRNOTAVAIL: ::c_int = 99;
++pub const ENETDOWN: ::c_int = 100;
++pub const ENETUNREACH: ::c_int = 101;
++pub const ENETRESET: ::c_int = 102;
++pub const ECONNABORTED: ::c_int = 103;
++pub const ECONNRESET: ::c_int = 104;
++pub const ENOBUFS: ::c_int = 105;
++pub const EISCONN: ::c_int = 106;
++pub const ENOTCONN: ::c_int = 107;
++pub const ESHUTDOWN: ::c_int = 108;
++pub const ETOOMANYREFS: ::c_int = 109;
++pub const ETIMEDOUT: ::c_int = 110;
++pub const ECONNREFUSED: ::c_int = 111;
++pub const EHOSTDOWN: ::c_int = 112;
++pub const EHOSTUNREACH: ::c_int = 113;
++pub const EALREADY: ::c_int = 114;
++pub const EINPROGRESS: ::c_int = 115;
++pub const ESTALE: ::c_int = 116;
++pub const EDQUOT: ::c_int = 122;
++pub const ENOMEDIUM: ::c_int = 123;
++pub const EMEDIUMTYPE: ::c_int = 124;
++pub const ECANCELED: ::c_int = 125;
++pub const ENOKEY: ::c_int = 126;
++pub const EKEYEXPIRED: ::c_int = 127;
++pub const EKEYREVOKED: ::c_int = 128;
++pub const EKEYREJECTED: ::c_int = 129;
++pub const EOWNERDEAD: ::c_int = 130;
++pub const ENOTRECOVERABLE: ::c_int = 131;
++pub const EHWPOISON: ::c_int = 133;
++pub const ERFKILL: ::c_int = 132;
++
++pub const SOL_SOCKET: ::c_int = 1;
++
++pub const SO_REUSEADDR: ::c_int = 2;
++pub const SO_TYPE: ::c_int = 3;
++pub const SO_ERROR: ::c_int = 4;
++pub const SO_DONTROUTE: ::c_int = 5;
++pub const SO_BROADCAST: ::c_int = 6;
++pub const SO_SNDBUF: ::c_int = 7;
++pub const SO_RCVBUF: ::c_int = 8;
++pub const SO_SNDBUFFORCE: ::c_int = 32;
++pub const SO_RCVBUFFORCE: ::c_int = 33;
++pub const SO_KEEPALIVE: ::c_int = 9;
++pub const SO_OOBINLINE: ::c_int = 10;
++pub const SO_NO_CHECK: ::c_int = 11;
++pub const SO_PRIORITY: ::c_int = 12;
++pub const SO_LINGER: ::c_int = 13;
++pub const SO_BSDCOMPAT: ::c_int = 14;
++pub const SO_REUSEPORT: ::c_int = 15;
++pub const SO_PASSCRED: ::c_int = 16;
++pub const SO_PEERCRED: ::c_int = 17;
++pub const SO_RCVLOWAT: ::c_int = 18;
++pub const SO_SNDLOWAT: ::c_int = 19;
++pub const SO_RCVTIMEO: ::c_int = 20;
++pub const SO_SNDTIMEO: ::c_int = 21;
++pub const SO_SECURITY_AUTHENTICATION: ::c_int = 22;
++pub const SO_SECURITY_ENCRYPTION_TRANSPORT: ::c_int = 23;
++pub const SO_SECURITY_ENCRYPTION_NETWORK: ::c_int = 24;
++pub const SO_BINDTODEVICE: ::c_int = 25;
++pub const SO_ATTACH_FILTER: ::c_int = 26;
++pub const SO_DETACH_FILTER: ::c_int = 27;
++pub const SO_GET_FILTER: ::c_int = SO_ATTACH_FILTER;
++pub const SO_PEERNAME: ::c_int = 28;
++pub const SO_TIMESTAMP: ::c_int = 29;
++pub const SO_ACCEPTCONN: ::c_int = 30;
++pub const SO_PEERSEC: ::c_int = 31;
++pub const SO_PASSSEC: ::c_int = 34;
++pub const SO_TIMESTAMPNS: ::c_int = 35;
++pub const SCM_TIMESTAMPNS: ::c_int = SO_TIMESTAMPNS;
++pub const SO_MARK: ::c_int = 36;
++pub const SO_PROTOCOL: ::c_int = 38;
++pub const SO_DOMAIN: ::c_int = 39;
++pub const SO_RXQ_OVFL: ::c_int = 40;
++pub const SO_WIFI_STATUS: ::c_int = 41;
++pub const SCM_WIFI_STATUS: ::c_int = SO_WIFI_STATUS;
++pub const SO_PEEK_OFF: ::c_int = 42;
++pub const SO_NOFCS: ::c_int = 43;
++pub const SO_LOCK_FILTER: ::c_int = 44;
++pub const SO_SELECT_ERR_QUEUE: ::c_int = 45;
++pub const SO_BUSY_POLL: ::c_int = 46;
++pub const SO_MAX_PACING_RATE: ::c_int = 47;
++pub const SO_BPF_EXTENSIONS: ::c_int = 48;
++pub const SO_INCOMING_CPU: ::c_int = 49;
++pub const SO_ATTACH_BPF: ::c_int = 50;
++pub const SO_DETACH_BPF: ::c_int = SO_DETACH_FILTER;
++
++pub const SA_ONSTACK: ::c_int = 0x08000000;
++pub const SA_SIGINFO: ::c_int = 0x00000004;
++pub const SA_NOCLDWAIT: ::c_int = 0x00000002;
++
++pub const SIGCHLD: ::c_int = 17;
++pub const SIGBUS: ::c_int = 7;
++pub const SIGUSR1: ::c_int = 10;
++pub const SIGUSR2: ::c_int = 12;
++pub const SIGCONT: ::c_int = 18;
++pub const SIGSTOP: ::c_int = 19;
++pub const SIGTSTP: ::c_int = 20;
++pub const SIGURG: ::c_int = 23;
++pub const SIGIO: ::c_int = 29;
++pub const SIGSYS: ::c_int = 31;
++pub const SIGSTKFLT: ::c_int = 16;
++pub const SIGUNUSED: ::c_int = 31;
++pub const SIGPOLL: ::c_int = 29;
++pub const SIGPWR: ::c_int = 30;
++pub const SIG_SETMASK: ::c_int = 2;
++pub const SIG_BLOCK: ::c_int = 0x000000;
++pub const SIG_UNBLOCK: ::c_int = 0x01;
++
++pub const POLLWRNORM: ::c_short = 0x100;
++pub const POLLWRBAND: ::c_short = 0x200;
++
++pub const O_ASYNC: ::c_int = 0x2000;
++pub const O_NDELAY: ::c_int = 0x800;
++
++pub const PTRACE_DETACH: ::c_uint = 17;
++
++pub const EFD_NONBLOCK: ::c_int = 0x800;
++
++pub const F_GETLK: ::c_int = 5;
++pub const F_GETOWN: ::c_int = 9;
++pub const F_SETOWN: ::c_int = 8;
++pub const F_SETLK: ::c_int = 6;
++pub const F_SETLKW: ::c_int = 7;
++
++pub const F_RDLCK: ::c_int = 0;
++pub const F_WRLCK: ::c_int = 1;
++pub const F_UNLCK: ::c_int = 2;
++
++pub const SFD_NONBLOCK: ::c_int = 0x0800;
++
++pub const TIOCEXCL: ::c_ulong = 0x540C;
++pub const TIOCNXCL: ::c_ulong = 0x540D;
++pub const TIOCSCTTY: ::c_ulong = 0x540E;
++pub const TIOCSTI: ::c_ulong = 0x5412;
++pub const TIOCMGET: ::c_ulong = 0x5415;
++pub const TIOCMBIS: ::c_ulong = 0x5416;
++pub const TIOCMBIC: ::c_ulong = 0x5417;
++pub const TIOCMSET: ::c_ulong = 0x5418;
++pub const TIOCCONS: ::c_ulong = 0x541D;
++
++pub const SFD_CLOEXEC: ::c_int = 0x080000;
++
++pub const NCCS: usize = 32;
++
++pub const O_TRUNC: ::c_int = 512;
++
++pub const O_CLOEXEC: ::c_int = 0x80000;
++
++pub const EBFONT: ::c_int = 59;
++pub const ENOSTR: ::c_int = 60;
++pub const ENODATA: ::c_int = 61;
++pub const ETIME: ::c_int = 62;
++pub const ENOSR: ::c_int = 63;
++pub const ENONET: ::c_int = 64;
++pub const ENOPKG: ::c_int = 65;
++pub const EREMOTE: ::c_int = 66;
++pub const ENOLINK: ::c_int = 67;
++pub const EADV: ::c_int = 68;
++pub const ESRMNT: ::c_int = 69;
++pub const ECOMM: ::c_int = 70;
++pub const EPROTO: ::c_int = 71;
++pub const EDOTDOT: ::c_int = 73;
++
++pub const SA_NODEFER: ::c_int = 0x40000000;
++pub const SA_RESETHAND: ::c_int = 0x80000000;
++pub const SA_RESTART: ::c_int = 0x10000000;
++pub const SA_NOCLDSTOP: ::c_int = 0x00000001;
++
++pub const EPOLL_CLOEXEC: ::c_int = 0x80000;
++
++pub const EFD_CLOEXEC: ::c_int = 0x80000;
++
++pub const __SIZEOF_PTHREAD_CONDATTR_T: usize = 4;
++pub const __SIZEOF_PTHREAD_MUTEX_T: usize = 40;
++pub const __SIZEOF_PTHREAD_MUTEXATTR_T: usize = 4;
++
++pub const O_DIRECT: ::c_int = 0x4000;
++pub const O_DIRECTORY: ::c_int = 0x10000;
++pub const O_NOFOLLOW: ::c_int = 0x20000;
++
++pub const MAP_LOCKED: ::c_int = 0x02000;
++pub const MAP_NORESERVE: ::c_int = 0x04000;
++
++pub const EDEADLOCK: ::c_int = 35;
++
++pub const FIOCLEX: ::c_ulong = 0x5451;
++pub const FIONCLEX: ::c_ulong = 0x5450;
++pub const FIONBIO: ::c_ulong = 0x5421;
++
++pub const MCL_CURRENT: ::c_int = 0x0001;
++pub const MCL_FUTURE: ::c_int = 0x0002;
++
++pub const SIGSTKSZ: ::size_t = 8192;
++pub const MINSIGSTKSZ: ::size_t = 2048;
++pub const CBAUD: ::tcflag_t = 0o0010017;
++pub const TAB1: ::tcflag_t = 0x00000800;
++pub const TAB2: ::tcflag_t = 0x00001000;
++pub const TAB3: ::tcflag_t = 0x00001800;
++pub const CR1: ::tcflag_t = 0x00000200;
++pub const CR2: ::tcflag_t = 0x00000400;
++pub const CR3: ::tcflag_t = 0x00000600;
++pub const FF1: ::tcflag_t = 0x00008000;
++pub const BS1: ::tcflag_t = 0x00002000;
++pub const VT1: ::tcflag_t = 0x00004000;
++pub const VWERASE: usize = 14;
++pub const VREPRINT: usize = 12;
++pub const VSUSP: usize = 10;
++pub const VSTART: usize = 8;
++pub const VSTOP: usize = 9;
++pub const VDISCARD: usize = 13;
++pub const VTIME: usize = 5;
++pub const IXON: ::tcflag_t = 0x00000400;
++pub const IXOFF: ::tcflag_t = 0x00001000;
++pub const ONLCR: ::tcflag_t = 0x4;
++pub const CSIZE: ::tcflag_t = 0x00000030;
++pub const CS6: ::tcflag_t = 0x00000010;
++pub const CS7: ::tcflag_t = 0x00000020;
++pub const CS8: ::tcflag_t = 0x00000030;
++pub const CSTOPB: ::tcflag_t = 0x00000040;
++pub const CREAD: ::tcflag_t = 0x00000080;
++pub const PARENB: ::tcflag_t = 0x00000100;
++pub const PARODD: ::tcflag_t = 0x00000200;
++pub const HUPCL: ::tcflag_t = 0x00000400;
++pub const CLOCAL: ::tcflag_t = 0x00000800;
++pub const ECHOKE: ::tcflag_t = 0x00000800;
++pub const ECHOE: ::tcflag_t = 0x00000010;
++pub const ECHOK: ::tcflag_t = 0x00000020;
++pub const ECHONL: ::tcflag_t = 0x00000040;
++pub const ECHOPRT: ::tcflag_t = 0x00000400;
++pub const ECHOCTL: ::tcflag_t = 0x00000200;
++pub const ISIG: ::tcflag_t = 0x00000001;
++pub const ICANON: ::tcflag_t = 0x00000002;
++pub const PENDIN: ::tcflag_t = 0x00004000;
++pub const NOFLSH: ::tcflag_t = 0x00000080;
++pub const CIBAUD: ::tcflag_t = 0o02003600000;
++pub const CBAUDEX: ::tcflag_t = 0o010000;
++pub const VSWTC: usize = 7;
++pub const OLCUC:  ::tcflag_t = 0o000002;
++pub const NLDLY:  ::tcflag_t = 0o000400;
++pub const CRDLY:  ::tcflag_t = 0o003000;
++pub const TABDLY: ::tcflag_t = 0o014000;
++pub const BSDLY:  ::tcflag_t = 0o020000;
++pub const FFDLY:  ::tcflag_t = 0o100000;
++pub const VTDLY:  ::tcflag_t = 0o040000;
++pub const XTABS:  ::tcflag_t = 0o014000;
++
++pub const B0: ::speed_t = 0o000000;
++pub const B50: ::speed_t = 0o000001;
++pub const B75: ::speed_t = 0o000002;
++pub const B110: ::speed_t = 0o000003;
++pub const B134: ::speed_t = 0o000004;
++pub const B150: ::speed_t = 0o000005;
++pub const B200: ::speed_t = 0o000006;
++pub const B300: ::speed_t = 0o000007;
++pub const B600: ::speed_t = 0o000010;
++pub const B1200: ::speed_t = 0o000011;
++pub const B1800: ::speed_t = 0o000012;
++pub const B2400: ::speed_t = 0o000013;
++pub const B4800: ::speed_t = 0o000014;
++pub const B9600: ::speed_t = 0o000015;
++pub const B19200: ::speed_t = 0o000016;
++pub const B38400: ::speed_t = 0o000017;
++pub const EXTA: ::speed_t = B19200;
++pub const EXTB: ::speed_t = B38400;
++pub const BOTHER: ::speed_t = 0o010000;
++pub const B57600: ::speed_t = 0o010001;
++pub const B115200: ::speed_t = 0o010002;
++pub const B230400: ::speed_t = 0o010003;
++pub const B460800: ::speed_t = 0o010004;
++pub const B500000: ::speed_t = 0o010005;
++pub const B576000: ::speed_t = 0o010006;
++pub const B921600: ::speed_t = 0o010007;
++pub const B1000000: ::speed_t = 0o010010;
++pub const B1152000: ::speed_t = 0o010011;
++pub const B1500000: ::speed_t = 0o010012;
++pub const B2000000: ::speed_t = 0o010013;
++pub const B2500000: ::speed_t = 0o010014;
++pub const B3000000: ::speed_t = 0o010015;
++pub const B3500000: ::speed_t = 0o010016;
++pub const B4000000: ::speed_t = 0o010017;
++
++pub const VEOL: usize = 11;
++pub const VEOL2: usize = 16;
++pub const VMIN: usize = 6;
++pub const IEXTEN: ::tcflag_t = 0x00008000;
++pub const TOSTOP: ::tcflag_t = 0x00000100;
++pub const FLUSHO: ::tcflag_t = 0x00001000;
++pub const EXTPROC: ::tcflag_t = 0x00010000;
++pub const TCGETS: ::c_ulong = 0x5401;
++pub const TCSETS: ::c_ulong = 0x5402;
++pub const TCSETSW: ::c_ulong = 0x5403;
++pub const TCSETSF: ::c_ulong = 0x5404;
++pub const TCGETA: ::c_ulong = 0x5405;
++pub const TCSETA: ::c_ulong = 0x5406;
++pub const TCSETAW: ::c_ulong = 0x5407;
++pub const TCSETAF: ::c_ulong = 0x5408;
++pub const TCSBRK: ::c_ulong = 0x5409;
++pub const TCXONC: ::c_ulong = 0x540A;
++pub const TCFLSH: ::c_ulong = 0x540B;
++pub const TIOCINQ: ::c_ulong = 0x541B;
++pub const TIOCGPGRP: ::c_ulong = 0x540F;
++pub const TIOCSPGRP: ::c_ulong = 0x5410;
++pub const TIOCOUTQ: ::c_ulong = 0x5411;
++pub const TIOCGWINSZ: ::c_ulong = 0x5413;
++pub const TIOCSWINSZ: ::c_ulong = 0x5414;
++pub const FIONREAD: ::c_ulong = 0x541B;
++
++// Syscall table
++pub const SYS_io_setup: ::c_long = 0;
++pub const SYS_io_destroy: ::c_long = 1;
++pub const SYS_io_submit: ::c_long = 2;
++pub const SYS_io_cancel: ::c_long = 3;
++pub const SYS_io_getevents: ::c_long = 4;
++pub const SYS_setxattr: ::c_long = 5;
++pub const SYS_lsetxattr: ::c_long = 6;
++pub const SYS_fsetxattr: ::c_long = 7;
++pub const SYS_getxattr: ::c_long = 8;
++pub const SYS_lgetxattr: ::c_long = 9;
++pub const SYS_fgetxattr: ::c_long = 10;
++pub const SYS_listxattr: ::c_long = 11;
++pub const SYS_llistxattr: ::c_long = 12;
++pub const SYS_flistxattr: ::c_long = 13;
++pub const SYS_removexattr: ::c_long = 14;
++pub const SYS_lremovexattr: ::c_long = 15;
++pub const SYS_fremovexattr: ::c_long = 16;
++pub const SYS_getcwd: ::c_long = 17;
++pub const SYS_lookup_dcookie: ::c_long = 18;
++pub const SYS_eventfd2: ::c_long = 19;
++pub const SYS_epoll_create1: ::c_long = 20;
++pub const SYS_epoll_ctl: ::c_long = 21;
++pub const SYS_epoll_pwait: ::c_long = 22;
++pub const SYS_dup: ::c_long = 23;
++pub const SYS_dup3: ::c_long = 24;
++pub const SYS_fcntl: ::c_long = 25;
++pub const SYS_inotify_init1: ::c_long = 26;
++pub const SYS_inotify_add_watch: ::c_long = 27;
++pub const SYS_inotify_rm_watch: ::c_long = 28;
++pub const SYS_ioctl: ::c_long = 29;
++pub const SYS_ioprio_set: ::c_long = 30;
++pub const SYS_ioprio_get: ::c_long = 31;
++pub const SYS_flock: ::c_long = 32;
++pub const SYS_mknodat: ::c_long = 33;
++pub const SYS_mkdirat: ::c_long = 34;
++pub const SYS_unlinkat: ::c_long = 35;
++pub const SYS_symlinkat: ::c_long = 36;
++pub const SYS_linkat: ::c_long = 37;
++pub const SYS_umount2: ::c_long = 39;
++pub const SYS_mount: ::c_long = 40;
++pub const SYS_pivot_root: ::c_long = 41;
++pub const SYS_nfsservctl: ::c_long = 42;
++pub const SYS_fallocate: ::c_long = 47;
++pub const SYS_faccessat: ::c_long = 48;
++pub const SYS_chdir: ::c_long = 49;
++pub const SYS_fchdir: ::c_long = 50;
++pub const SYS_chroot: ::c_long = 51;
++pub const SYS_fchmod: ::c_long = 52;
++pub const SYS_fchmodat: ::c_long = 53;
++pub const SYS_fchownat: ::c_long = 54;
++pub const SYS_fchown: ::c_long = 55;
++pub const SYS_openat: ::c_long = 56;
++pub const SYS_close: ::c_long = 57;
++pub const SYS_vhangup: ::c_long = 58;
++pub const SYS_pipe2: ::c_long = 59;
++pub const SYS_quotactl: ::c_long = 60;
++pub const SYS_getdents64: ::c_long = 61;
++pub const SYS_lseek: ::c_long = 62;
++pub const SYS_read: ::c_long = 63;
++pub const SYS_write: ::c_long = 64;
++pub const SYS_readv: ::c_long = 65;
++pub const SYS_writev: ::c_long = 66;
++pub const SYS_pread64: ::c_long = 67;
++pub const SYS_pwrite64: ::c_long = 68;
++pub const SYS_preadv: ::c_long = 69;
++pub const SYS_pwritev: ::c_long = 70;
++pub const SYS_pselect6: ::c_long = 72;
++pub const SYS_ppoll: ::c_long = 73;
++pub const SYS_signalfd4: ::c_long = 74;
++pub const SYS_vmsplice: ::c_long = 75;
++pub const SYS_splice: ::c_long = 76;
++pub const SYS_tee: ::c_long = 77;
++pub const SYS_readlinkat: ::c_long = 78;
++pub const SYS_newfstatat: ::c_long = 79;
++pub const SYS_fstat: ::c_long = 80;
++pub const SYS_sync: ::c_long = 81;
++pub const SYS_fsync: ::c_long = 82;
++pub const SYS_fdatasync: ::c_long = 83;
++pub const SYS_sync_file_range: ::c_long = 84;
++pub const SYS_timerfd_create: ::c_long = 85;
++pub const SYS_timerfd_settime: ::c_long = 86;
++pub const SYS_timerfd_gettime: ::c_long = 87;
++pub const SYS_utimensat: ::c_long = 88;
++pub const SYS_acct: ::c_long = 89;
++pub const SYS_capget: ::c_long = 90;
++pub const SYS_capset: ::c_long = 91;
++pub const SYS_personality: ::c_long = 92;
++pub const SYS_exit: ::c_long = 93;
++pub const SYS_exit_group: ::c_long = 94;
++pub const SYS_waitid: ::c_long = 95;
++pub const SYS_set_tid_address: ::c_long = 96;
++pub const SYS_unshare: ::c_long = 97;
++pub const SYS_futex: ::c_long = 98;
++pub const SYS_set_robust_list: ::c_long = 99;
++pub const SYS_get_robust_list: ::c_long = 100;
++pub const SYS_nanosleep: ::c_long = 101;
++pub const SYS_getitimer: ::c_long = 102;
++pub const SYS_setitimer: ::c_long = 103;
++pub const SYS_kexec_load: ::c_long = 104;
++pub const SYS_init_module: ::c_long = 105;
++pub const SYS_delete_module: ::c_long = 106;
++pub const SYS_timer_create: ::c_long = 107;
++pub const SYS_timer_gettime: ::c_long = 108;
++pub const SYS_timer_getoverrun: ::c_long = 109;
++pub const SYS_timer_settime: ::c_long = 110;
++pub const SYS_timer_delete: ::c_long = 111;
++pub const SYS_clock_settime: ::c_long = 112;
++pub const SYS_clock_gettime: ::c_long = 113;
++pub const SYS_clock_getres: ::c_long = 114;
++pub const SYS_clock_nanosleep: ::c_long = 115;
++pub const SYS_syslog: ::c_long = 116;
++pub const SYS_ptrace: ::c_long = 117;
++pub const SYS_sched_setparam: ::c_long = 118;
++pub const SYS_sched_setscheduler: ::c_long = 119;
++pub const SYS_sched_getscheduler: ::c_long = 120;
++pub const SYS_sched_getparam: ::c_long = 121;
++pub const SYS_sched_setaffinity: ::c_long = 122;
++pub const SYS_sched_getaffinity: ::c_long = 123;
++pub const SYS_sched_yield: ::c_long = 124;
++pub const SYS_sched_get_priority_max: ::c_long = 125;
++pub const SYS_sched_get_priority_min: ::c_long = 126;
++pub const SYS_sched_rr_get_interval: ::c_long = 127;
++pub const SYS_restart_syscall: ::c_long = 128;
++pub const SYS_kill: ::c_long = 129;
++pub const SYS_tkill: ::c_long = 130;
++pub const SYS_tgkill: ::c_long = 131;
++pub const SYS_sigaltstack: ::c_long = 132;
++pub const SYS_rt_sigsuspend: ::c_long = 133;
++pub const SYS_rt_sigaction: ::c_long = 134;
++pub const SYS_rt_sigprocmask: ::c_long = 135;
++pub const SYS_rt_sigpending: ::c_long = 136;
++pub const SYS_rt_sigtimedwait: ::c_long = 137;
++pub const SYS_rt_sigqueueinfo: ::c_long = 138;
++pub const SYS_rt_sigreturn: ::c_long = 139;
++pub const SYS_setpriority: ::c_long = 140;
++pub const SYS_getpriority: ::c_long = 141;
++pub const SYS_reboot: ::c_long = 142;
++pub const SYS_setregid: ::c_long = 143;
++pub const SYS_setgid: ::c_long = 144;
++pub const SYS_setreuid: ::c_long = 145;
++pub const SYS_setuid: ::c_long = 146;
++pub const SYS_setresuid: ::c_long = 147;
++pub const SYS_getresuid: ::c_long = 148;
++pub const SYS_setresgid: ::c_long = 149;
++pub const SYS_getresgid: ::c_long = 150;
++pub const SYS_setfsuid: ::c_long = 151;
++pub const SYS_setfsgid: ::c_long = 152;
++pub const SYS_times: ::c_long = 153;
++pub const SYS_setpgid: ::c_long = 154;
++pub const SYS_getpgid: ::c_long = 155;
++pub const SYS_getsid: ::c_long = 156;
++pub const SYS_setsid: ::c_long = 157;
++pub const SYS_getgroups: ::c_long = 158;
++pub const SYS_setgroups: ::c_long = 159;
++pub const SYS_uname: ::c_long = 160;
++pub const SYS_sethostname: ::c_long = 161;
++pub const SYS_setdomainname: ::c_long = 162;
++pub const SYS_getrlimit: ::c_long = 163;
++pub const SYS_setrlimit: ::c_long = 164;
++pub const SYS_getrusage: ::c_long = 165;
++pub const SYS_umask: ::c_long = 166;
++pub const SYS_prctl: ::c_long = 167;
++pub const SYS_getcpu: ::c_long = 168;
++pub const SYS_gettimeofday: ::c_long = 169;
++pub const SYS_settimeofday: ::c_long = 170;
++pub const SYS_adjtimex: ::c_long = 171;
++pub const SYS_getpid: ::c_long = 172;
++pub const SYS_getppid: ::c_long = 173;
++pub const SYS_getuid: ::c_long = 174;
++pub const SYS_geteuid: ::c_long = 175;
++pub const SYS_getgid: ::c_long = 176;
++pub const SYS_getegid: ::c_long = 177;
++pub const SYS_gettid: ::c_long = 178;
++pub const SYS_sysinfo: ::c_long = 179;
++pub const SYS_mq_open: ::c_long = 180;
++pub const SYS_mq_unlink: ::c_long = 181;
++pub const SYS_mq_timedsend: ::c_long = 182;
++pub const SYS_mq_timedreceive: ::c_long = 183;
++pub const SYS_mq_notify: ::c_long = 184;
++pub const SYS_mq_getsetattr: ::c_long = 185;
++pub const SYS_msgget: ::c_long = 186;
++pub const SYS_msgctl: ::c_long = 187;
++pub const SYS_msgrcv: ::c_long = 188;
++pub const SYS_msgsnd: ::c_long = 189;
++pub const SYS_semget: ::c_long = 190;
++pub const SYS_semctl: ::c_long = 191;
++pub const SYS_semtimedop: ::c_long = 192;
++pub const SYS_semop: ::c_long = 193;
++pub const SYS_shmget: ::c_long = 194;
++pub const SYS_shmctl: ::c_long = 195;
++pub const SYS_shmat: ::c_long = 196;
++pub const SYS_shmdt: ::c_long = 197;
++pub const SYS_socket: ::c_long = 198;
++pub const SYS_socketpair: ::c_long = 199;
++pub const SYS_bind: ::c_long = 200;
++pub const SYS_listen: ::c_long = 201;
++pub const SYS_accept: ::c_long = 202;
++pub const SYS_connect: ::c_long = 203;
++pub const SYS_getsockname: ::c_long = 204;
++pub const SYS_getpeername: ::c_long = 205;
++pub const SYS_sendto: ::c_long = 206;
++pub const SYS_recvfrom: ::c_long = 207;
++pub const SYS_setsockopt: ::c_long = 208;
++pub const SYS_getsockopt: ::c_long = 209;
++pub const SYS_shutdown: ::c_long = 210;
++pub const SYS_sendmsg: ::c_long = 211;
++pub const SYS_recvmsg: ::c_long = 212;
++pub const SYS_readahead: ::c_long = 213;
++pub const SYS_brk: ::c_long = 214;
++pub const SYS_munmap: ::c_long = 215;
++pub const SYS_mremap: ::c_long = 216;
++pub const SYS_add_key: ::c_long = 217;
++pub const SYS_request_key: ::c_long = 218;
++pub const SYS_keyctl: ::c_long = 219;
++pub const SYS_clone: ::c_long = 220;
++pub const SYS_execve: ::c_long = 221;
++pub const SYS_mmap: ::c_long = 222;
++pub const SYS_swapon: ::c_long = 224;
++pub const SYS_swapoff: ::c_long = 225;
++pub const SYS_mprotect: ::c_long = 226;
++pub const SYS_msync: ::c_long = 227;
++pub const SYS_mlock: ::c_long = 228;
++pub const SYS_munlock: ::c_long = 229;
++pub const SYS_mlockall: ::c_long = 230;
++pub const SYS_munlockall: ::c_long = 231;
++pub const SYS_mincore: ::c_long = 232;
++pub const SYS_madvise: ::c_long = 233;
++pub const SYS_remap_file_pages: ::c_long = 234;
++pub const SYS_mbind: ::c_long = 235;
++pub const SYS_get_mempolicy: ::c_long = 236;
++pub const SYS_set_mempolicy: ::c_long = 237;
++pub const SYS_migrate_pages: ::c_long = 238;
++pub const SYS_move_pages: ::c_long = 239;
++pub const SYS_rt_tgsigqueueinfo: ::c_long = 240;
++pub const SYS_perf_event_open: ::c_long = 241;
++pub const SYS_accept4: ::c_long = 242;
++pub const SYS_recvmmsg: ::c_long = 243;
++pub const SYS_wait4: ::c_long = 260;
++pub const SYS_prlimit64: ::c_long = 261;
++pub const SYS_fanotify_init: ::c_long = 262;
++pub const SYS_fanotify_mark: ::c_long = 263;
++pub const SYS_name_to_handle_at: ::c_long = 264;
++pub const SYS_open_by_handle_at: ::c_long = 265;
++pub const SYS_clock_adjtime: ::c_long = 266;
++pub const SYS_syncfs: ::c_long = 267;
++pub const SYS_setns: ::c_long = 268;
++pub const SYS_sendmmsg: ::c_long = 269;
++pub const SYS_process_vm_readv: ::c_long = 270;
++pub const SYS_process_vm_writev: ::c_long = 271;
++pub const SYS_kcmp: ::c_long = 272;
++pub const SYS_finit_module: ::c_long = 273;
++pub const SYS_sched_setattr: ::c_long = 274;
++pub const SYS_sched_getattr: ::c_long = 275;
++pub const SYS_renameat2: ::c_long = 276;
++pub const SYS_seccomp: ::c_long = 277;
++pub const SYS_getrandom: ::c_long = 278;
++pub const SYS_memfd_create: ::c_long = 279;
++pub const SYS_bpf: ::c_long = 280;
++pub const SYS_execveat: ::c_long = 281;
++pub const SYS_userfaultfd: ::c_long = 282;
++pub const SYS_membarrier: ::c_long = 283;
++pub const SYS_mlock2: ::c_long = 284;
++pub const SYS_copy_file_range: ::c_long = 285;
++pub const SYS_preadv2: ::c_long = 286;
++pub const SYS_pwritev2: ::c_long = 287;
++pub const SYS_pkey_mprotect: ::c_long = 288;
++pub const SYS_pkey_alloc: ::c_long = 289;
++pub const SYS_pkey_free: ::c_long = 290;
++
++#[link(name = "util")]
++extern {
++    pub fn sysctl(name: *mut ::c_int,
++                  namelen: ::c_int,
++                  oldp: *mut ::c_void,
++                  oldlenp: *mut ::size_t,
++                  newp: *mut ::c_void,
++                  newlen: ::size_t)
++                  -> ::c_int;
++}
+--- thunderbird-68.7.0.orig/third_party/rust/libc/src/unix/notbsd/linux/other/b64/mod.rs
++++ thunderbird-68.7.0/third_party/rust/libc/src/unix/notbsd/linux/other/b64/mod.rs
+@@ -67,6 +67,9 @@ cfg_if! {
+     } else if #[cfg(any(target_arch = "sparc64"))] {
+         mod sparc64;
+         pub use self::sparc64::*;
++    } else if #[cfg(any(target_arch = "loongarch64"))] {
++        mod loongarch64;
++        pub use self::loongarch64::*;
+     } else if #[cfg(any(target_arch = "x86_64"))] {
+         mod x86_64;
+         pub use self::x86_64::*;
+--- thunderbird-68.7.0.orig/third_party/rust/libc/src/unix/notbsd/linux/other/mod.rs
++++ thunderbird-68.7.0/third_party/rust/libc/src/unix/notbsd/linux/other/mod.rs
+@@ -206,22 +206,26 @@ s_no_extra_traits! {
+         pub ut_exit: __exit_status,
+ 
+         #[cfg(any(target_arch = "aarch64",
++                  target_arch = "loongarch64",
+                   target_arch = "sparc64",
+                   all(target_pointer_width = "32",
+                       not(target_arch = "x86_64"))))]
+         pub ut_session: ::c_long,
+         #[cfg(any(target_arch = "aarch64",
++                  target_arch = "loongarch64",
+                   target_arch = "sparc64",
+                   all(target_pointer_width = "32",
+                       not(target_arch = "x86_64"))))]
+         pub ut_tv: ::timeval,
+ 
+         #[cfg(not(any(target_arch = "aarch64",
++                      target_arch = "loongarch64",
+                       target_arch = "sparc64",
+                       all(target_pointer_width = "32",
+                           not(target_arch = "x86_64")))))]
+         pub ut_session: ::int32_t,
+         #[cfg(not(any(target_arch = "aarch64",
++                      target_arch = "loongarch64",
+                       target_arch = "sparc64",
+                       all(target_pointer_width = "32",
+                           not(target_arch = "x86_64")))))]
+@@ -744,7 +748,10 @@ cfg_if! {
+         pub const NFT_MSG_GETOBJ: ::c_int = 19;
+         pub const NFT_MSG_DELOBJ: ::c_int = 20;
+         pub const NFT_MSG_GETOBJ_RESET: ::c_int = 21;
++        #[cfg(not(target_arch = "loongarch64"))]
+         pub const NFT_MSG_MAX: ::c_int = 22;
++        #[cfg(any(target_arch = "loongarch64"))]
++        pub const NFT_MSG_MAX: ::c_int = 25;
+     } else {
+         pub const NFT_MSG_MAX: ::c_int = 18;
+     }
+@@ -977,6 +984,7 @@ cfg_if! {
+         pub use self::b32::*;
+     } else if #[cfg(any(target_arch = "x86_64",
+                         target_arch = "aarch64",
++                        target_arch = "loongarch64",
+                         target_arch = "powerpc64",
+                         target_arch = "sparc64"))] {
+         mod b64;
+--- thunderbird-68.7.0.orig/xpcom/reflect/xptcall/md/unix/moz.build
++++ thunderbird-68.7.0/xpcom/reflect/xptcall/md/unix/moz.build
+@@ -128,6 +128,13 @@ if CONFIG['OS_ARCH'] in ('Linux', 'FreeB
+             ASFLAGS += [
+                 '-fno-integrated-as',
+             ]
++    if CONFIG['CPU_ARCH'] == 'loongarch64':
++        SOURCES += [
++            'xptcinvoke_asm_loongarch64.S',
++            'xptcinvoke_loongarch64.cpp',
++            'xptcstubs_asm_loongarch64.S',
++            'xptcstubs_loongarch64.cpp',
++        ]
+     if CONFIG['CPU_ARCH'] == 'mips32':
+         SOURCES += [
+             'xptcinvoke_asm_mips.S',
+--- /dev/null
++++ thunderbird-68.7.0/xpcom/reflect/xptcall/md/unix/xptc_asm_loongarch_unix.h
+@@ -0,0 +1,127 @@
++#ifndef _XPTC_ASM_LOONGARCH_UNIX_H
++#define _XPTC_ASM_LOONGARCH_UNIX_H
++
++
++/*
++ * Symbolic register names
++ */
++# define zero     $r0
++# define ra       $r1
++# define gp       $r2
++# define sp       $r3
++# define a0       $r4
++# define v0       $r4
++# define a1       $r5
++# define v1       $r5
++# define a2       $r6
++# define a3       $r7
++# define a4       $r8
++# define a5       $r9
++# define a6       $r10
++# define a7       $r11
++# define t0       $r12
++# define t1       $r13
++# define t2       $r14
++# define t3       $r15
++# define t4       $r16
++# define t5       $r17
++# define t6       $r18
++# define t7       $r19
++/* # define at       $r19 */
++# define t8       $r20
++# define tp       $r21
++# define fp       $r22
++# define s0       $r23
++# define s1       $r24
++# define s2       $r25
++# define s3       $r26
++# define s4       $r27
++# define s5       $r28
++# define s6       $r29
++# define s7       $r30
++# define s8       $r31
++/* float point registers */
++# define fa0      $f0
++# define fv0      $f0
++# define fa1      $f1
++# define fv1      $f1
++# define fa2      $f2
++# define fa3      $f3
++# define fa4      $f4
++# define fa5      $f5
++# define fa6      $f6
++# define fa7      $f7
++# define ft0      $f8
++# define ft1      $f9
++# define ft2      $f10
++# define ft3      $f11
++# define ft4      $f12
++# define ft5      $f13
++# define ft6      $f14
++# define ft7      $f15
++# define ft8      $f16
++# define ft9      $f17
++# define ft10     $f18
++# define ft11     $f19
++# define ft12     $f20
++# define ft13     $f21
++# define ft14     $f22
++# define ft15     $f23
++# define fs0      $f24
++# define fs1      $f25
++# define fs2      $f26
++# define fs3      $f27
++# define fs4      $f28
++# define fs5      $f29
++# define fs6      $f30
++# define fs7      $f31
++
++
++/*
++ * How to add/sub/load/store/shift pointers
++ */
++#ifdef __loongarch64
++# define PTRLOG 3
++# define SZREG  8
++# define SZFREG 8
++# define REG_L ld.d
++# define REG_S st.d
++# define FREG_L fld.d
++# define FREG_S fst.d
++#else
++# error __loongarch_xlen must equal 32 or 64
++#endif
++
++
++
++/* 
++ * Stack alignment 
++ */
++#if _LOONGARCH_SIM == _ABILP64 
++# define ALSZ      15
++# define ALMASK    ~15
++#endif
++
++/* 
++ * Stack Frame Definitions 
++ */
++#if _LOONGARCH_SIM == _ABILP64
++# define NARGSAVE  0 /* No caller responsibilities */
++#else
++#error "unknown. ???:"
++#endif
++
++
++/*
++ * LEAF - declare leaf routine
++ */
++#define LEAF(symbol)                                          \
++        .text;                                                \
++        .globl  symbol;                                       \
++        .align  3;                                            \
++        cfi_startproc ;                                       \
++        .type  symbol,@function;                              \
++symbol:
++
++
++#endif /* _XPTC_ASM_LOONGARCH_UNIX_H */
+--- /dev/null
++++ thunderbird-68.7.0/xpcom/reflect/xptcall/md/unix/xptcinvoke_asm_loongarch64.S
+@@ -0,0 +1,128 @@
++/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 4 -*- */
++/* This Source Code Form is subject to the terms of the Mozilla Public
++ * License, v. 2.0. If a copy of the MPL was not distributed with this
++ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
++/* #include <sys/regdef.h> */
++/* #include <sys/asm.h> */
++#include "xptc_asm_loongarch_unix.h"
++
++.text
++.globl  invoke_count_words
++.globl  invoke_copy_to_stack
++
++# a0, a1, a2, a3, s0, ra, gp
++#define LOCALSZ 7
++#define FRAMESZ  ((((NARGSAVE + LOCALSZ) * SZREG) + ALSZ) & ALMASK)
++
++#define RAOFF (FRAMESZ -(1 * SZREG))
++#define A0OFF (FRAMESZ -(2 * SZREG))
++#define A1OFF (FRAMESZ -(3 * SZREG))
++#define A2OFF (FRAMESZ -(4 * SZREG))
++#define A3OFF (FRAMESZ -(5 * SZREG))
++#define S0OFF (FRAMESZ -(6 * SZREG))
++#define GPOFF (FRAMESZ -(7 * SZREG))
++
++#
++# _NS_InvokeByIndex(that, methodIndex, paramCount, params)
++#                      a0       a1          a2         a3
++
++    .text;
++    .globl _NS_InvokeByIndex;
++    .align 2;
++    .type _NS_InvokeByIndex,@function;
++_NS_InvokeByIndex:
++    addi.d    t0, zero, FRAMESZ
++    sub.d     sp, sp, t0
++
++    st.d      ra, sp, RAOFF
++    st.d      a0, sp, A0OFF
++    st.d      a1, sp, A1OFF
++    st.d      a2, sp, A2OFF
++    st.d      a3, sp, A3OFF
++    st.d      s0, sp, S0OFF
++
++    # invoke_count_words(paramCount, params)
++    addi.d    a0, a2, 0
++    addi.d    a1, a3, 0
++    bl        invoke_count_words
++
++    # invoke_copy_to_stack(uint32_t* d, uint32_t paramCount,
++    #                      nsXPTCVariant* s, uint32_t *reg)
++
++    # save sp before we copy the params to the stack
++    addi.d    t0, sp, 0
++
++    # assume full size of 16 bytes per param to be safe
++    slli.d    v0, v0, 4     # 16 bytes * num params
++    sub.d     sp, sp, v0    # make room
++    addi.d    a0, sp, 0     # a0 - param stack address
++
++    ld.d      a1, t0, A2OFF  # a1 - paramCount
++    ld.d      a2, t0, A3OFF  # a2 - params
++
++    # create temporary stack space to write int and fp regs
++    addi.d    t1, zero, 128
++    sub.d     sp, sp, t1      # 128 = 16 regs of 8 bytes
++    addi.d    a3, sp, 0
++
++    # save the old sp and save the arg stack
++    addi.d    t1, zero, 16
++    sub.d     sp, sp, t1
++    st.d      t0, sp, 0
++    st.d      a0, sp, 8
++
++    # copy the param into the stack areas
++    bl        invoke_copy_to_stack
++
++    ld.d      t3, sp, 8    # get previous a0
++    ld.d      s0, sp, 0     # get orig sp back and save away our stack pointer
++
++    ld.d      a0, s0, A0OFF  # a0 - that
++    ld.d      a1, s0, A1OFF  # a1 - methodIndex
++
++    # t1 = methodIndex * pow(2, PTRLOG)
++    # (use shift instead of mult)
++    slli.d    t1, a1, PTRLOG
++
++    # calculate the function we need to jump to
++    ld.d      t7, a0, 0
++    add.d     t7, t7, t1
++    ld.d      t7, t7, 0
++
++    # get register save area from invoke_copy_to_stack
++    addi.d    t1, zero, 128
++    sub.d     t1, t3, t1
++
++    # a1..a7 and fa0..fa7 should now be set to what
++    # invoke_copy_to_stack told us. skip a0
++    # because that's the "this" pointer
++
++    ld.d      a1, t1, 0
++    ld.d      a2, t1, 8
++    ld.d      a3, t1, 16
++    ld.d      a4, t1, 24
++    ld.d      a5, t1, 32
++    ld.d      a6, t1, 40
++    ld.d      a7, t1, 48
++
++    fld.d     fa0, t1, 56
++    fld.d     fa1, t1, 64
++    fld.d     fa2, t1, 72
++    fld.d     fa3, t1, 80
++    fld.d     fa4, t1, 88
++    fld.d     fa5, t1, 96
++    fld.d     fa6, t1, 104
++    fld.d     fa7, t1, 112
++
++    # create the stack pointer for the function
++    addi.d    sp, t3, 0
++
++    jirl      ra, t7, 0
++
++    # restore stack pointer.
++    addi.d    sp, s0, 0
++
++    ld.d      ra, sp, RAOFF
++    ld.d      s0, sp, S0OFF
++    addi.d    sp, sp, FRAMESZ
++    jirl      zero, ra, 0
+--- /dev/null
++++ thunderbird-68.7.0/xpcom/reflect/xptcall/md/unix/xptcinvoke_loongarch64.cpp
+@@ -0,0 +1,148 @@
++/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 4 -*- */
++/* This Source Code Form is subject to the terms of the Mozilla Public
++ * License, v. 2.0. If a copy of the MPL was not distributed with this
++ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
++
++/* Platform specific code to invoke XPCOM methods on native objects */
++
++#include "xptcprivate.h"
++
++#if (_LOONGARCH_SIM != _ABILP64)
++#error "This code is for loongarch lp64 only"
++#endif
++
++extern "C" uint32_t
++invoke_count_words(uint32_t paramCount, nsXPTCVariant* s)
++{
++    return paramCount;
++}
++
++extern "C" void
++invoke_copy_to_stack(uint64_t* d, uint32_t paramCount,
++                     nsXPTCVariant* s, uint64_t *regs)
++{
++#define N_ARG_GPRS       7       /* 8 regs minus 1 for "this" ptr */
++#define N_ARG_FPRS       8
++
++    int fcount = 0;
++    int icount = 0;
++
++    for (uint32_t i = 0; i < paramCount; i++, s++)
++    {
++        if (s->IsIndirect()) {
++            if (icount < N_ARG_GPRS)
++                regs[icount++] = (uint64_t) &s->val;
++            else
++                *d++ = (uint64_t) &s->val;
++            continue;
++        }
++        switch (s->type) {
++        //
++        // signed types first
++        //
++        case nsXPTType::T_I8:
++            if (icount < N_ARG_GPRS)
++                ((int64_t*)regs)[icount++] = s->val.i8;
++            else
++                *d++ = s->val.i8;
++            break;
++        case nsXPTType::T_I16:
++            if (icount < N_ARG_GPRS)
++                ((int64_t*)regs)[icount++] = s->val.i16;
++            else
++                *d++ = s->val.i16;
++            break;
++        case nsXPTType::T_I32:
++            if (icount < N_ARG_GPRS)
++                ((int64_t*)regs)[icount++] = s->val.i32;
++            else
++                *d++ = s->val.i32;
++            break;
++        case nsXPTType::T_I64:
++            if (icount < N_ARG_GPRS)
++                ((int64_t*)regs)[icount++] = s->val.i64;
++            else
++                *d++ = s->val.i64;
++            break;
++        //
++        // unsigned types next
++        //
++        case nsXPTType::T_U8:
++            if (icount < N_ARG_GPRS)
++                regs[icount++] = s->val.u8;
++            else
++                *d++ = s->val.u8;
++            break;
++        case nsXPTType::T_U16:
++            if (icount < N_ARG_GPRS)
++                regs[icount++] = s->val.u16;
++            else
++                *d++ = s->val.u16;
++            break;
++        case nsXPTType::T_U32:
++            if (icount < N_ARG_GPRS)
++		// 32-bit values need to be sign-extended
++		// in register, so use the signed value.
++                regs[icount++] = s->val.i32;
++            else
++                *d++ = s->val.u32;
++            break;
++        case nsXPTType::T_U64:
++            if (icount < N_ARG_GPRS)
++                regs[icount++] = s->val.u64;
++            else
++                *d++ = s->val.u64;
++            break;
++        case nsXPTType::T_FLOAT:
++            // the float data formate must not be converted!
++            // Just only copy without conversion.
++            if (fcount < N_ARG_FPRS)
++                *(float*)&regs[(fcount++) + N_ARG_GPRS] = s->val.f;
++            else
++                *(float*)d++ = s->val.f;
++            break;
++        case nsXPTType::T_DOUBLE:
++            if (fcount < N_ARG_FPRS)
++                *(double*)&regs[(fcount++) + N_ARG_GPRS] = s->val.d;
++            else
++                *(double*)d++ = s->val.d;
++            break;
++        case nsXPTType::T_BOOL:
++            if (icount < N_ARG_GPRS)
++                regs[icount++] = s->val.b;
++            else
++                *d++ = s->val.b;
++            break;
++        case nsXPTType::T_CHAR:
++            if (icount < N_ARG_GPRS)
++                regs[icount++] = s->val.c;
++            else
++                *d++ = s->val.c;
++            break;
++        case nsXPTType::T_WCHAR:
++            if (icount < N_ARG_GPRS)
++                regs[icount++] = s->val.wc;
++            else
++                *d++ = s->val.wc;
++            break;
++        default:
++            // all the others are plain pointer types
++            if (icount < N_ARG_GPRS)
++                regs[icount++] = (uint64_t)s->val.p;
++            else
++               *d++ = (uint64_t)s->val.p;
++            break;
++        }
++    }
++}
++
++extern "C" nsresult _NS_InvokeByIndex(nsISupports* that, uint32_t methodIndex,
++                                        uint32_t paramCount,
++                                        nsXPTCVariant* params);
++
++EXPORT_XPCOM_API(nsresult)
++NS_InvokeByIndex(nsISupports* that, uint32_t methodIndex,
++                   uint32_t paramCount, nsXPTCVariant* params)
++{
++    return _NS_InvokeByIndex(that, methodIndex, paramCount, params);
++}
+--- /dev/null
++++ thunderbird-68.7.0/xpcom/reflect/xptcall/md/unix/xptcstubs_asm_loongarch64.S
+@@ -0,0 +1,113 @@
++/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 4 -*- */
++/* This Source Code Form is subject to the terms of the Mozilla Public
++ * License, v. 2.0. If a copy of the MPL was not distributed with this
++ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
++/* #include <sys/regdef.h> */
++/* #include <sys/asm.h> */
++#include "xptc_asm_loongarch_unix.h"
++
++#define LOCALSZ 16
++#define FRAMESZ ((((NARGSAVE + LOCALSZ) * SZREG) + ALSZ) & ALMASK)
++
++#define A1OFF (FRAMESZ - (8 * SZREG))
++#define A2OFF (FRAMESZ - (7 * SZREG))
++#define A3OFF (FRAMESZ - (6 * SZREG))
++#define A4OFF (FRAMESZ - (5 * SZREG))
++#define A5OFF (FRAMESZ - (4 * SZREG))
++#define A6OFF (FRAMESZ - (3 * SZREG))
++#define A7OFF (FRAMESZ - (2 * SZREG))
++#define RAOFF (FRAMESZ - (1 * SZREG))
++
++#define FA0OFF (FRAMESZ - (16 * SZREG))
++#define FA1OFF (FRAMESZ - (15 * SZREG))
++#define FA2OFF (FRAMESZ - (14 * SZREG))
++#define FA3OFF (FRAMESZ - (13 * SZREG))
++#define FA4OFF (FRAMESZ - (12 * SZREG))
++#define FA5OFF (FRAMESZ - (11 * SZREG))
++#define FA6OFF (FRAMESZ - (10 * SZREG))
++#define FA7OFF (FRAMESZ - (9 * SZREG))
++
++#define SENTINEL_ENTRY(n)         /* defined in cpp file, not here */
++
++#define STUB_ENTRY(x)                                        \
++    .if x < 10;                                              \
++    .globl    _ZN14nsXPTCStubBase5Stub ##x ##Ev;             \
++    .type     _ZN14nsXPTCStubBase5Stub ##x ##Ev,@function;   \
++_ZN14nsXPTCStubBase5Stub ##x ##Ev:;                          \
++    addi.d    t0, zero, FRAMESZ;                             \
++    sub.d     sp, sp, t0;                                    \
++    addi.d    t0, zero, x;                                   \
++    b         sharedstub;                                   \
++    .elseif x < 100;                                         \
++    .globl    _ZN14nsXPTCStubBase6Stub ##x ##Ev;             \
++    .type     _ZN14nsXPTCStubBase6Stub ##x ##Ev,@function;   \
++_ZN14nsXPTCStubBase6Stub ##x ##Ev:;                          \
++    addi.d    t0, zero, FRAMESZ;                             \
++    sub.d     sp, sp, t0;                                    \
++    addi.d    t0, zero, x;                                   \
++    b         sharedstub;                                   \
++    .elseif x < 1000;                                        \
++    .globl    _ZN14nsXPTCStubBase7Stub ##x ##Ev;             \
++    .type     _ZN14nsXPTCStubBase7Stub ##x ##Ev,@function;   \
++_ZN14nsXPTCStubBase7Stub ##x ##Ev:;                          \
++    addi.d    t0, zero, FRAMESZ;                             \
++    sub.d     sp, sp, t0;                                    \
++    addi.d    t0, zero, x;                                   \
++    b         sharedstub;                                   \
++    .else;                                                   \
++    .err;                                                    \
++    .endif
++
++#
++# open a dummy frame for the function entries
++#
++    .text
++    .align   2
++    .type    dummy,@function
++dummy:
++#    .mask    0x90000FF0, RAOFF-FRAMESZ
++#    .fmask   0x000FF000, F19OFF-FRAMESZ
++
++#include "xptcstubsdef.inc"
++
++sharedstub:
++    st.d     a1, sp, A1OFF
++    st.d     a2, sp, A2OFF
++    st.d     a3, sp, A3OFF
++    st.d     a4, sp, A4OFF
++    st.d     a5, sp, A5OFF
++    st.d     a6, sp, A6OFF
++    st.d     a7, sp, A7OFF
++    st.d     ra, sp, RAOFF
++
++    fst.d    fa0, sp, FA0OFF
++    fst.d    fa1, sp, FA1OFF
++    fst.d    fa2, sp, FA2OFF
++    fst.d    fa3, sp, FA3OFF
++    fst.d    fa4, sp, FA4OFF
++    fst.d    fa5, sp, FA5OFF
++    fst.d    fa6, sp, FA6OFF
++    fst.d    fa7, sp, FA7OFF
++
++    # t0 is methodIndex
++    add.d    a1, t0, zero
++
++    # a2 is stack address where extra function params
++    # are stored that do not fit in registers
++    addi.d   a2, sp, FRAMESZ
++
++    # a3 is stack address of a1..a7
++    addi.d   a3, sp, A1OFF
++
++    # a4 is stack address of fa0..fa7
++    addi.d   a4, sp, FA0OFF
++
++    # PrepareAndDispatch(that, methodIndex, args, gprArgs, fpArgs)
++    #                     a0       a1        a2     a3       a4
++    #
++    bl       PrepareAndDispatch
++
++    ld.d     ra, sp, RAOFF
++
++    addi.d   sp, sp, FRAMESZ
++    jirl     zero, ra, 0
+--- /dev/null
++++ thunderbird-68.7.0/xpcom/reflect/xptcall/md/unix/xptcstubs_loongarch64.cpp
+@@ -0,0 +1,196 @@
++/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 4 -*- */
++/* This Source Code Form is subject to the terms of the Mozilla Public
++ * License, v. 2.0. If a copy of the MPL was not distributed with this
++ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
++
++#include "xptcprivate.h"
++
++#if (_LOONGARCH_SIM != _ABILP64)
++#error "This code is for loongarch lp64 only"
++#endif
++
++/*
++ * This is for loongarch lp64 ABI
++ *
++ * When we're called, the "gp" registers are stored in gprData and
++ * the "fp" registers are stored in fprData.  There are 8 regs
++ * available which correspond to the first 7 parameters of the
++ * function and the "this" pointer.  If there are additional parms,
++ * they are stored on the stack at address "args".
++ *
++ */
++extern "C" nsresult ATTRIBUTE_USED
++PrepareAndDispatch(nsXPTCStubBase* self, uint32_t methodIndex, uint64_t* args,
++                   uint64_t *gprData, double *fprData)
++{
++#define PARAM_BUFFER_COUNT        16
++#define PARAM_GPR_COUNT            7
++#define PARAM_FPR_COUNT            8
++
++    nsXPTCMiniVariant paramBuffer[PARAM_BUFFER_COUNT];
++    nsXPTCMiniVariant* dispatchParams = nullptr;
++    const nsXPTMethodInfo* info;
++    uint8_t paramCount;
++    uint8_t i;
++
++    NS_ASSERTION(self,"no self");
++
++    self->mEntry->GetMethodInfo(uint16_t(methodIndex), &info);
++    NS_ASSERTION(info,"no method info");
++
++    paramCount = info->GetParamCount();
++
++    // setup variant array pointer
++    if(paramCount > PARAM_BUFFER_COUNT)
++        dispatchParams = new nsXPTCMiniVariant[paramCount];
++    else
++        dispatchParams = paramBuffer;
++    NS_ASSERTION(dispatchParams,"no place for params");
++
++    const uint8_t indexOfJSContext = info->IndexOfJSContext();
++
++    uint64_t* ap = args;
++    uint32_t iCount = 0;
++    uint32_t fCount = 0;
++    for(i = 0; i < paramCount; i++)
++    {
++        const nsXPTParamInfo& param = info->GetParam(i);
++        const nsXPTType& type = param.GetType();
++        nsXPTCMiniVariant* dp = &dispatchParams[i];
++
++        if (i == indexOfJSContext) {
++            if (iCount < PARAM_GPR_COUNT)
++                iCount++;
++            else
++                ap++;
++        }
++
++        if(param.IsOut() || !type.IsArithmetic())
++        {
++            if (iCount < PARAM_GPR_COUNT)
++                dp->val.p = (void*)gprData[iCount++];
++            else
++                dp->val.p = (void*)*ap++;
++            continue;
++        }
++        // else
++        switch(type)
++        {
++        case nsXPTType::T_I8:
++            if (iCount < PARAM_GPR_COUNT)
++                dp->val.i8  = (int8_t)gprData[iCount++];
++            else
++                dp->val.i8  = (int8_t)*ap++;
++            break;
++
++        case nsXPTType::T_I16:
++             if (iCount < PARAM_GPR_COUNT)
++                 dp->val.i16  = (int16_t)gprData[iCount++];
++             else
++                 dp->val.i16  = (int16_t)*ap++;
++             break;
++
++        case nsXPTType::T_I32:
++             if (iCount < PARAM_GPR_COUNT)
++                 dp->val.i32  = (int32_t)gprData[iCount++];
++             else
++                 dp->val.i32  = (int32_t)*ap++;
++             break;
++
++        case nsXPTType::T_I64:
++             if (iCount < PARAM_GPR_COUNT)
++                 dp->val.i64  = (int64_t)gprData[iCount++];
++             else
++                 dp->val.i64  = (int64_t)*ap++;
++             break;
++
++        case nsXPTType::T_U8:
++             if (iCount < PARAM_GPR_COUNT)
++                 dp->val.u8  = (uint8_t)gprData[iCount++];
++             else
++                 dp->val.u8  = (uint8_t)*ap++;
++             break;
++
++        case nsXPTType::T_U16:
++             if (iCount < PARAM_GPR_COUNT)
++                 dp->val.u16  = (uint16_t)gprData[iCount++];
++             else
++                  dp->val.u16  = (uint16_t)*ap++;
++             break;
++
++        case nsXPTType::T_U32:
++             if (iCount < PARAM_GPR_COUNT)
++                 dp->val.u32  = (uint32_t)gprData[iCount++];
++             else
++                 dp->val.u32  = (uint32_t)*ap++;
++             break;
++
++        case nsXPTType::T_U64:
++             if (iCount < PARAM_GPR_COUNT)
++                 dp->val.u64  = (uint64_t)gprData[iCount++];
++             else
++                 dp->val.u64  = (uint64_t)*ap++;
++             break;
++
++        case nsXPTType::T_FLOAT:
++              // the float data formate must not be converted!
++              // Just only copy without conversion.
++              if (iCount < PARAM_FPR_COUNT)
++                  dp->val.f  = *(float*)&fprData[fCount++];
++              else
++                  dp->val.f  = *((float*)ap++);
++              break;
++
++        case nsXPTType::T_DOUBLE:
++               if (iCount < PARAM_FPR_COUNT)
++                   dp->val.d  = (double)fprData[fCount++];
++               else
++                   dp->val.d  = *((double*)ap++);
++               break;
++
++        case nsXPTType::T_BOOL:
++            if (iCount < PARAM_GPR_COUNT)
++                dp->val.b  = (bool)gprData[iCount++];
++            else
++                dp->val.b  = (bool)*ap++;
++            break;
++
++        case nsXPTType::T_CHAR:
++            if (iCount < PARAM_GPR_COUNT)
++                dp->val.c  = (char)gprData[iCount++];
++            else
++                dp->val.c  = (char)*ap++;
++            break;
++
++        case nsXPTType::T_WCHAR:
++            if (iCount < PARAM_GPR_COUNT)
++                dp->val.wc  = (wchar_t)gprData[iCount++];
++            else
++                dp->val.wc  = (wchar_t)*ap++;
++            break;
++
++        default:
++            NS_ASSERTION(0, "bad type");
++            break;
++        }
++    }
++
++    nsresult result = self->mOuter->CallMethod((uint16_t)methodIndex, info,
++                                               dispatchParams);
++
++    if(dispatchParams != paramBuffer)
++        delete [] dispatchParams;
++
++    return result;
++}
++
++#define STUB_ENTRY(n)        /* defined in the assembly file */
++
++#define SENTINEL_ENTRY(n)                              \
++nsresult nsXPTCStubBase::Sentinel##n()                 \
++{                                                      \
++    NS_ASSERTION(0,"nsXPTCStubBase::Sentinel called"); \
++    return NS_ERROR_NOT_IMPLEMENTED;                   \
++}
++
++#include "xptcstubsdef.inc"
