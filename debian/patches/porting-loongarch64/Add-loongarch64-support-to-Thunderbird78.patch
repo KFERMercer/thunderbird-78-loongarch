@@ -1,8 +1,9 @@
-From 6e5ea59450531be1ad69f2aa92186f91b7814d03 Mon Sep 17 00:00:00 2001
+From 351b7f7bc9b9707fe1930de2372fea5e24718e66 Mon Sep 17 00:00:00 2001
 From: KFERMercer <KFER.Mercer@gmail.com>
-Date: Sat, 10 Jun 2023 18:55:51 +0800
-Subject: [PATCH] porting: applying 68 patch to 78
+Date: Sat, 10 Jun 2023 19:22:54 +0800
+Subject: [PATCH] Revert "Revert "porting: applying 68 patch to 78""
 
+This reverts commit adfad5ba1711ed7914d7187a3b05d4826a754890.
 ---
  build/moz.configure/init.configure            |   3 +
  .../icu/source/i18n/double-conversion-utils.h |   2 +-
@@ -41,13 +42,13 @@ Subject: [PATCH] porting: applying 68 patch to 78
  create mode 100644 xpcom/reflect/xptcall/md/unix/xptcstubs_loongarch64.cpp
 
 diff --git a/build/moz.configure/init.configure b/build/moz.configure/init.configure
-index b887153321..178220cfab 100644
+index 3b94ee856d..fc9b400f6c 100644
 --- a/build/moz.configure/init.configure
 +++ b/build/moz.configure/init.configure
-@@ -758,6 +758,9 @@ def split_triplet(triplet, allow_msvc=False):
-     elif cpu == 'sh4':
-         canonical_cpu = 'sh4'
-         endianness = 'little'
+@@ -761,6 +761,9 @@ def split_triplet(triplet, allow_msvc=False):
+     elif cpu in ('m68k'):
+         canonical_cpu = 'm68k'
+         endianness = 'big'
 +    elif cpu == 'loongarch64':
 +        canonical_cpu = 'loongarch64'
 +        endianness = 'little'
@@ -68,10 +69,10 @@ index 8c6a0e16e0..7a9cea1c45 100644
      defined(__powerpc__) || defined(__ppc__) || defined(__ppc64__) || \
      defined(_POWER) || defined(_ARCH_PPC) || defined(_ARCH_PPC64) || \
 diff --git a/ipc/chromium/src/build/build_config.h b/ipc/chromium/src/build/build_config.h
-index f57319089c..fff7788ea8 100644
+index 1fa8db1839..04c6ef039d 100644
 --- a/ipc/chromium/src/build/build_config.h
 +++ b/ipc/chromium/src/build/build_config.h
-@@ -97,6 +97,9 @@
+@@ -101,6 +101,9 @@
  #elif defined(__mips64) && defined(__LP64__)
  #  define ARCH_CPU_MIPS 1
  #  define ARCH_CPU_64_BITS 1
@@ -107,10 +108,10 @@ index 29d3287311..67e6b42444 100644
                    AC_MSG_RESULT([no])
                    LDFLAGS=$_SAVE_LDFLAGS)
 diff --git a/media/webrtc/trunk/webrtc/build/build_config.h b/media/webrtc/trunk/webrtc/build/build_config.h
-index 229d1f411c..0337be5141 100644
+index 39b33b5ffa..88fc3b9232 100644
 --- a/media/webrtc/trunk/webrtc/build/build_config.h
 +++ b/media/webrtc/trunk/webrtc/build/build_config.h
-@@ -136,6 +136,10 @@
+@@ -150,6 +150,10 @@
  #define ARCH_CPU_MIPS_FAMILY 1
  #define ARCH_CPU_MIPS 1
  #define ARCH_CPU_64_BITS 1
@@ -262,27 +263,27 @@ index 57ccfa6b29..f66dc98585 100644
          raise RuntimeError('Could not parse readelf output?')
  
 diff --git a/python/mozbuild/mozbuild/configure/constants.py b/python/mozbuild/mozbuild/configure/constants.py
-index 7542dcdc63..e2e6841b22 100644
+index f44db99482..d5a86ba3b2 100644
 --- a/python/mozbuild/mozbuild/configure/constants.py
 +++ b/python/mozbuild/mozbuild/configure/constants.py
-@@ -47,6 +47,7 @@ CPU_bitness = {
-     'ia64': 64,
+@@ -48,6 +48,7 @@ CPU_bitness = {
+     'm68k': 32,
      'mips32': 32,
      'mips64': 64,
 +    'loongarch64': 64,
      'ppc': 32,
      'ppc64': 64,
      's390': 32,
-@@ -86,6 +87,7 @@ CPU_preprocessor_checks = OrderedDict((
+@@ -87,6 +88,7 @@ CPU_preprocessor_checks = OrderedDict((
      ('sparc64', '__sparc__ && __arch64__'),
      ('sparc', '__sparc__'),
      ('mips64', '__mips64'),
 +    ('loongarch64', '__loongarch64'),
      ('mips32', '__mips__'),
      ('sh4', '__sh__'),
- ))
+     ('m68k', '__m68k__'),
 diff --git a/python/mozbuild/mozbuild/test/configure/test_toolchain_configure.py b/python/mozbuild/mozbuild/test/configure/test_toolchain_configure.py
-index 37c4e26f0f..d126a7a4ae 100755
+index 61c612a2ed..9a1cf2bbef 100755
 --- a/python/mozbuild/mozbuild/test/configure/test_toolchain_configure.py
 +++ b/python/mozbuild/mozbuild/test/configure/test_toolchain_configure.py
 @@ -1205,6 +1205,10 @@ class LinuxCrossCompileToolchainTest(BaseToolchainTest):
@@ -1201,7 +1202,7 @@ index 0814abf5e8..00a66fe031 100644
                          target_arch = "s390x",
                          target_arch = "sparc64"))] {
 diff --git a/xpcom/reflect/xptcall/md/unix/moz.build b/xpcom/reflect/xptcall/md/unix/moz.build
-index 61a364abb6..45b1c6db4c 100644
+index 52b7988924..e182c5ec2a 100644
 --- a/xpcom/reflect/xptcall/md/unix/moz.build
 +++ b/xpcom/reflect/xptcall/md/unix/moz.build
 @@ -117,6 +117,13 @@ if CONFIG['OS_ARCH'] in ('Linux', 'FreeBSD', 'NetBSD', 'OpenBSD'):
