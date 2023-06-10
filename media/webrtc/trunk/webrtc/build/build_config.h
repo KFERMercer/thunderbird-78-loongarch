@@ -136,6 +136,10 @@
 #define ARCH_CPU_MIPS_FAMILY 1
 #define ARCH_CPU_MIPS 1
 #define ARCH_CPU_64_BITS 1
+#elif defined(__loongarch64)
+#define ARCH_CPU_LOONGARCH_FAMILY 1
+#define ARCH_CPU_LOONGARCH 1
+#define ARCH_CPU_64_BITS 1
 #elif defined(__mips__)
 #define ARCH_CPU_MIPS_FAMILY 1
 #define ARCH_CPU_MIPS 1

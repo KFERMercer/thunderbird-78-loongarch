@@ -1205,6 +1205,10 @@ class LinuxCrossCompileToolchainTest(BaseToolchainTest):
             '__mips64': 1,
             '__mips__': 1,
         },
+        'loongarch64-unknown-linux-gnuabi64': little_endian + {
+            '__loongarch64': 1,
+            '__loongarch__': 1,
+        },
         'mips-unknown-linux-gnu': big_endian + {
             '__mips__': 1,
         },

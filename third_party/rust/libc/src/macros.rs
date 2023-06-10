@@ -128,7 +128,7 @@ macro_rules! f {
     })*) => ($(
         #[inline]
         pub unsafe extern fn $i($($arg: $argty),*) -> $ret {
-            $($body);*
+            $($body)*
         }
     )*)
 }

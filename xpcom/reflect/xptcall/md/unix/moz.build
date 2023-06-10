@@ -117,6 +117,13 @@ if CONFIG['OS_ARCH'] in ('Linux', 'FreeBSD', 'NetBSD', 'OpenBSD'):
             'xptcstubs_aarch64.cpp',
             'xptcstubs_asm_aarch64.s',
         ]
+    if CONFIG['CPU_ARCH'] == 'loongarch64':
+        SOURCES += [
+            'xptcinvoke_asm_loongarch64.S',
+            'xptcinvoke_loongarch64.cpp',
+            'xptcstubs_asm_loongarch64.S',
+            'xptcstubs_loongarch64.cpp',
+        ]
     if CONFIG['CPU_ARCH'] == 'mips64':
         SOURCES += [
             'xptcinvoke_asm_mips64.S',
