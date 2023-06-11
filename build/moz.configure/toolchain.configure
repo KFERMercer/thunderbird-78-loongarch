@@ -1875,8 +1875,8 @@ def rustc_opt_level(opt_level_option, moz_optimize):
         return '1' if moz_optimize.optimize else '0'
 
 
-@depends(rustc_opt_level, debug_rust, '--enable-debug-symbols', '--enable-frame-pointers')
-def rust_compile_flags(opt_level, debug_rust, debug_symbols, frame_pointers):
+@depends(rustc_opt_level, debug_rust, '--enable-debug-symbols', '--enable-frame-pointers', host)
+def rust_compile_flags(opt_level, debug_rust, debug_symbols, frame_pointers, host):
     # Cargo currently supports only two interesting profiles for building:
     # development and release. Those map (roughly) to --enable-debug and
     # --disable-debug in Gecko, respectively.
@@ -1899,6 +1899,8 @@ def rust_compile_flags(opt_level, debug_rust, debug_symbols, frame_pointers):
 
     if debug_symbols:
         debug_info = '2'
+        if host.bitness == 32 or host.cpu in ('aarch64', 'ppc64', 's390x', 'x86'):
+            debug_info = '1'
 
     opts = []
 
@@ -2127,15 +2129,16 @@ def select_linker(linker, c_compiler, developer_options, enable_gold,
 set_config('LINKER_KIND', select_linker.KIND)
 
 
-@depends_if(select_linker, macos_sdk)
-def linker_ldflags(linker, macos_sdk):
+@depends_if(select_linker, macos_sdk, host)
+def linker_ldflags(linker, macos_sdk, host):
     flags = list(linker.LINKER_FLAG or [])
     if macos_sdk:
         if linker.KIND == 'ld64':
             flags.append('-Wl,-syslibroot,%s' % macos_sdk)
         else:
             flags.append('-Wl,--sysroot=%s' % macos_sdk)
-
+    elif host.cpu == 'arm':
+        flags.append('-Wl,--no-keep-memory')
     return flags
 
 

@@ -132,6 +132,9 @@ static bool ReadDependentCB(pathstr_t aDependentLib,
     ReadAheadLib(aDependentLib);
   }
 #endif
+  char lib[MAXPATHLEN];
+  if (realpath(aDependentLib, lib))
+      aDependentLib = lib;
   LibHandleType libHandle = GetLibHandle(aDependentLib);
   if (libHandle) {
     AppendDependentLib(libHandle);

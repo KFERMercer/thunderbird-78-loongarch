@@ -60,6 +60,9 @@ if CONFIG['CPU_ARCH'] == 'arm' and CONFIG['HAVE_ARM_NEON']:
     SOURCES += [
         'yuv_convert_arm.cpp',
     ]
+    # The integrated assembler fails to build yuv_convert_arm.cpp because it doesn't have NEON
+    if CONFIG['CC_TYPE'] == 'clang':
+        CXXFLAGS += ['-fno-integrated-as']
 
 LOCAL_INCLUDES += ['/media/libyuv/libyuv/include']
 

@@ -183,8 +183,6 @@ dependencies = [
 [[package]]
 name = "authenticator"
 version = "0.2.12"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "ff593fb4dd388fe452c5e63d4d668699466bd46b571c4b852dfbca4bac8f0706"
 dependencies = [
  "bitflags",
  "boxfnonce",

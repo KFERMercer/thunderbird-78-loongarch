@@ -227,7 +227,7 @@ class PluginModuleChild : public PPluginModuleChild {
 
   // we get this from the plugin
   NP_PLUGINSHUTDOWN mShutdownFunc;
-#if defined(OS_LINUX) || defined(OS_BSD) || defined(OS_SOLARIS)
+#if defined(OS_LINUX) || defined(OS_BSD) || defined(OS_SOLARIS) || defined(OS_HURD)
   NP_PLUGINUNIXINIT mInitializeFunc;
 #elif defined(OS_WIN) || defined(OS_MACOSX)
   NP_PLUGININIT mInitializeFunc;

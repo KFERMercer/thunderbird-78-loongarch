@@ -8,6 +8,7 @@ os_win = 0
 os_posix = 0
 os_macosx = 0
 os_bsd = 0
+os_hurd = 0
 os_linux = 0
 os_solaris = 0
 
@@ -25,6 +26,10 @@ else:
     elif CONFIG['OS_ARCH'] == 'SunOS':
         os_solaris = 1
         libevent_include_suffix = 'solaris'
+    # attempt to get GNU hurd into the build again, further modification probably needed
+    elif CONFIG['OS_ARCH'] == 'GNU':
+        os_hurd = 1
+        libevent_include_suffix = 'gnu'
     else:
         os_linux = 1
         if CONFIG['OS_TARGET'] == 'Android':

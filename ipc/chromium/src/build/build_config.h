@@ -22,8 +22,9 @@
 #  define OS_LINUX 1
 #elif defined(__APPLE__)
 #  define OS_MACOSX 1
-#elif defined(__linux__)
+#elif defined(__linux__) || defined(__GLIBC__) || defined(__GNU__)
 #  define OS_LINUX 1
+#  define OS_HURD 1
 #elif defined(__DragonFly__)
 #  define OS_DRAGONFLY 1
 #elif defined(__FreeBSD__) || defined(__FreeBSD_kernel__)
@@ -50,7 +51,7 @@
 // For access to standard POSIX features, use OS_POSIX instead of a more
 // specific macro.
 #if defined(OS_MACOSX) || defined(OS_LINUX) || defined(OS_BSD) || \
-    defined(OS_SOLARIS)
+    defined(OS_SOLARIS) || defined(OS_HURD)
 #  define OS_POSIX 1
 #endif
 
@@ -80,6 +81,9 @@
 #  define ARCH_CPU_ARMEL 1
 #  define ARCH_CPU_32_BITS 1
 #  define WCHAR_T_IS_UNSIGNED 1
+#elif defined(__m68k__)
+#  define ARCH_CPU_M68K 1
+#  define ARCH_CPU_32_BITS 1
 #elif defined(__powerpc64__)
 #  define ARCH_CPU_PPC64 1
 #  define ARCH_CPU_64_BITS 1
@@ -96,6 +100,9 @@
 #  define ARCH_CPU_32_BITS 1
 #elif defined(__mips64) && defined(__LP64__)
 #  define ARCH_CPU_MIPS 1
+#  define ARCH_CPU_64_BITS 1
+#elif defined(__loongarch64)
+#  define ARCH_CPU_LOONGARCH 1
 #  define ARCH_CPU_64_BITS 1
 #elif defined(__mips__)
 #  define ARCH_CPU_MIPS 1

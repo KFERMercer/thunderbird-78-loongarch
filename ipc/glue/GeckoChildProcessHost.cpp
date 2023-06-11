@@ -1126,11 +1126,30 @@ bool LinuxProcessLauncher::DoSetup() {
 }
 #endif  // MOZ_WIDGET_GTK
 
-#ifdef OS_POSIX
+#if defined(OS_POSIX) || defined(OS_HURD)
 bool PosixProcessLauncher::DoSetup() {
   if (!BaseProcessLauncher::DoSetup()) {
     return false;
   }
+
+//--------------------------------------------------
+  // For POSIX, we have to be extremely anal about *not* using
+  // std::wstring in code compiled with Mozilla's -fshort-wchar
+  // configuration, because chromium is compiled with -fno-short-wchar
+  // and passing wstrings from one config to the other is unsafe.  So
+  // we split the logic here.
+
+#    if defined(MOZ_WIDGET_GTK)
+  if (mProcessType == GeckoProcessType_Content) {
+    // disable IM module to avoid sandbox violation
+    mLaunchOptions->env_map["GTK_IM_MODULE"] = "gtk-im-context-simple";
+
+    // Disable ATK accessibility code in content processes because it conflicts
+    // with the sandbox, and we proxy that information through the main process
+    // anyway.
+    mLaunchOptions->env_map["NO_AT_BRIDGE"] = "1";
+  }
+#    endif  // defined(MOZ_WIDGET_GTK)
 
   // XPCOM may not be initialized in some subprocesses.  We don't want
   // to initialize XPCOM just for the directory service, especially
@@ -1140,7 +1159,7 @@ bool PosixProcessLauncher::DoSetup() {
     MOZ_ASSERT(gGREBinPath);
     nsCString path;
     NS_CopyUnicodeToNative(nsDependentString(gGREBinPath), path);
-#  if defined(OS_LINUX) || defined(OS_BSD)
+#  if defined(OS_LINUX) || defined(OS_BSD) || defined(OS_HURD)
     const char* ld_library_path = PR_GetEnv("LD_LIBRARY_PATH");
     nsCString new_ld_lib_path(path.get());
 
@@ -1237,7 +1256,7 @@ bool PosixProcessLauncher::DoSetup() {
   mChildArgv.push_back(mPidString);
 
   if (!CrashReporter::IsDummy()) {
-#  if defined(OS_LINUX) || defined(OS_BSD) || defined(OS_SOLARIS)
+#  if defined(OS_LINUX) || defined(OS_BSD) || defined(OS_SOLARIS) || defined(OS_HURD)
     int childCrashFd, childCrashRemapFd;
     if (!CrashReporter::CreateNotificationPipeForChild(&childCrashFd,
                                                        &childCrashRemapFd)) {

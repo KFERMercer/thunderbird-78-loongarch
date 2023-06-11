@@ -209,6 +209,6 @@ class nsCSSValue {
     int32_t mInt;
     float mFloat;
   } mValue;
-};
+} __attribute__ ((aligned(4)));
 
 #endif /* nsCSSValue_h___ */

@@ -548,7 +548,7 @@ class Shape {
 
   static const uint32_t FIXED_SLOTS_SHIFT = 24;
   static const uint32_t FIXED_SLOTS_MASK = 0x1f << FIXED_SLOTS_SHIFT;
-};
+} __attribute__ ((aligned(4)));
 
 /**
  * This layout is shared by all native objects. For non-native objects, the

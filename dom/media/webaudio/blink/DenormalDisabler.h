@@ -44,7 +44,7 @@ namespace WebCore {
 #  define HAVE_DENORMAL 1
 #endif
 
-#if defined(__arm__) || defined(__aarch64__)
+#if (defined(__arm__) && !defined(__SOFTFP__)) || defined(__aarch64__)
 #  define HAVE_DENORMAL 1
 #endif
 

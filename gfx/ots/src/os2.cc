@@ -3,6 +3,7 @@
 // found in the LICENSE file.
 
 #include <string>
+#include <cstddef>
 
 #include "os2.h"
 #include "head.h"

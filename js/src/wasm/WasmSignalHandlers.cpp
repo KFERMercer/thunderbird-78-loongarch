@@ -109,7 +109,7 @@ using mozilla::DebugOnly;
 #    define R01_sig(p) ((p)->sc_frame.fixreg[1])
 #    define R32_sig(p) ((p)->sc_frame.srr0)
 #  endif
-#elif defined(__linux__) || defined(__sun)
+#elif defined(__linux__) || defined(__sun) || defined(__GNU__)
 #  if defined(__linux__)
 #    define EIP_sig(p) ((p)->uc_mcontext.gregs[REG_EIP])
 #    define EBP_sig(p) ((p)->uc_mcontext.gregs[REG_EBP])
@@ -249,7 +249,16 @@ using mozilla::DebugOnly;
 #endif
 
 #ifdef WASM_EMULATE_ARM_UNALIGNED_FP_ACCESS
-#  include <sys/user.h>
+struct user_vfp {
+  unsigned long long fpregs[32];
+  unsigned long fpscr;
+};
+
+struct user_vfp_exc {
+  unsigned long fpexc;
+  unsigned long fpinst;
+  unsigned long fpinst2;
+};
 #endif
 
 #if defined(ANDROID)

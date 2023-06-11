@@ -3,6 +3,9 @@
 # We thus use INCLUDED_AUTOCONF_MK to enable/disable some parts depending
 # whether a normal build is happening or whether the check is running.
 installdir = $(libdir)/$(MOZ_APP_NAME)
+includedir := $(includedir)/$(MOZ_APP_NAME)
+idldir = $(datadir)/idl/$(MOZ_APP_NAME)
+sdkdir = $(libdir)/$(MOZ_APP_NAME)-devel
 ifeq (.,$(DEPTH))
 DIST = dist
 else

@@ -143,7 +143,7 @@ pref("extensions.hotfix.certs.2.sha1Fingerprint", "39:E7:2B:7A:5B:CF:37:78:F9:5D
 // Disable add-ons installed into the shared user and shared system areas by
 // default. This does not include the application directory. See the SCOPE
 // constants in AddonManager.jsm for values to use here
-pref("extensions.autoDisableScopes", 15);
+pref("extensions.autoDisableScopes", 3);
 
 // Enable add-ons installed and owned by the application, like the default theme.
 pref("extensions.startupScanScopes", 4);

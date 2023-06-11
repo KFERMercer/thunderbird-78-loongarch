@@ -40,6 +40,31 @@
 #endif
 
 #if defined(LINUX) || defined(__GNU__) || defined(__GLIBC__)
+#ifdef NEXTSTEP
+#include <bsd/libc.h>
+
+/*
+** balazs.pataki@sztaki.hu: The getcwd is broken in NEXTSTEP (returns 0),
+** when called on a mounted fs. Did anyone notice this? Here's an ugly
+** workaround ...
+*/
+#define getcwd(b,s)   my_getcwd(b,s)
+
+static char *
+my_getcwd (char *buf, size_t size)
+{
+    FILE *pwd = popen("pwd", "r");
+    char *result = fgets(buf, size, pwd);
+
+    if (result) {
+        buf[strlen(buf)-1] = '\0';
+    }
+    pclose (pwd);
+    return buf;
+}
+#endif /* NEXTSTEP */
+
+#if defined(LINUX) || defined(__GLIBC__) || defined(__GNU__)
 #include <getopt.h>
 #endif
 

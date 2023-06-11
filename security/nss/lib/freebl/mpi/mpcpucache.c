@@ -705,7 +705,7 @@ s_mpi_getProcessorLineSize()
 #define MPI_GET_PROCESSOR_LINE_SIZE_DEFINED 1
 #endif
 
-#if defined(__ppc64__)
+#if 0
 /*
  *  Sigh, The PPC has some really nice features to help us determine cache
  *  size, since it had lots of direct control functions to do so. The POWER

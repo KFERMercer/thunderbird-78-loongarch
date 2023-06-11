@@ -10,7 +10,7 @@
 //!
 //! <pref-file>   = <pref>*
 //! <pref>        = <pref-spec> "(" <pref-name> "," <pref-value> <pref-attrs> ")" ";"
-//! <pref-spec>   = "user_pref" | "pref" | "sticky_pref" // in default pref files
+//! <pref-spec>   = "user_pref" | "pref" | "sticky_pref | lockPref" // in default pref files
 //! <pref-spec>   = "user_pref"                          // in user pref files
 //! <pref-name>   = <string-literal>
 //! <pref-value>  = <string-literal> | "true" | "false" | <int-value>
@@ -169,6 +169,7 @@ enum Token {
     // Keywords
     Pref,       // pref
     StickyPref, // sticky_pref
+    LockPref,   // lockPref
     UserPref,   // user_pref
     True,       // true
     False,      // false
@@ -291,7 +292,7 @@ struct KeywordInfo {
     token: Token,
 }
 
-const KEYWORD_INFOS: [KeywordInfo; 7] = [
+const KEYWORD_INFOS: [KeywordInfo; 8] = [
     // These are ordered by frequency.
     KeywordInfo {
         string: b"pref",
@@ -320,6 +321,10 @@ const KEYWORD_INFOS: [KeywordInfo; 7] = [
     KeywordInfo {
         string: b"sticky_pref",
         token: Token::StickyPref,
+    },
+    KeywordInfo {
+        string: b"lock_pref",
+        token: Token::LockPref,
     },
 ];
 
@@ -373,14 +378,11 @@ impl<'t> Parser<'t> {
         // this will be either the first token of a new pref, or EOF.
         loop {
             // <pref-spec>
-            let (pref_value_kind, mut is_sticky) = match token {
-                Token::Pref if self.kind == PrefValueKind::Default => {
-                    (PrefValueKind::Default, false)
-                }
-                Token::StickyPref if self.kind == PrefValueKind::Default => {
-                    (PrefValueKind::Default, true)
-                }
-                Token::UserPref => (PrefValueKind::User, false),
+            let (pref_value_kind, mut is_sticky, mut is_locked) = match token {
+                Token::Pref => (PrefValueKind::Default, false, false),
+                Token::StickyPref => (PrefValueKind::Default, true, false),
+                Token::LockPref => (PrefValueKind::Default, false, true),
+                Token::UserPref => (PrefValueKind::User, false, false),
                 Token::SingleChar(EOF) => return !self.has_errors,
                 _ => {
                     token = self.error_and_recover(
@@ -490,7 +492,6 @@ impl<'t> Parser<'t> {
             };
 
             // ("," <pref-attr>)*   // default pref files only
-            let mut is_locked = false;
             let mut has_attrs = false;
             if self.kind == PrefValueKind::Default {
                 let ok = loop {

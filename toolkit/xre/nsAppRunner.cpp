@@ -3745,7 +3745,7 @@ int XREMain::XRE_mainStartup(bool* aExitFlag) {
 
   // Set program name to the one defined in application.ini.
   {
-    nsAutoCString program(gAppData->name);
+    nsAutoCString program(gAppData->remotingName);
     ToLowerCase(program);
     g_set_prgname(program.get());
   }

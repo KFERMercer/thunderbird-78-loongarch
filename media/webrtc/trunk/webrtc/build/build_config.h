@@ -37,6 +37,9 @@
 #elif defined(_WIN32)
 #define OS_WIN 1
 #define TOOLKIT_VIEWS 1
+#elif defined(__GNU__)
+#define OS_HURD 1
+#define TOOLKIT_GTK
 #elif defined(__DragonFly__)
 #define OS_DRAGONFLY 1
 #define TOOLKIT_GTK
@@ -70,7 +73,8 @@
 // For access to standard POSIXish features, use OS_POSIX instead of a
 // more specific macro.
 #if defined(OS_MACOSX) || defined(OS_LINUX) || defined(OS_BSD) ||	\
-    defined(OS_SOLARIS) || defined(OS_ANDROID) || defined(OS_NACL)
+    defined(OS_SOLARIS) || defined(OS_ANDROID) || defined(OS_NACL) ||   \
+    defined(OS_HURD)
 #define OS_POSIX 1
 #endif
 
@@ -114,6 +118,16 @@
 #define ARCH_CPU_LITTLE_ENDIAN 1
 #elif defined(__pnacl__)
 #define ARCH_CPU_32_BITS 1
+#elif defined(__MIPSEL__)
+#define ARCH_CPU_MIPS_FAMILY 1
+#define ARCH_CPU_MIPSEL 1
+#define ARCH_CPU_32_BITS 1
+#define ARCH_CPU_LITTLE_ENDIAN 1
+#elif defined(__m68k__)
+#define ARCH_CPU_M68K_FAMILY 1
+#define ARCH_CPU_M68K 1
+#define ARCH_CPU_32_BITS 1
+#define ARCH_CPU_BIG_ENDIAN 1
 #elif defined(__powerpc64__)
 #define ARCH_CPU_PPC_FAMILY 1
 #define ARCH_CPU_PPC64 1
@@ -135,6 +149,10 @@
 #elif defined(__mips64) && defined(__LP64__)
 #define ARCH_CPU_MIPS_FAMILY 1
 #define ARCH_CPU_MIPS 1
+#define ARCH_CPU_64_BITS 1
+#elif defined(__loongarch64)
+#define ARCH_CPU_LOONGARCH_FAMILY 1
+#define ARCH_CPU_LOONGARCH 1
 #define ARCH_CPU_64_BITS 1
 #elif defined(__mips__)
 #define ARCH_CPU_MIPS_FAMILY 1

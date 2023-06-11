@@ -219,6 +219,10 @@ if CONFIG['CPU_ARCH'] == 'x86_64':
     ASFLAGS += ['-I%s/media/libjpeg/simd/nasm/' % TOPSRCDIR]
     ASFLAGS += ['-I%s/media/libjpeg/simd/x86_64/' % TOPSRCDIR]
 
+# The integrated assembler fails to build simd/arm/jsimd_neon.S because it doesn't have NEON
+if CONFIG['CC_TYPE'] == 'clang' and CONFIG['CPU_ARCH'] == 'arm':
+    ASFLAGS += ['-fno-integrated-as']
+
 # We allow warnings for third-party code that can be updated from upstream.
 AllowCompilerWarnings()
 

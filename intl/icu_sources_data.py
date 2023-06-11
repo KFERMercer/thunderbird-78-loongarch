@@ -247,9 +247,7 @@ def update_data_file(topsrcdir):
     print('Running ICU make...')
     if not try_run(
             'icu-make',
-            ['make',
-             '--jobs=%d' % multiprocessing.cpu_count(),
-             '--output-sync'],
+            ['make'],
             cwd=objdir):
         return False
     print('Copying ICU data file...')

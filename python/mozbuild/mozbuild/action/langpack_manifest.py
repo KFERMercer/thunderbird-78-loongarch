@@ -16,6 +16,7 @@ import os
 import json
 import io
 import datetime
+import time
 import requests
 import mozversioncontrol
 import mozpack.path as mozpath
@@ -99,7 +100,7 @@ def get_timestamp_for_locale(path):
         dt = get_dt_from_hg(path)
 
     if dt is None:
-        dt = datetime.datetime.utcnow()
+        dt = datetime.datetime.utcfromtimestamp(int(os.environ.get('SOURCE_DATE_EPOCH', time.time())))
 
     dt = dt.replace(microsecond=0)
     return dt.strftime("%Y%m%d%H%M%S")
