@@ -1,5 +1,13 @@
 #!/bin/bash
 
-git diff HEAD ':!debian' > $1
+if [ $1 ]; then
+
+    git diff HEAD ':!debian' ':!loongarch-porting' > $1
+
+else
+
+    git diff HEAD ':!debian' ':!loongarch-porting'
+
+fi
 
 exit 0
