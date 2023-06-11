@@ -47,7 +47,6 @@ CPU_bitness = {
     'ia64': 64,
     'mips32': 32,
     'mips64': 64,
-    'loongarch64': 64,
     'ppc': 32,
     'ppc64': 64,
     's390': 32,
@@ -87,7 +86,6 @@ CPU_preprocessor_checks = OrderedDict((
     ('sparc64', '__sparc__ && __arch64__'),
     ('sparc', '__sparc__'),
     ('mips64', '__mips64'),
-    ('loongarch64', '__loongarch64'),
     ('mips32', '__mips__'),
     ('sh4', '__sh__'),
 ))

@@ -99,13 +99,11 @@ s! {
         pub c_cc: [::cc_t; ::NCCS],
         #[cfg(not(any(
             target_arch = "sparc64",
-            target_arch = "loongarch64",
             target_arch = "mips",
             target_arch = "mips64")))]
         pub c_ispeed: ::speed_t,
         #[cfg(not(any(
             target_arch = "sparc64",
-            target_arch = "loongarch64",
             target_arch = "mips",
             target_arch = "mips64")))]
         pub c_ospeed: ::speed_t,
@@ -1025,7 +1023,6 @@ cfg_if! {
     } else if #[cfg(any(target_arch = "x86_64",
                         target_arch = "aarch64",
                         target_arch = "powerpc64",
-                        target_arch = "loongarch64",
                         target_arch = "mips64",
                         target_arch = "s390x",
                         target_arch = "sparc64"))] {

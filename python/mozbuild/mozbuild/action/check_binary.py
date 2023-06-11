@@ -204,10 +204,9 @@ def check_textrel(target, binary):
     try:
         for tag, value in at_least_one(iter_readelf_dynamic(target, binary)):
             if tag == 'TEXTREL' or (tag == 'FLAGS' and 'TEXTREL' in value):
-                # raise RuntimeError(
-                #     'We do not want text relocations in libraries and programs'
-                # )
-                raise Skip()
+                raise RuntimeError(
+                    'We do not want text relocations in libraries and programs'
+                )
     except Empty:
         raise RuntimeError('Could not parse readelf output?')
 
