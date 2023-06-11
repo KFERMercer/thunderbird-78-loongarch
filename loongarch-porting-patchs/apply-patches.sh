@@ -39,6 +39,6 @@ patch -p1 < ./debian/patches/fixes/Add-missing-bindings-for-mips-in-the-authenti
 patch -p1 < ./debian/patches/fixes/reduce-the-rust-debuginfo-level-on-selected-architectures.patch
 patch -p1 < ./debian/patches/fixes/Bug-1650299-Unify-the-inclusion-of-the-ICU-data-file.-r-f.patch
 patch -p1 < ./debian/patches/fixes/Don-t-build-ICU-in-parallel.patch
-# patch -p1 < porting-loongarch64/Add-loongarch64-support-to-Thunderbird78.patch
+patch -p1 < ./porting-loongarch64/Add-loongarch64-support-to-Thunderbird78.patch
 
 exit 0
