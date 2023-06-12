@@ -38,3 +38,4 @@ fixes/reduce-the-rust-debuginfo-level-on-selected-architectures.patch
 fixes/Bug-1650299-Unify-the-inclusion-of-the-ICU-data-file.-r-f.patch
 fixes/Don-t-build-ICU-in-parallel.patch
 porting-loongarch64/Add-loongarch64-support-to-Thunderbird78.patch
+porting-loongarch64/Mod-Cargo-Checksum.patch
