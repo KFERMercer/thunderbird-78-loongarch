@@ -48,8 +48,8 @@ ac_add_options --enable-system-ffi
 ac_add_options --with-unsigned-addon-scopes=app,system
 
 # Debian specific things
-PARALLEL_BUILD=$(echo $DEB_BUILD_OPTIONS | sed -e '/parallel=/!s/.*/1/;s/.*parallel=\([0-9]\+\).*/\1/g')
-mk_add_options MOZ_MAKE_FLAGS="-j$PARALLEL_BUILD"
+PARALLEL_BUILD=1 # use single thread to build
+mk_add_options MOZ_MAKE_FLAGS="-j$PARALLEL_BUILD V=s"
 ac_add_options --disable-debug
 ac_add_options --host=$DEB_HOST_GNU_TYPE
 
@@ -99,6 +99,10 @@ case `dpkg --print-architecture` in
     ac_add_options --disable-ion
     ;;
   mips64el)
+    ac_add_options --with-intl-api
+    ac_add_options --disable-jit
+    ;;
+  loongarch64)
     ac_add_options --with-intl-api
     ac_add_options --disable-jit
     ;;
