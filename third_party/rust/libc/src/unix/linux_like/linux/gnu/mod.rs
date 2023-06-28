@@ -99,13 +99,11 @@ s! {
         pub c_cc: [::cc_t; ::NCCS],
         #[cfg(not(any(
             target_arch = "sparc64",
-            target_arch = "loongarch64",
             target_arch = "mips",
             target_arch = "mips64")))]
         pub c_ispeed: ::speed_t,
         #[cfg(not(any(
             target_arch = "sparc64",
-            target_arch = "loongarch64",
             target_arch = "mips",
             target_arch = "mips64")))]
         pub c_ospeed: ::speed_t,
@@ -210,22 +208,26 @@ s_no_extra_traits! {
 
         #[cfg(any(target_arch = "aarch64",
                   target_arch = "s390x",
+                  target_arch = "loongarch64",
                   all(target_pointer_width = "32",
                       not(target_arch = "x86_64"))))]
         pub ut_session: ::c_long,
         #[cfg(any(target_arch = "aarch64",
                   target_arch = "s390x",
+                  target_arch = "loongarch64",
                   all(target_pointer_width = "32",
                       not(target_arch = "x86_64"))))]
         pub ut_tv: ::timeval,
 
         #[cfg(not(any(target_arch = "aarch64",
                       target_arch = "s390x",
+                      target_arch = "loongarch64",
                       all(target_pointer_width = "32",
                           not(target_arch = "x86_64")))))]
         pub ut_session: i32,
         #[cfg(not(any(target_arch = "aarch64",
                       target_arch = "s390x",
+                      target_arch = "loongarch64",
                       all(target_pointer_width = "32",
                           not(target_arch = "x86_64")))))]
         pub ut_tv: __timeval,
