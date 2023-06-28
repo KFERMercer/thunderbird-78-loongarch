@@ -102,6 +102,10 @@ case `dpkg --print-architecture` in
     ac_add_options --with-intl-api
     ac_add_options --disable-jit
     ;;
+  loongarch64)
+    ac_add_options --with-intl-api
+    ac_add_options --disable-jit
+    ;;
   mipsel)
     ac_add_options --with-intl-api
     ac_add_options --disable-jit
