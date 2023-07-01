@@ -17,11 +17,11 @@
 
 二者有以下区别:
 
-- [`1%78.14.0-1_deb10u1`](https://github.com/loongsonedu/thunderbird-porting-demo/tree/1%2578.14.0-1_deb10u1)
+- [`1%78.14.0-1_deb10u1`](https://github.com/loongsonedu/thunderbird-porting-demo/tree/1%2578.14.0-1_deb10u1):
 
-    主线分支. 用于进行最终的编译和打包. *不应*在此分支直接修改*除 [`/debian`](https://github.com/loongsonedu/thunderbird-porting-demo/tree/1%2578.14.0-1_deb10u1/debian) 和 [*/loongarch-porting*](https://github.com/loongsonedu/thunderbird-porting-demo/tree/1%2578.14.0-1_deb10u1/loongarch-porting) 目录以外*的任何内容.
+    主线分支. 用于进行最终的编译和打包. ***不应***在此分支直接修改***除*** [`/debian`](https://github.com/loongsonedu/thunderbird-porting-demo/tree/1%2578.14.0-1_deb10u1/debian) 和 [`/loongarch-porting`](https://github.com/loongsonedu/thunderbird-porting-demo/tree/1%2578.14.0-1_deb10u1/loongarch-porting) 目录***以外***的任何内容.
 
-- [`developing`](https://github.com/loongsonedu/thunderbird-porting-demo/tree/developing)
+- [`developing`](https://github.com/loongsonedu/thunderbird-porting-demo/tree/developing):
 
     开发分支. 用于直接修改代码以进行测试. 如要将修改后的代码并入 `1%78.14.0-1_deb10u1` 分支, 则需自行生成代码 `.patch` 文件并放入适当的地方.
 
@@ -37,7 +37,7 @@
 
    ```shell
    # 使用以下命令查看当前系统信息:
-   apt install -y neofetch && neofetch
+   sudo apt install -y neofetch && neofetch
    ```
 
 2. rust-1.65.0-loongarch64-1.tgz ([点击下载](https://cdn2.loonglab.cn/rust-1.65.0-loongarch64-1.tgz))
@@ -74,8 +74,8 @@ source ~/.profile
 # cargo 手动编译安装 cbindgen:
 cargo install cbindgen
 
-# 解压缩源码包并进入源码目录:
-git && cd thunderbird-porting-demo
+# 克隆仓库并进入源码目录:
+git clone https://github.com/loongsonedu/thunderbird-porting-demo.git && cd ./thunderbird-porting-demo
 
 # 选择你要编译的分支 (以 1%78.14.0-1_deb10u1 分支为例):
 git checkout 1%78.14.0-1_deb10u1
@@ -86,7 +86,7 @@ dpkg-buildpackage -b -d -uc -us
 
 ## 开发工作流
 
-所有对 thunderbird 代码的修改都应该只在 [`developing`](https://github.com/loongsonedu/thunderbird-porting-demo/tree/developing) 分支下完成.
+所有对 thunderbird 代码的修改都应该***只***在 [`developing`](https://github.com/loongsonedu/thunderbird-porting-demo/tree/developing) 分支下完成.
 
 假定你现在已经对代码做出了一些更改, 并想将更改合并回 [`1%78.14.0-1_deb10u1`](https://github.com/loongsonedu/thunderbird-porting-demo/tree/1%2578.14.0-1_deb10u1) 主线:
 
