@@ -67,8 +67,8 @@ wget https://cdn2.loonglab.cn/rust-1.65.0-loongarch64-1.tgz
 tar xzvf ./rust-1.65.0-loongarch64-1.tgz
 
 # 安装 rustc-1.65.0:
-echo 'export PATH=$(pwd)/rust-1.65.0-loongarch64/bin:${HOME}/.cargo/bin:$PATH' >> ~/.profile
-echo 'export LD_LIBRARY_PATH=$(pwd)/rust-1.65.0-loongarch64/lib:$LD_LIBRARY_PATH' >> ~/.profile
+echo "export PATH=$(pwd)/rust-1.65.0-loongarch64/bin:${HOME}/.cargo/bin:"'$PATH' >> ~/.profile
+echo "export LD_LIBRARY_PATH=$(pwd)/rust-1.65.0-loongarch64/lib:"'$LD_LIBRARY_PATH' >> ~/.profile
 source ~/.profile
 
 # cargo 手动编译安装 cbindgen:
