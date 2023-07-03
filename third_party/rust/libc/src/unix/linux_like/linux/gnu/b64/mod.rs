@@ -69,9 +69,6 @@ cfg_if! {
     } else if #[cfg(any(target_arch = "sparc64"))] {
         mod sparc64;
         pub use self::sparc64::*;
-    } else if #[cfg(any(target_arch = "loongarch64"))] {
-        mod loongarch64;
-        pub use self::loongarch64::*;
     } else if #[cfg(any(target_arch = "mips64"))] {
         mod mips64;
         pub use self::mips64::*;
@@ -81,6 +78,9 @@ cfg_if! {
     } else if #[cfg(any(target_arch = "x86_64"))] {
         mod x86_64;
         pub use self::x86_64::*;
+    } else if #[cfg(any(target_arch = "loongarch64"))] {
+        mod loongarch64;
+        pub use self::loongarch64::*;
     } else {
         // Unknown target_arch
     }
