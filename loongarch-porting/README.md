@@ -72,7 +72,7 @@ echo "export LD_LIBRARY_PATH=$(pwd)/rust-1.65.0-loongarch64/lib:"'$LD_LIBRARY_PA
 source ~/.profile
 
 # cargo 手动编译安装 cbindgen:
-cargo install cbindgen
+cargo install --version 0.14.3 cbindgen
 
 # 克隆仓库并进入源码目录:
 git clone https://github.com/loongsonedu/thunderbird-porting-demo.git && cd ./thunderbird-porting-demo
