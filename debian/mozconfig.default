@@ -43,21 +43,15 @@ ac_add_options --enable-default-toolkit=cairo-gtk3
 ac_add_options --enable-extensions=default
 ac_add_options --enable-official-branding # use the official artwork
 ac_add_options --enable-openpgp
-# ac_add_options --enable-optimize
+ac_add_options --enable-optimize
 ac_add_options --enable-system-ffi
 ac_add_options --with-unsigned-addon-scopes=app,system
 
 # Debian specific things
 PARALLEL_BUILD=1 # use single thread to build
 mk_add_options MOZ_MAKE_FLAGS="-j$PARALLEL_BUILD V=s"
-# ac_add_options --disable-debug
+ac_add_options --disable-debug
 ac_add_options --host=$DEB_HOST_GNU_TYPE
-
-# specific for developing
-ac_add_options --enable-debug
-ac_add_options --disable-optimize
-ac_add_options --enable-rust-debug
-# mk_add_options RUST_BACKTRACE=1
 
 # some platform depended things
 case `dpkg --print-architecture` in
