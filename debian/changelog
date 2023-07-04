@@ -1,3 +1,9 @@
+thunderbird (1:78.14.0-1~deb10u1.loonglab.1) unstable; urgency=medium
+
+  * LoongArch64 porting.
+
+ -- KFERMercer <mercer@loonglab.cn>  Tue, 04 Jul 2023 22:00:00 +0800
+
 thunderbird (1:78.14.0-1~deb10u1) buster-security; urgency=medium
 
   * Rebuild for buster-security
