@@ -31,6 +31,7 @@ try:
     from importlib import metadata
 except ImportError: # for Python<3.8
     import importlib_metadata as metadata
-    
-# __version__ = metadata.version("jsonschema")
-__version__ = '3.2.0' # hack, enter correct jsonschema version here.
+try:
+    __version__ = metadata.version("jsonschema")
+except metadata.PackageNotFoundError:
+    __version__ = '3.2.0' # hack, enter correct jsonschema version here.
