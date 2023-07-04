@@ -44,3 +44,4 @@ porting-loongarch64/Remove-Cargo-lock.patch
 porting-loongarch64/Backporting-rust-libc-0.2.147-loongarch64-support.patch
 porting-loongarch64/Fix-rust-libc-build.patch
 porting-loongarch64/Fix-rust-authenticator-build.patch
+porting-loongarch64/Hack-importlib-metadata.patch
