@@ -588,4 +588,7 @@ def requires(distribution_name):
     return distribution(distribution_name).requires
 
 
-__version__ = version(__name__)
+try:
+    __version__ = version(__name__)
+except PackageNotFoundError:
+    __version__ = '1.5.0' # hack, enter correct version here
